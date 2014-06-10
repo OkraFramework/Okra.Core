@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Okra Split App (XAML)</Name>
+    <Description>An Okra App Framework application based upon the Windows Store Split template.</Description>
+    <Icon>__TemplateIcon.png</Icon>
+    <TemplateID>Okra.CS.SplitApplication</TemplateID>
+    <TemplateGroupID>WinRT-Managed</TemplateGroupID>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>43</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>OkraApp</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <TargetPlatformName>Windows</TargetPlatformName>
+    <RequiredPlatformVersion>8</RequiredPlatformVersion>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <CreateInPlace>true</CreateInPlace>
+    <BuildProjectOnLoad>true</BuildProjectOnLoad>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="Application.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true" BlendOpenInEditor="false" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="AppBootstrapper.cs">AppBootstrapper.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Package.appxmanifest">Package-managed.appxmanifest</ProjectItem>
+
+      <Folder Name="Properties" TargetFolderName="Properties">
+        <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      </Folder>
+
+      <Folder Name="Data" TargetFolderName="Data">
+        <ProjectItem ReplaceParameters="true" TargetFileName="DesignDataSource.cs">DesignDataSource.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SampleDataSource.cs">SampleDataSource.cs</ProjectItem>
+      </Folder>
+
+      <Folder Name="Pages" TargetFolderName="Pages">
+        <Folder Name="Home" TargetFolderName="Home">
+          <ProjectItem ReplaceParameters="true" BlendOpenInEditor="true" TargetFileName="HomePage.xaml">HomePage.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="HomePage.xaml.cs">HomePage.xaml.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="HomeViewModel.cs">HomeViewModel.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="HomeDesignData.cs">HomeDesignData.cs</ProjectItem>
+        </Folder>
+        <Folder Name="Split" TargetFolderName="Split">
+          <ProjectItem ReplaceParameters="true" TargetFileName="SplitPage.xaml">SplitPage.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="SplitPage.xaml.cs">SplitPage.xaml.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="SplitViewModel.cs">SplitViewModel.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="SplitDesignData.cs">SplitDesignData.cs</ProjectItem>
+        </Folder>
+      </Folder>
+
+      <Folder Name="Assets" TargetFolderName="Assets">
+        <ProjectItem ReplaceParameters="false" TargetFileName="LightGray.png">LightGray.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="MediumGray.png">MediumGray.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="DarkGray.png">DarkGray.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="Logo.png">Logo.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="SmallLogo.png">SmallLogo.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="SplashScreen.png">SplashScreen.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="StoreLogo.png">StoreLogo.png</ProjectItem>
+      </Folder>
+
+      <Folder Name="Common" TargetFolderName="Common">
+        <ProjectItem ReplaceParameters="false" TargetFileName="ReadMe.txt">ReadMe.txt</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="StandardStyles.xaml">StandardStyles.xaml</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="BindableBase.cs">BindableBase.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="BooleanToVisibilityConverter.cs">BooleanToVisibilityConverter.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="BooleanNegationConverter.cs">BooleanNegationConverter.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="LayoutAwarePage.cs">LayoutAwarePage.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="RichTextColumns.cs">RichTextColumns.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SuspensionManager.cs">SuspensionManager.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ViewModelBase.cs">ViewModelBase.cs</ProjectItem>
+      </Folder>
+
+      <ProjectItem ReplaceParameters="false" TargetFileName="$projectname$_TemporaryKey.pfx" BlendDoNotCreate="true">Application_TemporaryKey.pfx</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>NuGet.VisualStudio.Interop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+    <FullClassName>NuGet.VisualStudio.TemplateWizard</FullClassName>
+  </WizardExtension>
+  <WizardData>
+    <packages repository="extension" repositoryId="OkraAppFramework">
+      <package id="Microsoft.Composition" version="1.0.16" targetFramework="win" />
+      <package id="Okra.Core" version="0.9.6.1" targetFramework="win" />
+      <package id="Okra.MEF" version="0.9.6.1" targetFramework="win" />
+    </packages>
+  </WizardData>
+</VSTemplate>

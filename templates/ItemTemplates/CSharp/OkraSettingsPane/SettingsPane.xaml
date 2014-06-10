@@ -1,0 +1,26 @@
+﻿<UserControl
+    x:Name="pageRoot"
+    x:Class="$rootnamespace$.$safeitemname$"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:$rootnamespace$"
+    xmlns:common="using:$safeprojectname$.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:UI="using:Okra.UI"
+    mc:Ignorable="d"
+    d:DesignHeight="600"
+    d:DesignWidth="346"
+    d:DataContext="{Binding Source={d:DesignInstance Type=local:$fileinputname$DesignData, IsDesignTimeCreatable=True}}">
+
+    <UserControl.Resources>
+    </UserControl.Resources>
+
+    <UI:SettingsChrome Title="Settings" Logo="ms-appx:///Assets/SmallLogo.png" BackButtonCommand="{Binding GoBackCommand, Mode=OneWay}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Disabled" ZoomMode="Disabled" >
+            <StackPanel Orientation="Vertical">
+                <!-- TODO: Insert your settings controls here -->
+            </StackPanel>
+        </ScrollViewer>
+    </UI:SettingsChrome>
+</UserControl>
