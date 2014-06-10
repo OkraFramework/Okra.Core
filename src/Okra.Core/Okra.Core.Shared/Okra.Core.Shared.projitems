@@ -21,7 +21,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)DataTransfer\IShareTargetManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataTransfer\ShareSourceManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataTransfer\ShareTargetManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ReflectionHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ResourceHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\SerializationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\IActivatable.cs" />
