@@ -158,6 +158,7 @@ $RECYCLE.BIN/
 # Okra specific
 # =========================
 
+.nuget/
 artifacts/
 
 # Allow temporary keys created for unit test projects to be included
