@@ -19,6 +19,8 @@ function Invoke-MsBuildAndThrow
 {
     Param([string]$Path)
 
+    write-host "MSBuild" $Path
+
     $buildResult = Invoke-MsBuild -Path $Path -Params "/verbosity:minimal /property:Configuration=Release;VisualStudioVersion=12.0"
 
     if (!$buildResult)
@@ -31,7 +33,7 @@ function Invoke-MsBuildAndThrow
 
 If (!(Test-Path .\.nuget\nuget.exe))
 {
-    New-Item .\.nuget -type directory -Force
+    New-Item .\.nuget -type directory -Force | Out-Null
     Invoke-WebRequest 'https://www.nuget.org/nuget.exe' -OutFile '.\.nuget\nuget.exe'
 }
 

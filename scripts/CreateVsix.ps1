@@ -15,7 +15,7 @@ Set-Location $rootFolder
 
 If (!(Test-Path .\.nuget\nuget.exe))
 {
-    New-Item .\.nuget -type directory -Force
+    New-Item .\.nuget -type directory -Force | Out-Null
     Invoke-WebRequest 'https://www.nuget.org/nuget.exe' -OutFile '.\.nuget\nuget.exe'
 }
 
