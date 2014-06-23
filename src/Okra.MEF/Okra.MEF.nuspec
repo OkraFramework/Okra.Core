@@ -19,7 +19,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Okra.MEF.Windows\bin\Release\Okra.MEF.dll" target="lib\win\Okra.MEF.dll" />
-    <file src="Okra.MEF.Windows\bin\Release\Okra.MEF.pri" target="lib\win\Okra.MEF.pri" />
+    <file src="Okra.MEF.Windows\bin\Release\Okra.MEF.dll" target="lib\netcore451\Okra.MEF.dll" />
+    <file src="Okra.MEF.Windows\bin\Release\Okra.MEF.pri" target="lib\netcore451\Okra.MEF.pri" />
   </files>
 </package>
