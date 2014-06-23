@@ -27,6 +27,18 @@ function Invoke-MsBuildAndThrow
     }
 }
 
+# Check NuGet is installed and updated
+
+If (!(Test-Path .\.nuget\nuget.exe))
+{
+    New-Item .\.nuget -type directory -Force
+    Invoke-WebRequest 'https://www.nuget.org/nuget.exe' -OutFile '.\.nuget\nuget.exe'
+}
+
+# Restore NuGet packages
+
+.nuget\nuget restore
+
 # Perform builds
 
 Invoke-MsBuildAndThrow ".\src\Okra.Core\Okra.Core.Windows\Okra.Core.Windows.csproj"
