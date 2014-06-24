@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name Package="{BB89AFCA-43DA-45C1-907D-9D61DD11F28D}" ID="1002" />
-    <Description Package="{BB89AFCA-43DA-45C1-907D-9D61DD11F28D}" ID="1003" />
+    <Name>Blank App (Windows - Okra App Framework)</Name>
+    <Description>A project for a single page Windows app using the Okra App Framework that has no predefined controls or layout.</Description>
     <Icon Package="{BB89AFCA-43DA-45C1-907D-9D61DD11F28D}" ID="4001" />
-    <TemplateID>Microsoft.CS.WinRT.BlankApplication</TemplateID>
+    <TemplateID>Okra.CS.WinRT.BlankApplication</TemplateID>
     <TemplateGroupID>WinRT-Managed</TemplateGroupID>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>40</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>App</DefaultName>
+    <DefaultName>OkraApp</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
