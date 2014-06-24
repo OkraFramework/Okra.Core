@@ -59,10 +59,10 @@ Copy-Item .\templates\base\* .\artifacts\OkraAppFrameworkVsix\ -Recurse
 
 # Create the individual project templates
 
-Write-Zip .\templates\ProjectTemplates\CSharp\WindowsApps\OkraBlankApp\* ".\artifacts\OkraAppFrameworkVsix\ProjectTemplates\CSharp\OkraAppFramework\WindowsApps\OkraBlankApp.zip"
-Write-Zip .\templates\ProjectTemplates\CSharp\WindowsApps\OkraGridApp\* ".\artifacts\OkraAppFrameworkVsix\ProjectTemplates\CSharp\OkraAppFramework\WindowsApps\OkraGridApp.zip"
-Write-Zip .\templates\ProjectTemplates\CSharp\WindowsApps\OkraHubApp\* ".\artifacts\OkraAppFrameworkVsix\ProjectTemplates\CSharp\OkraAppFramework\WindowsApps\OkraHubApp.zip"
-Write-Zip .\templates\ProjectTemplates\CSharp\WindowsApps\OkraSplitApp\* ".\artifacts\OkraAppFrameworkVsix\ProjectTemplates\CSharp\OkraAppFramework\WindowsApps\OkraSplitApp.zip"
+Write-Zip @(".\templates\ProjectTemplates\CSharp\WindowsApps\OkraBlankApp\*") ".\artifacts\OkraAppFrameworkVsix\ProjectTemplates\CSharp\OkraAppFramework\WindowsApps\OkraBlankApp.zip"
+Write-Zip @(".\templates\ProjectTemplates\CSharp\WindowsApps\OkraGridApp\*", ".\templates\ProjectTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ProjectTemplates\CSharp\OkraAppFramework\WindowsApps\OkraGridApp.zip"
+Write-Zip @(".\templates\ProjectTemplates\CSharp\WindowsApps\OkraHubApp\*", ".\templates\ProjectTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ProjectTemplates\CSharp\OkraAppFramework\WindowsApps\OkraHubApp.zip"
+Write-Zip @(".\templates\ProjectTemplates\CSharp\WindowsApps\OkraSplitApp\*", ".\templates\ProjectTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ProjectTemplates\CSharp\OkraAppFramework\WindowsApps\OkraSplitApp.zip"
 
 # Create the individual item templates
 
