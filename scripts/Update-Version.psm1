@@ -65,6 +65,28 @@ function Update-VsixManifest
         Set-Content $FileName
 }
 
+function Update-PackagesConfig
+{
+    [CmdletBinding()]
+    Param
+    (
+        [Parameter(Mandatory=$True, Position = 1)][string]$FileName,
+        [Parameter(Mandatory=$True, Position = 2)][Version]$VersionNumber
+    )
+
+    $okraCoreRegex = '<package id="Okra.Core" version="[^"]+"'
+    $okraCore = '<package id="Okra.Core" version="' + $versionNumber + '"'
+
+    $okraMefRegex = '<package id="Okra.MEF" version="[^"]+"'
+    $okraMef = '<package id="Okra.MEF" version="' + $versionNumber + '"'
+
+    (Get-Content $FileName) |
+        ForEach-Object {$_ -replace $okraCoreRegex, $okraCore} |
+        ForEach-Object {$_ -replace $okraMefRegex, $okraMef} |
+        Set-Content $FileName
+}
+
 Export-ModuleMember -Function Update-AssemblyInfo
 Export-ModuleMember -Function Update-Nuspec
 Export-ModuleMember -Function Update-VsixManifest
+Export-ModuleMember -Function Update-PackagesConfig

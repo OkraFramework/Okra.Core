@@ -45,3 +45,8 @@ Update-Nuspec ".\src\Okra.MEF\Okra.MEF.nuspec" $versionNumber.ToString()
 write-host "Patching *.vsixmanifest files to" $versionNumber
 
 Update-VsixManifest ".\templates\base\extension.vsixmanifest" $versionNumber.ToString()
+
+write-host "Patching *.packageconfig files to" $versionNumber
+
+Update-PackagesConfig ".\templates\ProjectTemplates\CSharp\WindowsApps\shared\packages.config" $versionNumber.ToString()
+Update-PackagesConfig ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraBlankApp\packages.config" $versionNumber.ToString()
