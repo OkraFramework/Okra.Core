@@ -27,3 +27,5 @@ If (!(Test-Path .\.nuget\nuget.exe))
 
 .\.nuget\NuGet.exe pack .\src\Okra.Core\Okra.Core.nuspec -Prop Configuration=Release -Output .\artifacts -Symbols
 .\.nuget\NuGet.exe pack .\src\Okra.MEF\Okra.MEF.nuspec -Prop Configuration=Release -Output .\artifacts -Symbols
+.\.nuget\NuGet.exe pack .\src\Okra.Core\OkraUniversalPreview.Core.nuspec -Prop Configuration=Release -Output .\artifacts -Symbols
+.\.nuget\NuGet.exe pack .\src\Okra.MEF\OkraUniversalPreview.MEF.nuspec -Prop Configuration=Release -Output .\artifacts -Symbols
