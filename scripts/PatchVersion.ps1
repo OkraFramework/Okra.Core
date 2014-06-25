@@ -41,6 +41,8 @@ write-host "Patching *.nuspec files to" $versionNumber
 
 Update-Nuspec ".\src\Okra.Core\Okra.Core.nuspec" $versionNumber.ToString()
 Update-Nuspec ".\src\Okra.MEF\Okra.MEF.nuspec" $versionNumber.ToString()
+Update-Nuspec ".\src\Okra.Core\OkraUniversalPreview.Core.nuspec" $versionNumber.ToString()
+Update-Nuspec ".\src\Okra.MEF\OkraUniversalPreview.MEF.nuspec" $versionNumber.ToString()
 
 write-host "Patching *.vsixmanifest files to" $versionNumber
 

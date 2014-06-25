@@ -41,10 +41,18 @@ function Update-Nuspec
     $okraMefRegex = '<dependency id="Okra.MEF" version="[^"]+"/>'
     $okraMef = '<dependency id="Okra.MEF" version="[' + $versionNumber + ']"/>'
 
+    $okraUniCoreRegex = '<dependency id="OkraUniversalPreview.Core" version="[^"]+"/>'
+    $okraUniCore = '<dependency id="OkraUniversalPreview.Core" version="[' + $versionNumber + ']"/>'
+
+    $okraUniMefRegex = '<dependency id="OkraUniversalPreview.MEF" version="[^"]+"/>'
+    $okraUniMef = '<dependency id="OkraUniversalPreview.MEF" version="[' + $versionNumber + ']"/>'
+
     (Get-Content $FileName) |
         ForEach-Object {$_ -replace $versionRegex, $version} |
         ForEach-Object {$_ -replace $okraCoreRegex, $okraCore} |
         ForEach-Object {$_ -replace $okraMefRegex, $okraMef} |
+        ForEach-Object {$_ -replace $okraUniCoreRegex, $okraUniCore} |
+        ForEach-Object {$_ -replace $okraUniMefRegex, $okraUniMef} |
         Set-Content $FileName
 }
 
