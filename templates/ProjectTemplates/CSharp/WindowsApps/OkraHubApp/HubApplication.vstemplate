@@ -44,7 +44,6 @@
       <ProjectItem ReplaceParameters="false" TargetFileName="Assets\StoreLogo.scale-100.png">StoreLogo.png</ProjectItem>
 
       <ProjectItem ReplaceParameters="false" TargetFileName="Common\ReadMe.txt">ReadMe.txt</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="Common\ObservableDictionary.cs">ObservableDictionary.cs</ProjectItem>
 
       <ProjectItem ReplaceParameters="true" TargetFileName="Strings\$currentuiculturename$\Resources.resw">Resources.resw</ProjectItem>
 

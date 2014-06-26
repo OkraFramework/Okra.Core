@@ -119,7 +119,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="DataModel\SampleDataSource.cs" />
-    <Compile Include="Common\ObservableDictionary.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
