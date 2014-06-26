@@ -44,9 +44,6 @@
       <ProjectItem ReplaceParameters="false" TargetFileName="Assets\StoreLogo.scale-100.png">StoreLogo.png</ProjectItem>
 
       <ProjectItem ReplaceParameters="false" TargetFileName="Common\ReadMe.txt">ReadMe.txt</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="Common\NavigationHelper.cs">NavigationHelper.cs</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="Common\SuspensionManager.cs">SuspensionManager.cs</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="Common\RelayCommand.cs">RelayCommand.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Common\ObservableDictionary.cs">ObservableDictionary.cs</ProjectItem>
 	  
       <ProjectItem ReplaceParameters="false" TargetFileName="$projectname$_TemporaryKey.pfx" BlendDoNotCreate="true">Application_TemporaryKey.pfx</ProjectItem>
