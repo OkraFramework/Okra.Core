@@ -120,6 +120,7 @@
       <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AppBootstrapper.cs" />
     <Compile Include="DataModel\SampleDataSource.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Common\NavigationHelper.cs" />

@@ -30,6 +30,7 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="SectionPage.xaml.cs">SectionPage.xaml.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="ItemPage.xaml">ItemPage.xaml</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="ItemPage.xaml.cs">ItemPage.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="AppBootstrapper.cs">AppBootstrapper.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="DataModel\SampleDataSource.cs">SampleDataSource.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="DataModel\SampleData.json">SampleData.json</ProjectItem>

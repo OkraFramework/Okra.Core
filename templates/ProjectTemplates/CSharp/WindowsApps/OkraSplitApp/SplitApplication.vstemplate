@@ -28,6 +28,7 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="SplitPage.xaml">SplitPage.xaml</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="SplitPage.xaml.cs">SplitPage.xaml.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Package.appxmanifest">Package-managed.appxmanifest</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="AppBootstrapper.cs">AppBootstrapper.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="DataModel\SampleDataSource.cs">SampleDataSource.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="DataModel\SampleData.json">SampleData.json</ProjectItem>

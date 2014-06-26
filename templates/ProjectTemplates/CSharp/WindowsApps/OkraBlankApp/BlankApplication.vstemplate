@@ -25,6 +25,7 @@
       <ProjectItem ReplaceParameters="true" OpenInEditor="true" BlendOpenInEditor="false" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" BlendOpenInEditor="true" TargetFileName="MainPage.xaml">MainPage.xaml</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="MainPage.xaml.cs">MainPage.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="AppBootstrapper.cs">AppBootstrapper.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Package.appxmanifest">Package-managed.appxmanifest</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="Assets\Logo.scale-100.png">Logo.png</ProjectItem>
