@@ -49,8 +49,7 @@
             ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
             SelectionMode="None"
             IsSwipeEnabled="false"
-            IsItemClickEnabled="True"
-            ItemClick="ItemView_ItemClick">
+            IsItemClickEnabled="True">
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="110" Width="480" Margin="10">
