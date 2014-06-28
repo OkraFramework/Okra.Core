@@ -18,6 +18,7 @@
     <RequiredPlatformVersion>6.3.0</RequiredPlatformVersion>
     <CreateInPlace>true</CreateInPlace>
     <PreviewImage>BlankApp.png</PreviewImage>
+    <BuildProjectOnLoad>true</BuildProjectOnLoad>
   </TemplateData>
   <TemplateContent>
     <Project File="Application.csproj" ReplaceParameters="true">

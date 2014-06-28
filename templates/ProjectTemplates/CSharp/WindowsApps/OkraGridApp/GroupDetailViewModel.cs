@@ -3,6 +3,7 @@ using $safeprojectname$.Data;
 using Okra.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.IO;
 using System.Linq;
 using Windows.Foundation;
@@ -17,66 +18,67 @@ namespace $safeprojectname$
     /// within the group.
     /// </summary>
     [ViewModelExport("GroupDetail")]
-    public sealed partial class GroupDetailViewModel : ViewModelBase
+    public sealed partial class GroupDetailViewModel : ViewModelBase, IActivatable
     {
-        //private NavigationHelper navigationHelper;
-        //private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private SampleDataGroup group;
+        private IEnumerable<SampleDataItem> items;
 
-        ///// <summary>
-        ///// NavigationHelper is used on each page to aid in navigation and 
-        ///// process lifetime management
-        ///// </summary>
-        //public NavigationHelper NavigationHelper
-        //{
-        //    get { return this.navigationHelper; }
-        //}
+        [ImportingConstructor]
+        public GroupDetailViewModel(INavigationContext navigationContext)
+            : base(navigationContext)
+        {
+        }
 
-        ///// <summary>
-        ///// This can be changed to a strongly typed view model.
-        ///// </summary>
-        //public ObservableDictionary DefaultViewModel
-        //{
-        //    get { return this.defaultViewModel; }
-        //}
+        public SampleDataGroup Group
+        {
+            get
+            {
+                return group;
+            }
+            protected set
+            {
+                SetProperty(ref group, value);
+            }
+        }
 
+        public IEnumerable<SampleDataItem> Items
+        {
+            get
+            {
+                return items;
+            }
+            protected set
+            {
+                SetProperty(ref items, value);
+            }
+        }
 
-        //public GroupDetailPage()
-        //{
-        //    this.InitializeComponent();
-        //    this.navigationHelper = new NavigationHelper(this);
-        //    this.navigationHelper.LoadState += navigationHelper_LoadState;
-        //}
+        /// <summary>
+        /// Populates the page with content passed during navigation.  Any saved state is also
+        /// provided when recreating a page from a prior session.
+        /// </summary>
+        /// <param name="pageInfo">Information on the arguments and state passed to the page.</param>
+        public async void Activate(PageInfo pageInfo)
+        {
+            // TODO: Create an appropriate data model for your problem domain to replace the sample data
 
-        ///// <summary>
-        ///// Populates the page with content passed during navigation.  Any saved state is also
-        ///// provided when recreating a page from a prior session.
-        ///// </summary>
-        ///// <param name="sender">
-        ///// The source of the event; typically <see cref="NavigationHelper"/>
-        ///// </param>
-        ///// <param name="e">Event data that provides both the navigation parameter passed to
-        ///// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
-        ///// a dictionary of state preserved by this page during an earlier
-        ///// session.  The state will be null the first time a page is visited.</param>
-        //private async void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        //{
-        //    // TODO: Create an appropriate data model for your problem domain to replace the sample data
-        //    var group = await SampleDataSource.GetGroupAsync((String)e.NavigationParameter);
-        //    this.DefaultViewModel["Group"] = group;
-        //    this.DefaultViewModel["Items"] = group.Items;
-        //}
+            string groupId = pageInfo.GetArguments<string>();
+            var group = await SampleDataSource.GetGroupAsync(groupId);
+            this.Group = group;
+            this.Items = group.Items;
+        }
 
-        ///// <summary>
-        ///// Invoked when an item is clicked.
-        ///// </summary>
-        ///// <param name="sender">The GridView displaying the item clicked.</param>
-        ///// <param name="e">Event data that describes the item clicked.</param>
-        //void ItemView_ItemClick(object sender, ItemClickEventArgs e)
-        //{
-        //    // Navigate to the appropriate destination page, configuring the new page
-        //    // by passing required information as a navigation parameter
-        //    var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
-        //    this.Frame.Navigate(typeof(ItemDetailPage), itemId);
-        //}
+        /// <summary>
+        /// Saves any state to be recreated in a future session.
+        /// </summary>
+        /// <param name="pageInfo">Object to store page state.</param>
+        public void SaveState(PageInfo pageInfo)
+        {
+        }
+
+        public void NavigateToItemDetail(object sender, SampleDataItem item)
+        {
+            NavigationManager.NavigateTo("ItemDetail", item.UniqueId);
+        }
     }
 }

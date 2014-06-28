@@ -18,6 +18,7 @@
     <RequiredPlatformVersion>6.3.0</RequiredPlatformVersion>
     <PreviewImage>SplitApp.png</PreviewImage>
     <CreateInPlace>true</CreateInPlace>
+    <BuildProjectOnLoad>true</BuildProjectOnLoad>
   </TemplateData>
   <TemplateContent>
     <Project File="Application.csproj" ReplaceParameters="true">
