@@ -131,6 +131,8 @@
     <None Include="packages.config" />
     <Content Include="DataModel\SampleData.json"/>
     <Compile Include="Common\ViewModelBase.cs"/>
+    <Compile Include="Common\ItemClickTriggerBehavior.cs"/>
+    <Compile Include="Common\HeaderClickTriggerBehavior.cs"/>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.scale-100.png" />

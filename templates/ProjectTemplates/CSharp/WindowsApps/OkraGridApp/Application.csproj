@@ -126,6 +126,8 @@
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="DataModel\SampleDataSource.cs" />
     <Compile Include="Common\ViewModelBase.cs"/>
+    <Compile Include="Common\ItemClickTriggerBehavior.cs"/>
+    <Compile Include="Common\HeaderClickTriggerBehavior.cs"/>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

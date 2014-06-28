@@ -45,6 +45,8 @@
 
       <ProjectItem ReplaceParameters="false" TargetFileName="Common\ReadMe.txt">ReadMe.txt</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Common\ViewModelBase.cs">ViewModelBase.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Common\ItemClickTriggerBehavior.cs">ItemClickTriggerBehavior.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Common\HeaderClickTriggerBehavior.cs">HeaderClickTriggerBehavior.cs</ProjectItem>
 
       <ProjectItem ReplaceParameters="true" TargetFileName="Strings\$currentuiculturename$\Resources.resw">Resources.resw</ProjectItem>
 
