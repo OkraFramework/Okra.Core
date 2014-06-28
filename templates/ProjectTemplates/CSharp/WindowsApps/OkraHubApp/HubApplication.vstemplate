@@ -24,13 +24,16 @@
     <Project File="Application.csproj" ReplaceParameters="true">
       <ProjectItem ReplaceParameters="true" TargetFileName="Package.appxmanifest">Package-managed.appxmanifest</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
-      <ProjectItem ReplaceParameters="true" OpenInEditor="true" BlendOpenInEditor="false" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
-      <ProjectItem ReplaceParameters="true" BlendOpenInEditor="true" TargetFileName="HubPage.xaml">HubPage.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true" BlendOpenInEditor="true" TargetFileName="HubPage.xaml">HubPage.xaml</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="HubPage.xaml.cs">HubPage.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="HubViewModel.cs">HubViewModel.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="SectionPage.xaml">SectionPage.xaml</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="SectionPage.xaml.cs">SectionPage.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="SectionViewModel.cs">SectionViewModel.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="ItemPage.xaml">ItemPage.xaml</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="ItemPage.xaml.cs">ItemPage.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="ItemViewModel.cs">ItemViewModel.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="AppBootstrapper.cs">AppBootstrapper.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="DataModel\SampleDataSource.cs">SampleDataSource.cs</ProjectItem>
@@ -48,6 +51,7 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="Common\ViewModelBase.cs">ViewModelBase.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Common\ItemClickTriggerBehavior.cs">ItemClickTriggerBehavior.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Common\HeaderClickTriggerBehavior.cs">HeaderClickTriggerBehavior.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Common\HubHeaderClickTriggerBehavior.cs">HubHeaderClickTriggerBehavior.cs</ProjectItem>
 
       <ProjectItem ReplaceParameters="true" TargetFileName="Strings\$currentuiculturename$\Resources.resw">Resources.resw</ProjectItem>
 

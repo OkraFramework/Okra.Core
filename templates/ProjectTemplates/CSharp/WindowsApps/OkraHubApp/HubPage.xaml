@@ -1,9 +1,9 @@
 ﻿<Page
     x:Name="pageRoot"
     x:Class="$safeprojectname$.HubPage"
-    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity" xmlns:interactions="using:Microsoft.Xaml.Interactions.Core"
     xmlns:local="using:$safeprojectname$"
     xmlns:data="using:$safeprojectname$.Data"
     xmlns:common="using:$safeprojectname$.Common"
@@ -39,7 +39,7 @@
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
-        <Hub SectionHeaderClick="Hub_SectionHeaderClick">
+        <Hub>
             <Hub.Header>
                 <!-- Back button and page title -->
                 <Grid>
@@ -50,7 +50,7 @@
                     <Button  x:Name="backButton" Style="{StaticResource NavigationBackButtonNormalStyle}"
                         Margin="-1,-1,39,0" 
                         VerticalAlignment="Top"
-                        Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
+                        Command="{Binding GoBackCommand}"
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
@@ -58,6 +58,11 @@
                         VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
                 </Grid>
             </Hub.Header>
+            <interactivity:Interaction.Behaviors>
+                <common:HubHeaderClickTriggerBehavior>
+                    <interactions:CallMethodAction MethodName="NavigateToSectionDetail" TargetObject="{Binding DataContext, ElementName=pageRoot}"/>
+                </common:HubHeaderClickTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
             <HubSection Width="780" Margin="0,0,80,0">
                 <HubSection.Background>
                     <ImageBrush ImageSource="Assets/MediumGray.png" Stretch="UniformToFill" />
@@ -114,8 +119,12 @@
                         ItemTemplate="{StaticResource Standard310x260ItemTemplate}"
                         SelectionMode="None"
                         IsSwipeEnabled="false"
-                        IsItemClickEnabled="True"
-                        ItemClick="ItemView_ItemClick">
+                        IsItemClickEnabled="True">
+                        <interactivity:Interaction.Behaviors>
+                            <common:ItemClickTriggerBehavior>
+                                <interactions:CallMethodAction MethodName="NavigateToItemDetail" TargetObject="{Binding DataContext, ElementName=pageRoot}"/>
+                            </common:ItemClickTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
                     </GridView>
                 </DataTemplate>
             </HubSection>

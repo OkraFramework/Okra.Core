@@ -46,6 +46,7 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="Common\ViewModelBase.cs">ViewModelBase.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Common\ItemClickTriggerBehavior.cs">ItemClickTriggerBehavior.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Common\HeaderClickTriggerBehavior.cs">HeaderClickTriggerBehavior.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Common\HubHeaderClickTriggerBehavior.cs">HubHeaderClickTriggerBehavior.cs</ProjectItem>
 
       <ProjectItem ReplaceParameters="false" TargetFileName="$projectname$_TemporaryKey.pfx" BlendDoNotCreate="true">Application_TemporaryKey.pfx</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="packages.config">packages.config</ProjectItem>

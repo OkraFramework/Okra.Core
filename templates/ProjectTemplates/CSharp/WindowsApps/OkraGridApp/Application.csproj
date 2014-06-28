@@ -129,6 +129,7 @@
     <Compile Include="Common\ViewModelBase.cs"/>
     <Compile Include="Common\ItemClickTriggerBehavior.cs"/>
     <Compile Include="Common\HeaderClickTriggerBehavior.cs"/>
+    <Compile Include="Common\HubHeaderClickTriggerBehavior.cs"/>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

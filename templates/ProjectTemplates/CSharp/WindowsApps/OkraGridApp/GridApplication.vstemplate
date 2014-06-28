@@ -24,8 +24,8 @@
     <Project File="Application.csproj" ReplaceParameters="true">
       <ProjectItem ReplaceParameters="true" TargetFileName="Package.appxmanifest">Package-managed.appxmanifest</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
-      <ProjectItem ReplaceParameters="true" OpenInEditor="true" BlendOpenInEditor="false" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
-      <ProjectItem ReplaceParameters="true" BlendOpenInEditor="true" TargetFileName="GroupedItemsPage.xaml">GroupedItemsPage.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true" BlendOpenInEditor="true" TargetFileName="GroupedItemsPage.xaml">GroupedItemsPage.xaml</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="GroupedItemsPage.xaml.cs">GroupedItemsPage.xaml.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="GroupedItemsViewModel.cs">GroupedItemsViewModel.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="GroupDetailPage.xaml">GroupDetailPage.xaml</ProjectItem>
@@ -51,6 +51,7 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="Common\ViewModelBase.cs">ViewModelBase.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Common\ItemClickTriggerBehavior.cs">ItemClickTriggerBehavior.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Common\HeaderClickTriggerBehavior.cs">HeaderClickTriggerBehavior.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Common\HubHeaderClickTriggerBehavior.cs">HubHeaderClickTriggerBehavior.cs</ProjectItem>
 	  
       <ProjectItem ReplaceParameters="false" TargetFileName="$projectname$_TemporaryKey.pfx" BlendDoNotCreate="true">Application_TemporaryKey.pfx</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="packages.config">packages.config</ProjectItem>
