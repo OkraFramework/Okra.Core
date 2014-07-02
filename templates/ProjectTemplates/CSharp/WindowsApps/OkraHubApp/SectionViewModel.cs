@@ -28,7 +28,7 @@ namespace $safeprojectname$
     /// within the group.
     /// </summary>
     [ViewModelExport("Section")]
-    public sealed partial class SectionViewModel : ViewModelBase, IActivatable
+    public class SectionViewModel : ViewModelBase, IActivatable
     {
         private SampleDataGroup group;
         private IEnumerable<SampleDataItem> items;

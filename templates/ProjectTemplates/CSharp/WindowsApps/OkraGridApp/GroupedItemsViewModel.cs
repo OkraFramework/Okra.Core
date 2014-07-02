@@ -17,7 +17,7 @@ namespace $safeprojectname$
     /// A view model for displaying a grouped collection of items.
     /// </summary>
     [ViewModelExport("Home")]
-    public sealed partial class GroupedItemsViewModel : ViewModelBase
+    public class GroupedItemsViewModel : ViewModelBase
     {
         private IEnumerable<SampleDataGroup> groups;
 

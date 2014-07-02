@@ -7,6 +7,7 @@ using System.Composition;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -17,34 +18,35 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Hub Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=321224
+// The Items Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234233
 
 namespace $safeprojectname$
 {
     /// <summary>
-    /// A view model for displaying a grouped collection of items.
+    /// A view model for displaying a collection of item previews.  In the Split App this page
+    /// is used to display and select one of the available groups.
     /// </summary>
     [ViewModelExport("Home")]
-    public class HubViewModel : ViewModelBase
+    public class ItemsViewModel : ViewModelBase
     {
-        private SampleDataGroup section3Items;
+        private IEnumerable<SampleDataGroup> items;
 
         [ImportingConstructor]
-        public HubViewModel(INavigationContext navigationContext)
+        public ItemsViewModel(INavigationContext navigationContext)
             : base(navigationContext)
         {
             Initialize();
         }
 
-        public SampleDataGroup Section3Items
+        public IEnumerable<SampleDataGroup> Items
         {
             get
             {
-                return section3Items;
+                return items;
             }
             protected set
             {
-                SetProperty(ref section3Items, value);
+                SetProperty(ref items, value);
             }
         }
 
@@ -54,18 +56,13 @@ namespace $safeprojectname$
         private async void Initialize()
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var sampleDataGroup = await SampleDataSource.GetGroupAsync("Group-4");
-            this.Section3Items = sampleDataGroup;
+            var sampleDataGroups = await SampleDataSource.GetGroupsAsync();
+            this.Items = sampleDataGroups;
         }
 
-        public void NavigateToItemDetail(object sender, SampleDataItem item)
+        public void NavigateToSplitView(object sender, SampleDataGroup group)
         {
-            NavigationManager.NavigateTo("Item", item.UniqueId);
-        }
-
-        public void NavigateToSectionDetail(object sender, SampleDataGroup group)
-        {
-            NavigationManager.NavigateTo("Section", group.UniqueId);
+            NavigationManager.NavigateTo("Split", group.UniqueId);
         }
     }
 }

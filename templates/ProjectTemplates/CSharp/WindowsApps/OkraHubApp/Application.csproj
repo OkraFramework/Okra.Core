@@ -130,6 +130,7 @@
     <Compile Include="Common\ItemClickTriggerBehavior.cs"/>
     <Compile Include="Common\HeaderClickTriggerBehavior.cs"/>
     <Compile Include="Common\HubHeaderClickTriggerBehavior.cs"/>
+    <Compile Include="Common\SplitPageBehavior.cs"/>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

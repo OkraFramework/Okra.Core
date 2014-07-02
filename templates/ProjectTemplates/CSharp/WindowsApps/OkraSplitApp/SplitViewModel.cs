@@ -1,32 +1,44 @@
 ﻿using $safeprojectname$.Common;
 using $safeprojectname$.Data;
+using Okra.Core;
 using Okra.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Composition;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
 
-// The Group Detail Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234229
+// The Split Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234234
 
 namespace $safeprojectname$
 {
     /// <summary>
-    /// A view model for displaying an overview of a single group, including a preview of the items
-    /// within the group.
+    /// A view model for displaying a group title, a list of items within the group, and details for
+    /// the currently selected item.
     /// </summary>
-    [ViewModelExport("GroupDetail")]
-    public class GroupDetailViewModel : ViewModelBase, IActivatable
+    [ViewModelExport("Split")]
+    public class SplitViewModel : ViewModelBase, IActivatable
     {
         private SampleDataGroup group;
         private IEnumerable<SampleDataItem> items;
+        private SampleDataItem selectedItem;
 
         [ImportingConstructor]
-        public GroupDetailViewModel(INavigationContext navigationContext)
+        public SplitViewModel(INavigationContext navigationContext)
             : base(navigationContext)
         {
+            ClearSelectionCommand = new DelegateCommand(ClearSelection);
         }
 
         public SampleDataGroup Group
@@ -53,6 +65,29 @@ namespace $safeprojectname$
             }
         }
 
+        public SampleDataItem SelectedItem
+        {
+            get
+            {
+                return selectedItem;
+            }
+            set
+            {
+                SetProperty(ref selectedItem, value);
+            }
+        }
+
+        public ICommand ClearSelectionCommand
+        {
+            get;
+            private set;
+        }
+
+        public void ClearSelection()
+        {
+            SelectedItem = null;
+        }
+
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -66,6 +101,15 @@ namespace $safeprojectname$
             var group = await SampleDataSource.GetGroupAsync(groupId);
             this.Group = group;
             this.Items = group.Items;
+
+            // Restore the selected item
+
+            string selectedItemId;
+
+            if (pageInfo.TryGetState<string>("SelectedItem", out selectedItemId))
+                SelectedItem = await SampleDataSource.GetItemAsync(selectedItemId);
+            else
+                SelectedItem = null;
         }
 
         /// <summary>
@@ -74,11 +118,10 @@ namespace $safeprojectname$
         /// <param name="pageInfo">Object to store page state.</param>
         public void SaveState(PageInfo pageInfo)
         {
-        }
-
-        public void NavigateToItemDetail(object sender, SampleDataItem item)
-        {
-            NavigationManager.NavigateTo("ItemDetail", item.UniqueId);
+            if (SelectedItem != null)
+                pageInfo.SetState<string>("SelectedItem", SelectedItem.UniqueId);
+            else
+                pageInfo.SetState<string>("SelectedItem", null);
         }
     }
 }

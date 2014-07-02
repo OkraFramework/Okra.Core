@@ -27,7 +27,7 @@ namespace $safeprojectname$
     /// A view model for displaying details for a single item within a group.
     /// </summary>
     [ViewModelExport("Item")]
-    public sealed partial class ItemViewModel : ViewModelBase, IActivatable
+    public class ItemViewModel : ViewModelBase, IActivatable
     {
         private SampleDataItem item;
 
