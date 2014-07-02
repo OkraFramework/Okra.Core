@@ -1,6 +1,4 @@
-﻿using $safeprojectname$.Common;
-
-using Okra;
+﻿using Okra;
 using System;
 using System.Collections.Generic;
 using System.IO;

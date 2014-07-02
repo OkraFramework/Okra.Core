@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Okra.Navigation;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace $safeprojectname$
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
+    [PageExport("Home")]
     public sealed partial class MainPage : Page
     {
         public MainPage()
