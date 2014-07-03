@@ -3,6 +3,7 @@
     x:Class="$rootnamespace$.$safeitemname$"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity" xmlns:interactions="using:Microsoft.Xaml.Interactions.Core"
     xmlns:local="using:$rootnamespace$"
     xmlns:common="using:$safeprojectname$.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -22,6 +23,14 @@
         * Row 1 contains the rest of the page layout
     -->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <interactivity:Interaction.Behaviors>
+            <common:SplitPageBehavior MaximisedVisualState="PrimaryView" MinimisedVisualState="SinglePane" MinimisedDetailVisualState="SinglePane_Detail" SelectedObject="{Binding SelectedItem}"/>
+        </interactivity:Interaction.Behaviors>
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+               <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -49,7 +58,8 @@
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
             <TextBlock x:Name="pageTitle" Text="{Binding Title}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,0,40"/>
+                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,0,40"
+                        DataContext="{Binding Group}"/>
         </Grid>
 
         <!-- Vertical scrolling item list -->
@@ -63,7 +73,7 @@
             Padding="120,0,0,60"
             ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
             IsSwipeEnabled="False"
-            SelectionChanged="ItemListView_SelectionChanged">
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="6">
@@ -96,7 +106,7 @@
             Grid.Column="1"
             Grid.RowSpan="2"
             Padding="60,0,66,0"
-            DataContext="{Binding SelectedItem, ElementName=itemListView}"
+            DataContext="{Binding SelectedItem}"
             HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
             ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Enabled"
             ScrollViewer.ZoomMode="Disabled">
@@ -171,6 +181,9 @@
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemDetail" Storyboard.TargetProperty="Padding">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="120,0,90,0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backButton" Storyboard.TargetProperty="Command">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding ClearSelectionCommand}"/>
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
