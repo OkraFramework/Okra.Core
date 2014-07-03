@@ -20,14 +20,13 @@ using Windows.UI.Xaml.Navigation;
 namespace $rootnamespace$
 {
     /// <summary>
-    /// A basic page that provides characteristics common to most applications.
+    /// A basic view model that provides characteristics common to most applications.
     /// </summary>
-    [PageExport("$fileinputname$")]
-    public sealed partial class $safeitemname$ : Page
+    [ViewModelExport("$fileinputname$")]
+    public class $safeitemname$ : ViewModelBase
     {
         public $safeitemname$()
         {
-            this.InitializeComponent();
         }
     }
 }
