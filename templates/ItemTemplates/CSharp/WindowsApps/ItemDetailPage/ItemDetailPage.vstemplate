@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.microsoft.com/developer/vstemplate/2005">
   <TemplateData>
-    <Name Package="{BB89AFCA-43DA-45C1-907D-9D61DD11F28D}" ID="1022" />
-    <Description Package="{BB89AFCA-43DA-45C1-907D-9D61DD11F28D}" ID="1023" />
+    <Name>Item Detail Page (MVVM)</Name>
+    <Description>A page that displays one item in detail along with navigation to adjacent items in the same group.</Description>
     <Icon Package="{BB89AFCA-43DA-45C1-907D-9D61DD11F28D}" ID="4015" />
-    <TemplateID>Microsoft.CS.WinRT.ItemDetailPage</TemplateID>
+    <TemplateID>Okra.CS.WinRT.ItemDetailPage</TemplateID>
     <TemplateGroupID>WinRT-Managed-Win81</TemplateGroupID>
     <ProjectType>CSharp</ProjectType>
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>

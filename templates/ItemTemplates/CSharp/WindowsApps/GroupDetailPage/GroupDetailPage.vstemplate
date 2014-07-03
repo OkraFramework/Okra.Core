@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.microsoft.com/developer/vstemplate/2005">
   <TemplateData>
-    <Name Package="{BB89AFCA-43DA-45C1-907D-9D61DD11F28D}" ID="1020" />
-    <Description Package="{BB89AFCA-43DA-45C1-907D-9D61DD11F28D}" ID="1021" />
+    <Name>Group Detail Page (MVVM)</Name>
+    <Description>A page that displays details for a single group and previews each item in the group.</Description>
     <Icon Package="{BB89AFCA-43DA-45C1-907D-9D61DD11F28D}" ID="4013" />
-    <TemplateID>Microsoft.CS.WinRT.GroupDetailPage</TemplateID>
+    <TemplateID>Okra.CS.WinRT.GroupDetailPage</TemplateID>
     <TemplateGroupID>WinRT-Managed-Win81</TemplateGroupID>
     <ProjectType>CSharp</ProjectType>
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
