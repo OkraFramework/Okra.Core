@@ -67,7 +67,7 @@ Write-Zip @(".\templates\ProjectTemplates\CSharp\WindowsApps\OkraSplitApp\*", ".
 # Create the individual item templates
 
 Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraBasicPage\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraBasicPage.zip"
-Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraFileOpenPickerContract\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraFileOpenPickerContract.zip"
+# Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraFileOpenPickerContract\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraFileOpenPickerContract.zip"
 Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraGroupDetailPage\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraGroupDetailPage.zip"
 Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraGroupedItemsPage\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraGroupedItemsPage.zip"
 Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraHubPage\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraHubPage.zip"
