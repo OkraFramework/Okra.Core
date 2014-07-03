@@ -2,7 +2,7 @@
 <VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.microsoft.com/developer/vstemplate/2005">
   <TemplateData>
     <Name>Settings Flyout (MVVM)</Name>
-    <Description>A blank settings flyout.</Description>
+    <Description>A blank Settings Flyout.</Description>
     <Icon Package="{BB89AFCA-43DA-45C1-907D-9D61DD11F28D}" ID="4031" />
     <TemplateID>Okra.CS.WinRT.SettingsFlyout</TemplateID>
     <TemplateGroupID>WinRT-Managed-Win81</TemplateGroupID>

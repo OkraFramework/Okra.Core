@@ -66,15 +66,17 @@ Write-Zip @(".\templates\ProjectTemplates\CSharp\WindowsApps\OkraSplitApp\*", ".
 
 # Create the individual item templates
 
-#Write-Zip @(".\templates\ItemTemplates\CSharp\OkraBasicPage\*", ".\templates\ItemTemplates\CSharp\common\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraBasicPage.zip"
-#Write-Zip @(".\templates\ItemTemplates\CSharp\OkraSplitPage\*", ".\templates\ItemTemplates\CSharp\common\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraSplitPage.zip"
-#Write-Zip @(".\templates\ItemTemplates\CSharp\OkraItemsPage\*", ".\templates\ItemTemplates\CSharp\common\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraItemsPage.zip"
-#Write-Zip @(".\templates\ItemTemplates\CSharp\OkraItemDetailPage\*", ".\templates\ItemTemplates\CSharp\common\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraItemDetailPage.zip"
-#Write-Zip @(".\templates\ItemTemplates\CSharp\OkraGroupedItemsPage\*", ".\templates\ItemTemplates\CSharp\common\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraGroupedItemsPage.zip"
-#Write-Zip @(".\templates\ItemTemplates\CSharp\OkraGroupDetailPage\*", ".\templates\ItemTemplates\CSharp\common\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraGroupDetailPage.zip"
-#Write-Zip @(".\templates\ItemTemplates\CSharp\OkraShareTargetContract\*", ".\templates\ItemTemplates\CSharp\common\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraShareTargetContract.zip"
-#Write-Zip @(".\templates\ItemTemplates\CSharp\OkraSettingsPane\*", ".\templates\ItemTemplates\CSharp\common\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraSettingsPane.zip"
-#Write-Zip @(".\templates\ItemTemplates\CSharp\OkraSearchContract\*", ".\templates\ItemTemplates\CSharp\common\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraSearchContract.zip"
+Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraBasicPage\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraBasicPage.zip"
+Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraFileOpenPickerContract\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraFileOpenPickerContract.zip"
+Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraGroupDetailPage\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraGroupDetailPage.zip"
+Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraGroupedItemsPage\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraGroupedItemsPage.zip"
+Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraHubPage\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraHubPage.zip"
+Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraItemDetailPage\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraItemDetailPage.zip"
+Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraItemsPage\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraItemsPage.zip"
+Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraSearchContract\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraSearchContract.zip"
+Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraSettingsFlyout\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraSettingsFlyout.zip"
+Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraShareTargetContract\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraShareTargetContract.zip"
+Write-Zip @(".\templates\ItemTemplates\CSharp\WindowsApps\OkraSplitPage\*", ".\templates\ItemTemplates\CSharp\WindowsApps\shared\*") ".\artifacts\OkraAppFrameworkVsix\ItemTemplates\CSharp\OkraAppFramework\OkraSplitPage.zip"
 
 # Create the VSIX file
 
