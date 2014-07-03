@@ -21,7 +21,7 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid DataContext="{Binding Group}">
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -62,7 +62,7 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
             <GridView.Header>
-                <StackPanel Width="480" Margin="0,4,14,0">
+                <StackPanel Width="480" Margin="0,4,14,0" DataContext="{Binding Group}">
                     <TextBlock Text="{Binding Subtitle}" Margin="0,0,0,20" Style="{StaticResource SubheaderTextBlockStyle}" MaxHeight="60"/>
                     <Image Source="{Binding ImagePath}" Height="400" Margin="0,0,0,20" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
                     <TextBlock Text="{Binding Description}" Margin="0,0,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
@@ -88,7 +88,8 @@
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
             <TextBlock x:Name="pageTitle" Text="{Binding Title}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"
+                        DataContext="{Binding Group}"/>
         </Grid>
     </Grid>
 </Page>

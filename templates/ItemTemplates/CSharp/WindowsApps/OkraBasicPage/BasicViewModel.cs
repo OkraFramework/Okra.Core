@@ -2,6 +2,7 @@
 using Okra.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,7 +26,9 @@ namespace $rootnamespace$
     [ViewModelExport("$fileinputname$")]
     public class $safeitemname$ : ViewModelBase
     {
-        public $safeitemname$()
+        [ImportingConstructor]
+        public $safeitemname$(INavigationContext navigationContext)
+            : base(navigationContext)
         {
         }
     }
