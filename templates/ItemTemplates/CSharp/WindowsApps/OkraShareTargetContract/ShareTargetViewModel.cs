@@ -41,7 +41,7 @@ namespace $rootnamespace$
     /// This view model allows other applications to share content through this application.
     /// </summary>
     [ViewModelExport("$fileinputname$")]
-    public class $safeitemname$ : ViewModelBase, IShareTarget
+    public class $safeitemname$ : NotifyPropertyChangedBase, IShareTarget
     {
         private IShareOperation _shareOperation;
         private DelegateCommand _shareCommand;
@@ -56,8 +56,7 @@ namespace $rootnamespace$
         private bool supportsComment;
 
         [ImportingConstructor]
-        public $safeitemname$(INavigationContext navigationContext)
-            : base(navigationContext)
+        public $safeitemname$()
         {
             this._shareCommand = new DelegateCommand(Share, CanShare);
         }
