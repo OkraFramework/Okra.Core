@@ -70,13 +70,13 @@ namespace Okra.Navigation
 
             public bool CanExecute(object parameter)
             {
-                return navigationManager.CanGoBack;
+                return navigationManager.NavigationStack.CanGoBack;
             }
 
             public void Execute(object parameter)
             {
-                if (navigationManager.CanGoBack)
-                    navigationManager.GoBack();
+                if (navigationManager.NavigationStack.CanGoBack)
+                    navigationManager.NavigationStack.GoBack();
             }
         }
 

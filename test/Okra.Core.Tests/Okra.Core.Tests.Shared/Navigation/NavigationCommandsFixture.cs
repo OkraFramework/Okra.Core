@@ -175,6 +175,8 @@ namespace Okra.Tests.Navigation
         {
             // *** Fields ***
 
+            private MockNavigationStack navigationStack;
+
             public IList<string> MethodCallLog = new List<string>();
 
             // *** Events ***
@@ -185,23 +187,34 @@ namespace Okra.Tests.Navigation
 
             // *** Constructors ***
 
-            public MockNavigationManager()
+            public MockNavigationManager(MockNavigationStack navigationStack = null)
             {
-                this.NavigationStack = new MockNavigationStack(this);
+                if (navigationStack == null)
+                    navigationStack = new MockNavigationStack(this);
+
+                this.navigationStack = navigationStack;
             }
 
             // *** Properties ***
 
             public bool CanGoBack
             {
-                get;
-                set;
+                get
+                {
+                    return navigationStack.CanGoBack;
+                }
+                set
+                {
+                    navigationStack.CanGoBack = value;
+                }
             }
 
             public INavigationStack NavigationStack
             {
-                get;
-                private set;
+                get
+                {
+                    return navigationStack;
+                }
             }
 
             // *** Methods ***
@@ -247,7 +260,8 @@ namespace Okra.Tests.Navigation
 
             public bool CanGoBack
             {
-                get { return true; }
+                get;
+                set;
             }
 
             public PageInfo CurrentPage
