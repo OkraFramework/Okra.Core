@@ -9,6 +9,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <!-- Collection of items displayed by this page -->
+        <CollectionViewSource
+        x:Name="itemsViewSource"
+        Source="{Binding Items}"/>
+    </Page.Resources>
+
     <!--
         This grid acts as a root panel for the page that defines two rows:
         * Row 0 contains the back button and page title
@@ -25,11 +32,18 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--
-            TODO: Content should be placed within the following grid 
-                  to show details for the current item
-        -->
-        <Grid Grid.Row="1" x:Name="contentRegion"/>
+        <FlipView Grid.Row="1" ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
+                  SelectedValue="{Binding SelectedItem, Mode=TwoWay}">
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <!--
+                        TODO: Content should be placed within the following grid 
+                              to show details for the current item
+                    -->
+                    <Grid x:Name="contentRegion"/>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
 
         <!-- Back button and page title -->
         <Grid>
@@ -45,7 +59,7 @@
                         AutomationProperties.ItemType="Navigation Button"/>
             <TextBlock x:Name="pageTitle" Text="{Binding Title}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"
-                        DataContext="{Binding SelectedItem}"/>
+                        DataContext="{Binding Group}"/>
         </Grid>
     </Grid>
 </Page>

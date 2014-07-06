@@ -67,7 +67,7 @@ namespace $rootnamespace$
             {
                 return selectedItem;
             }
-            protected set
+            set
             {
                 SetProperty(ref selectedItem, value);
             }
