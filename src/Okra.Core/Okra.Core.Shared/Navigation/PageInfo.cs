@@ -22,6 +22,10 @@ namespace Okra.Navigation
         [DataMember]
         private Dictionary<string, StateData> stateDictionary = new Dictionary<string, StateData>();
 
+        // *** Events ***
+
+        public event StateChangedEventHandler StateChanged;
+
         // *** Constructors ***
 
         public PageInfo(string pageName, object arguments)
@@ -96,6 +100,20 @@ namespace Okra.Navigation
             // Set value into dictionary
 
             stateDictionary.Add(key, StateData.Create<T>(value));
+
+            // Raise events
+
+            OnStateChanged(key);
+        }
+
+        // *** Protected Methods ***
+
+        protected void OnStateChanged(string stateKey)
+        {
+            StateChangedEventHandler hander = StateChanged;
+
+            if (hander != null)
+                hander(this, new StateChangedEventArgs(stateKey));
         }
 
         // *** Private Sub-classes ***

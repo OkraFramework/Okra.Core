@@ -309,6 +309,19 @@ namespace Okra.Tests.Navigation
         }
 
         [TestMethod]
+        public void SetState_RaisesStateChangedEvent()
+        {
+            PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
+
+            List<string> stateChangedKeys = new List<string>();
+            navigationEntry.StateChanged += (sender, e) => { stateChangedKeys.Add(e.StateKey); };
+
+            navigationEntry.SetState<string>("MyKey", "Test State");
+
+            CollectionAssert.AreEqual(new[] { "MyKey" }, stateChangedKeys);
+        }
+
+        [TestMethod]
         public void SetState_Exception_KeyIsNull()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");

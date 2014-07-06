@@ -46,6 +46,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageName.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageNavigationEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\SpecialPageNames.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\StateChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\WindowNavigationTarget.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ActivationManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IActivationHandler.cs" />
