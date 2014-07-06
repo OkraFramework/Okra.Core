@@ -94,7 +94,37 @@ function Update-PackagesConfig
         Set-Content $FileName
 }
 
+function Update-CsprojReferences
+{
+    [CmdletBinding()]
+    Param
+    (
+        [Parameter(Mandatory=$True, Position = 1)][string]$FileName,
+        [Parameter(Mandatory=$True, Position = 2)][Version]$VersionNumber
+    )
+
+    $okraCoreRegex = '<Reference Include="Okra.Core, Version=[^,]+,'
+    $okraCore = '<Reference Include="Okra.Core, Version=' + $versionNumber + ','
+
+    $okraCoreHintRegex = '<HintPath>..\\packages\\Okra.Core.[^\\]+\\'
+    $okraCoreHint = '<HintPath>..\packages\Okra.Core.' + $versionNumber + '\'
+
+    $okraMefRegex = '<Reference Include="Okra.MEF, Version=[^,]+,'
+    $okraMef = '<Reference Include="Okra.MEF, Version=' + $versionNumber + ','
+
+    $okraMefHintRegex = '<HintPath>..\\packages\\Okra.MEF.[^\\]+\\'
+    $okraMefHint = '<HintPath>..\packages\Okra.MEF.' + $versionNumber + '\'
+
+    (Get-Content $FileName) |
+        ForEach-Object {$_ -replace $okraCoreRegex, $okraCore} |
+        ForEach-Object {$_ -replace $okraCoreHintRegex, $okraCoreHint} |
+        ForEach-Object {$_ -replace $okraMefRegex, $okraMef} |
+        ForEach-Object {$_ -replace $okraMefHintRegex, $okraMefHint} |
+        Set-Content $FileName
+}
+
 Export-ModuleMember -Function Update-AssemblyInfo
 Export-ModuleMember -Function Update-Nuspec
 Export-ModuleMember -Function Update-VsixManifest
 Export-ModuleMember -Function Update-PackagesConfig
+Export-ModuleMember -Function Update-CsprojReferences

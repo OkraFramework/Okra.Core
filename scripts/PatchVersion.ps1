@@ -48,6 +48,13 @@ write-host "Patching *.vsixmanifest files to" $versionNumber
 
 Update-VsixManifest ".\templates\base\extension.vsixmanifest" $versionNumber.ToString()
 
+write-host "Patching *.csproj files to" $versionNumber
+
+Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraBlankApp\Application.csproj" $versionNumber.ToString()
+Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraGridApp\Application.csproj" $versionNumber.ToString()
+Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraHubApp\Application.csproj" $versionNumber.ToString()
+Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraSplitApp\Application.csproj" $versionNumber.ToString()
+
 write-host "Patching *.packageconfig files to" $versionNumber
 
 Update-PackagesConfig ".\templates\ProjectTemplates\CSharp\WindowsApps\shared\packages.config" $versionNumber.ToString()
