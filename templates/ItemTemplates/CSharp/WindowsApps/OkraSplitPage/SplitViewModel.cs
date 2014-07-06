@@ -95,8 +95,8 @@ namespace $rootnamespace$
         /// <param name="pageInfo">Information on the arguments and state passed to the page.</param>
         public async void Activate(PageInfo pageInfo)
         {
-            // TODO: Assign a bindable group to this.Group")
-            // TODO: Assign a collection of bindable items to Me.DefaultViewModel("Items")
+            // TODO: Assign a bindable group to this.Group
+            // TODO: Assign a collection of bindable items to this.Items
 
             // Restore the selected item
 
@@ -104,7 +104,7 @@ namespace $rootnamespace$
 
             if (pageInfo.TryGetState<string>("SelectedItem", out selectedItemId))
             {
-                // TODO: Set the SelectedItem project to the correct selected
+                // TODO: Set the SelectedItem property to the correct selected
                 //       item as specified by the value of selectedItemId
             }
             else

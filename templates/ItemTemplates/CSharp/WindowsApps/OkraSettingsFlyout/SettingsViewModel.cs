@@ -1,9 +1,11 @@
 ﻿using Okra.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using $safeprojectname$.Common;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -19,14 +21,16 @@ using Windows.UI.Xaml.Navigation;
 namespace $rootnamespace$
 {
     /// <summary>
-    /// A page that displays the contents of a settings pane
+    /// A view model for displaying an overview of a single group, including a preview of the items
+    /// within the group.
     /// </summary>
-    [PageExport("$fileinputname$")]
-    public sealed partial class $safeitemname$ : UserControl
+    [ViewModelExport("$fileinputname$")]
+    public class $safeitemname$ : ViewModelBase
     {
-        public $safeitemname$()
+        [ImportingConstructor]
+        public $safeitemname$(INavigationContext navigationContext)
+            : base(navigationContext)
         {
-            this.InitializeComponent();
         }
     }
 }
