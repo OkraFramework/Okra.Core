@@ -7,7 +7,7 @@
     <authors>Andrew Wilkinson</authors>
     <owners>Andrew Wilkinson</owners>
     <licenseUrl>https://raw.githubusercontent.com/Andy-Wilkinson/Okra.Core/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/Andy-Wilkinson/Okra.Core</projectUrl>
+    <projectUrl>http://okraframework.github.io</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The Okra App Framework is designed to support the development of .Net Windows 8 applications, in particular those following the MVVM pattern. This package is designed for use with MEF.</description>
     <releaseNotes></releaseNotes>
