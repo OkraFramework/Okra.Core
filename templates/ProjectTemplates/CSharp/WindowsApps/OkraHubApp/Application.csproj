@@ -176,11 +176,11 @@
   <ItemGroup>
     <Reference Include="Okra.Core, Version=0.9.7.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Okra.Core.0.9.7.0\lib\netcore451\Okra.Core.dll</HintPath>
+      <HintPath>..\packages\Okra.Core.0.9.7\lib\netcore451\Okra.Core.dll</HintPath>
     </Reference>
     <Reference Include="Okra.MEF, Version=0.9.7.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Okra.MEF.0.9.7.0\lib\netcore451\Okra.MEF.dll</HintPath>
+      <HintPath>..\packages\Okra.MEF.0.9.7\lib\netcore451\Okra.MEF.dll</HintPath>
     </Reference>
     <Reference Include="System.Composition.AttributedModel">
       <HintPath>..\packages\Microsoft.Composition.1.0.27\lib\portable-net45+win8+wp8+wpa81\System.Composition.AttributedModel.dll</HintPath>

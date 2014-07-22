@@ -1,11 +1,15 @@
 [CmdletBinding()]
-Param([Parameter(Mandatory=$True)][Version]$versionNumber)
+Param
+(
+    [Parameter(Mandatory=$True)][Version]$versionNumber,
+    [Parameter(Mandatory=$False)][string]$prereleaseType
+)
 
 # Validate parameters
 
 If ($versionNumber.Revision -eq -1)
 {
-    throw "Paramter error: Version numbers should be four digit"
+    throw "Parameter error: Version numbers should be four digit"
 }
 
 # Move to the project root folder (parent from current script folder)
@@ -27,22 +31,22 @@ Import-Module -Name ".\scripts\Update-Version.psm1"
 
 write-host "Patching AssemblyInfo.cs files to" $versionNumber.ToString()
 
-Update-AssemblyInfo ".\src\Okra.Core\Okra.Core.Windows\Properties\AssemblyInfo.cs" $versionNumber
-Update-AssemblyInfo ".\src\Okra.Core\Okra.Core.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber
-Update-AssemblyInfo ".\src\Okra.MEF\Okra.MEF.Windows\Properties\AssemblyInfo.cs" $versionNumber
-Update-AssemblyInfo ".\src\Okra.MEF\Okra.MEF.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber
+Update-AssemblyInfo ".\src\Okra.Core\Okra.Core.Windows\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
+Update-AssemblyInfo ".\src\Okra.Core\Okra.Core.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
+Update-AssemblyInfo ".\src\Okra.MEF\Okra.MEF.Windows\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
+Update-AssemblyInfo ".\src\Okra.MEF\Okra.MEF.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 
-Update-AssemblyInfo ".\test\Okra.Core.Tests\Okra.Core.Tests.Windows\Properties\AssemblyInfo.cs" $versionNumber
-Update-AssemblyInfo ".\test\Okra.Core.Tests\Okra.Core.Tests.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber
-Update-AssemblyInfo ".\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\Properties\AssemblyInfo.cs" $versionNumber
-Update-AssemblyInfo ".\test\Okra.MEF.Tests\Okra.MEF.Tests.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber
+Update-AssemblyInfo ".\test\Okra.Core.Tests\Okra.Core.Tests.Windows\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
+Update-AssemblyInfo ".\test\Okra.Core.Tests\Okra.Core.Tests.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
+Update-AssemblyInfo ".\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
+Update-AssemblyInfo ".\test\Okra.MEF.Tests\Okra.MEF.Tests.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 
 write-host "Patching *.nuspec files to" $versionNumber
 
-Update-Nuspec ".\src\Okra.Core\Okra.Core.nuspec" $versionNumber.ToString()
-Update-Nuspec ".\src\Okra.MEF\Okra.MEF.nuspec" $versionNumber.ToString()
-Update-Nuspec ".\src\Okra.Core\OkraUniversalPreview.Core.nuspec" $versionNumber.ToString()
-Update-Nuspec ".\src\Okra.MEF\OkraUniversalPreview.MEF.nuspec" $versionNumber.ToString()
+Update-Nuspec ".\src\Okra.Core\Okra.Core.nuspec" $versionNumber $prereleaseType
+Update-Nuspec ".\src\Okra.MEF\Okra.MEF.nuspec" $versionNumber $prereleaseType
+Update-Nuspec ".\src\Okra.Core\OkraUniversalPreview.Core.nuspec" $versionNumber $prereleaseType
+Update-Nuspec ".\src\Okra.MEF\OkraUniversalPreview.MEF.nuspec" $versionNumber $prereleaseType
 
 write-host "Patching *.vsixmanifest files to" $versionNumber
 
@@ -50,12 +54,12 @@ Update-VsixManifest ".\templates\base\extension.vsixmanifest" $versionNumber.ToS
 
 write-host "Patching *.csproj files to" $versionNumber
 
-Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraBlankApp\Application.csproj" $versionNumber.ToString()
-Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraGridApp\Application.csproj" $versionNumber.ToString()
-Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraHubApp\Application.csproj" $versionNumber.ToString()
-Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraSplitApp\Application.csproj" $versionNumber.ToString()
+Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraBlankApp\Application.csproj" $versionNumber $prereleaseType
+Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraGridApp\Application.csproj" $versionNumber $prereleaseType
+Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraHubApp\Application.csproj" $versionNumber $prereleaseType
+Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraSplitApp\Application.csproj" $versionNumber $prereleaseType
 
 write-host "Patching *.packageconfig files to" $versionNumber
 
-Update-PackagesConfig ".\templates\ProjectTemplates\CSharp\WindowsApps\shared\packages.config" $versionNumber.ToString()
-Update-PackagesConfig ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraBlankApp\packages.config" $versionNumber.ToString()
+Update-PackagesConfig ".\templates\ProjectTemplates\CSharp\WindowsApps\shared\packages.config" $versionNumber $prereleaseType
+Update-PackagesConfig ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraBlankApp\packages.config" $versionNumber $prereleaseType

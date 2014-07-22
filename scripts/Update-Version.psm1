@@ -4,17 +4,19 @@ function Update-AssemblyInfo
     Param
     (
         [Parameter(Mandatory=$True, Position = 1)][string]$FileName,
-        [Parameter(Mandatory=$True, Position = 2)][Version]$VersionNumber
+        [Parameter(Mandatory=$True, Position = 2)][Version]$VersionNumber,
+        [Parameter(Mandatory=$False, Position = 3)][string]$PrereleaseType
     )
+
+    $semver = Get-SemanticVersion $VersionNumber $PrereleaseType
 
     $assemblyVersionRegex = 'AssemblyVersion\("[^"]+"\)'
     $assemblyVersion = 'AssemblyVersion("' + $VersionNumber + '")'
 
     $assemblyFileVersionRegex = 'AssemblyFileVersion\("[^"]+"\)'
     $assemblyFileVersion = 'AssemblyFileVersion("' + $VersionNumber + '")'
-
     $assemblyInformationalVersionRegex = 'AssemblyInformationalVersion\("[^"]+"\)'
-    $assemblyInformationalVersion = 'AssemblyInformationalVersion("' + $VersionNumber.ToString(3) + '")'
+    $assemblyInformationalVersion = 'AssemblyInformationalVersion("' + $semver + '")'
 
     (Get-Content $FileName) |
         ForEach-Object {$_ -replace $assemblyVersionRegex, $assemblyVersion} |
@@ -29,23 +31,26 @@ function Update-Nuspec
     Param
     (
         [Parameter(Mandatory=$True, Position = 1)][string]$FileName,
-        [Parameter(Mandatory=$True, Position = 2)][Version]$VersionNumber
+        [Parameter(Mandatory=$True, Position = 2)][Version]$VersionNumber,
+        [Parameter(Mandatory=$False, Position = 3)][string]$PrereleaseType
     )
 
+    $semver = Get-SemanticVersion $VersionNumber $PrereleaseType
+
     $versionRegex = '<version>[^\<]+</version>'
-    $version = '<version>' + $VersionNumber + '</version>'
+    $version = '<version>' + $semver + '</version>'
 
     $okraCoreRegex = '<dependency id="Okra.Core" version="[^"]+"/>'
-    $okraCore = '<dependency id="Okra.Core" version="[' + $versionNumber + ']"/>'
+    $okraCore = '<dependency id="Okra.Core" version="[' + $semver + ']"/>'
 
     $okraMefRegex = '<dependency id="Okra.MEF" version="[^"]+"/>'
-    $okraMef = '<dependency id="Okra.MEF" version="[' + $versionNumber + ']"/>'
+    $okraMef = '<dependency id="Okra.MEF" version="[' + $semver + ']"/>'
 
     $okraUniCoreRegex = '<dependency id="OkraUniversalPreview.Core" version="[^"]+"/>'
-    $okraUniCore = '<dependency id="OkraUniversalPreview.Core" version="[' + $versionNumber + ']"/>'
+    $okraUniCore = '<dependency id="OkraUniversalPreview.Core" version="[' + $semver + ']"/>'
 
     $okraUniMefRegex = '<dependency id="OkraUniversalPreview.MEF" version="[^"]+"/>'
-    $okraUniMef = '<dependency id="OkraUniversalPreview.MEF" version="[' + $versionNumber + ']"/>'
+    $okraUniMef = '<dependency id="OkraUniversalPreview.MEF" version="[' + $semver + ']"/>'
 
     (Get-Content $FileName) |
         ForEach-Object {$_ -replace $versionRegex, $version} |
@@ -62,7 +67,8 @@ function Update-VsixManifest
     Param
     (
         [Parameter(Mandatory=$True, Position = 1)][string]$FileName,
-        [Parameter(Mandatory=$True, Position = 2)][Version]$VersionNumber
+        [Parameter(Mandatory=$True, Position = 2)][Version]$VersionNumber,
+        [Parameter(Mandatory=$False, Position = 3)][string]$PrereleaseType
     )
 
     $versionRegex = '<Identity Id="OkraAppFramework" Version="[^"]+"'
@@ -79,14 +85,17 @@ function Update-PackagesConfig
     Param
     (
         [Parameter(Mandatory=$True, Position = 1)][string]$FileName,
-        [Parameter(Mandatory=$True, Position = 2)][Version]$VersionNumber
+        [Parameter(Mandatory=$True, Position = 2)][Version]$VersionNumber,
+        [Parameter(Mandatory=$False, Position = 3)][string]$PrereleaseType
     )
 
+    $semver = Get-SemanticVersion $VersionNumber $PrereleaseType
+
     $okraCoreRegex = '<package id="Okra.Core" version="[^"]+"'
-    $okraCore = '<package id="Okra.Core" version="' + $versionNumber + '"'
+    $okraCore = '<package id="Okra.Core" version="' + $semver + '"'
 
     $okraMefRegex = '<package id="Okra.MEF" version="[^"]+"'
-    $okraMef = '<package id="Okra.MEF" version="' + $versionNumber + '"'
+    $okraMef = '<package id="Okra.MEF" version="' + $semver + '"'
 
     (Get-Content $FileName) |
         ForEach-Object {$_ -replace $okraCoreRegex, $okraCore} |
@@ -100,20 +109,23 @@ function Update-CsprojReferences
     Param
     (
         [Parameter(Mandatory=$True, Position = 1)][string]$FileName,
-        [Parameter(Mandatory=$True, Position = 2)][Version]$VersionNumber
+        [Parameter(Mandatory=$True, Position = 2)][Version]$VersionNumber,
+        [Parameter(Mandatory=$False, Position = 3)][string]$PrereleaseType
     )
+
+    $semver = Get-SemanticVersion $VersionNumber $PrereleaseType
 
     $okraCoreRegex = '<Reference Include="Okra.Core, Version=[^,]+,'
     $okraCore = '<Reference Include="Okra.Core, Version=' + $versionNumber + ','
 
     $okraCoreHintRegex = '<HintPath>..\\packages\\Okra.Core.[^\\]+\\'
-    $okraCoreHint = '<HintPath>..\packages\Okra.Core.' + $versionNumber + '\'
+    $okraCoreHint = '<HintPath>..\packages\Okra.Core.' + $semver + '\'
 
     $okraMefRegex = '<Reference Include="Okra.MEF, Version=[^,]+,'
     $okraMef = '<Reference Include="Okra.MEF, Version=' + $versionNumber + ','
 
     $okraMefHintRegex = '<HintPath>..\\packages\\Okra.MEF.[^\\]+\\'
-    $okraMefHint = '<HintPath>..\packages\Okra.MEF.' + $versionNumber + '\'
+    $okraMefHint = '<HintPath>..\packages\Okra.MEF.' + $semver + '\'
 
     (Get-Content $FileName) |
         ForEach-Object {$_ -replace $okraCoreRegex, $okraCore} |
@@ -121,6 +133,25 @@ function Update-CsprojReferences
         ForEach-Object {$_ -replace $okraMefRegex, $okraMef} |
         ForEach-Object {$_ -replace $okraMefHintRegex, $okraMefHint} |
         Set-Content $FileName
+}
+
+function Get-SemanticVersion
+{
+    [CmdletBinding()]
+    Param
+    (
+        [Parameter(Mandatory=$True, Position = 1)][Version]$VersionNumber,
+        [Parameter(Mandatory=$False, Position = 2)][string]$PrereleaseType
+    )
+
+    if ($PrereleaseType)
+    {
+        return $VersionNumber.ToString(3) + "-" + $PrereleaseType + "." + $VersionNumber.Revision
+    }
+    else
+    {
+        return $VersionNumber.ToString(3)
+    }
 }
 
 Export-ModuleMember -Function Update-AssemblyInfo
