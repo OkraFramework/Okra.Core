@@ -1,5 +1,9 @@
 [CmdletBinding()]
-Param([Parameter(Mandatory=$False)][Version]$VersionNumber)
+Param
+(
+    [Parameter(Mandatory=$False, Position=1)][Version]$VersionNumber,
+    [Parameter(Mandatory=$False, Position=2)][string]$PrereleaseVersion
+)
 
 # Move to the project root folder (current script folder)
 
@@ -20,7 +24,7 @@ write-host "--- Cleaning solution ---"
 If ($VersionNumber -ne $null)
 {
     write-host "--- Patching version numbers ---"
-    .\scripts\PatchVersion.ps1 $VersionNumber
+    .\scripts\PatchVersion.ps1 $VersionNumber $PrereleaseVersion
 }
 
 write-host "--- Building release binaries ---"
