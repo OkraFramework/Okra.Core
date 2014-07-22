@@ -146,7 +146,7 @@ function Get-SemanticVersion
 
     if ($PrereleaseType)
     {
-        return $VersionNumber.ToString(3) + "-" + $PrereleaseType + "." + $VersionNumber.Revision
+        return $VersionNumber.ToString(3) + "-" + $PrereleaseType + $VersionNumber.Revision.ToString("D3")
     }
     else
     {
