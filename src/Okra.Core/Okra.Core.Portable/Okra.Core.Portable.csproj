@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Okra.Core.Portable</RootNamespace>
+    <AssemblyName>Okra.Core.Portable</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Okra.Core.Shared\Core\DelegateCommand.cs">
+      <Link>Core\DelegateCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Core\DelegateCommandT.cs">
+      <Link>Core\DelegateCommandT.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Core\NotifyPropertyChangedBase.cs">
+      <Link>Core\NotifyPropertyChangedBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\DataTransfer\DataPackageEx.cs">
+      <Link>DataTransfer\DataPackageEx.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\DataTransfer\IDataRequest.cs">
+      <Link>DataTransfer\IDataRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\DataTransfer\IShareable.cs">
+      <Link>DataTransfer\IShareable.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\DataTransfer\IShareOperation.cs">
+      <Link>DataTransfer\IShareOperation.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\DataTransfer\IShareSourceManager.cs">
+      <Link>DataTransfer\IShareSourceManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\DataTransfer\IShareTarget.cs">
+      <Link>DataTransfer\IShareTarget.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\DataTransfer\IShareTargetManager.cs">
+      <Link>DataTransfer\IShareTargetManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\IActivatable.cs">
+      <Link>Navigation\IActivatable.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\INavigationAware.cs">
+      <Link>Navigation\INavigationAware.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\INavigationBase.cs">
+      <Link>Navigation\INavigationBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\INavigationContext.cs">
+      <Link>Navigation\INavigationContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\INavigationManager.cs">
+      <Link>Navigation\INavigationManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\INavigationStack.cs">
+      <Link>Navigation\INavigationStack.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\INavigationTarget.cs">
+      <Link>Navigation\INavigationTarget.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\IViewFactory.cs">
+      <Link>Navigation\IViewFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\IViewLifetimeContext.cs">
+      <Link>Navigation\IViewLifetimeContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\NavigationBaseEx.cs">
+      <Link>Navigation\NavigationBaseEx.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\NavigationCommands.cs">
+      <Link>Navigation\NavigationCommands.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\NavigationStackEx.cs">
+      <Link>Navigation\NavigationStackEx.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\NavigationStorageType.cs">
+      <Link>Navigation\NavigationStorageType.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\PageInfo.cs">
+      <Link>Navigation\PageInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\PageName.cs">
+      <Link>Navigation\PageName.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\PageNavigationEventArgs.cs">
+      <Link>Navigation\PageNavigationEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\SpecialPageNames.cs">
+      <Link>Navigation\SpecialPageNames.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\StateChangedEventArgs.cs">
+      <Link>Navigation\StateChangedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Services\IActivationHandler.cs">
+      <Link>Services\IActivationHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Services\IActivationManager.cs">
+      <Link>Services\IActivationManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Services\ILaunchActivationHandler.cs">
+      <Link>Services\ILaunchActivationHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Services\ILifetimeAware.cs">
+      <Link>Services\ILifetimeAware.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Services\ILifetimeManager.cs">
+      <Link>Services\ILifetimeManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Services\IStorageManager.cs">
+      <Link>Services\IStorageManager.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

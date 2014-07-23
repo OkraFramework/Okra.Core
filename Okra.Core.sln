@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2013 for Windows
-VisualStudioVersion = 12.0.30324.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Okra.Core", "src\Okra.Core", "{B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Okra.Core", "Okra.Core", "{B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Okra.Core.Shared", "src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.shproj", "{FB719AFE-8F13-4F65-A713-56C004FD2D5A}"
 EndProject
@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.Core.Windows", "src\Ok
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.Core.WindowsPhone", "src\Okra.Core\Okra.Core.WindowsPhone\Okra.Core.WindowsPhone.csproj", "{D00DC503-CEF6-4565-ABEA-3024D6B02851}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Okra.MEF", "src\Okra.MEF", "{A605615E-DD69-4D49-B045-FAF5205FF4A2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Okra.MEF", "Okra.MEF", "{A605615E-DD69-4D49-B045-FAF5205FF4A2}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Okra.MEF.Shared", "src\Okra.MEF\Okra.MEF.Shared\Okra.MEF.Shared.shproj", "{F25B0F1E-FE19-49B2-8BC3-F3CE168DB5CD}"
 EndProject
@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.MEF.Windows", "src\Okr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.MEF.WindowsPhone", "src\Okra.MEF\Okra.MEF.WindowsPhone\Okra.MEF.WindowsPhone.csproj", "{B627A885-CF5C-4359-9533-BCC89804541B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Okra.Core.Tests", "test\Okra.Core.Tests", "{A1B634F7-9248-4DC0-AC8A-DADB973B5962}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Okra.Core.Tests", "Okra.Core.Tests", "{A1B634F7-9248-4DC0-AC8A-DADB973B5962}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Okra.Core.Tests.Shared", "test\Okra.Core.Tests\Okra.Core.Tests.Shared\Okra.Core.Tests.Shared.shproj", "{300BCD54-740F-45D0-A0A6-64FC4AF23C95}"
 EndProject
@@ -27,13 +27,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.Core.Tests.Windows", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.Core.Tests.WindowsPhone", "test\Okra.Core.Tests\Okra.Core.Tests.WindowsPhone\Okra.Core.Tests.WindowsPhone.csproj", "{B304D10F-AA6C-417C-BB59-E68DE3FC72CE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Okra.MEF.Tests", "test\Okra.MEF.Tests", "{A8D2B638-A58D-4F7E-A4C7-720BA695DCEF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Okra.MEF.Tests", "Okra.MEF.Tests", "{A8D2B638-A58D-4F7E-A4C7-720BA695DCEF}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Okra.MEF.Tests.Shared", "test\Okra.MEF.Tests\Okra.MEF.Tests.Shared\Okra.MEF.Tests.Shared.shproj", "{FE86EB90-083E-4411-884B-AA5EF63C306D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.MEF.Tests.Windows", "test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\Okra.MEF.Tests.Windows.csproj", "{DDEC51C1-5ED0-473A-B593-6BF291F1A55A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.MEF.Tests.WindowsPhone", "test\Okra.MEF.Tests\Okra.MEF.Tests.WindowsPhone\Okra.MEF.Tests.WindowsPhone.csproj", "{8E2D1E6A-900E-4EF4-8FC5-A47326C97A22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.Core.Portable", "src\Okra.Core\Okra.Core.Portable\Okra.Core.Portable.csproj", "{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -251,6 +253,20 @@ Global
 		{8E2D1E6A-900E-4EF4-8FC5-A47326C97A22}.Release|x86.ActiveCfg = Release|x86
 		{8E2D1E6A-900E-4EF4-8FC5-A47326C97A22}.Release|x86.Build.0 = Release|x86
 		{8E2D1E6A-900E-4EF4-8FC5-A47326C97A22}.Release|x86.Deploy.0 = Release|x86
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|ARM.ActiveCfg = Release|Any CPU
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|x64.ActiveCfg = Release|Any CPU
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -268,5 +284,6 @@ Global
 		{FE86EB90-083E-4411-884B-AA5EF63C306D} = {A8D2B638-A58D-4F7E-A4C7-720BA695DCEF}
 		{DDEC51C1-5ED0-473A-B593-6BF291F1A55A} = {A8D2B638-A58D-4F7E-A4C7-720BA695DCEF}
 		{8E2D1E6A-900E-4EF4-8FC5-A47326C97A22} = {A8D2B638-A58D-4F7E-A4C7-720BA695DCEF}
+		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
 	EndGlobalSection
 EndGlobal
