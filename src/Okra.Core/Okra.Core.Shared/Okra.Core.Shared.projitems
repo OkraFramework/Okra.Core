@@ -45,6 +45,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationStorageType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageName.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageNavigationEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageNavigationMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\SpecialPageNames.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\StateChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\WindowNavigationTarget.cs" />

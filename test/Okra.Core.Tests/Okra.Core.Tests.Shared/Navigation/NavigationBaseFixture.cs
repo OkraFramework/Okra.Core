@@ -145,7 +145,7 @@ namespace Okra.Tests.Navigation
             MockPage currentPage = (MockPage)navigationBase.DisplayPageCalls.Last();
             MockViewModel currentViewModel = (MockViewModel)currentPage.DataContext;
 
-            navigationStack.RaisePageDisposed(pageInfo, NavigationMode.Back);
+            navigationStack.RaisePageDisposed(pageInfo, PageNavigationMode.Back);
 
             Assert.AreEqual(true, currentViewModel.IsDisposed);
         }
@@ -160,7 +160,7 @@ namespace Okra.Tests.Navigation
             navigationStack.SetCurrentPage(pageInfo);
             MockPage currentPage = (MockPage)navigationBase.DisplayPageCalls.Last();
 
-            navigationStack.RaisePageDisposed(pageInfo, NavigationMode.Back);
+            navigationStack.RaisePageDisposed(pageInfo, PageNavigationMode.Back);
 
             Assert.AreEqual(true, currentPage.IsDisposed);
         }
@@ -175,10 +175,10 @@ namespace Okra.Tests.Navigation
             var args = new List<PageNavigationEventArgs>();
             navigationBase.NavigatingFrom += (sender, e) => { args.Add(e); };
 
-            navigationStack.RaiseNavigatingFrom(page, NavigationMode.Forward);
+            navigationStack.RaiseNavigatingFrom(page, PageNavigationMode.Forward);
 
             CollectionAssert.AreEqual(new[] { "Page 1" }, args.Select(e => e.Page.PageName).ToList());
-            CollectionAssert.AreEqual(new[] { NavigationMode.Forward }, args.Select(e => e.NavigationMode).ToList());
+            CollectionAssert.AreEqual(new[] { PageNavigationMode.Forward }, args.Select(e => e.NavigationMode).ToList());
         }
 
         [TestMethod]
@@ -190,7 +190,7 @@ namespace Okra.Tests.Navigation
 
             PageInfo page = new PageInfo("Page 1", null);
             navigationStack.SetCurrentPage(page);
-            navigationStack.RaiseNavigatingFrom(page, NavigationMode.Forward);
+            navigationStack.RaiseNavigatingFrom(page, PageNavigationMode.Forward);
 
             MockPage_NavigationAware currentPage = (MockPage_NavigationAware)navigationBase.DisplayPageCalls.Last();
 
@@ -206,7 +206,7 @@ namespace Okra.Tests.Navigation
 
             PageInfo page = new PageInfo("Page 1", null);
             navigationStack.SetCurrentPage(page);
-            navigationStack.RaiseNavigatingFrom(page, NavigationMode.Forward);
+            navigationStack.RaiseNavigatingFrom(page, PageNavigationMode.Forward);
 
             MockPage currentPage = (MockPage)navigationBase.DisplayPageCalls.Last();
             MockViewModel_NavigationAware currentViewModel = (MockViewModel_NavigationAware)currentPage.DataContext;
@@ -224,10 +224,10 @@ namespace Okra.Tests.Navigation
             var args = new List<PageNavigationEventArgs>();
             navigationBase.NavigatedTo += (sender, e) => { args.Add(e); };
 
-            navigationStack.RaiseNavigatedTo(page, NavigationMode.Forward);
+            navigationStack.RaiseNavigatedTo(page, PageNavigationMode.Forward);
 
             CollectionAssert.AreEqual(new[] { "Page 1" }, args.Select(e => e.Page.PageName).ToList());
-            CollectionAssert.AreEqual(new[] { NavigationMode.Forward }, args.Select(e => e.NavigationMode).ToList());
+            CollectionAssert.AreEqual(new[] { PageNavigationMode.Forward }, args.Select(e => e.NavigationMode).ToList());
         }
 
         [TestMethod]
@@ -239,7 +239,7 @@ namespace Okra.Tests.Navigation
 
             PageInfo page = new PageInfo("Page 1", null);
             navigationStack.SetCurrentPage(page);
-            navigationStack.RaiseNavigatedTo(page, NavigationMode.Forward);
+            navigationStack.RaiseNavigatedTo(page, PageNavigationMode.Forward);
 
             MockPage_NavigationAware currentPage = (MockPage_NavigationAware)navigationBase.DisplayPageCalls.Last();
 
@@ -255,7 +255,7 @@ namespace Okra.Tests.Navigation
 
             PageInfo page = new PageInfo("Page 1", null);
             navigationStack.SetCurrentPage(page);
-            navigationStack.RaiseNavigatedTo(page, NavigationMode.Forward);
+            navigationStack.RaiseNavigatedTo(page, PageNavigationMode.Forward);
 
             MockPage currentPage = (MockPage)navigationBase.DisplayPageCalls.Last();
             MockViewModel_NavigationAware currentViewModel = (MockViewModel_NavigationAware)currentPage.DataContext;
@@ -519,7 +519,7 @@ namespace Okra.Tests.Navigation
             {
                 base.AddRange(pages);
                 SetCurrentPage(pages.Last());
-                RaiseNavigatedTo(pages.Last(), NavigationMode.Forward);
+                RaiseNavigatedTo(pages.Last(), PageNavigationMode.Forward);
             }
 
             // *** Mock Helper Methods ***
@@ -532,19 +532,19 @@ namespace Okra.Tests.Navigation
                     PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
 
-            public void RaiseNavigatedTo(PageInfo page, NavigationMode navigationMode)
+            public void RaiseNavigatedTo(PageInfo page, PageNavigationMode navigationMode)
             {
                 if (NavigatedTo != null)
                     NavigatedTo(this, new PageNavigationEventArgs(page, navigationMode));
             }
 
-            public void RaiseNavigatingFrom(PageInfo page, NavigationMode navigationMode)
+            public void RaiseNavigatingFrom(PageInfo page, PageNavigationMode navigationMode)
             {
                 if (NavigatingFrom != null)
                     NavigatingFrom(this, new PageNavigationEventArgs(page, navigationMode));
             }
 
-            public void RaisePageDisposed(PageInfo page, NavigationMode navigationMode)
+            public void RaisePageDisposed(PageInfo page, PageNavigationMode navigationMode)
             {
                 if (PageDisposed != null)
                     PageDisposed(this, new PageNavigationEventArgs(page, navigationMode));

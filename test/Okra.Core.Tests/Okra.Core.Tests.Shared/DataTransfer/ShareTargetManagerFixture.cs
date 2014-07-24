@@ -406,12 +406,12 @@ namespace Okra.Tests.DataTransfer
 
             // *** Methods ***
 
-            public void NavigatedTo(NavigationMode navigationMode)
+            public void NavigatedTo(PageNavigationMode navigationMode)
             {
                 NavigationEvents.Add(string.Format("NavigatedTo({0})", navigationMode));
             }
 
-            public void NavigatingFrom(NavigationMode navigationMode)
+            public void NavigatingFrom(PageNavigationMode navigationMode)
             {
                 NavigationEvents.Add(string.Format("NavigatingFrom({0})", navigationMode));
             }

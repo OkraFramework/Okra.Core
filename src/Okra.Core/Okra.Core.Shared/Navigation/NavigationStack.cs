@@ -79,7 +79,7 @@ namespace Okra.Navigation
 
             // Call NavigatingFrom on the existing navigation entry
 
-            OnNavigatingFrom(CurrentPage, NavigationMode.Back);
+            OnNavigatingFrom(CurrentPage, PageNavigationMode.Back);
 
             // Clear the navigation stack
 
@@ -114,7 +114,7 @@ namespace Okra.Navigation
             // Call NavigatingFrom on the existing navigation entry
 
             PageInfo oldPage = CurrentPage;
-            OnNavigatingFrom(oldPage, NavigationMode.Back);
+            OnNavigatingFrom(oldPage, PageNavigationMode.Back);
 
             // Pop the last page from the navigation stack
 
@@ -131,10 +131,10 @@ namespace Okra.Navigation
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, page, internalStack.Count));
 
             if (CurrentPage != null)
-                OnNavigatedTo(CurrentPage, NavigationMode.Back);
+                OnNavigatedTo(CurrentPage, PageNavigationMode.Back);
 
             if (oldPage != null)
-                OnPageDisposed(oldPage, NavigationMode.Back);
+                OnPageDisposed(oldPage, PageNavigationMode.Back);
         }
 
         public void NavigateTo(PageInfo page)
@@ -158,7 +158,7 @@ namespace Okra.Navigation
             // Call NavigatingFrom on the existing navigation entry (if one exists)
 
             if (CurrentPage != null)
-                OnNavigatingFrom(CurrentPage, NavigationMode.New);
+                OnNavigatingFrom(CurrentPage, PageNavigationMode.New);
 
             // Get the initial state
 
@@ -178,7 +178,7 @@ namespace Okra.Navigation
 
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, pages.ToList(), insertionPosition));
 
-            OnNavigatedTo(CurrentPage, NavigationMode.New);
+            OnNavigatedTo(CurrentPage, PageNavigationMode.New);
         }
 
         // *** Protected Methods ***
@@ -191,7 +191,7 @@ namespace Okra.Navigation
                 eventHandler(this, args);
         }
 
-        protected virtual void OnNavigatingFrom(PageInfo page, NavigationMode navigationMode)
+        protected virtual void OnNavigatingFrom(PageInfo page, PageNavigationMode navigationMode)
         {
             EventHandler<PageNavigationEventArgs> eventHandler = NavigatingFrom;
 
@@ -199,7 +199,7 @@ namespace Okra.Navigation
                 eventHandler(this, new PageNavigationEventArgs(page, navigationMode));
         }
 
-        protected virtual void OnNavigatedTo(PageInfo page, NavigationMode navigationMode)
+        protected virtual void OnNavigatedTo(PageInfo page, PageNavigationMode navigationMode)
         {
             EventHandler<PageNavigationEventArgs> eventHandler = NavigatedTo;
 
@@ -207,7 +207,7 @@ namespace Okra.Navigation
                 eventHandler(this, new PageNavigationEventArgs(page, navigationMode));
         }
 
-        protected virtual void OnPageDisposed(PageInfo page, NavigationMode navigationMode)
+        protected virtual void OnPageDisposed(PageInfo page, PageNavigationMode navigationMode)
         {
             EventHandler<PageNavigationEventArgs> eventHandler = PageDisposed;
 

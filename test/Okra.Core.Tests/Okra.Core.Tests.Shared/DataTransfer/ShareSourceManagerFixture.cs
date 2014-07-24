@@ -52,7 +52,7 @@ namespace Okra.Tests.DataTransfer
             MockNavigationManager navigationManager = new MockNavigationManager();
             TestableSharingManager sharingManager = CreateSharingManager(navigationManager);
 
-            navigationManager.RaiseNavigatedTo(new PageNavigationEventArgs(new PageInfo("Page 1", null), NavigationMode.Forward));
+            navigationManager.RaiseNavigatedTo(new PageNavigationEventArgs(new PageInfo("Page 1", null), PageNavigationMode.Forward));
 
             Assert.AreEqual(1, sharingManager.RegisterForSharingCount);
         }
@@ -63,8 +63,8 @@ namespace Okra.Tests.DataTransfer
             MockNavigationManager navigationManager = new MockNavigationManager();
             TestableSharingManager sharingManager = CreateSharingManager(navigationManager);
 
-            navigationManager.RaiseNavigatedTo(new PageNavigationEventArgs(new PageInfo("Page 1", null), NavigationMode.Forward));
-            navigationManager.RaiseNavigatedTo(new PageNavigationEventArgs(new PageInfo("Page 2", null), NavigationMode.Forward));
+            navigationManager.RaiseNavigatedTo(new PageNavigationEventArgs(new PageInfo("Page 1", null), PageNavigationMode.Forward));
+            navigationManager.RaiseNavigatedTo(new PageNavigationEventArgs(new PageInfo("Page 2", null), PageNavigationMode.Forward));
 
             Assert.AreEqual(1, sharingManager.RegisterForSharingCount);
         }

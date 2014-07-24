@@ -10,14 +10,14 @@ namespace Okra.Navigation
     {
         // *** Constructors ***
 
-        public PageNavigationEventArgs(PageInfo page, NavigationMode navigationMode)
+        public PageNavigationEventArgs(PageInfo page, PageNavigationMode navigationMode)
         {
             throw new NotImplementedException();
         }
 
         // *** Properties ***
 
-        public NavigationMode NavigationMode
+        public PageNavigationMode NavigationMode
         {
             get
             {

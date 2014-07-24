@@ -13,18 +13,18 @@ namespace Okra.Navigation
         // *** Fields ***
 
         private readonly PageInfo page;
-        private readonly NavigationMode navigationMode;
+        private readonly PageNavigationMode navigationMode;
 
         // *** Constructors ***
 
-        public PageNavigationEventArgs(PageInfo page, NavigationMode navigationMode)
+        public PageNavigationEventArgs(PageInfo page, PageNavigationMode navigationMode)
         {
             // Validate arguments
 
             if (page == null)
                 throw new ArgumentNullException("page");
 
-            if (!Enum.IsDefined(typeof(NavigationMode), navigationMode))
+            if (!Enum.IsDefined(typeof(PageNavigationMode), navigationMode))
                 throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), "navigationMode");
 
             // Set properties
@@ -35,7 +35,7 @@ namespace Okra.Navigation
 
         // *** Properties ***
 
-        public NavigationMode NavigationMode
+        public PageNavigationMode NavigationMode
         {
             get
             {

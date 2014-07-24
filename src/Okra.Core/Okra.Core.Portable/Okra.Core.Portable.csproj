@@ -85,6 +85,9 @@
     <Compile Include="..\Okra.Core.Shared\Navigation\NavigationStorageType.cs">
       <Link>Navigation\NavigationStorageType.cs</Link>
     </Compile>
+    <Compile Include="..\Okra.Core.Shared\Navigation\PageNavigationMode.cs">
+      <Link>Navigation\PageNavigationMode.cs</Link>
+    </Compile>
     <Compile Include="..\Okra.Core.Shared\Navigation\SpecialPageNames.cs">
       <Link>Navigation\SpecialPageNames.cs</Link>
     </Compile>

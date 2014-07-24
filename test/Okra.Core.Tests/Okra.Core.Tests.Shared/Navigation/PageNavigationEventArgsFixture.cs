@@ -19,7 +19,7 @@ namespace Okra.Tests.Navigation
         public void Constructor_SetsPageProperty()
         {
             PageInfo navigationEntry = new PageInfo("SamplePage", null);
-            PageNavigationEventArgs eventArgs = new PageNavigationEventArgs(navigationEntry, NavigationMode.Forward);
+            PageNavigationEventArgs eventArgs = new PageNavigationEventArgs(navigationEntry, PageNavigationMode.Forward);
             
             Assert.AreEqual(navigationEntry, eventArgs.Page);
         }
@@ -28,9 +28,9 @@ namespace Okra.Tests.Navigation
         public void Constructor_SetsNavigationMode()
         {
             PageInfo navigationEntry = new PageInfo("SamplePage", null);
-            PageNavigationEventArgs eventArgs = new PageNavigationEventArgs(navigationEntry, NavigationMode.Forward);
+            PageNavigationEventArgs eventArgs = new PageNavigationEventArgs(navigationEntry, PageNavigationMode.Forward);
 
-            Assert.AreEqual(NavigationMode.Forward, eventArgs.NavigationMode);
+            Assert.AreEqual(PageNavigationMode.Forward, eventArgs.NavigationMode);
         }
 
         [TestMethod]
@@ -38,7 +38,7 @@ namespace Okra.Tests.Navigation
         {
             Assert.ThrowsException<ArgumentNullException>(() =>
                 {
-                    PageNavigationEventArgs eventArgs = new PageNavigationEventArgs(null, NavigationMode.Forward);
+                    PageNavigationEventArgs eventArgs = new PageNavigationEventArgs(null, PageNavigationMode.Forward);
                 });
         }
 
@@ -49,7 +49,7 @@ namespace Okra.Tests.Navigation
 
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                PageNavigationEventArgs eventArgs = new PageNavigationEventArgs(navigationEntry, (NavigationMode)100);
+                PageNavigationEventArgs eventArgs = new PageNavigationEventArgs(navigationEntry, (PageNavigationMode)100);
             });
         }
     }

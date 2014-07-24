@@ -83,10 +83,10 @@ namespace Okra.DataTransfer
                 // Call NavigatedTo(...) methods
 
                 if (viewLifetimeContext.View is INavigationAware)
-                    ((INavigationAware)viewLifetimeContext.View).NavigatedTo(NavigationMode.New);
+                    ((INavigationAware)viewLifetimeContext.View).NavigatedTo(PageNavigationMode.New);
 
                 if (viewLifetimeContext.ViewModel is INavigationAware)
-                    ((INavigationAware)viewLifetimeContext.ViewModel).NavigatedTo(NavigationMode.New);
+                    ((INavigationAware)viewLifetimeContext.ViewModel).NavigatedTo(PageNavigationMode.New);
 
                 return true;
             }
@@ -122,10 +122,10 @@ namespace Okra.DataTransfer
             // Call NavigatingFrom(...) methods
 
             if (viewLifetimeContext.View is INavigationAware)
-                ((INavigationAware)viewLifetimeContext.View).NavigatingFrom(NavigationMode.Back);
+                ((INavigationAware)viewLifetimeContext.View).NavigatingFrom(PageNavigationMode.Back);
 
             if (viewLifetimeContext.ViewModel is INavigationAware)
-                ((INavigationAware)viewLifetimeContext.ViewModel).NavigatingFrom(NavigationMode.Back);
+                ((INavigationAware)viewLifetimeContext.ViewModel).NavigatingFrom(PageNavigationMode.Back);
 
             // Dispose of the view lifetime context
 

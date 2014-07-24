@@ -176,7 +176,7 @@ namespace Okra.Navigation
 
         // *** Private Methods ***
 
-        private void CallNavigatedTo(PageInfo pageInfo, NavigationMode navigationMode)
+        private void CallNavigatedTo(PageInfo pageInfo, PageNavigationMode navigationMode)
         {
             // Fire the NavigatedTo event
 
@@ -191,7 +191,7 @@ namespace Okra.Navigation
             }
         }
 
-        private void CallNavigatingFrom(PageInfo pageInfo, NavigationMode navigationMode)
+        private void CallNavigatingFrom(PageInfo pageInfo, PageNavigationMode navigationMode)
         {
             // Fire the NavigatingFrom event
 
@@ -273,7 +273,7 @@ namespace Okra.Navigation
         private void navigationStack_NavigatedTo(object sender, PageNavigationEventArgs e)
         {
             if (restoringState)
-                CallNavigatedTo((PageInfo)e.Page, NavigationMode.Refresh);
+                CallNavigatedTo((PageInfo)e.Page, PageNavigationMode.Refresh);
             else
                 CallNavigatedTo((PageInfo)e.Page, e.NavigationMode);
         }

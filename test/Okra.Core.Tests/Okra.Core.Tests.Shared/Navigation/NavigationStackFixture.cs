@@ -473,7 +473,7 @@ namespace Okra.Tests.Navigation
 
             Assert.AreEqual(1, navigationEvents.Count);
             PageNavigationEventArgs navigationEvent = navigationEvents[0];
-            Assert.AreEqual(NavigationMode.New, navigationEvent.NavigationMode);
+            Assert.AreEqual(PageNavigationMode.New, navigationEvent.NavigationMode);
             Assert.AreEqual("Page 1", navigationEvent.Page.PageName);
         }
 
@@ -491,7 +491,7 @@ namespace Okra.Tests.Navigation
 
             Assert.AreEqual(1, navigationEvents.Count);
             PageNavigationEventArgs navigationEvent = navigationEvents[0];
-            Assert.AreEqual(NavigationMode.New, navigationEvent.NavigationMode);
+            Assert.AreEqual(PageNavigationMode.New, navigationEvent.NavigationMode);
             Assert.AreEqual("Page 2", navigationEvent.Page.PageName);
         }
 
@@ -525,7 +525,7 @@ namespace Okra.Tests.Navigation
 
             Assert.AreEqual(1, navigationEvents.Count);
             PageNavigationEventArgs navigationEvent = navigationEvents[0];
-            Assert.AreEqual(NavigationMode.Back, navigationEvent.NavigationMode);
+            Assert.AreEqual(PageNavigationMode.Back, navigationEvent.NavigationMode);
             Assert.AreEqual("Page 1", navigationEvent.Page.PageName);
         }
 
@@ -548,7 +548,7 @@ namespace Okra.Tests.Navigation
 
             Assert.AreEqual(1, navigationEvents.Count);
             PageNavigationEventArgs navigationEvent = navigationEvents[0];
-            Assert.AreEqual(NavigationMode.New, navigationEvent.NavigationMode);
+            Assert.AreEqual(PageNavigationMode.New, navigationEvent.NavigationMode);
             Assert.AreEqual("Page 4", navigationEvent.Page.PageName);
         }
 
@@ -597,7 +597,7 @@ namespace Okra.Tests.Navigation
 
             Assert.AreEqual(1, navigationEvents.Count);
             PageNavigationEventArgs navigationEvent = navigationEvents[0];
-            Assert.AreEqual(NavigationMode.New, navigationEvent.NavigationMode);
+            Assert.AreEqual(PageNavigationMode.New, navigationEvent.NavigationMode);
             Assert.AreEqual("Page 1", navigationEvent.Page.PageName);
         }
 
@@ -616,7 +616,7 @@ namespace Okra.Tests.Navigation
 
             Assert.AreEqual(1, navigationEvents.Count);
             PageNavigationEventArgs navigationEvent = navigationEvents[0];
-            Assert.AreEqual(NavigationMode.Back, navigationEvent.NavigationMode);
+            Assert.AreEqual(PageNavigationMode.Back, navigationEvent.NavigationMode);
             Assert.AreEqual("Page 2", navigationEvent.Page.PageName);
         }
 
@@ -635,7 +635,7 @@ namespace Okra.Tests.Navigation
 
             Assert.AreEqual(1, navigationEvents.Count);
             PageNavigationEventArgs navigationEvent = navigationEvents[0];
-            Assert.AreEqual(NavigationMode.Back, navigationEvent.NavigationMode);
+            Assert.AreEqual(PageNavigationMode.Back, navigationEvent.NavigationMode);
             Assert.AreEqual("Page 2", navigationEvent.Page.PageName);
         }
 
@@ -672,7 +672,7 @@ namespace Okra.Tests.Navigation
 
             Assert.AreEqual(1, pageDisposedEvents.Count);
             PageNavigationEventArgs pageDisposedEvent = pageDisposedEvents[0];
-            Assert.AreEqual(NavigationMode.Back, pageDisposedEvent.NavigationMode);
+            Assert.AreEqual(PageNavigationMode.Back, pageDisposedEvent.NavigationMode);
             Assert.AreEqual("Page 2", pageDisposedEvent.Page.PageName);
         }
 
