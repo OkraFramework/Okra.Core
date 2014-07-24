@@ -91,15 +91,6 @@
     <Compile Include="..\Okra.Core.Shared\Navigation\SpecialPageNames.cs">
       <Link>Navigation\SpecialPageNames.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Services\IActivationHandler.cs">
-      <Link>Services\IActivationHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\Services\IActivationManager.cs">
-      <Link>Services\IActivationManager.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\Services\ILaunchActivationHandler.cs">
-      <Link>Services\ILaunchActivationHandler.cs</Link>
-    </Compile>
     <Compile Include="..\Okra.Core.Shared\Services\ILifetimeAware.cs">
       <Link>Services\ILifetimeAware.cs</Link>
     </Compile>
