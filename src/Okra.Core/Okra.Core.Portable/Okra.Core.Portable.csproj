@@ -8,8 +8,8 @@
     <ProjectGuid>{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Okra.Core.Portable</RootNamespace>
-    <AssemblyName>Okra.Core.Portable</AssemblyName>
+    <RootNamespace>Okra</RootNamespace>
+    <AssemblyName>Okra.Core</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -37,18 +37,6 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Okra.Core.Shared\Core\DelegateCommand.cs">
-      <Link>Core\DelegateCommand.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\Core\DelegateCommandT.cs">
-      <Link>Core\DelegateCommandT.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\Core\NotifyPropertyChangedBase.cs">
-      <Link>Core\NotifyPropertyChangedBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\DataTransfer\DataPackageEx.cs">
-      <Link>DataTransfer\DataPackageEx.cs</Link>
-    </Compile>
     <Compile Include="..\Okra.Core.Shared\DataTransfer\IDataRequest.cs">
       <Link>DataTransfer\IDataRequest.cs</Link>
     </Compile>
@@ -94,32 +82,11 @@
     <Compile Include="..\Okra.Core.Shared\Navigation\IViewLifetimeContext.cs">
       <Link>Navigation\IViewLifetimeContext.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\NavigationBaseEx.cs">
-      <Link>Navigation\NavigationBaseEx.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\NavigationCommands.cs">
-      <Link>Navigation\NavigationCommands.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\NavigationStackEx.cs">
-      <Link>Navigation\NavigationStackEx.cs</Link>
-    </Compile>
     <Compile Include="..\Okra.Core.Shared\Navigation\NavigationStorageType.cs">
       <Link>Navigation\NavigationStorageType.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\PageInfo.cs">
-      <Link>Navigation\PageInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\PageName.cs">
-      <Link>Navigation\PageName.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\PageNavigationEventArgs.cs">
-      <Link>Navigation\PageNavigationEventArgs.cs</Link>
-    </Compile>
     <Compile Include="..\Okra.Core.Shared\Navigation\SpecialPageNames.cs">
       <Link>Navigation\SpecialPageNames.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\StateChangedEventArgs.cs">
-      <Link>Navigation\StateChangedEventArgs.cs</Link>
     </Compile>
     <Compile Include="..\Okra.Core.Shared\Services\IActivationHandler.cs">
       <Link>Services\IActivationHandler.cs</Link>
@@ -139,6 +106,17 @@
     <Compile Include="..\Okra.Core.Shared\Services\IStorageManager.cs">
       <Link>Services\IStorageManager.cs</Link>
     </Compile>
+    <Compile Include="Core\Stub_DelegateCommand.cs" />
+    <Compile Include="Core\Stub_DelegateCommandT.cs" />
+    <Compile Include="Core\Stub_NotifyPropertyChangedBase.cs" />
+    <Compile Include="DataTransfer\Stub_DataPackageEx.cs" />
+    <Compile Include="Navigation\Stub_NavigationBaseEx.cs" />
+    <Compile Include="Navigation\Stub_NavigationCommands.cs" />
+    <Compile Include="Navigation\Stub_NavigationStackEx.cs" />
+    <Compile Include="Navigation\Stub_PageInfo.cs" />
+    <Compile Include="Navigation\Stub_PageName.cs" />
+    <Compile Include="Navigation\Stub_PageNavigationEventArgs.cs" />
+    <Compile Include="Navigation\Stub_StateChangedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
