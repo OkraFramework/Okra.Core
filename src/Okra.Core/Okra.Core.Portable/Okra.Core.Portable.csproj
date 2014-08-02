@@ -97,6 +97,12 @@
     <Compile Include="..\Okra.Core.Shared\Sharing\IShareSourceManager.cs">
       <Link>Sharing\IShareSourceManager.cs</Link>
     </Compile>
+    <Compile Include="..\Okra.Core.Shared\Sharing\IShareTarget.cs">
+      <Link>Sharing\IShareTarget.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Sharing\IShareTargetManager.cs">
+      <Link>Sharing\IShareTargetManager.cs</Link>
+    </Compile>
     <Compile Include="Core\Stub_DelegateCommand.cs" />
     <Compile Include="Core\Stub_DelegateCommandT.cs" />
     <Compile Include="Core\Stub_NotifyPropertyChangedBase.cs" />

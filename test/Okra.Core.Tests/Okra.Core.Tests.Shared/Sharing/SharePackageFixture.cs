@@ -17,7 +17,7 @@ namespace Okra.Tests.Sharing
             DataPackage dataPackage = new DataPackage();
             SharePackage sharePackage = new SharePackage(dataPackage);
 
-            sharePackage.SetData("Test Format", "Test Value");
+            sharePackage.SetData<string>("Test Format", "Test Value");
 
             object data = await dataPackage.GetView().GetDataAsync("Test Format");
             Assert.AreEqual("Test Value", data);

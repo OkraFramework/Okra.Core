@@ -33,7 +33,7 @@ namespace Okra.Sharing
 
         // *** Methods ***
 
-        public void SetData(string formatId, object value)
+        public void SetData<T>(string formatId, T value)
         {
             dataPackage.SetData(formatId, value);
         }

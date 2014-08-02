@@ -16,7 +16,7 @@ namespace Okra.Sharing
 
         // *** Methods ***
 
-        void SetData(string formatId, object value);
+        void SetData<T>(string formatId, T value);
         void SetAsyncData<T>(string formatId, AsyncDataProvider<T> dataProvider);
     }
 }
