@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.DataTransfer;
+using Okra.Sharing;
 using Okra.Navigation;
 using Okra.Tests.Mocks;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml.Navigation;
 
-namespace Okra.Tests.DataTransfer
+namespace Okra.Tests.Sharing
 {
     [TestClass]
     public class ShareSourceManagerFixture
@@ -75,10 +75,10 @@ namespace Okra.Tests.DataTransfer
             TestableSharingManager sharingManager = CreateSharingManager();
             sharingManager.DefaultFailureText = null;
 
-            MockDataRequest dataRequest = new MockDataRequest();
-            sharingManager.DataRequested(dataRequest);
+            MockShareRequest shareRequest = new MockShareRequest();
+            sharingManager.ShareRequested(shareRequest);
 
-            CollectionAssert.AreEqual(new string[] { }, dataRequest.FailureText);
+            CollectionAssert.AreEqual(new string[] { }, shareRequest.FailureText);
         }
 
         [TestMethod]
@@ -87,10 +87,10 @@ namespace Okra.Tests.DataTransfer
             TestableSharingManager sharingManager = CreateSharingManager();
             sharingManager.DefaultFailureText = "";
 
-            MockDataRequest dataRequest = new MockDataRequest();
-            sharingManager.DataRequested(dataRequest);
+            MockShareRequest shareRequest = new MockShareRequest();
+            sharingManager.ShareRequested(shareRequest);
 
-            CollectionAssert.AreEqual(new string[] { }, dataRequest.FailureText);
+            CollectionAssert.AreEqual(new string[] { }, shareRequest.FailureText);
         }
 
         [TestMethod]
@@ -99,26 +99,26 @@ namespace Okra.Tests.DataTransfer
             TestableSharingManager sharingManager = CreateSharingManager();
             sharingManager.DefaultFailureText = "Test Text";
 
-            MockDataRequest dataRequest = new MockDataRequest();
-            sharingManager.DataRequested(dataRequest);
+            MockShareRequest shareRequest = new MockShareRequest();
+            sharingManager.ShareRequested(shareRequest);
 
-            CollectionAssert.AreEqual(new string[] { "Test Text" }, dataRequest.FailureText);
+            CollectionAssert.AreEqual(new string[] { "Test Text" }, shareRequest.FailureText);
         }
 
         [TestMethod]
-        public void WithSharableElement_ForwardsDataRequest()
+        public void WithSharableElement_ForwardsShareRequest()
         {
             INavigationManager navigationManager = new MockNavigationManager(_ => new object[] { new MockPageElement(), new MockShareablePageElement(), new MockPageElement() });
 
             TestableSharingManager sharingManager = CreateSharingManager(navigationManager);
 
             navigationManager.NavigationStack.NavigateTo(new PageInfo("Test Page", null));
-            
-            MockDataRequest dataRequest = new MockDataRequest();
-            sharingManager.DataRequested(dataRequest);
+
+            MockShareRequest shareRequest = new MockShareRequest();
+            sharingManager.ShareRequested(shareRequest);
 
             MockShareablePageElement sharableElement = navigationManager.GetPageElements(navigationManager.NavigationStack.CurrentPage).First(e => e is MockShareablePageElement) as MockShareablePageElement;
-            CollectionAssert.AreEqual(new object[] { dataRequest }, sharableElement.DataRequests);
+            CollectionAssert.AreEqual(new object[] { shareRequest }, sharableElement.ShareRequests);
         }
 
         [TestMethod]
@@ -130,10 +130,10 @@ namespace Okra.Tests.DataTransfer
             sharingManager.DefaultFailureText = "Default Text";
 
             navigationManager.NavigationStack.NavigateTo(new PageInfo("Test Page", null));
-            MockDataRequest dataRequest = new MockDataRequest();
-            sharingManager.DataRequested(dataRequest);
+            MockShareRequest shareRequest = new MockShareRequest();
+            sharingManager.ShareRequested(shareRequest);
 
-            CollectionAssert.AreEqual(new string[] { }, dataRequest.FailureText);
+            CollectionAssert.AreEqual(new string[] { }, shareRequest.FailureText);
         }
 
         // *** Private Methods ***
@@ -165,9 +165,9 @@ namespace Okra.Tests.DataTransfer
 
             // *** Methods ***
 
-            public new void DataRequested(IDataRequest dataRequest)
+            public new void ShareRequested(IShareRequest shareRequest)
             {
-                base.DataRequested(dataRequest);
+                base.ShareRequested(shareRequest);
             }
 
             // *** Overriden base methods ***
@@ -178,7 +178,7 @@ namespace Okra.Tests.DataTransfer
             }
         }
 
-        private class MockDataRequest : IDataRequest
+        private class MockShareRequest : IShareRequest
         {
             // *** Fields ***
 
@@ -186,7 +186,7 @@ namespace Okra.Tests.DataTransfer
 
             // *** Properties ***
 
-            public DataPackage Data
+            public ISharePackage Data
             {
                 get
                 {
@@ -197,22 +197,12 @@ namespace Okra.Tests.DataTransfer
                     throw new NotImplementedException();
                 }
             }
-
-            public DateTimeOffset Deadline
-            {
-                get { throw new NotImplementedException(); }
-            }
-
+            
             // *** Methods ***
 
             public void FailWithDisplayText(string displayText)
             {
                 FailureText.Add(displayText);
-            }
-
-            public DataRequestDeferral GetDeferral()
-            {
-                throw new NotImplementedException();
             }
         }
 
@@ -224,13 +214,14 @@ namespace Okra.Tests.DataTransfer
         {
             // *** Fields ***
 
-            public readonly List<IDataRequest> DataRequests = new List<IDataRequest>();
+            public readonly List<IShareRequest> ShareRequests = new List<IShareRequest>();
 
             // *** Methods ***
 
-            public void ShareRequested(IDataRequest dataRequest)
+            public Task ShareRequested(IShareRequest shareRequest)
             {
-                DataRequests.Add(dataRequest);
+                ShareRequests.Add(shareRequest);
+                return Task.FromResult(true);
             }
         }
     }

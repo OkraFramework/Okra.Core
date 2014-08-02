@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Okra.DataTransfer
+namespace Okra.Sharing
 {
     public interface IShareSourceManager
     {

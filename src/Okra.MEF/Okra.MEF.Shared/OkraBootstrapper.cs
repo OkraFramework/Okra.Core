@@ -11,6 +11,7 @@ using Windows.UI.Xaml;
 using System;
 using System.Threading.Tasks;
 using Okra.Helpers;
+using Okra.Sharing;
 using Okra.DataTransfer;
 
 #if WINDOWS_APP

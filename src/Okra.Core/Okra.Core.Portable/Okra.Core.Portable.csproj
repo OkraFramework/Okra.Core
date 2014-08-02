@@ -37,24 +37,6 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Okra.Core.Shared\DataTransfer\IDataRequest.cs">
-      <Link>DataTransfer\IDataRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\DataTransfer\IShareable.cs">
-      <Link>DataTransfer\IShareable.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\DataTransfer\IShareOperation.cs">
-      <Link>DataTransfer\IShareOperation.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\DataTransfer\IShareSourceManager.cs">
-      <Link>DataTransfer\IShareSourceManager.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\DataTransfer\IShareTarget.cs">
-      <Link>DataTransfer\IShareTarget.cs</Link>
-    </Compile>
-    <Compile Include="..\Okra.Core.Shared\DataTransfer\IShareTargetManager.cs">
-      <Link>DataTransfer\IShareTargetManager.cs</Link>
-    </Compile>
     <Compile Include="..\Okra.Core.Shared\Navigation\IActivatable.cs">
       <Link>Navigation\IActivatable.cs</Link>
     </Compile>
@@ -100,10 +82,24 @@
     <Compile Include="..\Okra.Core.Shared\Services\IStorageManager.cs">
       <Link>Services\IStorageManager.cs</Link>
     </Compile>
+    <Compile Include="..\Okra.Core.Shared\Sharing\IShareable.cs">
+      <Link>Sharing\IShareable.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Sharing\ISharePackage.cs">
+      <Link>Sharing\ISharePackage.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Sharing\ISharePropertySet.cs">
+      <Link>Sharing\ISharePropertySet.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Sharing\IShareRequest.cs">
+      <Link>Sharing\IShareRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Sharing\IShareSourceManager.cs">
+      <Link>Sharing\IShareSourceManager.cs</Link>
+    </Compile>
     <Compile Include="Core\Stub_DelegateCommand.cs" />
     <Compile Include="Core\Stub_DelegateCommandT.cs" />
     <Compile Include="Core\Stub_NotifyPropertyChangedBase.cs" />
-    <Compile Include="DataTransfer\Stub_DataPackageEx.cs" />
     <Compile Include="Navigation\Stub_NavigationBaseEx.cs" />
     <Compile Include="Navigation\Stub_NavigationCommands.cs" />
     <Compile Include="Navigation\Stub_NavigationStackEx.cs" />

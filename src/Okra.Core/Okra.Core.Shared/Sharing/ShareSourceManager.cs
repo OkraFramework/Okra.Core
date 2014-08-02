@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 
-namespace Okra.DataTransfer
+namespace Okra.Sharing
 {
     public class ShareSourceManager : IShareSourceManager
     {
@@ -48,7 +48,7 @@ namespace Okra.DataTransfer
             dataTransferManager.DataRequested += DataTransferManager_DataRequested;
         }
 
-        protected void DataRequested(IDataRequest dataRequest)
+        protected async Task ShareRequested(IShareRequest shareRequest)
         {
             // Find the first page element that implements IShareable and forward the data request
 
@@ -61,7 +61,7 @@ namespace Okra.DataTransfer
                 {
                     if (element is IShareable)
                     {
-                        ((IShareable)element).ShareRequested(dataRequest);
+                        await ((IShareable)element).ShareRequested(shareRequest);
                         hasRequestBeenProcessed = true;
                     }
                 }
@@ -70,15 +70,17 @@ namespace Okra.DataTransfer
             // If there is nothing to share and their is a default failure text specified then return this
 
             if (!hasRequestBeenProcessed && !string.IsNullOrEmpty(DefaultFailureText))
-                dataRequest.FailWithDisplayText(DefaultFailureText);
+                shareRequest.FailWithDisplayText(DefaultFailureText);
         }
 
         // *** Private Methods ***
 
-        protected void DataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        protected async void DataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
         {
-            IDataRequest dataRequest = new DataRequestProxy(args.Request);
-            DataRequested(dataRequest);
+            DataRequestDeferral deferral = args.Request.GetDeferral();
+            IShareRequest shareRequest = new ShareRequest(args.Request);
+            await ShareRequested(shareRequest);
+            deferral.Complete();
         }
 
         private void NavigationManager_NavigatedTo(object sender, PageNavigationEventArgs e)
@@ -95,38 +97,28 @@ namespace Okra.DataTransfer
 
         // *** Private Sub-classes ***
 
-        private class DataRequestProxy : IDataRequest
+        private class ShareRequest : IShareRequest
         {
             // *** Fields ***
 
             private readonly DataRequest dataRequest;
+            private readonly ISharePackage sharePackage;
 
             // *** Constructors ***
 
-            public DataRequestProxy(DataRequest dataRequest)
+            public ShareRequest(DataRequest dataRequest)
             {
                 this.dataRequest = dataRequest;
+                this.sharePackage = new SharePackage(dataRequest.Data);
             }
 
             // *** Properties ***
 
-            public DataPackage Data
+            public ISharePackage Data
             {
                 get
                 {
-                    return dataRequest.Data;
-                }
-                set
-                {
-                    dataRequest.Data = value;
-                }
-            }
-
-            public DateTimeOffset Deadline
-            {
-                get
-                {
-                    return dataRequest.Deadline;
+                    return sharePackage;
                 }
             }
 
@@ -135,11 +127,6 @@ namespace Okra.DataTransfer
             public void FailWithDisplayText(string displayText)
             {
                 dataRequest.FailWithDisplayText(displayText);
-            }
-
-            public DataRequestDeferral GetDeferral()
-            {
-                return dataRequest.GetDeferral();
             }
         }
     }
