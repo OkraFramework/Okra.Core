@@ -11,8 +11,9 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Core\DelegateCommandFixture.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotifyPropertyChangedFixture.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Sharing\DataPackageExFixture.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sharing\SharePackageExFixture.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\SharePackageFixture.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sharing\SharePackageViewExFixture.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\SharePackageViewFixture.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\ShareSourceManagerFixture.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\ShareTargetManagerFixture.cs" />

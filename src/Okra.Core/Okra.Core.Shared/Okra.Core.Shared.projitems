@@ -12,7 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\DelegateCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\DelegateCommandT.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotifyPropertyChangedBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Sharing\DataPackageEx.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\IShareable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\IShareOperation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\ISharePackage.cs" />
@@ -23,7 +22,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\IShareTarget.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\IShareTargetManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\SharePackage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sharing\SharePackageEx.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\SharePackageView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sharing\SharePackageViewEx.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\ShareSourceManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\ShareTargetManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\StandardShareFormats.cs" />

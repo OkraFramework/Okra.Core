@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using Windows.ApplicationModel.DataTransfer;
+using System.Threading.Tasks;
 
 namespace Okra.Sharing
 {
@@ -11,7 +12,7 @@ namespace Okra.Sharing
         {
             get
             {
-                return StandardDataFormats.ApplicationLink;
+                throw new NotImplementedException();
             }
         }
 
@@ -19,7 +20,7 @@ namespace Okra.Sharing
         {
             get
             {
-                return StandardDataFormats.Html;
+                throw new NotImplementedException();
             }
         }
 
@@ -27,7 +28,7 @@ namespace Okra.Sharing
         {
             get
             {
-                return StandardDataFormats.Rtf;
+                throw new NotImplementedException();
             }
         }
 
@@ -35,7 +36,7 @@ namespace Okra.Sharing
         {
             get
             {
-                return StandardDataFormats.Text;
+                throw new NotImplementedException();
             }
         }
 
@@ -43,7 +44,7 @@ namespace Okra.Sharing
         {
             get
             {
-                return StandardDataFormats.WebLink;
+                throw new NotImplementedException();
             }
         }
     }
