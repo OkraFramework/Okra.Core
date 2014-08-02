@@ -85,8 +85,14 @@
     <Compile Include="..\Okra.Core.Shared\Sharing\IShareable.cs">
       <Link>Sharing\IShareable.cs</Link>
     </Compile>
+    <Compile Include="..\Okra.Core.Shared\Sharing\IShareOperation.cs">
+      <Link>Sharing\IShareOperation.cs</Link>
+    </Compile>
     <Compile Include="..\Okra.Core.Shared\Sharing\ISharePackage.cs">
       <Link>Sharing\ISharePackage.cs</Link>
+    </Compile>
+    <Compile Include="..\Okra.Core.Shared\Sharing\ISharePackageView.cs">
+      <Link>Sharing\ISharePackageView.cs</Link>
     </Compile>
     <Compile Include="..\Okra.Core.Shared\Sharing\ISharePropertySet.cs">
       <Link>Sharing\ISharePropertySet.cs</Link>

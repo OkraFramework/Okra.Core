@@ -13,7 +13,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Okra.DataTransfer
+namespace Okra.Sharing
 {
     public class ShareTargetManager : IShareTargetManager, IActivationHandler
     {
@@ -144,47 +144,31 @@ namespace Okra.DataTransfer
             // *** Fields ***
 
             private readonly ShareOperation shareOperation;
+            private readonly SharePackageView data;
 
             // *** Constructors ***
 
             public ShareOperationProxy(ShareOperation shareOperation)
             {
                 this.shareOperation = shareOperation;
+                this.data = new SharePackageView(shareOperation.Data);
             }
 
             // *** Properties ***
 
-            public DataPackageView Data
+            public ISharePackageView Data
             {
                 get
                 {
-                    return shareOperation.Data;
-                }
-            }
-
-            public string QuickLinkId
-            {
-                get
-                {
-                    return shareOperation.QuickLinkId;
+                    return data;
                 }
             }
 
             // *** Methods ***
 
-            public void RemoveThisQuickLink()
-            {
-                shareOperation.RemoveThisQuickLink();
-            }
-
             public void ReportCompleted()
             {
                 shareOperation.ReportCompleted();
-            }
-
-            public void ReportCompleted(QuickLink quicklink)
-            {
-                shareOperation.ReportCompleted(quicklink);
             }
 
             public void ReportDataRetrieved()

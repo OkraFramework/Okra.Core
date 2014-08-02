@@ -16,12 +16,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\IShareable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\IShareOperation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\ISharePackage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sharing\ISharePackageView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\ISharePropertySet.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\IShareRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\IShareSourceManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\IShareTarget.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\IShareTargetManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\SharePackage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sharing\SharePackageView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\ShareSourceManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\ShareTargetManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\StandardShareFormats.cs" />

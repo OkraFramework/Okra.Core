@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.DataTransfer;
+using Okra.Sharing;
 using Okra.Navigation;
 using Okra.Services;
 using Okra.Tests.Mocks;
@@ -13,7 +13,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.DataTransfer.ShareTarget;
 using Windows.UI.Xaml.Navigation;
 
-namespace Okra.Tests.DataTransfer
+namespace Okra.Tests.Sharing
 {
     [TestClass]
     public class ShareTargetManagerFixture
@@ -94,7 +94,7 @@ namespace Okra.Tests.DataTransfer
 
             Assert.AreEqual(false, result);
         }
-        
+
         [TestMethod]
         public async Task Activate_DisplaysThePage_WithCorrectName()
         {
@@ -132,7 +132,7 @@ namespace Okra.Tests.DataTransfer
 
             Assert.AreEqual(0, shareTargetManager.DisplayedViews.Count);
         }
-        
+
         [TestMethod]
         public async Task Activate_CallsNavigatedTo_OnView()
         {
@@ -465,29 +465,14 @@ namespace Okra.Tests.DataTransfer
 
             // *** Properties ***
 
-            public DataPackageView Data
-            {
-                get { throw new NotImplementedException(); }
-            }
-
-            public string QuickLinkId
+            public ISharePackageView Data
             {
                 get { throw new NotImplementedException(); }
             }
 
             // *** Methods ***
 
-            public void RemoveThisQuickLink()
-            {
-                throw new NotImplementedException();
-            }
-
             public void ReportCompleted()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void ReportCompleted(QuickLink quicklink)
             {
                 throw new NotImplementedException();
             }

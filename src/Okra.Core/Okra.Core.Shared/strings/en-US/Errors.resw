@@ -144,6 +144,9 @@
   <data name="Exception_InvalidOperation_CannotModifyReadOnlyCollection" xml:space="preserve">
     <value>Cannot modify a read-only collection.</value>
   </data>
+  <data name="Exception_InvalidOperation_CannotModifyShareProperties" xml:space="preserve">
+    <value>Cannot modify share properties as a share target.</value>
+  </data>
   <data name="Exception_InvalidOperation_CannotNavigateAsPageIsNotFound" xml:space="preserve">
     <value>Cannot navigate as a page named '{0}' does not exist.</value>
   </data>
