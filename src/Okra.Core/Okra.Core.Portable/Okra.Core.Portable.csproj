@@ -79,9 +79,6 @@
     <Compile Include="..\Okra.Core.Shared\Services\ILifetimeManager.cs">
       <Link>Services\ILifetimeManager.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Services\IStorageManager.cs">
-      <Link>Services\IStorageManager.cs</Link>
-    </Compile>
     <Compile Include="..\Okra.Core.Shared\Sharing\IShareable.cs">
       <Link>Sharing\IShareable.cs</Link>
     </Compile>
