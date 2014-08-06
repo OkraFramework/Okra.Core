@@ -152,5 +152,39 @@ namespace Okra.Tests.Navigation
 
             Assert.AreEqual(1, changedCount);
         }
+
+        [TestMethod]
+        public void PropertyChanged_CanGoBack_IsCalledWheNavigatingBackToFirstPage()
+        {
+            NavigationStackWithHome navigationStack = new NavigationStackWithHome();
+
+            navigationStack.NavigateTo(new PageInfo("Page 1", null));
+            navigationStack.NavigateTo(new PageInfo("Page 2", null));
+            navigationStack.NavigateTo(new PageInfo("Page 3", null));
+
+            int changedCount = 0;
+            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+
+            navigationStack.GoBackTo(navigationStack[0]);
+
+            Assert.AreEqual(1, changedCount);
+        }
+
+        [TestMethod]
+        public void PropertyChanged_CanGoBack_IsNotCalledWheNavigatingBackToSecondPage()
+        {
+            NavigationStackWithHome navigationStack = new NavigationStackWithHome();
+
+            navigationStack.NavigateTo(new PageInfo("Page 1", null));
+            navigationStack.NavigateTo(new PageInfo("Page 2", null));
+            navigationStack.NavigateTo(new PageInfo("Page 3", null));
+
+            int changedCount = 0;
+            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+
+            navigationStack.GoBackTo(navigationStack[1]);
+
+            Assert.AreEqual(0, changedCount);
+        }
     }
 }

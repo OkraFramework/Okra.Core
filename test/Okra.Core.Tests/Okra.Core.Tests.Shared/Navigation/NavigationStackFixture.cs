@@ -163,6 +163,37 @@ namespace Okra.Tests.Navigation
         }
 
         [TestMethod]
+        public void GoBackTo_NavigatesBackToSpecifiedPage()
+        {
+            NavigationStack navigationStack = new NavigationStack();
+            PageInfo page2 = new PageInfo("Page 2", null);
+
+            navigationStack.NavigateTo(new PageInfo("Page 1", null));
+            navigationStack.NavigateTo(page2);
+            navigationStack.NavigateTo(new PageInfo("Page 3", null));
+            navigationStack.NavigateTo(new PageInfo("Page 4", null));
+
+            navigationStack.GoBackTo(page2);
+
+            Assert.AreEqual(2, navigationStack.Count);
+            Assert.AreEqual("Page 1", navigationStack[0].PageName);
+            Assert.AreEqual("Page 2", navigationStack[1].PageName);
+        }
+
+        [TestMethod]
+        public void GoBackTo_ThrowsException_SpecifiedPageNotInBackStack()
+        {
+            NavigationStack navigationStack = new NavigationStack();
+
+            navigationStack.NavigateTo(new PageInfo("Page 1", null));
+            navigationStack.NavigateTo(new PageInfo("Page 2", null));
+
+            PageInfo unknownPage = new PageInfo("Page 3", null);
+
+            Assert.ThrowsException<InvalidOperationException>(() => navigationStack.GoBackTo(unknownPage));
+        }
+
+        [TestMethod]
         public void NavigateTo_OnePageNavigated_CountIsOne()
         {
             NavigationStack navigationStack = new NavigationStack();
@@ -400,6 +431,47 @@ namespace Okra.Tests.Navigation
         }
 
         [TestMethod]
+        public void CollectionChanged_IsCalledWhenNavigatingBackTo_MultiplePages()
+        {
+            NavigationStack navigationStack = new NavigationStack();
+
+            navigationStack.NavigateTo(new PageInfo("Page 1", null));
+            navigationStack.NavigateTo(new PageInfo("Page 2", null));
+            navigationStack.NavigateTo(new PageInfo("Page 3", null));
+
+            List<NotifyCollectionChangedEventArgs> changeEvents = new List<NotifyCollectionChangedEventArgs>();
+            navigationStack.CollectionChanged += delegate(object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
+
+            navigationStack.GoBackTo(navigationStack[0]);
+
+            Assert.AreEqual(1, changeEvents.Count);
+            NotifyCollectionChangedEventArgs changeEvent = changeEvents[0];
+            Assert.AreEqual(NotifyCollectionChangedAction.Reset, changeEvent.Action);
+        }
+
+        [TestMethod]
+        public void CollectionChanged_IsCalledWhenNavigatingBackTo_OnPage()
+        {
+            NavigationStack navigationStack = new NavigationStack();
+
+            navigationStack.NavigateTo(new PageInfo("Page 1", null));
+            navigationStack.NavigateTo(new PageInfo("Page 2", null));
+            navigationStack.NavigateTo(new PageInfo("Page 3", null));
+
+            List<NotifyCollectionChangedEventArgs> changeEvents = new List<NotifyCollectionChangedEventArgs>();
+            navigationStack.CollectionChanged += delegate(object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
+
+            navigationStack.GoBackTo(navigationStack[1]);
+
+            Assert.AreEqual(1, changeEvents.Count);
+            NotifyCollectionChangedEventArgs changeEvent = changeEvents[0];
+            Assert.AreEqual(NotifyCollectionChangedAction.Remove, changeEvent.Action);
+            Assert.AreEqual(1, changeEvent.OldItems.Count);
+            Assert.AreEqual("Page 3", ((PageInfo)changeEvent.OldItems[0]).PageName);
+            Assert.AreEqual(2, changeEvent.OldStartingIndex);
+        }
+
+        [TestMethod]
         public void CollectionChanged_IsCalledWhenNavigationStackIsCleared()
         {
             NavigationStack navigationStack = new NavigationStack();
@@ -530,6 +602,26 @@ namespace Okra.Tests.Navigation
         }
 
         [TestMethod]
+        public void NavigatedTo_IsCalledWhenNavigatingBackToAPage()
+        {
+            NavigationStack navigationStack = new NavigationStack();
+
+            navigationStack.NavigateTo(new PageInfo("Page 1", null));
+            navigationStack.NavigateTo(new PageInfo("Page 2", null));
+            navigationStack.NavigateTo(new PageInfo("Page 3", null));
+
+            List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
+            navigationStack.NavigatedTo += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+
+            navigationStack.GoBackTo(navigationStack[0]);
+
+            Assert.AreEqual(1, navigationEvents.Count);
+            PageNavigationEventArgs navigationEvent = navigationEvents[0];
+            Assert.AreEqual(PageNavigationMode.Back, navigationEvent.NavigationMode);
+            Assert.AreEqual("Page 1", navigationEvent.Page.PageName);
+        }
+
+        [TestMethod]
         public void NavigatedTo_IsCalledWhenPagesArePushedOntoStack()
         {
             NavigationStack navigationStack = new NavigationStack();
@@ -602,7 +694,7 @@ namespace Okra.Tests.Navigation
         }
 
         [TestMethod]
-        public void NavigatingFrom_IsCalledWhenNavigationStackIsCleared()
+        public void NavigatingFrom_IsCalledWhenSecondPageNavigatedThenBack()
         {
             NavigationStack navigationStack = new NavigationStack();
 
@@ -621,7 +713,7 @@ namespace Okra.Tests.Navigation
         }
 
         [TestMethod]
-        public void NavigatingFrom_IsCalledWhenSecondPageNavigatedThenBack()
+        public void NavigatingFrom_IsCalledWhenNavigationStackIsCleared()
         {
             NavigationStack navigationStack = new NavigationStack();
 
@@ -637,6 +729,26 @@ namespace Okra.Tests.Navigation
             PageNavigationEventArgs navigationEvent = navigationEvents[0];
             Assert.AreEqual(PageNavigationMode.Back, navigationEvent.NavigationMode);
             Assert.AreEqual("Page 2", navigationEvent.Page.PageName);
+        }
+
+        [TestMethod]
+        public void NavigatingFrom_IsCalledWhenNavigatingBackToAPage()
+        {
+            NavigationStack navigationStack = new NavigationStack();
+
+            navigationStack.NavigateTo(new PageInfo("Page 1", null));
+            navigationStack.NavigateTo(new PageInfo("Page 2", null));
+            navigationStack.NavigateTo(new PageInfo("Page 3", null));
+
+            List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
+            navigationStack.NavigatingFrom += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+
+            navigationStack.GoBackTo(navigationStack[0]);
+
+            Assert.AreEqual(1, navigationEvents.Count);
+            PageNavigationEventArgs navigationEvent = navigationEvents[0];
+            Assert.AreEqual(PageNavigationMode.Back, navigationEvent.NavigationMode);
+            Assert.AreEqual("Page 3", navigationEvent.Page.PageName);
         }
 
         [TestMethod]
@@ -674,6 +786,29 @@ namespace Okra.Tests.Navigation
             PageNavigationEventArgs pageDisposedEvent = pageDisposedEvents[0];
             Assert.AreEqual(PageNavigationMode.Back, pageDisposedEvent.NavigationMode);
             Assert.AreEqual("Page 2", pageDisposedEvent.Page.PageName);
+        }
+
+        [TestMethod]
+        public void PageDisposed_IsCalledWhenNavigatingBackMultiplePages()
+        {
+            NavigationStack navigationStack = new NavigationStack();
+
+            navigationStack.NavigateTo(new PageInfo("Page 1", null));
+            navigationStack.NavigateTo(new PageInfo("Page 2", null));
+            navigationStack.NavigateTo(new PageInfo("Page 3", null));
+
+            List<PageNavigationEventArgs> pageDisposedEvents = new List<PageNavigationEventArgs>();
+            navigationStack.PageDisposed += delegate(object sender, PageNavigationEventArgs e) { pageDisposedEvents.Add(e); };
+
+            navigationStack.GoBackTo(navigationStack[0]);
+
+            Assert.AreEqual(2, pageDisposedEvents.Count);
+            PageNavigationEventArgs pageDisposedEventPage2 = pageDisposedEvents.First(e => e.Page.PageName == "Page 2");
+            PageNavigationEventArgs pageDisposedEventPage3 = pageDisposedEvents.First(e => e.Page.PageName == "Page 3");
+            Assert.AreEqual(PageNavigationMode.Back, pageDisposedEventPage2.NavigationMode);
+            Assert.AreEqual("Page 2", pageDisposedEventPage2.Page.PageName);
+            Assert.AreEqual(PageNavigationMode.Back, pageDisposedEventPage3.NavigationMode);
+            Assert.AreEqual("Page 3", pageDisposedEventPage3.Page.PageName);
         }
 
         [TestMethod]
@@ -748,6 +883,23 @@ namespace Okra.Tests.Navigation
             navigationStack.GoBack();
 
             Assert.AreEqual(1, changedCount);
+        }
+
+        [TestMethod]
+        public void PropertyChanged_CanGoBack_IsNotCalledWheNavigatingBackToFirstPage()
+        {
+            NavigationStack navigationStack = new NavigationStack();
+
+            navigationStack.NavigateTo(new PageInfo("Page 1", null));
+            navigationStack.NavigateTo(new PageInfo("Page 2", null));
+            navigationStack.NavigateTo(new PageInfo("Page 3", null));
+
+            int changedCount = 0;
+            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+
+            navigationStack.GoBackTo(navigationStack[0]);
+
+            Assert.AreEqual(0, changedCount);
         }
 
         [TestMethod]
@@ -874,6 +1026,23 @@ namespace Okra.Tests.Navigation
         }
 
         [TestMethod]
+        public void PropertyChanged_Count_IsCalledWhenWhenNavigatingBackTo()
+        {
+            NavigationStack navigationStack = new NavigationStack();
+
+            navigationStack.NavigateTo(new PageInfo("Page 1", null));
+            navigationStack.NavigateTo(new PageInfo("Page 2", null));
+            navigationStack.NavigateTo(new PageInfo("Page 3", null));
+
+            int changedCount = 0;
+            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
+
+            navigationStack.GoBackTo(navigationStack[0]);
+
+            Assert.AreEqual(1, changedCount);
+        }
+
+        [TestMethod]
         public void PropertyChanged_Count_IsCalledWhenNavigationStackIsCleared()
         {
             NavigationStack navigationStack = new NavigationStack();
@@ -980,6 +1149,23 @@ namespace Okra.Tests.Navigation
             navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
 
             navigationStack.GoBack();
+
+            Assert.AreEqual(1, changedCount);
+        }
+
+        [TestMethod]
+        public void PropertyChanged_CurrentPage_IsCalledWhenNavigatingBackTo()
+        {
+            NavigationStack navigationStack = new NavigationStack();
+
+            navigationStack.NavigateTo(new PageInfo("Page 1", null));
+            navigationStack.NavigateTo(new PageInfo("Page 2", null));
+            navigationStack.NavigateTo(new PageInfo("Page 3", null));
+
+            int changedCount = 0;
+            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
+
+            navigationStack.GoBackTo(navigationStack[0]);
 
             Assert.AreEqual(1, changedCount);
         }

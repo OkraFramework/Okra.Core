@@ -22,6 +22,7 @@ namespace Okra.Navigation
 
         void Clear();
         void GoBack();
+        void GoBackTo(PageInfo page);
         void NavigateTo(PageInfo page);
         void Push(IEnumerable<PageInfo> pages);
     }

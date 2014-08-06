@@ -510,6 +510,11 @@ namespace Okra.Tests.Navigation
                 throw new NotImplementedException();
             }
 
+            public void GoBackTo(PageInfo page)
+            {
+                throw new NotImplementedException();
+            }
+
             public void NavigateTo(PageInfo page)
             {
                 throw new NotImplementedException();

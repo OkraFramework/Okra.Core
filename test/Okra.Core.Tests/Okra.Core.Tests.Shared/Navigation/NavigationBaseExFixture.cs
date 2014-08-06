@@ -216,6 +216,11 @@ namespace Okra.Tests.Navigation
                 GoBackCallCount++;
             }
 
+            public void GoBackTo(PageInfo page)
+            {
+                throw new NotImplementedException();
+            }
+
             public void NavigateTo(PageInfo page)
             {
                 NavigateToCalls.Add(page);

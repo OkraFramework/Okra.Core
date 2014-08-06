@@ -276,6 +276,11 @@ namespace Okra.Tests.Navigation
                 navigationManager.MethodCallLog.Add("GoBack()");
             }
 
+            public void GoBackTo(PageInfo page)
+            {
+                throw new NotImplementedException();
+            }
+
             public void NavigateTo(PageInfo page)
             {
                 navigationManager.MethodCallLog.Add(string.Format("NavigateTo({0}, {1})", page.PageName, page.GetArguments<string>()));

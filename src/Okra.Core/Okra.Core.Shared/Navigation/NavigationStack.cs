@@ -111,30 +111,23 @@ namespace Okra.Navigation
             if (!CanGoBack)
                 throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotGoBackWithEmptyBackStack"));
 
-            // Call NavigatingFrom on the existing navigation entry
+            // Call into internal method
 
-            PageInfo oldPage = CurrentPage;
-            OnNavigatingFrom(oldPage, PageNavigationMode.Back);
+            GoBackToInternal(Count - 1);
+        }
 
-            // Pop the last page from the navigation stack
+        public void GoBackTo(PageInfo page)
+        {
+            // Check that the specified page exists in the navigation stack
 
-            PageInfo page = internalStack[internalStack.Count - 1];
-            internalStack.RemoveAt(internalStack.Count - 1);
+            int pageIndex = internalStack.IndexOf(page);
 
-            // Raise property changed events
+            if (pageIndex == -1)
+                throw new InvalidOperationException(string.Format(ResourceHelper.GetErrorResource("Exception_InvalidOperation_SpecifiedPageDoesNotExistInNavigationStack"), page.PageName));
 
-            OnPropertyChanged("Count");
-            OnPropertyChanged("CurrentPage");
-            if (!CanGoBack)
-                OnPropertyChanged("CanGoBack");
+            // Call into internal method
 
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, page, internalStack.Count));
-
-            if (CurrentPage != null)
-                OnNavigatedTo(CurrentPage, PageNavigationMode.Back);
-
-            if (oldPage != null)
-                OnPageDisposed(oldPage, PageNavigationMode.Back);
+            GoBackToInternal(pageIndex + 1);
         }
 
         public void NavigateTo(PageInfo page)
@@ -221,6 +214,40 @@ namespace Okra.Navigation
 
             if (eventHandler != null)
                 eventHandler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        // *** Private Methods ***
+
+        private void GoBackToInternal(int removedPageIndex)
+        {
+            int removedPageCount = internalStack.Count - removedPageIndex;
+            IList<PageInfo> removedPages = internalStack.GetRange(removedPageIndex, removedPageCount);
+
+            // Call NavigatingFrom on the existing navigation entry
+
+            OnNavigatingFrom(CurrentPage, PageNavigationMode.Back);
+
+            // Remove the pages from the navigation stack
+
+            internalStack.RemoveRange(removedPageIndex, removedPageCount);
+
+            // Raise property changed events
+
+            OnPropertyChanged("Count");
+            OnPropertyChanged("CurrentPage");
+            if (!CanGoBack)
+                OnPropertyChanged("CanGoBack");
+
+            if (removedPageCount == 1)
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedPages[0], internalStack.Count));
+            else
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+
+            if (CurrentPage != null)
+                OnNavigatedTo(CurrentPage, PageNavigationMode.Back);
+
+            foreach (PageInfo removedPage in removedPages)
+                OnPageDisposed(removedPage, PageNavigationMode.Back);
         }
     }
 }

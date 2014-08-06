@@ -44,6 +44,11 @@ namespace Okra.Tests.Mocks
             base.RemoveAt(base.Count - 1);
         }
 
+        public void GoBackTo(PageInfo page)
+        {
+            throw new NotImplementedException();
+        }
+
         public void NavigateTo(PageInfo page)
         {
             base.Add(page);
