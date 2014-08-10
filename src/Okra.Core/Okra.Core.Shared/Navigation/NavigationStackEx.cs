@@ -9,6 +9,19 @@ namespace Okra.Navigation
 {
     public static class NavigationStackEx
     {
+        public static void GoBackTo(this INavigationStack navigationStack, string pageName)
+        {
+            // Validate Parameters
+
+            if (string.IsNullOrEmpty(pageName))
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
+
+            // Delegate to the INavigationStack
+
+            PageInfo page = navigationStack.Last(p => p.PageName == pageName);
+            navigationStack.GoBackTo(page);
+        }
+
         public static void NavigateTo(this INavigationStack navigationStack, string pageName)
         {
             // Validate Parameters

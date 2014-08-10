@@ -46,7 +46,8 @@ namespace Okra.Tests.Mocks
 
         public void GoBackTo(PageInfo page)
         {
-            throw new NotImplementedException();
+            while (CurrentPage != page)
+                GoBack();
         }
 
         public void NavigateTo(PageInfo page)

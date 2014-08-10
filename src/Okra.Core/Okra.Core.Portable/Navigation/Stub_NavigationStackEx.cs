@@ -8,6 +8,11 @@ namespace Okra.Navigation
 {
     public static class NavigationStackEx
     {
+        public static void GoBackTo(this INavigationStack navigationStack, string pageName)
+        {
+            throw new NotImplementedException();
+        }
+
         public static void NavigateTo(this INavigationStack navigationStack, string pageName)
         {
             throw new NotImplementedException();
