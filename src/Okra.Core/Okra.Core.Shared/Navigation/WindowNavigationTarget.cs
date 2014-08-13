@@ -18,15 +18,22 @@ namespace Okra.Navigation
 
         public void NavigateTo(object page, INavigationBase navigationManager)
         {
+            SetWindowContent(page);
+        }
+
+        // *** Protected Methods ***
+
+        protected virtual void SetWindowContent(object page)
+        {
             // If the content host has not been created then create this
 
             if (contentHost == null)
             {
                 contentHost = new ContentControl()
-                                {
-                                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                                    VerticalContentAlignment = VerticalAlignment.Stretch
-                                };
+                {
+                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                    VerticalContentAlignment = VerticalAlignment.Stretch
+                };
             }
 
             // Ensure that the window content is set to the content host
