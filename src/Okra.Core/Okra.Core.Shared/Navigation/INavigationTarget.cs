@@ -10,6 +10,6 @@ namespace Okra.Navigation
     {
         // *** Methods ***
 
-        void NavigateTo(object page);
+        void NavigateTo(object page, INavigationBase navigationManager);
     }
 }

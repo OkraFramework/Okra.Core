@@ -169,7 +169,7 @@ namespace Okra.Navigation
         {
             // Navigate to the relevant page
 
-            navigationTarget.NavigateTo(page);
+            navigationTarget.NavigateTo(page, this);
         }
 
         // *** Private Methods ***

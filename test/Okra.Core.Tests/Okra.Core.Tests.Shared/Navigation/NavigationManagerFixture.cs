@@ -111,7 +111,20 @@ namespace Okra.Tests.Navigation
 
             navigationManager.DisplayPage(page);
 
-            CollectionAssert.AreEqual(new object[] { page }, navigationTarget.NavigateToCalls);
+            CollectionAssert.AreEqual(new object[] { page }, navigationTarget.NavigateToCalls.Select(c=>c.Item1).ToArray());
+        }
+
+        [TestMethod]
+        public void DisplayPage_PassesNavigationManagerToNavigationTarget()
+        {
+            MockNavigationTarget navigationTarget = new MockNavigationTarget();
+            TestableNavigationManager navigationManager = CreateNavigationManager(navigationTarget: navigationTarget);
+
+            object page = new object();
+
+            navigationManager.DisplayPage(page);
+
+            CollectionAssert.AreEqual(new INavigationBase[] { navigationManager }, navigationTarget.NavigateToCalls.Select(c => c.Item2).ToArray());
         }
                 
         [TestMethod]

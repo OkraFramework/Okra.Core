@@ -9,13 +9,13 @@ namespace Okra.Tests.Mocks
     {
         // *** Fields ***
 
-        public List<object> NavigateToCalls = new List<object>();
+        public List<Tuple<object, INavigationBase>> NavigateToCalls = new List<Tuple<object, INavigationBase>>();
 
         // *** Methods ***
 
-        public void NavigateTo(object page)
+        public void NavigateTo(object page, INavigationBase navigationManager)
         {
-            NavigateToCalls.Add(page);
+            NavigateToCalls.Add(Tuple.Create(page, navigationManager));
         }
     }
 }

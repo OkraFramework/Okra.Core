@@ -16,7 +16,7 @@ namespace Okra.Navigation
 
         // *** Methods ***
 
-        public void NavigateTo(object page)
+        public void NavigateTo(object page, INavigationBase navigationManager)
         {
             // If the content host has not been created then create this
 
