@@ -97,6 +97,14 @@ namespace Okra.Navigation
                     args.Handled = true;
                     GoBack();
                 }
+
+                // Handle going forward via keyboard (Alt+Right or GoForward)
+
+                if ((key == VirtualKey.Right && onlyAlt) || (key == VirtualKey.GoForward && noModifiers))
+                {
+                    args.Handled = true;
+                    GoForward();
+                }
             }
         }
 
