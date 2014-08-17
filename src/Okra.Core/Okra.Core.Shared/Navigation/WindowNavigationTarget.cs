@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.System;
 using Windows.UI.Core;
+using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -101,6 +102,27 @@ namespace Okra.Navigation
 
         protected void Window_PointerPressed(CoreWindow sender, PointerEventArgs args)
         {
+            PointerPointProperties properties = args.CurrentPoint.Properties;
+
+            // Ignore button chords with the left, right, and middle buttons
+            if (properties.IsLeftButtonPressed || properties.IsRightButtonPressed ||
+                properties.IsMiddleButtonPressed) return;
+
+            // If back or foward are pressed (but not both) navigate appropriately
+            bool backPressed = properties.IsXButton1Pressed;
+            bool forwardPressed = properties.IsXButton2Pressed;
+
+            if (backPressed && !forwardPressed)
+            {
+                args.Handled = true;
+                GoBack();
+            }
+
+            if (!backPressed && forwardPressed)
+            {
+                args.Handled = true;
+                GoForward();
+            }
         }
 
 #endif
@@ -111,6 +133,11 @@ namespace Okra.Navigation
         {
             if (navigationManager != null && navigationManager.NavigationStack.CanGoBack)
                 navigationManager.NavigationStack.GoBack();
+        }
+
+        private void GoForward()
+        {
+            // Currently not implemented in navigation stack so ignore these events
         }
     }
 }
