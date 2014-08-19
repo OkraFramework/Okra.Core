@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:nav="using:Okra.Navigation"
     mc:Ignorable="d"
-    Width="346"
+    d:DesignWidth="266"
     RequestedTheme="Light"
     nav:SettingsPaneInfo.Title="Settings" nav:SettingsPaneInfo.IconSource="ms-appx:///Assets/SmallLogo.png"
     nav:SettingsPaneInfo.HeaderBackground="{ThemeResource SettingsFlyoutHeaderBackgroundThemeBrush}" nav:SettingsPaneInfo.HeaderForeground="{ThemeResource SettingsFlyoutHeaderForegroundThemeBrush}">
