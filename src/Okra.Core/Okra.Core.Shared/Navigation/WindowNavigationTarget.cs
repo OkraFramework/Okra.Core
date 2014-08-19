@@ -38,6 +38,10 @@ namespace Okra.Navigation
 
         protected virtual void RegisterEventHandlers()
         {
+#if WINDOWS_PHONE_APP
+            Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+#endif
+
 #if WINDOWS_APP
             Window.Current.CoreWindow.Dispatcher.AcceleratorKeyActivated += Window_AcceleratorKeyActivated;
             Window.Current.CoreWindow.PointerPressed += Window_PointerPressed;
@@ -68,6 +72,17 @@ namespace Okra.Navigation
         }
 
         // *** Event Handlers ***
+
+#if WINDOWS_PHONE_APP
+        void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        {
+            if (navigationManager != null && navigationManager.NavigationStack.CanGoBack)
+            {
+                e.Handled = true;
+                navigationManager.NavigationStack.GoBack();
+            }
+        }
+#endif
 
 #if WINDOWS_APP
 
