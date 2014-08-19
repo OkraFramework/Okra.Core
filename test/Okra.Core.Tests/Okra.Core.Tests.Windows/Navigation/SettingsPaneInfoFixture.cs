@@ -106,5 +106,26 @@ namespace Okra.Tests.Navigation
 
             Assert.AreEqual("Title", title);
         }
+
+        [UITestMethod]
+        public void Width_DefaultIsStandardSettingsWidth()
+        {
+            DependencyObject obj = new Page();
+
+            double width = SettingsPaneInfo.GetWidth(obj);
+
+            Assert.AreEqual(346, width);
+        }
+
+        [UITestMethod]
+        public void Width_CanSet()
+        {
+            DependencyObject obj = new Page();
+
+            SettingsPaneInfo.SetWidth(obj, 500);
+            double width = SettingsPaneInfo.GetWidth(obj);
+
+            Assert.AreEqual(500, width);
+        }
     }
 }

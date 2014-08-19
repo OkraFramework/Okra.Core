@@ -107,6 +107,7 @@ namespace Okra.Navigation
                 if (page is DependencyObject)
                 {
                     settingsFlyout.Title = SettingsPaneInfo.GetTitle((DependencyObject)page);
+                    settingsFlyout.Width = SettingsPaneInfo.GetWidth((DependencyObject)page);
                     settingsFlyout.IconSource = SettingsPaneInfo.GetIconSource((DependencyObject)page);
 
                     Brush headerBackground = SettingsPaneInfo.GetHeaderBackground((DependencyObject)page);

@@ -16,6 +16,7 @@ namespace Okra.Navigation
         public static readonly DependencyProperty HeaderForegroundProperty = DependencyProperty.RegisterAttached("HeaderForeground", typeof(Brush), typeof(SettingsPaneInfo), new PropertyMetadata(null));
         public static readonly DependencyProperty IconSourceProperty = DependencyProperty.RegisterAttached("IconSource", typeof(ImageSource), typeof(SettingsPaneInfo), new PropertyMetadata(new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:/Assets/SmallLogo.png"))));
         public static readonly DependencyProperty TitleProperty = DependencyProperty.RegisterAttached("Title", typeof(string), typeof(SettingsPaneInfo), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty WidthProperty = DependencyProperty.RegisterAttached("Width", typeof(double), typeof(SettingsPaneInfo), new PropertyMetadata(346.0));
 
         // *** Attached Dependency Property Getters/Setters ***
 
@@ -57,6 +58,16 @@ namespace Okra.Navigation
         public static void SetTitle(DependencyObject obj, string value)
         {
             obj.SetValue(TitleProperty, value);
+        }
+
+        public static double GetWidth(DependencyObject obj)
+        {
+            return (double)obj.GetValue(WidthProperty);
+        }
+
+        public static void SetWidth(DependencyObject obj, double value)
+        {
+            obj.SetValue(WidthProperty, value);
         }
     }
 }

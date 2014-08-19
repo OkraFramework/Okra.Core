@@ -82,6 +82,19 @@ namespace Okra.Tests.Navigation
         }
 
         [UITestMethod]
+        public void DisplayPage_SetsSettingsFlyoutWidth()
+        {
+            TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
+
+            UserControl page = new UserControl();
+            SettingsPaneInfo.SetWidth(page, 420);
+            settingsPaneManager.DisplayPage(page);
+
+            SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
+            Assert.AreEqual(420, flyout.Width);
+        }
+
+        [UITestMethod]
         public void DisplayPage_SetsSettingsFlyoutIconSource()
         {
             TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
