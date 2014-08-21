@@ -57,7 +57,7 @@ namespace Okra.Sharing
 
         // *** Methods ***
 
-        public async Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
+        public Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
         {
             if (activatedEventArgs.Kind == ActivationKind.ShareTarget)
             {
@@ -88,10 +88,10 @@ namespace Okra.Sharing
                 if (viewLifetimeContext.ViewModel is INavigationAware)
                     ((INavigationAware)viewLifetimeContext.ViewModel).NavigatedTo(PageNavigationMode.New);
 
-                return true;
+                return Task.FromResult(true);
             }
 
-            return false;
+            return Task.FromResult(false);
         }
 
         // *** Protected Methods ***

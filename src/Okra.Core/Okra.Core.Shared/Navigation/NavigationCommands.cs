@@ -112,6 +112,14 @@ namespace Okra.Navigation
             {
                 navigationManager.NavigateTo(pageName, arguments);
             }
+
+            protected void OnCanExecuteChanged()
+            {
+                EventHandler eventHandler = CanExecuteChanged;
+
+                if (eventHandler != null)
+                    eventHandler(this, new EventArgs());
+            }
         }
 
         // *** IUICommand State Classes ***

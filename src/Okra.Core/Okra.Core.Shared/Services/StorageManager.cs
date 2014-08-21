@@ -75,7 +75,7 @@ namespace Okra.Services
                 StorageFile file = await folder.GetFileAsync(name);
                 return await RetrieveAsync<T>(file);
             }
-            catch (FileNotFoundException e)
+            catch (FileNotFoundException)
             {
                 return default(T);
             }
