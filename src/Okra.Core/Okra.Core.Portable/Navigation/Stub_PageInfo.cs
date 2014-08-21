@@ -12,7 +12,9 @@ namespace Okra.Navigation
     {
         // *** Events ***
 
+#pragma warning disable 0067 // Ignore CS0067 "The event 'StateChanged' is never used" (since this is only a stub)
         public event StateChangedEventHandler StateChanged;
+#pragma warning restore 0067
 
         // *** Constructors ***
 

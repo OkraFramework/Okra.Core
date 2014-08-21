@@ -11,8 +11,10 @@ namespace Okra.Core
     {
         // *** Events ***
 
+#pragma warning disable 0067 // Ignore CS0067 "The event 'CanExecuteChanged' is never used" (since this is only a stub)
         public event EventHandler CanExecuteChanged;
-
+#pragma warning restore 0067
+        
         // *** Constructors ***
 
         public DelegateCommand(Action<T> execute, Func<T, bool> canExecute)

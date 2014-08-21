@@ -10,27 +10,27 @@ namespace Okra.Sharing
     {
         // *** Static Methods - GetXxx ***
 
-        public async static Task<Uri> GetApplicationLinkAsync(this ISharePackageView sharePackageView)
+        public static Task<Uri> GetApplicationLinkAsync(this ISharePackageView sharePackageView)
         {
             throw new NotImplementedException();
         }
 
-        public async static Task<string> GetHtmlFormatAsync(this ISharePackageView sharePackageView)
+        public static Task<string> GetHtmlFormatAsync(this ISharePackageView sharePackageView)
         {
             throw new NotImplementedException();
         }
 
-        public async static Task<string> GetRtfAsync(this ISharePackageView sharePackageView)
+        public static Task<string> GetRtfAsync(this ISharePackageView sharePackageView)
         {
             throw new NotImplementedException();
         }
 
-        public async static Task<string> GetTextAsync(this ISharePackageView sharePackageView)
+        public static Task<string> GetTextAsync(this ISharePackageView sharePackageView)
         {
             throw new NotImplementedException();
         }
 
-        public async static Task<Uri> GetWebLinkAsync(this ISharePackageView sharePackageView)
+        public static Task<Uri> GetWebLinkAsync(this ISharePackageView sharePackageView)
         {
             throw new NotImplementedException();
         }

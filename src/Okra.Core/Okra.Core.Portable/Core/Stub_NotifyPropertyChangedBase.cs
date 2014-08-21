@@ -13,7 +13,9 @@ namespace Okra.Core
     {
         // *** Events ***
 
+#pragma warning disable 0067 // Ignore CS0067 "The event 'PropertyChanged' is never used" (since this is only a stub)
         public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore 0067
 
         // *** Protected Methods ***
 
