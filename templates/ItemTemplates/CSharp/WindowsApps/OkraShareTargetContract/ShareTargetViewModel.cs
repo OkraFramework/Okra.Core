@@ -1,6 +1,6 @@
 ﻿using $safeprojectname$.Common;
 using Okra.Core;
-using Okra.DataTransfer;
+using Okra.Sharing;
 using Okra.Navigation;
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ using Windows.UI.Xaml.Navigation;
 // TODO : To configure the Okra App Framework to handle share target activation add the following code to the AppBootstrapper.cs file
 //
 //        [Import]
-//        public IShareTargetManager ShareTargetManager { get; set; }
+//        public Okra.Sharing.IShareTargetManager ShareTargetManager { get; set; }
 //
 //        protected override void SetupServices()
 //        {
@@ -185,14 +185,6 @@ namespace $rootnamespace$
             this.Comment = String.Empty;
             this.Placeholder = "Add a comment";
             this.SupportsComment = true;
-
-            // Update the shared content's thumbnail image in the background
-            if (shareProperties.Thumbnail != null)
-            {
-                var stream = await shareProperties.Thumbnail.OpenReadAsync();
-                thumbnailImage.SetSource(stream);
-                this.ShowImage = true;
-            }
         }
 
         /// <summary>
