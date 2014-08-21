@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Okra.Navigation;
 using Okra.Tests.Mocks;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using System.ComponentModel;
 
 namespace Okra.Tests.Navigation
 {
@@ -231,6 +232,31 @@ namespace Okra.Tests.Navigation
                 throw new NotImplementedException();
             }
 
+            // *** Mock Methods ***
+
+            public void RaiseNavigatedTo(PageNavigationEventArgs eventArgs)
+            {
+                if (NavigatedTo != null)
+                    NavigatedTo(this, eventArgs);
+            }
+
+            public void RaiseNavigatingFrom(PageNavigationEventArgs eventArgs)
+            {
+                if (NavigatingFrom != null)
+                    NavigatingFrom(this, eventArgs);
+            }
+
+            public void RaisePageDisposed(PageNavigationEventArgs eventArgs)
+            {
+                if (PageDisposed != null)
+                    PageDisposed(this, eventArgs);
+            }
+
+            public void RaisePropertyChanged(PropertyChangedEventArgs eventArgs)
+            {
+                if (PropertyChanged != null)
+                    PropertyChanged(this, eventArgs);
+            }
         }
 
         public class InvalidPage

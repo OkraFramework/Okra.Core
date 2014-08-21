@@ -59,5 +59,31 @@ namespace Okra.Tests.Mocks
         {
             base.AddRange(pages);
         }
+
+        // *** Mock Methods ***
+
+        public void RaiseNavigatedTo(PageNavigationEventArgs eventArgs)
+        {
+            if (NavigatedTo != null)
+                NavigatedTo(this, eventArgs);
+        }
+
+        public void RaiseNavigatingFrom(PageNavigationEventArgs eventArgs)
+        {
+            if (NavigatingFrom != null)
+                NavigatingFrom(this, eventArgs);
+        }
+
+        public void RaisePageDisposed(PageNavigationEventArgs eventArgs)
+        {
+            if (PageDisposed != null)
+                PageDisposed(this, eventArgs);
+        }
+
+        public void RaisePropertyChanged(PropertyChangedEventArgs eventArgs)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, eventArgs);
+        }
     }
 }

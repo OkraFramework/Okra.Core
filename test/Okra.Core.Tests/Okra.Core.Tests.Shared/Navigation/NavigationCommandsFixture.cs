@@ -229,10 +229,24 @@ namespace Okra.Tests.Navigation
                 throw new NotImplementedException();
             }
 
+            // *** Mock Methods ***
+
             public void RaiseCanGoBackChanged()
             {
                 if (CanGoBackChanged != null)
                     CanGoBackChanged(this, EventArgs.Empty);
+            }
+            
+            public void RaiseNavigatedTo(PageNavigationEventArgs eventArgs)
+            {
+                if (NavigatedTo != null)
+                    NavigatedTo(this, eventArgs);
+            }
+
+            public void RaiseNavigatingFrom(PageNavigationEventArgs eventArgs)
+            {
+                if (NavigatingFrom != null)
+                    NavigatingFrom(this, eventArgs);
             }
         }
 
@@ -289,6 +303,32 @@ namespace Okra.Tests.Navigation
             public void Push(IEnumerable<PageInfo> pages)
             {
                 throw new NotImplementedException();
+            }
+
+            // *** Mock Methods ***
+
+            public void RaiseNavigatedTo(PageNavigationEventArgs eventArgs)
+            {
+                if (NavigatedTo != null)
+                    NavigatedTo(this, eventArgs);
+            }
+
+            public void RaiseNavigatingFrom(PageNavigationEventArgs eventArgs)
+            {
+                if (NavigatingFrom != null)
+                    NavigatingFrom(this, eventArgs);
+            }
+
+            public void RaisePageDisposed(PageNavigationEventArgs eventArgs)
+            {
+                if (PageDisposed != null)
+                    PageDisposed(this, eventArgs);
+            }
+
+            public void RaisePropertyChanged(PropertyChangedEventArgs eventArgs)
+            {
+                if (PropertyChanged != null)
+                    PropertyChanged(this, eventArgs);
             }
         }
     }

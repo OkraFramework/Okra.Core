@@ -141,6 +141,20 @@ namespace Okra.MEF.Tests
             {
                 throw new NotImplementedException();
             }
+
+            // *** Mock Methods ***
+
+            public void RaiseActivating(IActivatedEventArgs eventArgs)
+            {
+                if (Activating != null)
+                    Activating(this, eventArgs);
+            }
+
+            public void RaiseActivated(IActivatedEventArgs eventArgs)
+            {
+                if (Activated != null)
+                    Activated(this, eventArgs);
+            }
         }
 
         [Export(typeof(INavigationManager))]
@@ -198,6 +212,26 @@ namespace Okra.MEF.Tests
             public Task<bool> RestoreNavigationStack()
             {
                 throw new NotImplementedException();
+            }
+
+            // *** Mock Methods ***
+
+            public void RaiseCanGoBackChanged()
+            {
+                if (CanGoBackChanged != null)
+                    CanGoBackChanged(this, new EventArgs());
+            }
+
+            public void RaiseNavigatedTo(PageNavigationEventArgs eventArgs)
+            {
+                if (NavigatedTo != null)
+                    NavigatedTo(this, eventArgs);
+            }
+
+            public void RaiseNavigatingFrom(PageNavigationEventArgs eventArgs)
+            {
+                if (NavigatingFrom != null)
+                    NavigatingFrom(this, eventArgs);
             }
         }
 

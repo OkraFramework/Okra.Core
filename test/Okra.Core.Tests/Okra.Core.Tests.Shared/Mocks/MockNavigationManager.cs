@@ -110,6 +110,12 @@ namespace Okra.Tests.Mocks
 
         // *** Mock Methods ***
 
+        public void RaiseCanGoBackChanged()
+        {
+            if (CanGoBackChanged != null)
+                CanGoBackChanged(this, new EventArgs());
+        }
+
         public void RaiseNavigatedTo(PageNavigationEventArgs eventArgs)
         {
             if (NavigatedTo != null)
