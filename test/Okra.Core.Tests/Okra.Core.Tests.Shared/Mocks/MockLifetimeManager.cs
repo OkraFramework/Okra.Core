@@ -36,11 +36,5 @@ namespace Okra.Tests.Mocks
             foreach (ILifetimeAware service in RegisteredServices)
                 service.OnResuming().Wait();
         }
-
-        public void Exit()
-        {
-            foreach (ILifetimeAware service in RegisteredServices)
-                service.OnExiting().Wait();
-        }
     }
 }

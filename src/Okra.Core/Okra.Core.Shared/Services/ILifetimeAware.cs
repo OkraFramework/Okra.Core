@@ -10,7 +10,6 @@ namespace Okra.Services
     {
         // *** Methods ***
 
-        Task OnExiting();
         Task OnResuming();
         Task OnSuspending();
     }

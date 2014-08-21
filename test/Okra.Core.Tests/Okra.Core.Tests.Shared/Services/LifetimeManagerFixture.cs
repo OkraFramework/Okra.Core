@@ -85,20 +85,6 @@ namespace Okra.Tests.Services
         }
 
         [TestMethod]
-        public void RegistedServices_ReceiveExitingEvent()
-        {
-            MockService service1 = new MockService();
-            MockService service2 = new MockService();
-
-            TestableLifetimeManager lifetimeManager = CreateLifetimeManager(new[] { service1, service2 });
-
-            lifetimeManager.Exit();
-
-            CollectionAssert.AreEqual(new string[] { "OnExiting" }, service1.LifetimeEventCalls);
-            CollectionAssert.AreEqual(new string[] { "OnExiting" }, service2.LifetimeEventCalls);
-        }
-
-        [TestMethod]
         public void RegistedServices_ReceiveMultipleEvents()
         {
             MockService service1 = new MockService();
@@ -108,10 +94,9 @@ namespace Okra.Tests.Services
 
             lifetimeManager.Suspend(new MockSuspendingEventArgs());
             lifetimeManager.Resume();
-            lifetimeManager.Exit();
 
-            CollectionAssert.AreEqual(new string[] { "OnSuspending", "OnResuming", "OnExiting" }, service1.LifetimeEventCalls);
-            CollectionAssert.AreEqual(new string[] { "OnSuspending", "OnResuming", "OnExiting" }, service2.LifetimeEventCalls);
+            CollectionAssert.AreEqual(new string[] { "OnSuspending", "OnResuming" }, service1.LifetimeEventCalls);
+            CollectionAssert.AreEqual(new string[] { "OnSuspending", "OnResuming" }, service2.LifetimeEventCalls);
         }
 
         [TestMethod]
@@ -179,11 +164,6 @@ namespace Okra.Tests.Services
                 base.OnResuming(null, null);
             }
 
-            public void Exit()
-            {
-                base.OnExiting(null, null);
-            }
-
             // *** Overriden base methods ***
 
             protected override ISuspendingDeferral GetDeferral(ISuspendingEventArgs e)
@@ -216,12 +196,6 @@ namespace Okra.Tests.Services
             public IList LifetimeEventCalls { get; private set; }
 
             // *** Methods ***
-
-            public Task OnExiting()
-            {
-                LifetimeEventCalls.Add("OnExiting");
-                return Task.FromResult(true);
-            }
 
             public Task OnResuming()
             {

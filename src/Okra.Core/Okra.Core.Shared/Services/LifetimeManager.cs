@@ -21,7 +21,6 @@ namespace Okra.Services
         {
             Application.Current.Suspending += this.OnSuspending;
             Application.Current.Resuming += this.OnResuming;
-            CoreApplication.Exiting += this.OnExiting;
         }
 
         // *** Methods ***
@@ -71,12 +70,6 @@ namespace Okra.Services
         protected void OnResuming(object sender, object e)
         {
             IEnumerable<Task> resumingTasks = registeredServices.Select(service => service.OnResuming());
-            Task.WhenAll(resumingTasks).Wait();
-        }
-
-        protected void OnExiting(object sender, object e)
-        {
-            IEnumerable<Task> resumingTasks = registeredServices.Select(service => service.OnExiting());
             Task.WhenAll(resumingTasks).Wait();
         }
 

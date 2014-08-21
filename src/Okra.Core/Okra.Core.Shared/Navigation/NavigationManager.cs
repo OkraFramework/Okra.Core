@@ -138,11 +138,6 @@ namespace Okra.Navigation
 
         // *** ILifetimeAware Methods ***
 
-        public Task OnExiting()
-        {
-            return Task.FromResult(true);
-        }
-
         public Task OnResuming()
         {
             return Task.FromResult(true);
