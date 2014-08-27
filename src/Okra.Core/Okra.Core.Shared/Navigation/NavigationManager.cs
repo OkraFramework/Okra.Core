@@ -38,6 +38,12 @@ namespace Okra.Navigation
         protected NavigationManager(INavigationTarget navigationTarget, IViewFactory viewFactory, ILifetimeManager lifetimeManager, IStorageManager storageManager, INavigationStack navigationStack)
             : base(viewFactory, navigationStack)
         {
+            if (lifetimeManager == null)
+                throw new ArgumentNullException("lifetimeManager");
+
+            if (storageManager == null)
+                throw new ArgumentNullException("storageManager");
+
             this.storageManager = storageManager;
 
             // Use a default INavigationTarget if not specified
@@ -81,6 +87,9 @@ namespace Okra.Navigation
             }
             set
             {
+                if (!Enum.IsDefined(typeof(NavigationStorageType), value))
+                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"));
+
                 navigationStorageType = value;
             }
         }

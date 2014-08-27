@@ -194,6 +194,17 @@ namespace Okra.Tests.Navigation
         }
 
         [TestMethod]
+        public void GoBackTo_ThrowsException_NullPage()
+        {
+            NavigationStack navigationStack = new NavigationStack();
+
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                navigationStack.GoBackTo(null);
+            });
+        }
+
+        [TestMethod]
         public void NavigateTo_OnePageNavigated_CountIsOne()
         {
             NavigationStack navigationStack = new NavigationStack();
@@ -369,8 +380,21 @@ namespace Okra.Tests.Navigation
             });
         }
 
+        [TestMethod]
+        public void Push_ThrowsException_NullPageInEnumerable()
+        {
+            NavigationStack navigationStack = new NavigationStack();
+            PageInfo page1 = new PageInfo("Page 1", null);
+            PageInfo page3 = new PageInfo("Page 1", null);
+
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                navigationStack.Push(new PageInfo[] { page1, null, page3 });
+            });
+        }
+
         // *** Behavior Tests ***
-        
+
         [TestMethod]
         public void CollectionChanged_IsCalledWhenFirstPageNavigated()
         {
@@ -816,7 +840,7 @@ namespace Okra.Tests.Navigation
         {
             NavigationStack navigationStack = new NavigationStack();
 
-            navigationStack.NavigateTo(new PageInfo("Page 1", null));            
+            navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
             List<PageNavigationEventArgs> pageDisposedEvents = new List<PageNavigationEventArgs>();
             navigationStack.PageDisposed += delegate(object sender, PageNavigationEventArgs e) { pageDisposedEvents.Add(e); };
@@ -825,7 +849,7 @@ namespace Okra.Tests.Navigation
 
             Assert.AreEqual(0, pageDisposedEvents.Count);
         }
-        
+
         [TestMethod]
         public void PropertyChanged_CanGoBack_IsCalledWhenFirstPageNavigated()
         {
@@ -1062,7 +1086,7 @@ namespace Okra.Tests.Navigation
         public void PropertyChanged_Count_IsNotCalledWhenEmptyNavigationStackIsCleared()
         {
             NavigationStack navigationStack = new NavigationStack();
-            
+
             int changedCount = 0;
             navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
 
@@ -1235,6 +1259,101 @@ namespace Okra.Tests.Navigation
                     });
 
             Assert.AreEqual(0, changedCount);
+        }
+
+        [TestMethod]
+        public void OnCollectionChanged_ThrowsException_NullEventArgs()
+        {
+            TestableNavigationStack navigationStack = new TestableNavigationStack();
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                navigationStack.OnCollectionChanged(null);
+            });
+        }
+
+        [TestMethod]
+        public void OnNavigatingFrom_ThrowsException_NullPageInfo()
+        {
+            TestableNavigationStack navigationStack = new TestableNavigationStack();
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                navigationStack.OnNavigatingFrom(null, PageNavigationMode.New);
+            });
+        }
+
+        [TestMethod]
+        public void OnNavigatingFrom_ThrowsException_InvalidNavigationMode()
+        {
+            TestableNavigationStack navigationStack = new TestableNavigationStack();
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                navigationStack.OnNavigatingFrom(new PageInfo("Page 1", null), (PageNavigationMode)100);
+            });
+        }
+
+        [TestMethod]
+        public void OnNavigatedTo_ThrowsException_NullPageInfo()
+        {
+            TestableNavigationStack navigationStack = new TestableNavigationStack();
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                navigationStack.OnNavigatedTo(null, PageNavigationMode.New);
+            });
+        }
+
+        [TestMethod]
+        public void OnNavigatedTo_ThrowsException_InvalidNavigationMode()
+        {
+            TestableNavigationStack navigationStack = new TestableNavigationStack();
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                navigationStack.OnNavigatedTo(new PageInfo("Page 1", null), (PageNavigationMode)100);
+            });
+        }
+
+        [TestMethod]
+        public void OnPageDisposed_ThrowsException_NullPageInfo()
+        {
+            TestableNavigationStack navigationStack = new TestableNavigationStack();
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                navigationStack.OnPageDisposed(null, PageNavigationMode.New);
+            });
+        }
+
+        [TestMethod]
+        public void OnPageDisposed_ThrowsException_InvalidNavigationMode()
+        {
+            TestableNavigationStack navigationStack = new TestableNavigationStack();
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                navigationStack.OnPageDisposed(new PageInfo("Page 1", null), (PageNavigationMode)100);
+            });
+        }
+
+        // *** Private sub-classes ***
+
+        private class TestableNavigationStack : NavigationStack
+        {
+            public new void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
+            {
+                base.OnCollectionChanged(args);
+            }
+
+            public new void OnNavigatingFrom(PageInfo page, PageNavigationMode navigationMode)
+            {
+                base.OnNavigatingFrom(page, navigationMode);
+            }
+
+            public new void OnNavigatedTo(PageInfo page, PageNavigationMode navigationMode)
+            {
+                base.OnNavigatedTo(page, navigationMode);
+            }
+
+            public new void OnPageDisposed(PageInfo page, PageNavigationMode navigationMode)
+            {
+                base.OnPageDisposed(page, navigationMode);
+            }
         }
     }
 }

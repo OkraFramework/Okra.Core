@@ -42,6 +42,12 @@ namespace Okra.Navigation
 
         public NavigationBase(IViewFactory viewFactory, INavigationStack navigationStack)
         {
+            if (viewFactory == null)
+                throw new ArgumentNullException("viewFactory");
+
+            if (navigationStack == null)
+                throw new ArgumentNullException("navigationStack");
+
             this.viewFactory = viewFactory;
             this.navigationStack = navigationStack;
 
@@ -76,6 +82,9 @@ namespace Okra.Navigation
 
         public bool CanNavigateTo(string pageName)
         {
+            if (string.IsNullOrEmpty(pageName))
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
+
             // Query the underlying view factory to see if the page exists
 
             return viewFactory.IsViewDefined(pageName);
@@ -83,6 +92,9 @@ namespace Okra.Navigation
 
         public IEnumerable<object> GetPageElements(PageInfo page)
         {
+            if (page == null)
+                throw new ArgumentNullException("page");
+
             // Get the cached page if present, otherwise return an empty array
 
             PageDetails pageDetails;
@@ -108,6 +120,9 @@ namespace Okra.Navigation
 
         protected void RestoreState(NavigationState state)
         {
+            if (state == null)
+                throw new ArgumentNullException("state");
+
             // Restore the navigation stack
             // NB: Flag that we are restoring state so we can pass a NavigationMode.Refresh to restored pages
 
@@ -160,6 +175,9 @@ namespace Okra.Navigation
 
         protected virtual void OnNavigatedTo(PageNavigationEventArgs args)
         {
+            if (args == null)
+                throw new ArgumentNullException("args");
+
             EventHandler<PageNavigationEventArgs> eventHandler = NavigatedTo;
 
             if (eventHandler != null)
@@ -168,6 +186,9 @@ namespace Okra.Navigation
 
         protected virtual void OnNavigatingFrom(PageNavigationEventArgs args)
         {
+            if (args == null)
+                throw new ArgumentNullException("args");
+
             EventHandler<PageNavigationEventArgs> eventHandler = NavigatingFrom;
 
             if (eventHandler != null)

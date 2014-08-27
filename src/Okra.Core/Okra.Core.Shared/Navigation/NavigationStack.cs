@@ -118,6 +118,9 @@ namespace Okra.Navigation
 
         public void GoBackTo(PageInfo page)
         {
+            if (page == null)
+                throw new ArgumentNullException("page");
+
             // Check that the specified page exists in the navigation stack
 
             int pageIndex = internalStack.IndexOf(page);
@@ -142,6 +145,9 @@ namespace Okra.Navigation
         {
             if (pages == null)
                 throw new ArgumentNullException("pages");
+
+            if (pages.Contains(null))
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_EnumerableContainsNullPage"));
 
             // If there are no pages to push then just return (and don't raise any events)
 
@@ -178,6 +184,9 @@ namespace Okra.Navigation
 
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
         {
+            if (args == null)
+                throw new ArgumentNullException("args");
+
             NotifyCollectionChangedEventHandler eventHandler = CollectionChanged;
 
             if (eventHandler != null)
@@ -186,6 +195,12 @@ namespace Okra.Navigation
 
         protected virtual void OnNavigatingFrom(PageInfo page, PageNavigationMode navigationMode)
         {
+            if (page == null)
+                throw new ArgumentNullException("page");
+
+            if (!Enum.IsDefined(typeof(PageNavigationMode), navigationMode))
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), "navigationMode");
+
             EventHandler<PageNavigationEventArgs> eventHandler = NavigatingFrom;
 
             if (eventHandler != null)
@@ -194,6 +209,12 @@ namespace Okra.Navigation
 
         protected virtual void OnNavigatedTo(PageInfo page, PageNavigationMode navigationMode)
         {
+            if (page == null)
+                throw new ArgumentNullException("page");
+
+            if (!Enum.IsDefined(typeof(PageNavigationMode), navigationMode))
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), "navigationMode");
+
             EventHandler<PageNavigationEventArgs> eventHandler = NavigatedTo;
 
             if (eventHandler != null)
@@ -202,6 +223,12 @@ namespace Okra.Navigation
 
         protected virtual void OnPageDisposed(PageInfo page, PageNavigationMode navigationMode)
         {
+            if (page == null)
+                throw new ArgumentNullException("page");
+
+            if (!Enum.IsDefined(typeof(PageNavigationMode), navigationMode))
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), "navigationMode");
+
             EventHandler<PageNavigationEventArgs> eventHandler = PageDisposed;
 
             if (eventHandler != null)

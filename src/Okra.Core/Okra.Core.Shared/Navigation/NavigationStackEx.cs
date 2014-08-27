@@ -13,6 +13,9 @@ namespace Okra.Navigation
         {
             // Validate Parameters
 
+            if (navigationStack == null)
+                throw new ArgumentNullException("navigationStack");
+
             if (string.IsNullOrEmpty(pageName))
                 throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
 
@@ -25,6 +28,9 @@ namespace Okra.Navigation
         public static void NavigateTo(this INavigationStack navigationStack, string pageName)
         {
             // Validate Parameters
+
+            if (navigationStack == null)
+                throw new ArgumentNullException("navigationStack");
 
             if (string.IsNullOrEmpty(pageName))
                 throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
@@ -39,6 +45,9 @@ namespace Okra.Navigation
         {
             // Validate Parameters
 
+            if (navigationStack == null)
+                throw new ArgumentNullException("navigationStack");
+
             if (string.IsNullOrEmpty(pageName))
                 throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
 
@@ -52,24 +61,32 @@ namespace Okra.Navigation
         {
             // Validate Parameters
 
+            if (navigationStack == null)
+                throw new ArgumentNullException("navigationStack");
+
             if (pageName == null)
                 throw new ArgumentNullException("pageName");
 
             // Convert the page type to a string and delegate this
 
-            navigationStack.NavigateTo(PageName.FromType(pageName));
+            PageInfo navigationEntry = new PageInfo(PageName.FromType(pageName), null);
+            navigationStack.NavigateTo(navigationEntry);
         }
 
         public static void NavigateTo(this INavigationStack navigationStack, Type pageName, object arguments)
         {
             // Validate Parameters
 
+            if (navigationStack == null)
+                throw new ArgumentNullException("navigationStack");
+
             if (pageName == null)
                 throw new ArgumentNullException("pageName");
 
             // Convert the page type to a string and delegate this
 
-            navigationStack.NavigateTo(PageName.FromType(pageName), arguments);
+            PageInfo navigationEntry = new PageInfo(PageName.FromType(pageName), arguments);
+            navigationStack.NavigateTo(navigationEntry);
         }
     }
 }

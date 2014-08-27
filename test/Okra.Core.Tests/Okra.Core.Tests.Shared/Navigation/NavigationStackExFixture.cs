@@ -45,6 +45,12 @@ namespace Okra.Tests.Navigation
         }
 
         [TestMethod]
+        public void GoBackTo_Exception_NavigationStackIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => NavigationStackEx.GoBackTo(null, "Page 1"));
+        }
+
+        [TestMethod]
         public void GoBackTo_Exception_IfPageNameIsNull()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -69,6 +75,12 @@ namespace Okra.Tests.Navigation
 
             CollectionAssert.AreEqual(new string[] { "Page 1" }, navigationStack.Select(e => e.PageName).ToList());
             CollectionAssert.AreEqual(new object[] { null }, navigationStack.Select(e => e.GetArguments<string>()).ToList());
+        }
+
+        [TestMethod]
+        public void NavigateTo_WithPageName_Exception_NavigationStackIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => NavigationStackEx.NavigateTo(null, "Page 1"));
         }
 
         [TestMethod]
@@ -99,6 +111,12 @@ namespace Okra.Tests.Navigation
         }
 
         [TestMethod]
+        public void NavigateTo_WithPageNameAndParameter_Exception_NavigationStackIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => NavigationStackEx.NavigateTo(null, "Page 1", new object()));
+        }
+
+        [TestMethod]
         public void NavigateTo_WithPageNameAndParameter_Exception_IfPageNameIsNull()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -126,6 +144,12 @@ namespace Okra.Tests.Navigation
         }
 
         [TestMethod]
+        public void NavigateTo_WithType_Exception_NavigationStackIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => NavigationStackEx.NavigateTo(null, typeof(MockPage)));
+        }
+
+        [TestMethod]
         public void NavigateTo_WithType_Exception_IfPageNameIsNull()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -142,6 +166,12 @@ namespace Okra.Tests.Navigation
 
             CollectionAssert.AreEqual(new string[] { MockNavigationBase.MOCKPAGE_NAME }, navigationStack.Select(e => e.PageName).ToList());
             CollectionAssert.AreEqual(new object[] { "Parameter 1" }, navigationStack.Select(e => e.GetArguments<string>()).ToList());
+        }
+
+        [TestMethod]
+        public void NavigateTo_WithTypeAndParameter_Exception_NavigationStackIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => NavigationStackEx.NavigateTo(null, typeof(MockPage), new object()));
         }
 
         [TestMethod]

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
+using Okra.Helpers;
 
 #if WINDOWS_APP
 using Windows.UI.ApplicationSettings;
@@ -16,20 +17,50 @@ namespace Okra.Navigation
     {
         // *** Methods ***
 
-        public static ICommand GetGoBackCommand(this INavigationBase navigationManager)
+        public static ICommand GetGoBackCommand(this INavigationBase navigationBase)
         {
-            return new GoBackCommand(navigationManager);
+            // Validate Parameters
+
+            if (navigationBase == null)
+                throw new ArgumentNullException("navigationBase");
+
+            // Return the command
+
+            return new GoBackCommand(navigationBase);
         }
 
-        public static ICommand GetNavigateToCommand(this INavigationBase navigationManager, string pageName, object arguments = null)
+        public static ICommand GetNavigateToCommand(this INavigationBase navigationBase, string pageName, object arguments = null)
         {
-            return new NavigateToCommand(navigationManager, pageName, arguments);
+            // Validate Parameters
+
+            if (navigationBase == null)
+                throw new ArgumentNullException("navigationBase");
+
+            if (string.IsNullOrEmpty(pageName))
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
+
+            // Return the command
+
+            return new NavigateToCommand(navigationBase, pageName, arguments);
         }
 
 #if WINDOWS_APP
-        public static SettingsCommand GetNavigateToSettingsCommand(this INavigationBase navigationManager, string label, string pageName, object arguments = null)
+        public static SettingsCommand GetNavigateToSettingsCommand(this INavigationBase navigationBase, string label, string pageName, object arguments = null)
         {
-            NavigateToState state = new NavigateToState(navigationManager, pageName, arguments);
+            // Validate Parameters
+
+            if (navigationBase == null)
+                throw new ArgumentNullException("navigationBase");
+
+            if (string.IsNullOrEmpty(label))
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "label");
+
+            if (string.IsNullOrEmpty(pageName))
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
+
+            // Return the command
+
+            NavigateToState state = new NavigateToState(navigationBase, pageName, arguments);
 
             return new SettingsCommand(state, label, NavigateToUICommand_Invoked);
         }

@@ -13,6 +13,9 @@ namespace Okra.Navigation
         {
             // Validate Parameters
 
+            if (navigationBase == null)
+                throw new ArgumentNullException("navigationBase");
+
             if (!navigationBase.NavigationStack.CanGoBack)
                 throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotGoBackWithEmptyBackStack"));
 
@@ -24,6 +27,9 @@ namespace Okra.Navigation
         public static void NavigateTo(this INavigationBase navigationBase, string pageName)
         {
             // Validate Parameters
+
+            if (navigationBase == null)
+                throw new ArgumentNullException("navigationBase");
 
             if (string.IsNullOrEmpty(pageName))
                 throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
@@ -40,6 +46,9 @@ namespace Okra.Navigation
         {
             // Validate Parameters
 
+            if (navigationBase == null)
+                throw new ArgumentNullException("navigationBase");
+
             if (string.IsNullOrEmpty(pageName))
                 throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
 
@@ -51,28 +60,45 @@ namespace Okra.Navigation
             navigationBase.NavigationStack.NavigateTo(pageName, arguments);
         }
 
-        public static void NavigateTo(this INavigationBase navigationManager, Type pageName)
+        public static void NavigateTo(this INavigationBase navigationBase, Type pageName)
         {
             // Validate Parameters
+
+            if (navigationBase == null)
+                throw new ArgumentNullException("navigationBase");
 
             if (pageName == null)
                 throw new ArgumentNullException("pageName");
 
+            string pageNameString = PageName.FromType(pageName);
+
+            if (!navigationBase.CanNavigateTo(pageNameString))
+                throw new InvalidOperationException(string.Format(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotNavigateAsPageIsNotFound"), pageNameString));
+
             // Delegate to the INavigationManager
 
-            navigationManager.NavigateTo(PageName.FromType(pageName));
+            navigationBase.NavigationStack.NavigateTo(pageNameString);
         }
 
-        public static void NavigateTo(this INavigationBase navigationManager, Type pageName, object arguments)
+        public static void NavigateTo(this INavigationBase navigationBase, Type pageName, object arguments)
         {
             // Validate Parameters
+
+            if (navigationBase == null)
+                throw new ArgumentNullException("navigationBase");
 
             if (pageName == null)
                 throw new ArgumentNullException("pageName");
 
+            string pageNameString = PageName.FromType(pageName);
+
+            if (!navigationBase.CanNavigateTo(pageNameString))
+                throw new InvalidOperationException(string.Format(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotNavigateAsPageIsNotFound"), pageNameString));
+
+
             // Delegate to the INavigationManager
 
-            navigationManager.NavigateTo(PageName.FromType(pageName), arguments);
+            navigationBase.NavigationStack.NavigateTo(pageNameString, arguments);
         }
     }
 }

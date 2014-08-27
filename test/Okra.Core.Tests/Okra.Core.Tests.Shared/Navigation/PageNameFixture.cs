@@ -20,5 +20,11 @@ namespace Okra.Tests.Navigation
 
             Assert.AreEqual("Okra.Tests.Navigation.PageNameFixture", pageName);
         }
+
+        [TestMethod]
+        public void FromType_Exception_NullType()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => PageName.FromType(null));
+        }
     }
 }

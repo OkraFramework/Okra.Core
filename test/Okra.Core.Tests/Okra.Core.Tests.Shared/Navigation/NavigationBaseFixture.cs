@@ -16,6 +16,24 @@ namespace Okra.Tests.Navigation
     [TestClass]
     public class NavigationBaseFixture
     {
+        // *** Constructor Tests ***
+
+        [TestMethod]
+        public void Constructor_Exception_NullViewFactory()
+        {
+            INavigationStack navigationStack = new MockNavigationStack();
+
+            Assert.ThrowsException<ArgumentNullException>(() => new TestableNavigationBase(null, navigationStack));
+        }
+
+        [TestMethod]
+        public void Constructor_Exception_NullNavigationStack()
+        {
+            IViewFactory viewFactory = MockViewFactory.WithPageAndViewModel;
+
+            Assert.ThrowsException<ArgumentNullException>(() => new TestableNavigationBase(viewFactory, null));
+        }
+
         // *** Property Test ***
 
         [TestMethod]
@@ -287,6 +305,22 @@ namespace Okra.Tests.Navigation
         }
 
         [TestMethod]
+        public void CanNavigateTo_Exception_NullPageName()
+        {
+            INavigationBase navigationBase = CreateNavigationBase();
+
+            Assert.ThrowsException<ArgumentException>(() => navigationBase.CanNavigateTo(null));
+        }
+
+        [TestMethod]
+        public void CanNavigateTo_Exception_EmptyPageName()
+        {
+            INavigationBase navigationBase = CreateNavigationBase();
+
+            Assert.ThrowsException<ArgumentException>(() => navigationBase.CanNavigateTo(""));
+        }
+
+        [TestMethod]
         public void GetPageElements_ReturnsEmptyArrayIfNotCached()
         {
             TestableNavigationBase navigationBase = CreateNavigationBase();
@@ -325,6 +359,14 @@ namespace Okra.Tests.Navigation
             MockPage currentPage = navigationBase.DisplayPageCalls.Cast<MockPage>().LastOrDefault();
 
             CollectionAssert.AreEqual(new object[] { currentPage }, navigationBase.GetPageElements(pageInfo).ToList());
+        }
+
+        [TestMethod]
+        public void GetPageElements_Exception_NullPageInfo()
+        {
+            INavigationBase navigationBase = CreateNavigationBase();
+
+            Assert.ThrowsException<ArgumentNullException>(() => navigationBase.GetPageElements(null));
         }
 
         [TestMethod]
@@ -433,6 +475,30 @@ namespace Okra.Tests.Navigation
             }
         }
 
+        [TestMethod]
+        public void RestoreState_Exception_NullState()
+        {
+            TestableNavigationBase navigationBase = CreateNavigationBase();
+
+            Assert.ThrowsException<ArgumentNullException>(() => navigationBase.RestoreState(null));
+        }
+
+        [TestMethod]
+        public void OnNavigatedTo_Exception_NullEventArgs()
+        {
+            TestableNavigationBase navigationBase = CreateNavigationBase();
+
+            Assert.ThrowsException<ArgumentNullException>(() => navigationBase.OnNavigatedTo(null));
+        }
+
+        [TestMethod]
+        public void OnNavigatingFrom_Exception_NullEventArgs()
+        {
+            TestableNavigationBase navigationBase = CreateNavigationBase();
+
+            Assert.ThrowsException<ArgumentNullException>(() => navigationBase.OnNavigatingFrom(null));
+        }
+
         // *** Private Methods ***
 
         private TestableNavigationBase CreateNavigationBase(IViewFactory viewFactory = null, INavigationStack navigationStack = null)
@@ -473,6 +539,16 @@ namespace Okra.Tests.Navigation
             protected override void DisplayPage(object page)
             {
                 DisplayPageCalls.Add(page);
+            }
+
+            public new void OnNavigatedTo(PageNavigationEventArgs args)
+            {
+                base.OnNavigatedTo(args);
+            }
+
+            public new void OnNavigatingFrom(PageNavigationEventArgs args)
+            {
+                base.OnNavigatingFrom(args);
             }
 
             public new void RestoreState(NavigationState state)

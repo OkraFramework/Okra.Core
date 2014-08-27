@@ -20,6 +20,41 @@ namespace Okra.Tests.Navigation
     [TestClass]
     public class NavigationManagerFixture
     {
+        // *** Constructor Tests ***
+
+        [TestMethod]
+        public void Constructor_Exception_NullViewFactory()
+        {
+            INavigationTarget navigationTarget = new MockNavigationTarget();
+            IViewFactory viewFactory = null;
+            ILifetimeManager lifetimeManager = new MockLifetimeManager();
+            IStorageManager storageManager = new MockStorageManager();
+
+            Assert.ThrowsException<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
+        }
+
+        [TestMethod]
+        public void Constructor_Exception_NullLifetimeManager()
+        {
+            INavigationTarget navigationTarget = new MockNavigationTarget();
+            IViewFactory viewFactory = MockViewFactory.WithPageAndViewModel;
+            ILifetimeManager lifetimeManager = null;
+            IStorageManager storageManager = new MockStorageManager();
+
+            Assert.ThrowsException<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
+        }
+
+        [TestMethod]
+        public void Constructor_Exception_NullStorageManager()
+        {
+            INavigationTarget navigationTarget = new MockNavigationTarget();
+            IViewFactory viewFactory = MockViewFactory.WithPageAndViewModel;
+            ILifetimeManager lifetimeManager = new MockLifetimeManager();
+            IStorageManager storageManager = null;
+
+            Assert.ThrowsException<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
+        }
+
         // *** Property Tests ***
 
         [TestMethod]
@@ -80,6 +115,14 @@ namespace Okra.Tests.Navigation
             navigationManager.NavigationStorageType = NavigationStorageType.Local;
 
             Assert.AreEqual(NavigationStorageType.Local, navigationManager.NavigationStorageType);
+        }
+
+        [TestMethod]
+        public void NavigationStorageType_Exception_InvalidEnum()
+        {
+            INavigationManager navigationManager = CreateNavigationManager();
+
+            Assert.ThrowsException<ArgumentException>(() => navigationManager.NavigationStorageType = (NavigationStorageType)100);
         }
 
         [TestMethod]

@@ -10,6 +10,9 @@ namespace Okra.Navigation
     {
         public static string FromType(Type type)
         {
+            if (type == null)
+                throw new ArgumentNullException("type");
+
             return type.FullName;
         }
     }
