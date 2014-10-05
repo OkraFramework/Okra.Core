@@ -114,14 +114,20 @@ namespace Okra.Navigation
 
             NavigationState restoredState = null;
 
-            switch (NavigationStorageType)
+            try
             {
-                case Navigation.NavigationStorageType.Local:
-                    restoredState = await storageManager.RetrieveAsync<NavigationState>(ApplicationData.Current.LocalFolder, STORAGE_FILENAME);
-                    break;
-                case Navigation.NavigationStorageType.Roaming:
-                    restoredState = await storageManager.RetrieveAsync<NavigationState>(ApplicationData.Current.RoamingFolder, STORAGE_FILENAME);
-                    break;
+                switch (NavigationStorageType)
+                {
+                    case Navigation.NavigationStorageType.Local:
+                        restoredState = await storageManager.RetrieveAsync<NavigationState>(ApplicationData.Current.LocalFolder, STORAGE_FILENAME);
+                        break;
+                    case Navigation.NavigationStorageType.Roaming:
+                        restoredState = await storageManager.RetrieveAsync<NavigationState>(ApplicationData.Current.RoamingFolder, STORAGE_FILENAME);
+                        break;
+                }
+            }
+            catch (SerializationException)
+            {
             }
 
             // If a navigation stack is available, then restore this

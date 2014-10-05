@@ -309,6 +309,21 @@ namespace Okra.Tests.Navigation
         }
 
         [TestMethod]
+        public void SetState_SameStateKeyOverwritesPreviousValue()
+        {
+            PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
+
+            navigationEntry.SetState<string>("MyKey", "State A");
+            navigationEntry.SetState<string>("MyKey", "State B");
+
+            string result;
+            bool success = navigationEntry.TryGetState<string>("MyKey", out result);
+
+            Assert.AreEqual(true, success);
+            Assert.AreEqual("State B", result);
+        }
+
+        [TestMethod]
         public void SetState_RaisesStateChangedEvent()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");

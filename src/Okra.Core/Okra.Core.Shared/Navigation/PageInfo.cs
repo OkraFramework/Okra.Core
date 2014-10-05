@@ -99,7 +99,7 @@ namespace Okra.Navigation
 
             // Set value into dictionary
 
-            stateDictionary.Add(key, StateData.Create<T>(value));
+            stateDictionary[key] = StateData.Create<T>(value);
 
             // Raise events
 
