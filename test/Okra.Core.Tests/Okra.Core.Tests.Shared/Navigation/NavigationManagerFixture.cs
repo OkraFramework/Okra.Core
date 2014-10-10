@@ -310,6 +310,24 @@ namespace Okra.Tests.Navigation
             }
         }
 
+        [TestMethod]
+        public async Task RestoreNavigationStack_NavigatesToHomePageIfStateFileIsCorrupt()
+        {
+            MockNavigationStack navigationStack = new MockNavigationStack();
+            MockStorageManager storageManager = new MockStorageManager();
+            INavigationManager navigationManager = CreateNavigationManager(navigationStack: navigationStack, storageManager: storageManager);
+            navigationManager.NavigationStorageType = NavigationStorageType.Local;
+
+            InvalidNavigationState state = new InvalidNavigationState();
+            await storageManager.StoreAsync<InvalidNavigationState>(ApplicationData.Current.LocalFolder, "Okra_Navigation_NavigationManager.xml", state);
+
+            bool success = await navigationManager.RestoreNavigationStack();
+
+            Assert.AreEqual(false, success);
+            string[] pageNames = navigationStack.Select(page => page.PageName).ToArray();
+            CollectionAssert.AreEqual(new string[] { "Home" }, pageNames);
+        }
+
         // *** Behavior Tests ***
 
         [TestMethod]
@@ -371,6 +389,26 @@ namespace Okra.Tests.Navigation
             public new void DisplayPage(object page)
             {
                 base.DisplayPage(page);
+            }
+        }
+
+        [DataContract]
+        public class InvalidNavigationState
+        {
+            // *** Constructors ***
+
+            public InvalidNavigationState()
+            {
+                SomeProperty = "Some Value";
+            }
+
+            // *** Properties ***
+
+            [DataMember]
+            public string SomeProperty
+            {
+                get;
+                private set;
             }
         }
     }
