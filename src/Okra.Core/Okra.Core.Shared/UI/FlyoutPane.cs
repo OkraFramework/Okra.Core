@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Media.Animation;
 
 namespace Okra.UI
 {
+    [Obsolete("FlyoutPane is to be removed from the Okra.Core assemblies.")]
     public class FlyoutPane
     {
         // *** Fields ***

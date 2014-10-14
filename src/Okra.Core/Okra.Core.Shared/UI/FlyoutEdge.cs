@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Okra.UI
 {
+    [Obsolete("FlyoutEdge is to be removed from the Okra.Core assemblies.")]
     public enum FlyoutEdge
     {
         Left,
