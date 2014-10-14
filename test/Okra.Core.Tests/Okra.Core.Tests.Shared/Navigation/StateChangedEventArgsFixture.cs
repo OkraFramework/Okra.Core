@@ -18,5 +18,11 @@ namespace Okra.Tests.Navigation
 
             Assert.AreEqual("Test Key", eventArgs.StateKey);
         }
+
+        [TestMethod]
+        public void Constructor_ThrowsException_WhenStateKeyIsNull()
+        {
+            Assert.ThrowsException<ArgumentException>(() => new StateChangedEventArgs(null));
+        }
     }
 }

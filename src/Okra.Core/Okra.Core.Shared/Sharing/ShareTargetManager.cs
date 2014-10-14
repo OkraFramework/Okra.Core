@@ -27,6 +27,12 @@ namespace Okra.Sharing
 
         public ShareTargetManager(IActivationManager activationManager, IViewFactory viewFactory)
         {
+            if (activationManager == null)
+                throw new ArgumentNullException("activationManager");
+
+            if (viewFactory == null)
+                throw new ArgumentNullException("viewFactory");
+            
             this.viewFactory = viewFactory;
 
             // Register with the activation manager
@@ -59,6 +65,9 @@ namespace Okra.Sharing
 
         public Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
         {
+            if (activatedEventArgs == null)
+                throw new ArgumentNullException("activatedEventArgs");
+
             if (activatedEventArgs.Kind == ActivationKind.ShareTarget)
             {
                 IShareTargetActivatedEventArgs shareTargetEventArgs = (IShareTargetActivatedEventArgs)activatedEventArgs;
@@ -98,6 +107,9 @@ namespace Okra.Sharing
 
         protected virtual void DisplayPage(IViewLifetimeContext viewLifetimeContext)
         {
+            if (viewLifetimeContext == null)
+                throw new ArgumentNullException("viewLifetimeContext");
+
             // Create a new content host for the page
 
             ContentControl contentHost = new ContentControl()
@@ -119,6 +131,9 @@ namespace Okra.Sharing
 
         protected void OnWindowClosing(IViewLifetimeContext viewLifetimeContext)
         {
+            if (viewLifetimeContext == null)
+                throw new ArgumentNullException("viewLifetimeContext");
+
             // Call NavigatingFrom(...) methods
 
             if (viewLifetimeContext.View is INavigationAware)
@@ -134,6 +149,9 @@ namespace Okra.Sharing
 
         protected virtual IShareOperation WrapShareOperation(IShareTargetActivatedEventArgs shareTargetEventArgs)
         {
+            if (shareTargetEventArgs == null)
+                throw new ArgumentNullException("shareTargetEventArgs");
+
             return new ShareOperationProxy(shareTargetEventArgs.ShareOperation);
         }
 

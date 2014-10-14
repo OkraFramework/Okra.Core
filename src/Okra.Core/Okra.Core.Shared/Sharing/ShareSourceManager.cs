@@ -19,6 +19,9 @@ namespace Okra.Sharing
 
         public ShareSourceManager(INavigationManager navigationManager)
         {
+            if (navigationManager == null)
+                throw new ArgumentNullException("navigationManager");
+
             this.navigationManager = navigationManager;
             navigationManager.NavigatedTo += NavigationManager_NavigatedTo;
         }
@@ -48,7 +51,15 @@ namespace Okra.Sharing
             dataTransferManager.DataRequested += DataTransferManager_DataRequested;
         }
 
-        protected async Task ShareRequested(IShareRequest shareRequest)
+        protected Task ShareRequested(IShareRequest shareRequest)
+        {
+            if (shareRequest == null)
+                throw new ArgumentNullException("shareRequest");
+
+            return ShareRequestedInternal(shareRequest);
+        }
+
+        protected async Task ShareRequestedInternal(IShareRequest shareRequest)
         {
             // Find the first page element that implements IShareable and forward the data request
 
@@ -75,7 +86,7 @@ namespace Okra.Sharing
 
         // *** Private Methods ***
 
-        protected async void DataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        private async void DataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
         {
             DataRequestDeferral deferral = args.Request.GetDeferral();
             IShareRequest shareRequest = new ShareRequest(args.Request);

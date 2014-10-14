@@ -15,6 +15,14 @@ namespace Okra.Tests.Sharing
     [TestClass]
     public class ShareSourceManagerFixture
     {
+        // *** Constructor Tests ***
+
+        [TestMethod]
+        public void Constructor_ThrowsException_IfNavigationManagerIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => new ShareSourceManager(null));
+        }
+
         // *** Property Tests ***
 
         [TestMethod]
@@ -33,6 +41,17 @@ namespace Okra.Tests.Sharing
             sharingManager.DefaultFailureText = "Test Text";
 
             Assert.AreEqual("Test Text", sharingManager.DefaultFailureText);
+        }
+
+        // *** Method Tests ***
+
+        [TestMethod]
+        public void ShareRequested_ThrowsException_IfShareRequestIsNull()
+        {
+            MockNavigationManager navigationManager = new MockNavigationManager();
+            TestableSharingManager sharingManager = CreateSharingManager(navigationManager);
+
+            Assert.ThrowsException<ArgumentNullException>(() => sharingManager.ShareRequested(null));
         }
 
         // *** Behaviour Tests ***
@@ -124,7 +143,7 @@ namespace Okra.Tests.Sharing
         [TestMethod]
         public void WithSharableElement_DoesNotSetDisplayText()
         {
-            INavigationManager navigationManager = new MockNavigationManager(_=>new object[] { new MockShareablePageElement()});
+            INavigationManager navigationManager = new MockNavigationManager(_ => new object[] { new MockShareablePageElement() });
 
             TestableSharingManager sharingManager = CreateSharingManager(navigationManager);
             sharingManager.DefaultFailureText = "Default Text";
@@ -197,7 +216,7 @@ namespace Okra.Tests.Sharing
                     throw new NotImplementedException();
                 }
             }
-            
+
             // *** Methods ***
 
             public void FailWithDisplayText(string displayText)

@@ -19,6 +19,16 @@ namespace Okra.Services
 
         public LaunchActivationHandler(IActivationManager activationManager, INavigationManager navigationManager)
         {
+            // Validate parameters
+
+            if (activationManager == null)
+                throw new ArgumentNullException("activationManager");
+
+            if (navigationManager == null)
+                throw new ArgumentNullException("navigationManager");
+
+            // Store state
+
             this.navigationManager = navigationManager;
 
             // Register with the activation manager
@@ -28,7 +38,19 @@ namespace Okra.Services
 
         // *** Methods ***
 
-        public async Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
+        public Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
+        {
+            // Validate parameters
+
+            if (activatedEventArgs == null)
+                throw new ArgumentNullException("activatedEventArgs");
+
+            // Call private internal method
+
+            return ActivateInternal(activatedEventArgs);
+        }
+
+        private async Task<bool> ActivateInternal(IActivatedEventArgs activatedEventArgs)
         {
             if (activatedEventArgs.Kind == ActivationKind.Launch)
             {

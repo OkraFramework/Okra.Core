@@ -90,6 +90,17 @@ namespace Okra.Tests.Services
         }
 
         [TestMethod]
+        public void Activate_ThrowsException_IfEventArgsIsNull()
+        {
+            MockService service1 = new MockService(Task.FromResult(false));
+            MockService service2 = new MockService(Task.FromResult(false));
+
+            ActivationManager activationManager = CreateActivationManager(services: new[] { service1, service2 });
+
+            Assert.ThrowsException<ArgumentNullException>(() => activationManager.Activate(null));
+        }
+
+        [TestMethod]
         public void Register_ThrowsException_IfServiceIsNull()
         {
             ActivationManager activationManager = CreateActivationManager();

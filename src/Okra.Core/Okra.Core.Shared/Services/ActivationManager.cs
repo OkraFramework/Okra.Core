@@ -22,39 +22,16 @@ namespace Okra.Services
 
         // *** Methods ***
 
-        public async Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
+        public Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
         {
-            // Raise Activating event
+            // Validate parameters
 
-            EventHandler<IActivatedEventArgs> activatingEventHandler = Activating;
+            if (activatedEventArgs == null)
+                throw new ArgumentNullException("activatedEventArgs");
 
-            if (activatingEventHandler != null)
-                activatingEventHandler(this, activatedEventArgs);
+            // Call internal async implementation
 
-            // Call activate on all activation handlers
-            // NB: We convert to an array so that the Select is not called multiple times
-
-            IEnumerable<Task<bool>> activationTasks = registeredServices.Select(service => service.Activate(activatedEventArgs)).ToArray();
-            await Task.WhenAll(activationTasks);
-
-            // Raise Activated event
-
-            EventHandler<IActivatedEventArgs> activatedEventHandler = Activated;
-
-            if (activatedEventHandler != null)
-                activatedEventHandler(this, activatedEventArgs);
-
-            // Determine if the activation was handled by any of the handlers
-
-            Task<bool> firstHandlingTask = activationTasks.FirstOrDefault(task => task.Result == true);
-            bool handled = firstHandlingTask != null;
-
-            // If the activation was handled then activate the current window
-            
-            if (handled && Window.Current != null)
-                Window.Current.Activate();
-
-            return handled;
+            return ActivateInternal(activatedEventArgs);
         }
 
         public void Register(IActivationHandler service)
@@ -85,6 +62,48 @@ namespace Okra.Services
             // Remove the service from the internal list
 
             registeredServices.Remove(service);
+        }
+
+        // *** Private Methods ***
+
+        private async Task<bool> ActivateInternal(IActivatedEventArgs activatedEventArgs)
+        {
+            // Validate parameters
+
+            if (activatedEventArgs == null)
+                throw new ArgumentNullException("activatedEventArgs");
+
+            // Raise Activating event
+
+            EventHandler<IActivatedEventArgs> activatingEventHandler = Activating;
+
+            if (activatingEventHandler != null)
+                activatingEventHandler(this, activatedEventArgs);
+
+            // Call activate on all activation handlers
+            // NB: We convert to an array so that the Select is not called multiple times
+
+            IEnumerable<Task<bool>> activationTasks = registeredServices.Select(service => service.Activate(activatedEventArgs)).ToArray();
+            await Task.WhenAll(activationTasks);
+
+            // Raise Activated event
+
+            EventHandler<IActivatedEventArgs> activatedEventHandler = Activated;
+
+            if (activatedEventHandler != null)
+                activatedEventHandler(this, activatedEventArgs);
+
+            // Determine if the activation was handled by any of the handlers
+
+            Task<bool> firstHandlingTask = activationTasks.FirstOrDefault(task => task.Result == true);
+            bool handled = firstHandlingTask != null;
+
+            // If the activation was handled then activate the current window
+
+            if (handled && Window.Current != null)
+                Window.Current.Activate();
+
+            return handled;
         }
     }
 }

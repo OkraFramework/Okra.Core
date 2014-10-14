@@ -9,27 +9,67 @@ namespace Okra.Sharing
     {
         // *** Static Methods - GetXxx ***
 
-        public async static Task<Uri> GetApplicationLinkAsync(this ISharePackageView sharePackageView)
+        public static Task<Uri> GetApplicationLinkAsync(this ISharePackageView sharePackageView)
+        {
+            if (sharePackageView == null)
+                throw new ArgumentNullException("sharePackageView");
+
+            return GetApplicationLinkAsyncInternal(sharePackageView);
+        }
+
+        private async static Task<Uri> GetApplicationLinkAsyncInternal(this ISharePackageView sharePackageView)
         {
             return (Uri)await sharePackageView.GetDataAsync<Uri>(StandardShareFormats.ApplicationLink);
         }
 
-        public async static Task<string> GetHtmlFormatAsync(this ISharePackageView sharePackageView)
+        public static Task<string> GetHtmlFormatAsync(this ISharePackageView sharePackageView)
+        {
+            if (sharePackageView == null)
+                throw new ArgumentNullException("sharePackageView");
+
+            return GetHtmlFormatAsyncInternal(sharePackageView);
+        }
+
+        private async static Task<string> GetHtmlFormatAsyncInternal(this ISharePackageView sharePackageView)
         {
             return (string)await sharePackageView.GetDataAsync<string>(StandardShareFormats.Html);
         }
 
-        public async static Task<string> GetRtfAsync(this ISharePackageView sharePackageView)
+        public static Task<string> GetRtfAsync(this ISharePackageView sharePackageView)
+        {
+            if (sharePackageView == null)
+                throw new ArgumentNullException("sharePackageView");
+
+            return GetRtfAsyncInternal(sharePackageView);
+        }
+
+        private async static Task<string> GetRtfAsyncInternal(this ISharePackageView sharePackageView)
         {
             return (string)await sharePackageView.GetDataAsync<string>(StandardShareFormats.Rtf);
         }
 
-        public async static Task<string> GetTextAsync(this ISharePackageView sharePackageView)
+        public static Task<string> GetTextAsync(this ISharePackageView sharePackageView)
+        {
+            if (sharePackageView == null)
+                throw new ArgumentNullException("sharePackageView");
+
+            return GetTextAsyncInternal(sharePackageView);
+        }
+
+        private async static Task<string> GetTextAsyncInternal(this ISharePackageView sharePackageView)
         {
             return (string)await sharePackageView.GetDataAsync<string>(StandardShareFormats.Text);
         }
 
-        public async static Task<Uri> GetWebLinkAsync(this ISharePackageView sharePackageView)
+        public static Task<Uri> GetWebLinkAsync(this ISharePackageView sharePackageView)
+        {
+            if (sharePackageView == null)
+                throw new ArgumentNullException("sharePackageView");
+
+            return GetWebLinkAsyncInternal(sharePackageView);
+        }
+
+        private async static Task<Uri> GetWebLinkAsyncInternal(this ISharePackageView sharePackageView)
         {
             return (Uri)await sharePackageView.GetDataAsync<Uri>(StandardShareFormats.WebLink);
         }

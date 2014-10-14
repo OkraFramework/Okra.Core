@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Okra.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,9 @@ namespace Okra.Sharing
 
         public SharePackage(DataPackage dataPackage)
         {
+            if (dataPackage == null)
+                throw new ArgumentNullException("dataPackage");
+
             this.dataPackage = dataPackage;
             this.properties = new SharePropertySet(dataPackage.Properties);
         }
@@ -35,11 +39,20 @@ namespace Okra.Sharing
 
         public void SetData<T>(string formatId, T value)
         {
+            if (string.IsNullOrEmpty(formatId))
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "formatId");
+            
             dataPackage.SetData(formatId, value);
         }
 
         public void SetAsyncData<T>(string formatId, AsyncDataProvider<T> dataProvider)
         {
+            if (string.IsNullOrEmpty(formatId))
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "formatId");
+
+            if (dataProvider == null)
+                throw new ArgumentNullException("dataProvider");
+
             dataPackage.SetDataProvider(formatId, (DataProviderRequest request) => DataProviderRequestHandler<T>(request, dataProvider));
         }
 

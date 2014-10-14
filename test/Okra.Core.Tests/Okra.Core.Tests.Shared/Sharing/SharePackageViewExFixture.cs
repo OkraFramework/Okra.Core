@@ -23,6 +23,12 @@ namespace Okra.Tests.Sharing
         }
 
         [TestMethod]
+        public void GetApplicationLinkAsync_ThrowsException_IfSharePackageViewIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageViewEx.GetApplicationLinkAsync(null));
+        }
+
+        [TestMethod]
         public async Task GetHtmlFormatAsync_GetsDataFromSharePackageView()
         {
             MockSharePackageView sharePackageView = new MockSharePackageView();
@@ -31,6 +37,12 @@ namespace Okra.Tests.Sharing
             string data = await sharePackageView.GetHtmlFormatAsync();
 
             Assert.AreEqual("Test Html", data);
+        }
+
+        [TestMethod]
+        public void GetHtmlFormatAsync_ThrowsException_IfSharePackageViewIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageViewEx.GetHtmlFormatAsync(null));
         }
 
         [TestMethod]
@@ -45,6 +57,12 @@ namespace Okra.Tests.Sharing
         }
 
         [TestMethod]
+        public void GetRtfAsync_ThrowsException_IfSharePackageViewIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageViewEx.GetRtfAsync(null));
+        }
+
+        [TestMethod]
         public async Task GetTextAsync_GetsDataFromSharePackageView()
         {
             MockSharePackageView sharePackageView = new MockSharePackageView();
@@ -56,6 +74,12 @@ namespace Okra.Tests.Sharing
         }
 
         [TestMethod]
+        public void GetTextAsync_ThrowsException_IfSharePackageViewIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageViewEx.GetTextAsync(null));
+        }
+
+        [TestMethod]
         public async Task GetWebLinkAsync_GetsDataFromSharePackageView()
         {
             MockSharePackageView sharePackageView = new MockSharePackageView();
@@ -64,6 +88,12 @@ namespace Okra.Tests.Sharing
             Uri data = await sharePackageView.GetWebLinkAsync();
 
             Assert.AreEqual(new Uri("http://www.example.com"), data);
+        }
+
+        [TestMethod]
+        public void GetWebLinkAsync_ThrowsException_IfSharePackageViewIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageViewEx.GetWebLinkAsync(null));
         }
 
         // *** Private sub-classes ***

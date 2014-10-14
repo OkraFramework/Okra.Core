@@ -24,6 +24,12 @@ namespace Okra.Tests.Sharing
         }
 
         [TestMethod]
+        public void SetApplicationLink_ThrowsException_IfSharePackageIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetApplicationLink(null, new Uri("http://www.example.com")));
+        }
+
+        [TestMethod]
         public void SetHtmlFormat_SetsDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
@@ -33,6 +39,12 @@ namespace Okra.Tests.Sharing
             Assert.AreEqual(1, sharePackage.SetDataCalls.Count);
             Assert.AreEqual(StandardDataFormats.Html, sharePackage.SetDataCalls[0].Item1);
             Assert.AreEqual("Test Html", sharePackage.SetDataCalls[0].Item2);
+        }
+
+        [TestMethod]
+        public void SetHtmlFormat_ThrowsException_IfSharePackageIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetHtmlFormat(null, "Test Html"));
         }
 
         [TestMethod]
@@ -48,6 +60,12 @@ namespace Okra.Tests.Sharing
         }
 
         [TestMethod]
+        public void SetRtf_ThrowsException_IfSharePackageIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetRtf(null, "Test Rtf"));
+        }
+
+        [TestMethod]
         public void SetText_SetsDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
@@ -60,6 +78,12 @@ namespace Okra.Tests.Sharing
         }
 
         [TestMethod]
+        public void SetText_ThrowsException_IfSharePackageIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetText(null, "Test Text"));
+        }
+
+        [TestMethod]
         public void SetWebLink_SetsDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
@@ -69,6 +93,12 @@ namespace Okra.Tests.Sharing
             Assert.AreEqual(1, sharePackage.SetDataCalls.Count);
             Assert.AreEqual(StandardDataFormats.WebLink, sharePackage.SetDataCalls[0].Item1);
             Assert.AreEqual(new Uri("http://www.example.com"), sharePackage.SetDataCalls[0].Item2);
+        }
+
+        [TestMethod]
+        public void SetWebLink_ThrowsException_IfSharePackageIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetWebLink(null, new Uri("http://www.example.com")));
         }
 
         [TestMethod]
@@ -88,6 +118,16 @@ namespace Okra.Tests.Sharing
         }
 
         [TestMethod]
+        public void SetAsyncApplicationLink_ThrowsException_IfSharePackageIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetAsyncApplicationLink(null, async (state) =>
+            {
+                await Task.Delay(200);
+                return new Uri("http://www.example.com");
+            }));
+        }
+
+        [TestMethod]
         public async Task SetAsyncHtmlFormat_SetsAsyncDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
@@ -101,6 +141,16 @@ namespace Okra.Tests.Sharing
             Assert.AreEqual(1, sharePackage.SetAsyncDataCalls.Count);
             Assert.AreEqual(StandardDataFormats.Html, sharePackage.SetAsyncDataCalls[0].Item1);
             Assert.AreEqual("Test Html", await sharePackage.SetAsyncDataCalls[0].Item2(""));
+        }
+
+        [TestMethod]
+        public void SetAsyncHtmlFormat_ThrowsException_IfSharePackageIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetAsyncHtmlFormat(null, async (state) =>
+            {
+                await Task.Delay(200);
+                return "Test Html";
+            }));
         }
 
         [TestMethod]
@@ -120,6 +170,16 @@ namespace Okra.Tests.Sharing
         }
 
         [TestMethod]
+        public void SetAsyncRtf_ThrowsException_IfSharePackageIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetAsyncRtf(null, async (state) =>
+            {
+                await Task.Delay(200);
+                return "Test Rtf";
+            }));
+        }
+
+        [TestMethod]
         public async Task SetAsyncText_SetsAsyncDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
@@ -136,6 +196,16 @@ namespace Okra.Tests.Sharing
         }
 
         [TestMethod]
+        public void SetAsyncText_ThrowsException_IfSharePackageIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetAsyncText(null, async (state) =>
+            {
+                await Task.Delay(200);
+                return "Test Text";
+            }));
+        }
+
+        [TestMethod]
         public async Task SetAsyncWebLink_SetsAsyncDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
@@ -149,6 +219,16 @@ namespace Okra.Tests.Sharing
             Assert.AreEqual(1, sharePackage.SetAsyncDataCalls.Count);
             Assert.AreEqual(StandardDataFormats.WebLink, sharePackage.SetAsyncDataCalls[0].Item1);
             Assert.AreEqual(new Uri("http://www.example.com"), await sharePackage.SetAsyncDataCalls[0].Item2(""));
+        }
+
+        [TestMethod]
+        public void SetAsyncWebLink_ThrowsException_IfSharePackageIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetAsyncWebLink(null, async (state) =>
+            {
+                await Task.Delay(200);
+                return new Uri("http://www.example.com");
+            }));
         }
 
         // *** Private sub-classes ***

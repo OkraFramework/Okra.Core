@@ -25,6 +25,18 @@ namespace Okra.Tests.Services
             CollectionAssert.Contains(activationManager.RegisteredServices, activationHandler);
         }
 
+        [TestMethod]
+        public void Constructor_ThrowsException_IfActivationManagerIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => new LaunchActivationHandler(null, new MockNavigationManager()));
+        }
+
+        [TestMethod]
+        public void Constructor_ThrowsException_IfNavigationManagerIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => new LaunchActivationHandler(new MockActivationManager(), null));
+        }
+
         // *** Method Tests ***
 
         [TestMethod]
@@ -115,6 +127,14 @@ namespace Okra.Tests.Services
             // Assert that the home page was navigated to
 
             CollectionAssert.AreEqual(new string[] { }, navigationManager.NavigatedPages.Select(t => t.Item1).ToArray());
+        }
+
+        [TestMethod]
+        public void Activate_ThrowsException_IfEventArgsIsNull()
+        {
+            LaunchActivationHandler activationHandler = CreateLaunchActivationHandler();
+
+            Assert.ThrowsException<ArgumentNullException>(() => activationHandler.Activate(null));
         }
 
         // *** Private Methods ***

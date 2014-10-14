@@ -12,6 +12,12 @@ namespace Okra.Tests.Sharing
     public class SharePackageFixture
     {
         [TestMethod]
+        public void Constructor_ThrowsException_IfDataPackageIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => new SharePackage(null));
+        }
+
+        [TestMethod]
         public async Task SetData_SetsDataOnDataPackage()
         {
             DataPackage dataPackage = new DataPackage();
@@ -21,6 +27,24 @@ namespace Okra.Tests.Sharing
 
             object data = await dataPackage.GetView().GetDataAsync("Test Format");
             Assert.AreEqual("Test Value", data);
+        }
+
+        [TestMethod]
+        public void SetData_ThrowsException_IfFormatIdIsNull()
+        {
+            DataPackage dataPackage = new DataPackage();
+            SharePackage sharePackage = new SharePackage(dataPackage);
+
+            Assert.ThrowsException<ArgumentException>(() => sharePackage.SetData<string>(null, "Test Value"));
+        }
+
+        [TestMethod]
+        public void SetData_ThrowsException_IfFormatIdIsEmpty()
+        {
+            DataPackage dataPackage = new DataPackage();
+            SharePackage sharePackage = new SharePackage(dataPackage);
+
+            Assert.ThrowsException<ArgumentException>(() => sharePackage.SetData<string>("", "Test Value"));
         }
 
         [TestMethod]
@@ -37,6 +61,41 @@ namespace Okra.Tests.Sharing
 
             object data = await dataPackage.GetView().GetDataAsync("Test Format");
             Assert.AreEqual("Test Value", data);
+        }
+
+        [TestMethod]
+        public void SetAsyncData_ThrowsException_IfFormatIdIsNull()
+        {
+            DataPackage dataPackage = new DataPackage();
+            SharePackage sharePackage = new SharePackage(dataPackage);
+
+            Assert.ThrowsException<ArgumentException>(() => sharePackage.SetAsyncData<string>(null, async (state) =>
+            {
+                await Task.Delay(200);
+                return "Test Value";
+            }));
+        }
+
+        [TestMethod]
+        public void SetAsyncData_ThrowsException_IfFormatIdIsEmpty()
+        {
+            DataPackage dataPackage = new DataPackage();
+            SharePackage sharePackage = new SharePackage(dataPackage);
+
+            Assert.ThrowsException<ArgumentException>(() => sharePackage.SetAsyncData<string>("", async (state) =>
+            {
+                await Task.Delay(200);
+                return "Test Value";
+            }));
+        }
+
+        [TestMethod]
+        public void SetAsyncData_ThrowsException_IfDataProviderIsNull()
+        {
+            DataPackage dataPackage = new DataPackage();
+            SharePackage sharePackage = new SharePackage(dataPackage);
+
+            Assert.ThrowsException<ArgumentNullException>(() => sharePackage.SetAsyncData<string>("Test Format", null));
         }
 
         [TestMethod]

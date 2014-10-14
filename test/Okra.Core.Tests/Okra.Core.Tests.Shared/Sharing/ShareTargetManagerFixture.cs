@@ -29,6 +29,18 @@ namespace Okra.Tests.Sharing
             CollectionAssert.Contains(activationManager.RegisteredServices, shareTargetManager);
         }
 
+        [TestMethod]
+        public void Constructor_ThrowsException_IfActivationManagerIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => new ShareTargetManager(null, new MockViewFactory()));
+        }
+
+        [TestMethod]
+        public void Constructor_ThrowsException_IfViewFactoryIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => new ShareTargetManager(new MockActivationManager(), null));
+        }
+
         // *** Property Tests ***
 
         [TestMethod]
@@ -219,6 +231,38 @@ namespace Okra.Tests.Sharing
             Assert.AreEqual(activatedEventArgs, ((MockShareOperation)pageViewModel.ActivateEvents[0]).ActivatedEventArgs);
         }
 
+        [TestMethod]
+        public void Activate_ThrowsException_IfEventArgsIsNull()
+        {
+            ShareTargetManager shareTargetManager = CreateShareTargetManager();
+
+            Assert.ThrowsException<ArgumentNullException>(() => shareTargetManager.Activate(null));
+        }
+
+        [TestMethod]
+        public void DisplayPage_ThrowsException_IfViewLifetimeContextIsNull()
+        {
+            TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
+
+            Assert.ThrowsException<ArgumentNullException>(() => shareTargetManager.DisplayPageDirect(null));
+        }
+
+        [TestMethod]
+        public void OnWindowClosing_ThrowsException_IfViewLifetimeContextIsNull()
+        {
+            TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
+
+            Assert.ThrowsException<ArgumentNullException>(() => shareTargetManager.OnWindowClosing(null));
+        }
+
+        [TestMethod]
+        public void WrapShareOperation_ThrowsException_IfEventArgsIsNull()
+        {
+            TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
+
+            Assert.ThrowsException<ArgumentNullException>(() => shareTargetManager.WrapShareOperationDirect(null));
+        }
+
         // *** Behaviour Tests ***
 
         [TestMethod]
@@ -305,9 +349,19 @@ namespace Okra.Tests.Sharing
 
             // *** Methods ***
 
+            public void DisplayPageDirect(IViewLifetimeContext viewLifetimeContext)
+            {
+                base.DisplayPage(viewLifetimeContext);
+            }
+
             public new void OnWindowClosing(IViewLifetimeContext viewLifetimeContext)
             {
                 base.OnWindowClosing(viewLifetimeContext);
+            }
+
+            public void WrapShareOperationDirect(IShareTargetActivatedEventArgs shareTargetEventArgs)
+            {
+                base.WrapShareOperation(shareTargetEventArgs);
             }
 
             // *** Overriden base methods ***
