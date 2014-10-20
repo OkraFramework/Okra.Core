@@ -42,6 +42,20 @@ namespace Okra.Tests.Navigation
         }
 
         [UITestMethod]
+        public void HeaderBackground_ThrowsException_IfGetterObjectIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.GetHeaderBackground(null));
+        }
+
+        [UITestMethod]
+        public void HeaderBackground_ThrowsException_IfSetterObjectIsNull()
+        {
+            Brush red = new SolidColorBrush(Colors.Red);
+
+            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.SetHeaderBackground(null, red));
+        }
+
+        [UITestMethod]
         public void HeaderForeground_DefaultIsNull()
         {
             DependencyObject obj = new Page();
@@ -61,6 +75,20 @@ namespace Okra.Tests.Navigation
             Brush brush = SettingsPaneInfo.GetHeaderForeground(obj);
 
             Assert.AreEqual(red, brush);
+        }
+
+        [UITestMethod]
+        public void HeaderForeground_ThrowsException_IfGetterObjectIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.GetHeaderForeground(null));
+        }
+
+        [UITestMethod]
+        public void HeaderForeground_ThrowsException_IfSetterObjectIsNull()
+        {
+            Brush red = new SolidColorBrush(Colors.Red);
+
+            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.SetHeaderForeground(null, red));
         }
 
         [UITestMethod]
@@ -87,6 +115,20 @@ namespace Okra.Tests.Navigation
         }
 
         [UITestMethod]
+        public void IconSource_ThrowsException_IfGetterObjectIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.GetIconSource(null));
+        }
+
+        [UITestMethod]
+        public void IconSource_ThrowsException_IfSetterObjectIsNull()
+        {
+            ImageSource iconSource = new BitmapImage(new Uri("ms-appx:/Test"));
+
+            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.SetIconSource(null, iconSource));
+        }
+
+        [UITestMethod]
         public void Title_DefaultIsEmptyString()
         {
             DependencyObject obj = new Page();
@@ -108,6 +150,18 @@ namespace Okra.Tests.Navigation
         }
 
         [UITestMethod]
+        public void Title_ThrowsException_IfGetterObjectIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.GetTitle(null));
+        }
+
+        [UITestMethod]
+        public void Title_ThrowsException_IfSetterObjectIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.SetTitle(null, "Title"));
+        }
+
+        [UITestMethod]
         public void Width_DefaultIsStandardSettingsWidth()
         {
             DependencyObject obj = new Page();
@@ -126,6 +180,18 @@ namespace Okra.Tests.Navigation
             double width = SettingsPaneInfo.GetWidth(obj);
 
             Assert.AreEqual(500, width);
+        }
+
+        [UITestMethod]
+        public void Width_ThrowsException_IfGetterObjectIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.GetWidth(null));
+        }
+
+        [UITestMethod]
+        public void Width_ThrowsException_IfSetterObjectIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.SetWidth(null, 500));
         }
     }
 }

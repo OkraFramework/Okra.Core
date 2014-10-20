@@ -28,6 +28,22 @@ namespace Okra.Tests.Search
             CollectionAssert.Contains(activationManager.RegisteredServices, searchManager);
         }
 
+        [TestMethod]
+        public void Constructor_ThrowsException_IfNavigationManagerIsNull()
+        {
+            MockActivationManager activationManager = new MockActivationManager();
+
+            Assert.ThrowsException<ArgumentNullException>(() => new SearchManager(null, activationManager));
+        }
+
+        [TestMethod]
+        public void Constructor_ThrowsException_IfActivationManagerIsNull()
+        {
+            MockNavigationManager navigationManager = new MockNavigationManager();
+
+            Assert.ThrowsException<ArgumentNullException>(() => new SearchManager(navigationManager, null));
+        }
+
         // *** Property Tests ***
 
         [TestMethod]
@@ -296,6 +312,30 @@ namespace Okra.Tests.Search
             CollectionAssert.AreEqual(new string[] { }, navigationManager.NavigatedPages.Select(t => t.Item1).ToArray());
         }
 
+        [TestMethod]
+        public async Task Activate_ThrowsException_IfEventArgsIsNull()
+        {
+            SearchManager searchManager = CreateSearchMananger();
+
+            Assert.ThrowsException<ArgumentNullException>(() => searchManager.Activate(null));
+        }
+
+        [TestMethod]
+        public void OnActivationManagerActivated_ThrowsException_IfEventArgsIsNull()
+        {
+            TestableSearchManager searchManager = CreateSearchMananger();
+
+            Assert.ThrowsException<ArgumentNullException>(() => searchManager.CallOnActivationManagerActivated(null));
+        }
+
+        [TestMethod]
+        public void OnQuerySubmitted_ThrowsException_IfEventArgsIsNull()
+        {
+            TestableSearchManager searchManager = CreateSearchMananger();
+
+            Assert.ThrowsException<ArgumentNullException>(() => searchManager.CallOnQuerySubmitted(null));
+        }
+
         // *** Behaviour Tests ***
 
         [TestMethod]
@@ -361,6 +401,18 @@ namespace Okra.Tests.Search
             public TestableSearchManager(INavigationManager navigationManager, IActivationManager activationManager)
                 : base(navigationManager, activationManager)
             {
+            }
+
+            // *** Methods ***
+
+            public void CallOnActivationManagerActivated(IActivatedEventArgs e)
+            {
+                base.OnActivationManagerActivated(this, e);
+            }
+
+            public void CallOnQuerySubmitted(SearchPaneQuerySubmittedEventArgs args)
+            {
+                base.OnQuerySubmitted(null, args);
             }
 
             // *** Overriden base methods ***

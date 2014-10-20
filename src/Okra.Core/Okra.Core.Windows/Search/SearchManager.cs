@@ -24,6 +24,12 @@ namespace Okra.Search
 
         public SearchManager(INavigationManager navigationManager, IActivationManager activationManager)
         {
+            if (navigationManager == null)
+                throw new ArgumentNullException("navigationManager");
+
+            if (activationManager == null)
+                throw new ArgumentNullException("activationManager");
+
             this.navigationManager = navigationManager;
 
             // Register with the activation manager
@@ -60,7 +66,15 @@ namespace Okra.Search
 
         // *** Methods ***
 
-        public async Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
+        public Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
+        {
+            if (activatedEventArgs == null)
+                throw new ArgumentNullException("activatedEventArgs");
+
+            return ActivateInternal(activatedEventArgs);
+        }
+
+        private async Task<bool> ActivateInternal(IActivatedEventArgs activatedEventArgs)
         {
             if (activatedEventArgs.Kind == ActivationKind.Search)
             {
@@ -91,6 +105,9 @@ namespace Okra.Search
 
         protected void OnActivationManagerActivated(object sender, IActivatedEventArgs e)
         {
+            if (e == null)
+                throw new ArgumentNullException("e");
+
             // Once the application is activated we register for the SearchPage.QuerySubmitted event
             // NB: This is a slightly more performant method of receiving search queries for running applications than via activation
             
@@ -106,6 +123,9 @@ namespace Okra.Search
 
         protected void OnQuerySubmitted(SearchPane sender, SearchPaneQuerySubmittedEventArgs args)
         {
+            if (args == null)
+                throw new ArgumentNullException("args");
+
             DisplaySearchResults(args.QueryText, args.Language);
         }
 

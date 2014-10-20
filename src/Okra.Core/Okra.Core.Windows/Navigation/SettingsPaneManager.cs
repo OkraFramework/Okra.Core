@@ -48,6 +48,9 @@ namespace Okra.Navigation
 
         protected void OnSettingsPaneBackClick(object sender, BackClickEventArgs e)
         {
+            if (e == null)
+                throw new ArgumentNullException("e");
+
             e.Handled = true;
             this.GoBack();
         }
@@ -149,6 +152,9 @@ namespace Okra.Navigation
 
         protected virtual void ShowSettingsFlyout(SettingsFlyout settingsFlyout)
         {
+            if (settingsFlyout == null)
+                throw new ArgumentNullException("settingsFlyout");
+
             // Show the settings flyout
             // NB: Call 'ShowIndependent()' rather than 'Show()' as we handle displaying the system settings pane as required
 

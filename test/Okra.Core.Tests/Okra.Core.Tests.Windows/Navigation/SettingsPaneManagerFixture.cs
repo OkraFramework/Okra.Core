@@ -19,6 +19,30 @@ namespace Okra.Tests.Navigation
     [TestClass]
     public class SettingsPaneManagerFixture
     {
+        // *** Constructor Tests ***
+
+        [TestMethod]
+        public void Constructor_WithViewFactory_ThrowsException_WhenViewFactoryIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => new SettingsPaneManager(null));
+        }
+
+        [TestMethod]
+        public void Constructor_WithViewFactoryAndNavigationStack_ThrowsException_WhenViewFactoryIsNull()
+        {
+            INavigationStack navigationStack = new MockNavigationStack();
+
+            Assert.ThrowsException<ArgumentNullException>(() => new TestableSettingsPaneManager(null, navigationStack));
+        }
+
+        [TestMethod]
+        public void Constructor_WithViewFactoryAndNavigationStack_ThrowsException_WhenNavigationStackIsNull()
+        {
+            IViewFactory viewFactory = MockViewFactory.NoPageDefined;
+
+            Assert.ThrowsException<ArgumentNullException>(() => new TestableSettingsPaneManager(viewFactory, null));
+        }
+
         // *** Property Tests ***
 
         [TestMethod]
@@ -134,6 +158,22 @@ namespace Okra.Tests.Navigation
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
             Assert.AreEqual(brush, flyout.HeaderForeground);
+        }
+
+        [UITestMethod]
+        public void OnSettingsPaneBackClick_ThrowsException_IfEventArgsIsNull()
+        {
+            TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
+
+            Assert.ThrowsException<ArgumentNullException>(() => settingsPaneManager.CallOnSettingsPaneBackClick(null));
+        }
+
+        [UITestMethod]
+        public void ShowSettingsFlyout_ThrowsException_IfEventArgsIsNull()
+        {
+            TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
+
+            Assert.ThrowsException<ArgumentNullException>(() => settingsPaneManager.CallShowSettingsFlyoutDirect(null));
         }
 
         // *** Behaviour Tests ***
@@ -271,6 +311,11 @@ namespace Okra.Tests.Navigation
             public void CallOnSettingsPaneBackClick(BackClickEventArgs e)
             {
                 base.OnSettingsPaneBackClick(null, e);
+            }
+
+            public void CallShowSettingsFlyoutDirect(SettingsFlyout settingsFlyout)
+            {
+                base.ShowSettingsFlyout(settingsFlyout);
             }
 
             public new void DisplayPage(object page)

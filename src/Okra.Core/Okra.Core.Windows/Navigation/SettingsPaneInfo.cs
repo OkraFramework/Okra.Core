@@ -22,51 +22,81 @@ namespace Okra.Navigation
 
         public static Brush GetHeaderBackground(DependencyObject obj)
         {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
             return (Brush)obj.GetValue(HeaderBackgroundProperty);
         }
 
         public static void SetHeaderBackground(DependencyObject obj, Brush value)
         {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
             obj.SetValue(HeaderBackgroundProperty, value);
         }
 
         public static Brush GetHeaderForeground(DependencyObject obj)
         {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
             return (Brush)obj.GetValue(HeaderForegroundProperty);
         }
 
         public static void SetHeaderForeground(DependencyObject obj, Brush value)
         {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
             obj.SetValue(HeaderForegroundProperty, value);
         }
 
         public static ImageSource GetIconSource(DependencyObject obj)
         {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
             return (ImageSource)obj.GetValue(IconSourceProperty);
         }
 
         public static void SetIconSource(DependencyObject obj, ImageSource value)
         {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
             obj.SetValue(IconSourceProperty, value);
         }
 
         public static string GetTitle(DependencyObject obj)
         {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
             return (string)obj.GetValue(TitleProperty);
         }
 
         public static void SetTitle(DependencyObject obj, string value)
         {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
             obj.SetValue(TitleProperty, value);
         }
 
         public static double GetWidth(DependencyObject obj)
         {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
             return (double)obj.GetValue(WidthProperty);
         }
 
         public static void SetWidth(DependencyObject obj, double value)
         {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
             obj.SetValue(WidthProperty, value);
         }
     }
