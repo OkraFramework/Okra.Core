@@ -116,6 +116,13 @@ namespace Okra.Navigation
                 hander(this, new StateChangedEventArgs(stateKey));
         }
 
+        // *** Overriden Base Methods ***
+
+        public override string ToString()
+        {
+            return pageName;
+        }
+
         // *** Private Sub-classes ***
 
         [DataContract]

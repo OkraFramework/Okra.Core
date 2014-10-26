@@ -352,6 +352,16 @@ namespace Okra.Tests.Navigation
             Assert.ThrowsException<ArgumentException>(() => navigationEntry.SetState<string>("", "Test"));
         }
 
+        [TestMethod]
+        public void ToString_ReturnsReadableString_IfArgumentsAreNull()
+        {
+            PageInfo navigationEntry = new PageInfo("Page Name", null);
+
+            string str = navigationEntry.ToString();
+
+            Assert.AreEqual("Page Name", str);
+        }
+
         // *** Serialization Tests ***
 
         [TestMethod]
