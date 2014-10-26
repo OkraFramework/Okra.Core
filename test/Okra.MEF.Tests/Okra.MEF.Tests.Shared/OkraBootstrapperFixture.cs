@@ -24,6 +24,15 @@ namespace Okra.MEF.Tests
         // *** Method Tests ***
 
         [TestMethod]
+        public void Activate_ThrowsException_IfEventArgsAreNull()
+        {
+            TestableBootstrapper bootstrapper = new TestableBootstrapper();
+            bootstrapper.Initialize();
+
+            Assert.ThrowsException<ArgumentNullException>(() => bootstrapper.Activate(null));
+        }
+
+        [TestMethod]
         public void Initialize_ComposesProperties()
         {
             TestableBootstrapper bootstrapper = new TestableBootstrapper();
@@ -69,6 +78,15 @@ namespace Okra.MEF.Tests
             Assert.AreEqual(1, activationManager.ActivationEventArgs.Count);
             Assert.IsInstanceOfType(activationManager.ActivationEventArgs[0], typeof(MockActivatedEventArgs));
             Assert.AreEqual(ActivationKind.Launch, activationManager.ActivationEventArgs[0].Kind);
+        }
+
+        [TestMethod]
+        public void OnActivated_ThrowsException_IfEventArgsAreNull()
+        {
+            TestableBootstrapper bootstrapper = new TestableBootstrapper();
+            bootstrapper.Initialize();
+
+            Assert.ThrowsException<ArgumentNullException>(() => bootstrapper.SimulateActivate(null));
         }
 
         // *** Private Sub-classes ***

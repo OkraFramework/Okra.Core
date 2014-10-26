@@ -40,6 +40,9 @@ namespace Okra
 
         public void Activate(IActivatedEventArgs args)
         {
+            if (args == null)
+                throw new ArgumentNullException("args");
+
             OnActivated(CoreApplication.GetCurrentView(), args);
         }
 
@@ -121,6 +124,9 @@ namespace Okra
 
         protected virtual void OnActivated(CoreApplicationView sender, IActivatedEventArgs args)
         {
+            if (args == null)
+                throw new ArgumentNullException("args");
+
             // Setup services if this is the first activation
 
             if (!isActivated)

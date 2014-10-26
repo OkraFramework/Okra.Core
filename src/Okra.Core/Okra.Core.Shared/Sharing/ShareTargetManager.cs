@@ -75,7 +75,7 @@ namespace Okra.Sharing
 
                 // Create a new page to display the share target UI
 
-                IViewLifetimeContext viewLifetimeContext = viewFactory.CreateView(ShareTargetPageName, null);
+                IViewLifetimeContext viewLifetimeContext = viewFactory.CreateView(ShareTargetPageName, new NullNavigationContext());
 
                 // Call Activate(...) methods
 
@@ -156,6 +156,16 @@ namespace Okra.Sharing
         }
 
         // *** Private Sub-classes ***
+
+        private class NullNavigationContext : INavigationContext
+        {
+            // *** Methods ***
+
+            public INavigationBase GetCurrent()
+            {
+                return null;
+            }
+        }
 
         private class ShareOperationProxy : IShareOperation
         {

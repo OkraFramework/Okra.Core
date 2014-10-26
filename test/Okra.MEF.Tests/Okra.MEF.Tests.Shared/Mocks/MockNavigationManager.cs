@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Okra.Navigation;
 
-namespace Okra.Tests.Mocks
+namespace Okra.MEF.Tests.Mocks
 {
     public class MockNavigationManager : INavigationManager
     {

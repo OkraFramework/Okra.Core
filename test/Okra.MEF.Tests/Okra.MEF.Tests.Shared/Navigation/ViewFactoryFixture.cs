@@ -6,14 +6,54 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Okra.Navigation;
 using System.Composition;
 using System.Composition.Hosting.Core;
-using Okra.Tests.Mocks;
+using Okra.MEF.Tests.Mocks;
 
 namespace Okra.MEF.Tests.Navigation
 {
     [TestClass]
     public class ViewFactoryFixture
     {
+        // *** Constructor Tests ***
+
+        [TestMethod]
+        public void Constructor_ThrowsException_IfCompositionContextFactoryIsNull()
+        {
+            Lazy<object, PageMetadata>[] lazyPageExports = new Lazy<object, PageMetadata>[]
+                            {
+                                new Lazy<object, PageMetadata>(() => {throw new InvalidOperationException();}, new PageMetadata() { PageName = "Page 1"}),
+                                new Lazy<object, PageMetadata>(() => {throw new InvalidOperationException();}, new PageMetadata() { PageName = "Page 2"}),
+                                new Lazy<object, PageMetadata>(() => {throw new InvalidOperationException();}, new PageMetadata() { PageName = "Page 3"})
+                            };
+
+            Assert.ThrowsException<ArgumentNullException>(() => new ViewFactory(null, lazyPageExports));
+        }
+
+        [TestMethod]
+        public void Constructor_ThrowsException_IfPageExportsIsNull()
+        {
+            Dictionary<CompositionContract, Func<object>> exportFactories = new Dictionary<CompositionContract, Func<object>>();
+            ExportFactory<CompositionContext> compositionContextFactory = new ExportFactory<CompositionContext>(() => CreateCompositionContext(exportFactories));
+
+            Assert.ThrowsException<ArgumentNullException>(() => new ViewFactory(compositionContextFactory, null));
+        }
+
         // *** Method Tests ***
+
+        [TestMethod]
+        public void AttachViewModel_ThrowsException_IfPageIsNull()
+        {
+            TestableViewFactory viewFactory = CreateViewFactory();
+
+            Assert.ThrowsException<ArgumentNullException>(() => viewFactory.CallAttachViewModel(null, new object()));
+        }
+
+        [TestMethod]
+        public void AttachViewModel_ThrowsException_IfViewModelIsNull()
+        {
+            TestableViewFactory viewFactory = CreateViewFactory();
+
+            Assert.ThrowsException<ArgumentNullException>(() => viewFactory.CallAttachViewModel(new object(), null));
+        }
 
         [TestMethod]
         public void CreateView_CreatesNewPage_WithViewModel()
@@ -117,6 +157,32 @@ namespace Okra.MEF.Tests.Navigation
         }
 
         [TestMethod]
+        public void CreateView_ThrowsException_PageNameIsNull()
+        {
+            IViewFactory viewFactory = CreateViewFactory();
+            INavigationContext navigationContext = CreateNavigationContext();
+
+            Assert.ThrowsException<ArgumentException>(() => viewFactory.CreateView(null, navigationContext));
+        }
+
+        [TestMethod]
+        public void CreateView_ThrowsException_PageNameIsEmpty()
+        {
+            IViewFactory viewFactory = CreateViewFactory();
+            INavigationContext navigationContext = CreateNavigationContext();
+
+            Assert.ThrowsException<ArgumentException>(() => viewFactory.CreateView("", navigationContext));
+        }
+
+        [TestMethod]
+        public void CreateView_ThrowsException_IfNavigationContextIsNull()
+        {
+            IViewFactory viewFactory = CreateViewFactory();
+
+            Assert.ThrowsException<ArgumentNullException>(() => viewFactory.CreateView("Page 2", null));
+        }
+
+        [TestMethod]
         public void IsViewDefined_ReturnsTrue_SpecifiedPageExists()
         {
             IViewFactory viewFactory = CreateViewFactory();
@@ -134,6 +200,24 @@ namespace Okra.MEF.Tests.Navigation
             bool viewDefined = viewFactory.IsViewDefined("Page X");
 
             Assert.AreEqual(false, viewDefined);
+        }
+
+        [TestMethod]
+        public void IsViewDefined_ThrowsException_IfPageNameIsNull()
+        {
+            IViewFactory viewFactory = CreateViewFactory();
+            INavigationContext navigationContext = CreateNavigationContext();
+
+            Assert.ThrowsException<ArgumentException>(() => viewFactory.IsViewDefined(null));
+        }
+
+        [TestMethod]
+        public void IsViewDefined_ThrowsException_IfPageNameIsEmpty()
+        {
+            IViewFactory viewFactory = CreateViewFactory();
+            INavigationContext navigationContext = CreateNavigationContext();
+
+            Assert.ThrowsException<ArgumentException>(() => viewFactory.IsViewDefined(""));
         }
 
         // *** Behaviour Tests ***
@@ -183,7 +267,7 @@ namespace Okra.MEF.Tests.Navigation
 
         // *** Private Methods ***
 
-        private IViewFactory CreateViewFactory(NavigationContextProxy navigationContextProxy = null)
+        private TestableViewFactory CreateViewFactory(NavigationContextProxy navigationContextProxy = null)
         {
             if (navigationContextProxy == null)
                 navigationContextProxy = new NavigationContextProxy();
@@ -258,6 +342,13 @@ namespace Okra.MEF.Tests.Navigation
             {
             }
 
+            // *** Methods ***
+
+            public void CallAttachViewModel(object page, object viewModel)
+            {
+                base.AttachViewModel(page, viewModel);
+            }
+
             // *** Overriden Base Methods ***
 
             protected override void AttachViewModel(object page, object viewModel)
@@ -271,7 +362,6 @@ namespace Okra.MEF.Tests.Navigation
         {
             private Dictionary<CompositionContract, Func<object>> exportFactories;
             private IList<object> exports = new List<object>();
-
 
             // *** Constructors ***
 
@@ -306,27 +396,6 @@ namespace Okra.MEF.Tests.Navigation
                     if (export is IDisposable)
                         ((IDisposable)export).Dispose();
                 }
-            }
-        }
-
-        private class MockNavigationContext : INavigationContext
-        {
-            // *** Fields ***
-
-            private readonly INavigationBase current;
-
-            // *** Constructors ***
-
-            public MockNavigationContext(INavigationBase current)
-            {
-                this.current = current;
-            }
-
-            // *** Methods ***
-
-            public INavigationBase GetCurrent()
-            {
-                return current;
             }
         }
 

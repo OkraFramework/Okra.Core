@@ -122,17 +122,17 @@ namespace Okra.Tests.Sharing
         }
 
         [TestMethod]
-        public async Task Activate_DisplaysThePage_WithNullNavigationContext()
+        public async Task Activate_DisplaysThePage_WithNullReturningNavigationContext()
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
             shareTargetManager.ShareTargetPageName = "ShareTarget";
 
             await shareTargetManager.Activate(new MockShareTargetActivatedEventArgs());
 
-            INavigationContext[] navigatedNavigationContexts = shareTargetManager.DisplayedViews
-                                                .Select(viewLifetimeContext => viewLifetimeContext.NavigationContext).ToArray();
+            INavigationBase[] navigatedNavigationContexts = shareTargetManager.DisplayedViews
+                                                .Select(viewLifetimeContext => viewLifetimeContext.NavigationContext.GetCurrent()).ToArray();
 
-            CollectionAssert.AreEqual(new INavigationContext[] { null }, navigatedNavigationContexts);
+            CollectionAssert.AreEqual(new INavigationBase[] { null }, navigatedNavigationContexts);
         }
 
         [TestMethod]

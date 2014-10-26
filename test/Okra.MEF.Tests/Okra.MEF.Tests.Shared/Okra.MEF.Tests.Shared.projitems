@@ -9,7 +9,9 @@
     <Import_RootNamespace>Okra.MEF.Tests</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Mocks\MockNavigationContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mocks\MockNavigationManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationContextProxyFixture.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageExportAttributeFixture.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\ViewFactoryFixture.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\ViewModelExportAttributeFixture.cs" />

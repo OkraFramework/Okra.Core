@@ -29,6 +29,24 @@ namespace Okra.MEF.Tests.Navigation
             Assert.AreEqual("Okra.MEF.Tests.Navigation.PageExportAttributeFixture", attribute.PageName);
         }
 
+        [TestMethod]
+        public void Constructor_ThrowsException_IfPageNameIsNull()
+        {
+            Assert.ThrowsException<ArgumentException>(() => new PageExportAttribute((string)null));
+        }
+
+        [TestMethod]
+        public void Constructor_ThrowsException_IfPageNameIsEmpty()
+        {
+            Assert.ThrowsException<ArgumentException>(() => new PageExportAttribute(""));
+        }
+
+        [TestMethod]
+        public void Constructor_ThrowsException_IfPageTypeIsNull()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => new PageExportAttribute((Type)null));
+        }
+
         // *** Property Tests ***
 
         [TestMethod]
