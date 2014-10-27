@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 //      Minor Version 
 //      Build Number
 //      Revision
-[assembly: AssemblyVersion("0.9.7.0")]
-[assembly: AssemblyFileVersion("0.9.7.0")]
-[assembly: AssemblyInformationalVersion("0.9.7")]
+[assembly: AssemblyVersion("0.9.8.0")]
+[assembly: AssemblyFileVersion("0.9.8.0")]
+[assembly: AssemblyInformationalVersion("0.9.8")]
 [assembly: ComVisible(false)]

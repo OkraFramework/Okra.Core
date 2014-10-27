@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Okra.Core</id>
-    <version>0.9.7</version>
+    <version>0.9.8</version>
     <title>Okra App Framework (Core only)</title>
     <authors>Andrew Wilkinson</authors>
     <owners>Andrew Wilkinson</owners>
