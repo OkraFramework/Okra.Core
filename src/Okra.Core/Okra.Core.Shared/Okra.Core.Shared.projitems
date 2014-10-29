@@ -66,16 +66,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\LaunchActivationHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\LifetimeManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\StorageManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UI\FlyoutEdge.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UI\FlyoutPane.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UI\SettingsChrome.cs" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="$(MSBuildThisFileDirectory)strings\en-US\Errors.resw" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)Themes\Generic.xaml">
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
 </Project>

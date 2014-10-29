@@ -116,9 +116,8 @@
   <Import Project="..\Okra.Core.Shared\Okra.Core.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>mkdir "$(TargetDir)\Okra.Core\Themes"
-copy "$(TargetDir)\Themes\Generic.xbf" "$(TargetDir)\Okra.Core\Themes\Generic.xbf"
-copy "$(TargetDir)\Okra.Core.xr.xml" "$(TargetDir)\Okra.Core\Okra.Core.xr.xml"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
