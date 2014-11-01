@@ -14,13 +14,7 @@ namespace Okra.Tests.Mocks
         public Func<PageInfo, IEnumerable<object>> pageElementFunc;
         public Dictionary<PageInfo, IEnumerable<object>> pageElementCache = new Dictionary<PageInfo, IEnumerable<object>>();
         public bool CanRestoreNavigationStack = false;
-
-        // *** Events ***
-
-        public event EventHandler CanGoBackChanged;
-        public event EventHandler<PageNavigationEventArgs> NavigatingFrom;
-        public event EventHandler<PageNavigationEventArgs> NavigatedTo;
-
+        
         // *** Constructors ***
 
         public MockNavigationManager(Func<PageInfo, IEnumerable<object>> pageElementFunc = null)
@@ -32,12 +26,7 @@ namespace Okra.Tests.Mocks
         }
 
         // *** Properties ***
-
-        public bool CanGoBack
-        {
-            get { throw new NotImplementedException(); }
-        }
-
+        
         public string HomePageName
         {
             get;
@@ -110,22 +99,10 @@ namespace Okra.Tests.Mocks
 
         // *** Mock Methods ***
 
-        public void RaiseCanGoBackChanged()
-        {
-            if (CanGoBackChanged != null)
-                CanGoBackChanged(this, new EventArgs());
-        }
-
         public void RaiseNavigatedTo(PageNavigationEventArgs eventArgs)
         {
-            if (NavigatedTo != null)
-                NavigatedTo(this, eventArgs);
-        }
-
-        public void RaiseNavigatingFrom(PageNavigationEventArgs eventArgs)
-        {
-            if (NavigatingFrom != null)
-                NavigatingFrom(this, eventArgs);
+            MockNavigationStack navigationStack = (MockNavigationStack)this.NavigationStack;
+            navigationStack.RaiseNavigatedTo(eventArgs);
         }
     }
 }

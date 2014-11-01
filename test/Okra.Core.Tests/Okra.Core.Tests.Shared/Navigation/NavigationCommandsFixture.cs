@@ -244,13 +244,7 @@ namespace Okra.Tests.Navigation
             private MockNavigationStack navigationStack;
 
             public IList<string> MethodCallLog = new List<string>();
-
-            // *** Events ***
-
-            public event EventHandler CanGoBackChanged;
-            public event EventHandler<PageNavigationEventArgs> NavigatingFrom;
-            public event EventHandler<PageNavigationEventArgs> NavigatedTo;
-
+            
             // *** Constructors ***
 
             public MockNavigationManager(MockNavigationStack navigationStack = null)
@@ -299,20 +293,8 @@ namespace Okra.Tests.Navigation
 
             public void RaiseCanGoBackChanged()
             {
-                if (CanGoBackChanged != null)
-                    CanGoBackChanged(this, EventArgs.Empty);
-            }
-            
-            public void RaiseNavigatedTo(PageNavigationEventArgs eventArgs)
-            {
-                if (NavigatedTo != null)
-                    NavigatedTo(this, eventArgs);
-            }
-
-            public void RaiseNavigatingFrom(PageNavigationEventArgs eventArgs)
-            {
-                if (NavigatingFrom != null)
-                    NavigatingFrom(this, eventArgs);
+                MockNavigationStack navigationStack = (MockNavigationStack)this.NavigationStack;
+                navigationStack.RaisePropertyChanged(new PropertyChangedEventArgs("CanGoBack"));
             }
         }
 

@@ -23,7 +23,7 @@ namespace Okra.Sharing
                 throw new ArgumentNullException("navigationManager");
 
             this.navigationManager = navigationManager;
-            navigationManager.NavigatedTo += NavigationManager_NavigatedTo;
+            navigationManager.NavigationStack.NavigatedTo += NavigationManager_NavigatedTo;
         }
 
         // *** Properties ***

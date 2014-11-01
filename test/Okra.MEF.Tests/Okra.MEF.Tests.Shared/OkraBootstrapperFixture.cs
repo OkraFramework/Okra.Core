@@ -179,15 +179,6 @@ namespace Okra.MEF.Tests
         [Shared]
         private class MockNavigationManager : INavigationManager
         {
-            public event EventHandler CanGoBackChanged;
-            public event EventHandler<PageNavigationEventArgs> NavigatingFrom;
-            public event EventHandler<PageNavigationEventArgs> NavigatedTo;
-
-            public bool CanGoBack
-            {
-                get { throw new NotImplementedException(); }
-            }
-
             public string HomePageName
             {
                 get
@@ -230,26 +221,6 @@ namespace Okra.MEF.Tests
             public Task<bool> RestoreNavigationStack()
             {
                 throw new NotImplementedException();
-            }
-
-            // *** Mock Methods ***
-
-            public void RaiseCanGoBackChanged()
-            {
-                if (CanGoBackChanged != null)
-                    CanGoBackChanged(this, new EventArgs());
-            }
-
-            public void RaiseNavigatedTo(PageNavigationEventArgs eventArgs)
-            {
-                if (NavigatedTo != null)
-                    NavigatedTo(this, eventArgs);
-            }
-
-            public void RaiseNavigatingFrom(PageNavigationEventArgs eventArgs)
-            {
-                if (NavigatingFrom != null)
-                    NavigatingFrom(this, eventArgs);
             }
         }
 

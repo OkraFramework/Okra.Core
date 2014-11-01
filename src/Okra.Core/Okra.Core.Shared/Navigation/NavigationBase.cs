@@ -21,18 +21,7 @@ namespace Okra.Navigation
         private readonly Dictionary<PageInfo, PageDetails> pageCache = new Dictionary<PageInfo, PageDetails>();
 
         private bool restoringState = false;
-
-        // *** Events ***
-
-        [Obsolete("Use INavigationStack.PropertyChanged event for future compatibility")]
-        public event EventHandler CanGoBackChanged;
-
-        [Obsolete("Use INavigationStack.NavigatingFrom event for future compatibility")]
-        public event EventHandler<PageNavigationEventArgs> NavigatingFrom;
-
-        [Obsolete("Use INavigationStack.NavigatedTo event for future compatibility")]
-        public event EventHandler<PageNavigationEventArgs> NavigatedTo;
-
+        
         // *** Constructors ***
 
         public NavigationBase(IViewFactory viewFactory)
@@ -60,15 +49,6 @@ namespace Okra.Navigation
         }
 
         // *** Properties ***
-
-        [Obsolete("Use INavigationStack.CanGoBack property for future compatibility")]
-        public bool CanGoBack
-        {
-            get
-            {
-                return navigationStack.CanGoBack;
-            }
-        }
 
         public INavigationStack NavigationStack
         {
@@ -170,39 +150,11 @@ namespace Okra.Navigation
 
             return state;
         }
-
-        // *** Protected Event Methods ***
-
-        protected virtual void OnNavigatedTo(PageNavigationEventArgs args)
-        {
-            if (args == null)
-                throw new ArgumentNullException("args");
-
-            EventHandler<PageNavigationEventArgs> eventHandler = NavigatedTo;
-
-            if (eventHandler != null)
-                eventHandler(this, args);
-        }
-
-        protected virtual void OnNavigatingFrom(PageNavigationEventArgs args)
-        {
-            if (args == null)
-                throw new ArgumentNullException("args");
-
-            EventHandler<PageNavigationEventArgs> eventHandler = NavigatingFrom;
-
-            if (eventHandler != null)
-                eventHandler(this, args);
-        }
-
+        
         // *** Private Methods ***
 
         private void CallNavigatedTo(PageInfo pageInfo, PageNavigationMode navigationMode)
         {
-            // Fire the NavigatedTo event
-
-            OnNavigatedTo(new PageNavigationEventArgs(pageInfo, navigationMode));
-
             // Call NavigatedTo on all page elements
 
             foreach (object element in GetPageElements(pageInfo))
@@ -214,10 +166,6 @@ namespace Okra.Navigation
 
         private void CallNavigatingFrom(PageInfo pageInfo, PageNavigationMode navigationMode)
         {
-            // Fire the NavigatingFrom event
-
-            OnNavigatingFrom(new PageNavigationEventArgs(pageInfo, navigationMode));
-
             // Call NavigatingFrom on all page elements
 
             foreach (object element in GetPageElements(pageInfo))
@@ -313,14 +261,6 @@ namespace Okra.Navigation
         {
             switch (e.PropertyName)
             {
-                case "CanGoBack":
-                    {
-                        EventHandler eventHandler = CanGoBackChanged;
-
-                        if (eventHandler != null)
-                            eventHandler(this, EventArgs.Empty);
-                    }
-                    break;
                 case "CurrentPage":
                     DisplayNavigationEntry((PageInfo)navigationStack.CurrentPage);
                     break;

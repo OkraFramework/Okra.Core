@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,25 +77,15 @@ namespace Okra.Navigation
 
             // *** Events ***
 
-            public event EventHandler CanExecuteChanged
-            {
-                // Simply use this as an alias for the INavigationBase.OnCanGoBackChanged event
-
-                add
-                {
-                    navigationManager.CanGoBackChanged += value;
-                }
-                remove
-                {
-                    navigationManager.CanGoBackChanged -= value;
-                }
-            }
+            public event EventHandler CanExecuteChanged;
 
             // *** Constructors ***
 
             public GoBackCommand(INavigationBase navigationManager)
             {
                 this.navigationManager = navigationManager;
+
+                navigationManager.NavigationStack.PropertyChanged += NavigationStack_PropertyChanged;
             }
 
             // *** Methods ***
@@ -108,6 +99,24 @@ namespace Okra.Navigation
             {
                 if (navigationManager.NavigationStack.CanGoBack)
                     navigationManager.NavigationStack.GoBack();
+            }
+
+            // *** Private Methods ***
+
+            private void NavigationStack_PropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+                if (e.PropertyName == "CanGoBack")
+                {
+                    OnCanExecuteChanged();
+                }
+            }
+
+            private void OnCanExecuteChanged()
+            {
+                EventHandler eventHandler = CanExecuteChanged;
+
+                if (eventHandler != null)
+                    eventHandler(this, new EventArgs());
             }
         }
 
