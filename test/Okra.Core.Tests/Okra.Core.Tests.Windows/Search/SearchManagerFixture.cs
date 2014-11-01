@@ -313,7 +313,7 @@ namespace Okra.Tests.Search
         }
 
         [TestMethod]
-        public async Task Activate_ThrowsException_IfEventArgsIsNull()
+        public void Activate_ThrowsException_IfEventArgsIsNull()
         {
             SearchManager searchManager = CreateSearchMananger();
 
