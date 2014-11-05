@@ -17,7 +17,5 @@
   <files>
     <file src="Okra.Core.Windows\bin\Release\Okra.Core.dll" target="lib\netcore451\Okra.Core.dll" />
     <file src="Okra.Core.Windows\bin\Release\Okra.Core.pri" target="lib\netcore451\Okra.Core.pri" />
-    <file src="Okra.Core.Windows\bin\Release\Okra.Core.xr.xml" target="lib\netcore451\Okra.Core\Okra.Core.xr.xml" />
-    <file src="Okra.Core.Windows\bin\Release\Themes\Generic.xbf" target="lib\netcore451\Okra.Core\Themes\Generic.xbf" />
   </files>
 </package>
