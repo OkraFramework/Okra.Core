@@ -61,7 +61,7 @@ namespace Okra.Tests.Navigation
             TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
 
             object page = new object();
-            settingsPaneManager.DisplayPage(page);
+            settingsPaneManager.CallDisplayPage(page);
 
             Assert.AreEqual(1, settingsPaneManager.ShowSettingsFlyoutCalls.Count);
             Assert.IsNotNull(settingsPaneManager.ShowSettingsFlyoutCalls[0]);
@@ -73,23 +73,61 @@ namespace Okra.Tests.Navigation
             TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
 
             object page = new object();
-            settingsPaneManager.DisplayPage(page);
-            settingsPaneManager.DisplayPage(page);
+            settingsPaneManager.CallDisplayPage(page);
+            settingsPaneManager.CallDisplayPage(page);
 
             Assert.AreEqual(2, settingsPaneManager.ShowSettingsFlyoutCalls.Count);
             Assert.AreEqual(settingsPaneManager.ShowSettingsFlyoutCalls[0], settingsPaneManager.ShowSettingsFlyoutCalls[1]);
         }
 
         [UITestMethod]
-        public void DisplayPage_SetsSettingsFlyoutContent()
+        public void DisplayPage_SetsSettingsFlyoutHostContent()
         {
             TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
 
             UserControl page = new UserControl();
-            settingsPaneManager.DisplayPage(page);
+            settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
             Assert.AreEqual(page, flyout.Content);
+        }
+
+        [UITestMethod]
+        public void DisplayPage_WithSettingsFlyout_SetsSettingsFlyoutHostContent()
+        {
+            TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
+
+            SettingsFlyout page = new SettingsFlyout();
+            settingsPaneManager.CallDisplayPage(page);
+
+            SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
+            Assert.AreEqual(page, flyout.Content);
+        }
+
+        [UITestMethod]
+        public void DisplayPage_UsesDefaultSettingsFlyoutTemplate()
+        {
+            TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
+
+            UserControl page = new UserControl();
+            settingsPaneManager.CallDisplayPage(new SettingsFlyout());
+            settingsPaneManager.CallDisplayPage(page);
+
+            SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
+            Assert.AreEqual(null, flyout.Template);
+        }
+
+        [UITestMethod]
+        public void DisplayPage_WithSettingsFlyout_UsesCustomTemplate()
+        {
+            TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
+
+            SettingsFlyout page = new SettingsFlyout();
+            settingsPaneManager.CallDisplayPage(new UserControl());
+            settingsPaneManager.CallDisplayPage(page);
+
+            SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
+            Assert.IsNotNull(flyout.Template);
         }
 
         [UITestMethod]
@@ -99,7 +137,7 @@ namespace Okra.Tests.Navigation
 
             UserControl page = new UserControl();
             SettingsPaneInfo.SetTitle(page, "Test Title");
-            settingsPaneManager.DisplayPage(page);
+            settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
             Assert.AreEqual("Test Title", flyout.Title);
@@ -112,10 +150,26 @@ namespace Okra.Tests.Navigation
 
             UserControl page = new UserControl();
             SettingsPaneInfo.SetWidth(page, 420);
-            settingsPaneManager.DisplayPage(page);
+            settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
             Assert.AreEqual(420, flyout.Width);
+        }
+
+        [UITestMethod]
+        public void DisplayPage_WithSettingsFlyout_ResetsSettingsFlyoutWidth()
+        {
+            TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
+
+            UserControl page1 = new UserControl();
+            SettingsPaneInfo.SetWidth(page1, 420);
+            settingsPaneManager.CallDisplayPage(page1);
+
+            SettingsFlyout page2 = new SettingsFlyout();
+            settingsPaneManager.CallDisplayPage(page2);
+
+            SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
+            Assert.AreEqual(double.NaN, flyout.Width);
         }
 
         [UITestMethod]
@@ -126,7 +180,7 @@ namespace Okra.Tests.Navigation
 
             UserControl page = new UserControl();
             SettingsPaneInfo.SetIconSource(page, icon);
-            settingsPaneManager.DisplayPage(page);
+            settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
             Assert.AreEqual(icon, flyout.IconSource);
@@ -140,7 +194,7 @@ namespace Okra.Tests.Navigation
 
             UserControl page = new UserControl();
             SettingsPaneInfo.SetHeaderBackground(page, brush);
-            settingsPaneManager.DisplayPage(page);
+            settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
             Assert.AreEqual(brush, flyout.HeaderBackground);
@@ -154,7 +208,7 @@ namespace Okra.Tests.Navigation
 
             UserControl page = new UserControl();
             SettingsPaneInfo.SetHeaderForeground(page, brush);
-            settingsPaneManager.DisplayPage(page);
+            settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
             Assert.AreEqual(brush, flyout.HeaderForeground);
@@ -318,7 +372,7 @@ namespace Okra.Tests.Navigation
                 base.ShowSettingsFlyout(settingsFlyout);
             }
 
-            public new void DisplayPage(object page)
+            public void CallDisplayPage(object page)
             {
                 base.DisplayPage(page);
             }

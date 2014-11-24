@@ -104,6 +104,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Navigation\ISettingsPaneManager.cs" />
+    <Compile Include="Navigation\SettingsPaneHost.cs" />
     <Compile Include="Navigation\SettingsPaneInfo.cs" />
     <Compile Include="Navigation\SettingsPaneManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
