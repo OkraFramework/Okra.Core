@@ -22,7 +22,7 @@ namespace $rootnamespace$
     /// A page that displays the contents of a settings pane
     /// </summary>
     [PageExport("$fileinputname$")]
-    public sealed partial class $safeitemname$ : UserControl
+    public sealed partial class $safeitemname$ : SettingsFlyout
     {
         public $safeitemname$()
         {

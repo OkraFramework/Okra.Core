@@ -1,20 +1,17 @@
-﻿<UserControl
+﻿<SettingsFlyout
     x:Class="$rootnamespace$.$safeitemname$"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:$rootnamespace$"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:nav="using:Okra.Navigation"
     mc:Ignorable="d"
-    d:DesignWidth="266"
-    RequestedTheme="Light"
-    nav:SettingsPaneInfo.Title="Settings" nav:SettingsPaneInfo.IconSource="ms-appx:///Assets/SmallLogo.png"
-    nav:SettingsPaneInfo.HeaderBackground="{ThemeResource SettingsFlyoutHeaderBackgroundThemeBrush}" nav:SettingsPaneInfo.HeaderForeground="{ThemeResource SettingsFlyoutHeaderForegroundThemeBrush}">
+    IconSource="Assets/SmallLogo.png"
+    Title="$safeitemname$"
+    d:DesignWidth="346">
 
     <!-- This StackPanel acts as a root panel for vertical layout of the content sections -->
-    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                Background="{ThemeResource SettingsFlyoutBackgroundThemeBrush}">
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
         <!-- The StackPanel(s) below define individual content sections -->
 
@@ -37,4 +34,4 @@
         <!-- Define more Content Sections below as necessary -->
 
     </StackPanel>
-</UserControl>
+</SettingsFlyout>
