@@ -1,3 +1,9 @@
+[CmdletBinding()]
+Param
+(
+    [switch]$noTests
+)
+
 # Move to the project root folder (parent from current script folder)
 
 function Get-ScriptDirectory
@@ -48,7 +54,10 @@ Invoke-MsBuildAndThrow ".\src\Okra.Core\Okra.Core.WindowsPhone\Okra.Core.Windows
 Invoke-MsBuildAndThrow ".\src\Okra.MEF\Okra.MEF.Windows\Okra.MEF.Windows.csproj"
 Invoke-MsBuildAndThrow ".\src\Okra.MEF\Okra.MEF.WindowsPhone\Okra.MEF.WindowsPhone.csproj"
 
-Invoke-MsBuildAndThrow ".\test\Okra.Core.Tests\Okra.Core.Tests.Windows\Okra.Core.Tests.Windows.csproj"
-Invoke-MsBuildAndThrow ".\test\Okra.Core.Tests\Okra.Core.Tests.WindowsPhone\Okra.Core.Tests.WindowsPhone.csproj"
-Invoke-MsBuildAndThrow ".\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\Okra.MEF.Tests.Windows.csproj"
-Invoke-MsBuildAndThrow ".\test\Okra.MEF.Tests\Okra.MEF.Tests.WindowsPhone\Okra.MEF.Tests.WindowsPhone.csproj"
+if (!$noTests)
+{
+	Invoke-MsBuildAndThrow ".\test\Okra.Core.Tests\Okra.Core.Tests.Windows\Okra.Core.Tests.Windows.csproj"
+	Invoke-MsBuildAndThrow ".\test\Okra.Core.Tests\Okra.Core.Tests.WindowsPhone\Okra.Core.Tests.WindowsPhone.csproj"
+	Invoke-MsBuildAndThrow ".\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\Okra.MEF.Tests.Windows.csproj"
+	Invoke-MsBuildAndThrow ".\test\Okra.MEF.Tests\Okra.MEF.Tests.WindowsPhone\Okra.MEF.Tests.WindowsPhone.csproj"
+}
