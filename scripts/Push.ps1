@@ -12,17 +12,16 @@ function Get-ScriptDirectory
 $rootFolder = (Get-Item (Get-ScriptDirectory)).Parent.FullName
 Set-Location $rootFolder
 
+# Import modules
+
+Import-Module -Name ".\scripts\Invoke-MsBuild.psm1"
+Import-Module -Name ".\scripts\Invoke-NuGet.psm1"
+
 # Check NuGet is installed and updated
 
-If (!(Test-Path .\.nuget\nuget.exe))
-{
-    New-Item .\.nuget -type directory -Force | Out-Null
-    Invoke-WebRequest 'https://www.nuget.org/nuget.exe' -OutFile '.\.nuget\nuget.exe'
-}
-
-.\.nuget\NuGet.exe update -self
+Install-NuGet
 
 # Push packages to NuGet.org
 
-.\.nuget\NuGet.exe push .\artifacts\Okra.Core.$versionNumber.nupkg
-.\.nuget\NuGet.exe push .\artifacts\Okra.MEF.$versionNumber.nupkg
+Push-NuGetPackage .\artifacts\Okra.Core.$versionNumber.nupkg
+Push-NuGetPackage .\artifacts\Okra.MEF.$versionNumber.nupkg

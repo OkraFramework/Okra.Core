@@ -9,6 +9,19 @@ function Install-NuGet
     .\.nuget\NuGet.exe update -self
 }
 
+function Install-NuGetPackage
+{
+    [CmdletBinding()]
+    Param
+    (
+        [Parameter(Mandatory=$True, Position = 1)][string]$PackageName,
+        [Parameter(Mandatory=$True, Position = 2)][string]$PackageVersion,
+        [Parameter(Mandatory=$True, Position = 3)][string]$OutputDirectory
+    )
+
+    .\.nuget\NuGet.exe install $PackageName -OutputDirectory $OutputDirectory -Version $PackageVersion
+}
+
 function Add-NuGetPackage
 {
     [CmdletBinding()]
@@ -19,6 +32,17 @@ function Add-NuGetPackage
     )
 
     .\.nuget\NuGet.exe pack $NuspecFileName -Prop Configuration=Release -Output $OutputDirectory -Symbols
+}
+
+function Push-NuGetPackage
+{
+    [CmdletBinding()]
+    Param
+    (
+        [Parameter(Mandatory=$True, Position = 1)][string]$PackageFileName
+    )
+
+    .\.nuget\NuGet.exe push $PackageFileName
 }
 
 function Restore-NuGetPackages

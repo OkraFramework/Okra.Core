@@ -9,43 +9,14 @@ function Get-ScriptDirectory
 $rootFolder = (Get-Item (Get-ScriptDirectory)).Parent.FullName
 Set-Location $rootFolder
 
-# --- Initialization ---
+# Import modules
 
-# Check NuGet is installed and updated
+Import-Module -Name ".\scripts\Invoke-NuGet.psm1"
+Import-Module -Name ".\scripts\Invoke-DotNetZip.psm1"
 
-If (!(Test-Path .\.nuget\nuget.exe))
-{
-    New-Item .\.nuget -type directory -Force | Out-Null
-    Invoke-WebRequest 'https://www.nuget.org/nuget.exe' -OutFile '.\.nuget\nuget.exe'
-}
+# Install DotNetZip package via NuGet
 
-.\.nuget\NuGet.exe update -self
-
-# Install required NuGet packages
-
-.\.nuget\NuGet.exe install DotNetZip -OutputDirectory .\packages -Version 1.9.3
-
-# --- Functions ---
-
-function Write-Zip( $sourcefiles, $zipPath )
-{
-    $item = New-Item .\artifacts\ziptemp -type directory
-    Copy-item $sourcefiles .\artifacts\ziptemp -Recurse
-
-    $zipFullPath = Join-Path (pwd) $zipPath
-
-    Add-Type -Path ".\packages\DotNetZip.1.9.3\lib\net20\Ionic.zip.dll"
-
-    $zip = new-object Ionic.Zip.ZipFile
-    $zip.AddDirectory($item.FullName)
-    $zip.Save($zipFullPath)
-    $zip.Dispose()
-
-    Remove-Item .\artifacts\ziptemp -Recurse -Force
-    return $zipPath
-}
-
-# --- Script ---
+Install-DotNetZip
 
 # Clean the solution
 
