@@ -18,6 +18,7 @@ Set-Location $rootFolder
 # Import modules
 
 Import-Module -Name ".\scripts\Invoke-MsBuild.psm1"
+Import-Module -Name ".\scripts\Invoke-NuGet.psm1"
 
 # Functions
 
@@ -35,17 +36,10 @@ function Invoke-MsBuildAndThrow
     }
 }
 
-# Check NuGet is installed and updated
+# Check NuGet is installed and restore packages
 
-If (!(Test-Path .\.nuget\nuget.exe))
-{
-    New-Item .\.nuget -type directory -Force | Out-Null
-    Invoke-WebRequest 'https://www.nuget.org/nuget.exe' -OutFile '.\.nuget\nuget.exe'
-}
-
-# Restore NuGet packages
-
-.nuget\nuget restore
+Install-NuGet
+Restore-NuGetPackages
 
 # Perform builds
 

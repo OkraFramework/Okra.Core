@@ -20,3 +20,8 @@ function Add-NuGetPackage
 
     .\.nuget\NuGet.exe pack $NuspecFileName -Prop Configuration=Release -Output $OutputDirectory -Symbols
 }
+
+function Restore-NuGetPackages
+{
+    .nuget\nuget restore
+}
