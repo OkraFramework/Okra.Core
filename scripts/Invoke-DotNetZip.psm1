@@ -9,7 +9,7 @@ function Write-Zip
     [CmdletBinding()]
     Param
     (
-        [Parameter(Mandatory=$True, Position = 1)][string]$Sourcefiles,
+        [Parameter(Mandatory=$True, Position = 1)][string[]]$Sourcefiles,
         [Parameter(Mandatory=$True, Position = 2)][string]$ZipPath
     )
 

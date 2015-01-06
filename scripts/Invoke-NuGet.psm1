@@ -31,7 +31,16 @@ function Add-NuGetPackage
         [Parameter(Mandatory=$True, Position = 2)][string]$OutputDirectory
     )
 
+    # Call NuGet pack
+
     .\.nuget\NuGet.exe pack $NuspecFileName -Prop Configuration=Release -Output $OutputDirectory -Symbols
+    
+    # Throw a terminating exception if NuGet packaging failed
+
+    if ($LastExitCode -ne 0)
+    {
+        throw "NuGet packaging failed."
+    }
 }
 
 function Push-NuGetPackage
