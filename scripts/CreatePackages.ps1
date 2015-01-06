@@ -9,23 +9,21 @@ function Get-ScriptDirectory
 $rootFolder = (Get-Item (Get-ScriptDirectory)).Parent.FullName
 Set-Location $rootFolder
 
+# Import modules
+
+Import-Module -Name ".\scripts\Invoke-NuGet.psm1"
+
 # Create the artifacts directory if it doesn't exist
 
 New-Item .\artifacts -type directory -Force | Out-Null
 
 # Check NuGet is installed and updated
 
-If (!(Test-Path .\.nuget\nuget.exe))
-{
-    New-Item .\.nuget -type directory -Force | Out-Null
-    Invoke-WebRequest 'https://www.nuget.org/nuget.exe' -OutFile '.\.nuget\nuget.exe'
-}
-
-.\.nuget\NuGet.exe update -self
+Install-NuGet
 
 # Create packages
 
-.\.nuget\NuGet.exe pack .\src\Okra.Core\Okra.Core.nuspec -Prop Configuration=Release -Output .\artifacts -Symbols
-.\.nuget\NuGet.exe pack .\src\Okra.MEF\Okra.MEF.nuspec -Prop Configuration=Release -Output .\artifacts -Symbols
-.\.nuget\NuGet.exe pack .\src\Okra.Core\OkraUniversalPreview.Core.nuspec -Prop Configuration=Release -Output .\artifacts -Symbols
-.\.nuget\NuGet.exe pack .\src\Okra.MEF\OkraUniversalPreview.MEF.nuspec -Prop Configuration=Release -Output .\artifacts -Symbols
+Add-NuGetPackage .\src\Okra.Core\Okra.Core.nuspec .\artifacts
+Add-NuGetPackage .\src\Okra.MEF\Okra.MEF.nuspec .\artifacts
+Add-NuGetPackage .\src\Okra.Core\OkraUniversalPreview.Core.nuspec .\artifacts
+Add-NuGetPackage .\src\Okra.MEF\OkraUniversalPreview.MEF.nuspec .\artifacts
