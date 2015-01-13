@@ -39,7 +39,8 @@ function Invoke-MsBuildAndThrow
 # Check NuGet is installed and restore packages
 
 Install-NuGet
-Restore-NuGetPackages
+Restore-NuGetPackages ".\Okra.Core.sln"
+Restore-NuGetPackages ".\Okra.MEF.sln"
 
 # Perform builds
 

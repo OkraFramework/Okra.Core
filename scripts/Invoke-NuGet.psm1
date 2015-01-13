@@ -56,5 +56,11 @@ function Push-NuGetPackage
 
 function Restore-NuGetPackages
 {
-    .nuget\nuget restore
+    [CmdletBinding()]
+    Param
+    (
+        [Parameter(Mandatory=$False)][string]$SolutionFileName
+    )
+
+    .nuget\nuget restore $SolutionFileName
 }
