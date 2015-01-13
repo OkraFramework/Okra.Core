@@ -156,9 +156,17 @@ namespace Okra.Navigation
 
             public T GetData<T>()
             {
-                if (data == null && rawData != null)
+                if (data == null)
                 {
-                    data = SerializationHelper.DeserializeFromArray(rawData, typeof(T));
+                    if (rawData != null)
+                    {
+                        data = SerializationHelper.DeserializeFromArray(rawData, typeof(T));
+                    }
+                    else
+                    {
+                        data = default(T);
+                    }
+
                     dataType = typeof(T);
                 }
 

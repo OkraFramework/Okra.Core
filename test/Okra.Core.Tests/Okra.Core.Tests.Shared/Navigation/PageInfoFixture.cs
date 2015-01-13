@@ -74,6 +74,14 @@ namespace Okra.Tests.Navigation
         }
 
         [TestMethod]
+        public void Constructor_SetsArguments_NullReturnsDefaultInt()
+        {
+            PageInfo navigationEntry = new PageInfo("Page Name", null);
+
+            Assert.AreEqual(0, navigationEntry.GetArguments<int>());
+        }
+
+        [TestMethod]
         public void Constructor_ThrowsException_WhenPageNameIsNull()
         {
             Assert.ThrowsException<ArgumentException>(() => new PageInfo(null, "Arguments"));
@@ -443,6 +451,17 @@ namespace Okra.Tests.Navigation
             var args = newEntry.GetArguments<StructState>();
             Assert.AreEqual("Text Value", args.Text);
             Assert.AreEqual(42, args.Number);
+        }
+
+        [TestMethod]
+        public void Serialization_PersistsArguments_NullReturnsDefaultInt()
+        {
+            PageInfo sourceEntry = new PageInfo("Page Name", null);
+
+            byte[] data = SerializationHelper.SerializeToArray(sourceEntry);
+            PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
+
+            Assert.AreEqual(0, newEntry.GetArguments<int>());
         }
 
         [TestMethod]
