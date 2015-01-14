@@ -65,7 +65,7 @@ namespace Okra.Navigation
             // NB: Set the 'isUnloading' flag to stop reopening the system settings pane
             // TODO : Add some way to indicate to VMs that they are closing - IClosingAware?
 
-            isUnloading = false;
+            isUnloading = true;
             NavigationStack.Clear();
             isUnloading = false;
         }
