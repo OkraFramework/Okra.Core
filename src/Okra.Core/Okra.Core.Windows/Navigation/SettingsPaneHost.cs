@@ -47,10 +47,12 @@ namespace Okra.Navigation
             
             if (newContent is SettingsFlyout)
             {
-                this.Template = chromelessTemplate;
-                this.ClearValue(WidthProperty);
+                SettingsFlyout newContentFlyout = (SettingsFlyout)newContent;
 
-                ((SettingsFlyout)newContent).BackClick += SettingsPaneHost_BackClick;
+                this.Template = chromelessTemplate;
+                this.Width = newContentFlyout.Width;
+
+                newContentFlyout.BackClick += SettingsPaneHost_BackClick;
             }
             else
             {

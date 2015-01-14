@@ -157,7 +157,7 @@ namespace Okra.Tests.Navigation
         }
 
         [UITestMethod]
-        public void DisplayPage_WithSettingsFlyout_ResetsSettingsFlyoutWidth()
+        public void DisplayPage_WithSettingsFlyout_SetsSettingsFlyoutHostWidth()
         {
             TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
 
@@ -165,11 +165,11 @@ namespace Okra.Tests.Navigation
             SettingsPaneInfo.SetWidth(page1, 420);
             settingsPaneManager.CallDisplayPage(page1);
 
-            SettingsFlyout page2 = new SettingsFlyout();
+            SettingsFlyout page2 = new SettingsFlyout() { Width = 500 };
             settingsPaneManager.CallDisplayPage(page2);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
-            Assert.AreEqual(double.NaN, flyout.Width);
+            Assert.AreEqual(500, flyout.Width);
         }
 
         [UITestMethod]
