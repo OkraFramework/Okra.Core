@@ -11,4 +11,5 @@
   * Upload the Visual Studio extension to the Visual Studio Gallery
 * Update AppVeyor to the next version for prerelease package publishing
 * Update Okra-Samples to use the latest release of the framework
+* Update Okra-Todo to user the latest release of the framework
 * Write blog post announcing the release
