@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>OkraUniversalPreview.MEF</id>
-    <version>0.9.8</version>
+    <version>1.0.0</version>
     <title>PREVIEW - Okra App Framework - Universal Framework</title>
     <authors>Andrew Wilkinson</authors>
     <owners>Andrew Wilkinson</owners>
@@ -14,7 +14,7 @@
     <copyright>Copyright 2014</copyright>
     <tags>Okra MVVM WinRT WindowsStore Windows8 Win8 MEF</tags>
     <dependencies>
-      <dependency id="OkraUniversalPreview.Core" version="[0.9.8]"/>
+      <dependency id="OkraUniversalPreview.Core" version="[1.0.0]"/>
       <dependency id="Microsoft.Composition" version="[1.0.27]"/>
     </dependencies>
   </metadata>
