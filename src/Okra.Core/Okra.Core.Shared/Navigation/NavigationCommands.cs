@@ -8,7 +8,7 @@ using System.Windows.Input;
 using Windows.UI.Popups;
 using Okra.Helpers;
 
-#if WINDOWS_APP
+#if WINDOWS_APP || WINDOWS_UAP
 using Windows.UI.ApplicationSettings;
 #endif
 
@@ -45,7 +45,7 @@ namespace Okra.Navigation
             return new NavigateToCommand(navigationBase, pageName, arguments);
         }
 
-#if WINDOWS_APP
+#if WINDOWS_APP || WINDOWS_UAP
         public static SettingsCommand GetNavigateToSettingsCommand(this INavigationBase navigationBase, string label, string pageName, object arguments = null)
         {
             // Validate Parameters

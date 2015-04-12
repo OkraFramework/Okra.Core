@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-#if WINDOWS_APP
+#if WINDOWS_APP || WINDOWS_UAP
 using Windows.UI.ApplicationSettings;
 #endif
 
@@ -161,7 +161,7 @@ namespace Okra.Tests.Navigation
             Assert.ThrowsException<ArgumentException>(() => NavigationCommands.GetNavigateToCommand(navigationManager, "", new object()));
         }
 
-#if WINDOWS_APP
+#if WINDOWS_APP || WINDOWS_UAP
         [TestMethod]
         public void GetNavigateToSettingsCommand_ReturnsNewSettingsCommand()
         {

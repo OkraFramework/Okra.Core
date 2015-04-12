@@ -110,6 +110,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <SDKReference Include="Windows Desktop, Version=10.0.10030.0">
+      <Name>Windows Desktop Extension SDK</Name>
+    </SDKReference>
     <SDKReference Include="Windows Mobile, Version=10.0.0.1">
       <Name>Windows Mobile Extension SDK</Name>
     </SDKReference>
