@@ -46,8 +46,10 @@ Restore-NuGetPackages ".\Okra.MEF.sln"
 
 Invoke-MsBuildAndThrow ".\src\Okra.Core\Okra.Core.Windows\Okra.Core.Windows.csproj"
 Invoke-MsBuildAndThrow ".\src\Okra.Core\Okra.Core.WindowsPhone\Okra.Core.WindowsPhone.csproj"
+Invoke-MsBuildAndThrow ".\src\Okra.Core\Okra.Core.Xamarin.Forms\Okra.Core.Xamarin.Forms.csproj"
 Invoke-MsBuildAndThrow ".\src\Okra.MEF\Okra.MEF.Windows\Okra.MEF.Windows.csproj"
 Invoke-MsBuildAndThrow ".\src\Okra.MEF\Okra.MEF.WindowsPhone\Okra.MEF.WindowsPhone.csproj"
+Invoke-MsBuildAndThrow ".\src\Okra.MEF\Okra.MEF.Xamarin.Forms\Okra.MEF.Xamarin.Forms.csproj"
 
 if (!$noTests)
 {

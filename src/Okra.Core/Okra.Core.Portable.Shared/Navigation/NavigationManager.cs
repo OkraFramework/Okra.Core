@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 using System.Threading.Tasks;
 using Okra.Helpers;
 using Okra.Services;
-using Windows.ApplicationModel.Activation;
+
+#if NETFX_CORE
 using Windows.Storage;
-using Windows.UI.Xaml;
-using System.Reflection;
-using Windows.UI.Xaml.Navigation;
+#else
+using PCLStorage;
+#endif
 
 namespace Okra.Navigation
 {
@@ -51,12 +51,22 @@ namespace Okra.Navigation
             if (navigationTarget != null)
                 this.navigationTarget = navigationTarget;
             else
+#if NETFX_CORE
                 this.navigationTarget = new WindowNavigationTarget();
+#else
+                this.navigationTarget = new NavigationViewNavigationTarget();
+#endif
 
             // Register with the LifetimeManager
 
             lifetimeManager.Register(this);
         }
+
+        // *** Imported Properties ***
+
+#if !NETFX_CORE
+        public IFileSystem FileSystem { get; set; }
+#endif   
 
         // *** Properties ***
 
@@ -119,22 +129,31 @@ namespace Okra.Navigation
                 switch (NavigationStorageType)
                 {
                     case Navigation.NavigationStorageType.Local:
+#if NETFX_CORE
                         restoredState = await storageManager.RetrieveAsync<NavigationState>(ApplicationData.Current.LocalFolder, STORAGE_FILENAME);
+#else
+                        restoredState = await storageManager.RetrieveAsync<NavigationState>(FileSystem.LocalStorage, STORAGE_FILENAME);//.ConfigureAwait(false);
+#endif
                         break;
                     case Navigation.NavigationStorageType.Roaming:
+#if NETFX_CORE
                         restoredState = await storageManager.RetrieveAsync<NavigationState>(ApplicationData.Current.RoamingFolder, STORAGE_FILENAME);
+#else
+                        restoredState = await storageManager.RetrieveAsync<NavigationState>(FileSystem.RoamingStorage, STORAGE_FILENAME);//.ConfigureAwait(false);
+#endif                        
                         break;
                 }
             }
             catch (SerializationException)
             {
-            }
+            }            
 
             // If a navigation stack is available, then restore this
 
             if (restoredState != null)
             {
                 RestoreState(restoredState);
+                //await BeginInvokeOnMainThreadAsync(() => RestoreState(restoredState)).ConfigureAwait(false);
 
                 // Return true to signal success
 
@@ -146,10 +165,29 @@ namespace Okra.Navigation
             else
             {
                 this.NavigateTo(HomePageName);
+                //await BeginInvokeOnMainThreadAsync(() => this.NavigateTo(HomePageName)).ConfigureAwait(false);
 
                 return false;
             }
         }
+
+        //private Task BeginInvokeOnMainThreadAsync(Action action)
+        //{
+        //    TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
+        //    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+        //    {
+        //        try
+        //        {
+        //            action();
+        //            tcs.SetResult(null);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            tcs.SetException(ex);
+        //        }
+        //    });
+        //    return tcs.Task;
+        //}
 
         // *** ILifetimeAware Methods ***
 
@@ -165,10 +203,18 @@ namespace Okra.Navigation
             switch (NavigationStorageType)
             {
                 case Navigation.NavigationStorageType.Local:
-                    await StoreNavigationStack(ApplicationData.Current.LocalFolder);
+#if NETFX_CORE
+                    await StoreNavigationStack(ApplicationData.Current.LocalFolder).ConfigureAwait(false);
+#else
+                    await StoreNavigationStack(FileSystem.LocalStorage).ConfigureAwait(false);
+#endif                    
                     break;
                 case Navigation.NavigationStorageType.Roaming:
-                    await StoreNavigationStack(ApplicationData.Current.RoamingFolder);
+#if NETFX_CORE
+                    await StoreNavigationStack(ApplicationData.Current.RoamingFolder).ConfigureAwait(false);
+#else
+                    await StoreNavigationStack(FileSystem.RoamingStorage).ConfigureAwait(false);
+#endif
                     break;
             }
         }
@@ -184,12 +230,16 @@ namespace Okra.Navigation
 
         // *** Private Methods ***
 
+#if NETFX_CORE
         private Task StoreNavigationStack(StorageFolder folder)
+#else
+        private Task StoreNavigationStack(IFolder folder)            
+#endif
         {
             // Create an object for storage of the navigation state
 
             NavigationState state = StoreState();
-            
+
             // Store the state using the IStorageManager
 
             return storageManager.StoreAsync(folder, STORAGE_FILENAME, state);

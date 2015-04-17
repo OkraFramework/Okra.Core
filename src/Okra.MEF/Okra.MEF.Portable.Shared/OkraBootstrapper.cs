@@ -5,13 +5,19 @@ using System.Reflection;
 using System.Linq;
 using Okra.Navigation;
 using Okra.Services;
+using System;
+using System.Threading.Tasks;
+
+#if NETFX_CORE
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
-using System;
-using System.Threading.Tasks;
-using Okra.Helpers;
 using Okra.Sharing;
+using Okra.Helpers;
+#else
+using Xamarin.Forms;
+using PCLStorage;
+#endif
 
 #if WINDOWS_APP
 using Okra.Search;
@@ -25,6 +31,30 @@ namespace Okra
 
         private bool isActivated;
 
+#if !NETFX_CORE
+        private IFileSystem fileSystem;
+#endif
+
+        // *** Constructors ***
+#if !NETFX_CORE
+        /// <summary>
+        /// Creates and initializes a bootstrapper for the Okra framework.
+        /// </summary>
+        /// <param name="fileSystem">
+        /// A platform specific file system wrapper used for storing navigation stack and 
+        /// state when INavigationManager.NavigationStorageType is set to local or roaming.
+        /// <remarks>
+        /// Use the PCLStorage.FileSystem.Current instance.
+        /// </remarks>
+        /// </param>
+        public OkraBootstrapper(IFileSystem fileSystem)
+        {
+            if (fileSystem == null)
+                throw new ArgumentNullException("fileSystem", "A platform specific file system wrapper must be supplied.");
+
+            this.fileSystem = fileSystem;
+        }
+#endif
         // *** Imported Properties ***
 
         [Import]
@@ -36,14 +66,42 @@ namespace Okra
         [Import]
         public ILaunchActivationHandler LaunchActivationHandler { get; set; }
 
+#if !NETFX_CORE
+        [Import]
+        public ILifetimeManager LifetimeManager { get; set; }
+#endif        
+
         // *** Public Methods ***
 
+#if NETFX_CORE
         public void Activate(IActivatedEventArgs args)
+#else
+        public async void Activate(IActivatedEventArgs args)
+#endif
         {
             if (args == null)
                 throw new ArgumentNullException("args");
 
-            OnActivated(CoreApplication.GetCurrentView(), args);
+            // Setup services if this is the first activation
+
+            if (!isActivated)
+            {
+#if !NETFX_CORE
+                NavigationManager.FileSystem = fileSystem;
+#endif
+                SetupServices();
+                isActivated = true;
+            }
+
+            // Call the activation manager
+            // NB: Since this is async and we do not await it, we need to inject any exceptions into the Application.UnhandledException event
+
+            Task activateTask = ActivationManager.Activate(args);
+#if NETFX_CORE
+            ExceptionHelper.InjectAsyncExceptions(activateTask);
+#else
+            await activateTask;
+#endif
         }
 
         public virtual void Initialize()
@@ -59,6 +117,7 @@ namespace Okra
             CompositionHost compositionHost = containerConfiguration.CreateContainer();
             compositionHost.SatisfyImports(this);
 
+#if NETFX_CORE
             // Attach to the CoreApplicationView for activation events
 
             if (registerForActivation)
@@ -66,6 +125,7 @@ namespace Okra
                 CoreApplicationView coreApplicationView = CoreApplication.GetCurrentView();
                 coreApplicationView.Activated += OnActivated;
             }
+#endif
         }
 
         // *** Protected Methods ***
@@ -85,11 +145,13 @@ namespace Okra
                                                                     if (info.ParameterType == typeof(INavigationTarget))
                                                                         builder.AllowDefault();
                                                                 });
-
             
-            okraConventionBuilder.ForType<ActivationManager>().Export<IActivationManager>().Shared();
+#if NETFX_CORE
             okraConventionBuilder.ForType<ShareSourceManager>().Export<IShareSourceManager>().Shared();
             okraConventionBuilder.ForType<ShareTargetManager>().Export<IShareTargetManager>().Shared();
+#endif
+
+            okraConventionBuilder.ForType<ActivationManager>().Export<IActivationManager>().Shared();
             okraConventionBuilder.ForType<LifetimeManager>().Export<ILifetimeManager>().Shared();
             okraConventionBuilder.ForType<StorageManager>().Export<IStorageManager>().Shared();
             okraConventionBuilder.ForType<LaunchActivationHandler>().Export<ILaunchActivationHandler>().Shared();
@@ -122,24 +184,11 @@ namespace Okra
         {
         }
 
+#if NETFX_CORE
         protected virtual void OnActivated(CoreApplicationView sender, IActivatedEventArgs args)
         {
-            if (args == null)
-                throw new ArgumentNullException("args");
-
-            // Setup services if this is the first activation
-
-            if (!isActivated)
-            {
-                SetupServices();
-                isActivated = true;
-            }
-
-            // Call the activation manager
-            // NB: Since this is async and we do not await it, we need to inject any exceptions into the Application.UnhandledException event
-
-            Task activateTask = ActivationManager.Activate(args);
-            ExceptionHelper.InjectAsyncExceptions(activateTask);
+            Activate(args);
         }
+#endif
     }
 }

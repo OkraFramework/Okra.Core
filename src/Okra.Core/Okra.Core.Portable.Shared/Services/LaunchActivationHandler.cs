@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Okra.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Okra.Navigation;
+
+#if NETFX_CORE
 using Windows.ApplicationModel.Activation;
-using Windows.UI.Xaml;
+#endif
 
 namespace Okra.Services
 {

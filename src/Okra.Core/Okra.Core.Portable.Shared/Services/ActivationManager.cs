@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Okra.Helpers;
-using Okra.Navigation;
-using Windows.ApplicationModel.Activation;
+
+#if NETFX_CORE
 using Windows.UI.Xaml;
+using Windows.ApplicationModel.Activation;
+#endif
 
 namespace Okra.Services
 {
@@ -98,10 +100,12 @@ namespace Okra.Services
             Task<bool> firstHandlingTask = activationTasks.FirstOrDefault(task => task.Result == true);
             bool handled = firstHandlingTask != null;
 
+#if NETFX_CORE
             // If the activation was handled then activate the current window
 
             if (handled && Window.Current != null)
                 Window.Current.Activate();
+#endif
 
             return handled;
         }

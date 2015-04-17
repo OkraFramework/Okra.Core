@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Composition;
 using System.Composition.Hosting.Core;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Okra.Helpers;
-using Windows.UI.Xaml;
 
 namespace Okra.Navigation
 {
@@ -104,9 +101,13 @@ namespace Okra.Navigation
 
             if (viewModel == null)
                 throw new ArgumentNullException("viewModel");
-
-            if (page is FrameworkElement)
-                ((FrameworkElement)page).DataContext = viewModel;
+#if NETFX_CORE
+            if (page is Windows.UI.Xaml.FrameworkElement)
+                ((Windows.UI.Xaml.FrameworkElement)page).DataContext = viewModel;
+#else
+            if (page is Xamarin.Forms.BindableObject)
+                ((Xamarin.Forms.BindableObject)page).BindingContext = viewModel;
+#endif
         }
 
         // *** Private Sub-Classes ***

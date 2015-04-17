@@ -1,58 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Okra.Helpers;
 using Windows.ApplicationModel;
-using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 
 namespace Okra.Services
 {
-    public class LifetimeManager : ILifetimeManager
+    public class LifetimeManager : LifetimeManagerBase
     {
-        // *** Fields ***
-
-        private HashSet<ILifetimeAware> registeredServices = new HashSet<ILifetimeAware>();
-
-        // *** Constructors ***
-
         public LifetimeManager()
         {
             Application.Current.Suspending += this.OnSuspending;
             Application.Current.Resuming += this.OnResuming;
-        }
-
-        // *** Methods ***
-
-        public void Register(ILifetimeAware service)
-        {
-            // Validate parameters
-
-            if (service == null)
-                throw new ArgumentNullException("service");
-
-            if (registeredServices.Contains(service))
-                throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotRegisterServiceMultipleTimes"));
-
-            // Add the service to the internal list
-
-            registeredServices.Add(service);
-        }
-
-        public void Unregister(ILifetimeAware service)
-        {
-            // Validate parameters
-
-            if (service == null)
-                throw new ArgumentNullException("service");
-
-            if (!registeredServices.Contains(service))
-                throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotUnregisterUnregisteredService"));
-
-            // Remove the service from the internal list
-
-            registeredServices.Remove(service);
         }
 
         // *** Protected Methods ***
@@ -61,16 +20,14 @@ namespace Okra.Services
         {
             ISuspendingDeferral deferal = GetDeferral(e);
 
-            IEnumerable<Task> resumingTasks = registeredServices.Select(service => service.OnSuspending());
-            await Task.WhenAll(resumingTasks);
+            await SuspendServicesAsync();
 
             deferal.Complete();
         }
 
-        protected void OnResuming(object sender, object e)
+        protected async void OnResuming(object sender, object e)
         {
-            IEnumerable<Task> resumingTasks = registeredServices.Select(service => service.OnResuming());
-            Task.WhenAll(resumingTasks).Wait();
+            await ResumeServicesAsync();
         }
 
         protected virtual ISuspendingDeferral GetDeferral(ISuspendingEventArgs e)
