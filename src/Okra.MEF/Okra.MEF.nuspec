@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The Okra App Framework is designed to support the development of .Net Windows 8 applications, in particular those following the MVVM pattern. This package is designed for use with MEF.</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright 2014</copyright>
+    <copyright>Copyright 2015</copyright>
     <tags>Okra MVVM WinRT WindowsStore Windows8 Win8 MEF</tags>
     <dependencies>
       <dependency id="Okra.Core" version="[1.0.0]"/>
