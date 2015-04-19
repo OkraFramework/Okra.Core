@@ -138,14 +138,6 @@
       <Name>Okra.Core.Xamarin.Forms</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="README_FIRST.txt" />
-    <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
-  </ItemGroup>
   <Import Project="..\..\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems" Label="Shared" />
   <Import Project="..\Okra.MEF\Okra.MEF.projitems" Label="Shared" Condition="Exists('..\Okra.MEF\Okra.MEF.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
