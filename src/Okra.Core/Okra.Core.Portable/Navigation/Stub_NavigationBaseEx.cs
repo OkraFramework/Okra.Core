@@ -23,12 +23,12 @@ namespace Okra.Navigation
             throw new NotImplementedException();
         }
 
-        public static void NavigateTo(this INavigationBase navigationManager, Type pageName)
+        public static void NavigateTo(this INavigationBase navigationBase, Type pageName)
         {
             throw new NotImplementedException();
         }
 
-        public static void NavigateTo(this INavigationBase navigationManager, Type pageName, object arguments)
+        public static void NavigateTo(this INavigationBase navigationBase, Type pageName, object arguments)
         {
             throw new NotImplementedException();
         }

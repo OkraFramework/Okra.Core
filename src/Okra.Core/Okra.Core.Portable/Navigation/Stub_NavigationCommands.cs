@@ -11,12 +11,12 @@ namespace Okra.Navigation
     {
         // *** Methods ***
 
-        public static ICommand GetGoBackCommand(this INavigationBase navigationManager)
+        public static ICommand GetGoBackCommand(this INavigationBase navigationBase)
         {
             throw new NotImplementedException();
         }
 
-        public static ICommand GetNavigateToCommand(this INavigationBase navigationManager, string pageName, object arguments = null)
+        public static ICommand GetNavigateToCommand(this INavigationBase navigationBase, string pageName, object arguments = null)
         {
             throw new NotImplementedException();
         }
