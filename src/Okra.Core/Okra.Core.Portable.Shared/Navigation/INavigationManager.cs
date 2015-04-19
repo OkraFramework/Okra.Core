@@ -13,9 +13,6 @@ namespace Okra.Navigation
         string HomePageName { get; set; }
         NavigationStorageType NavigationStorageType { get; set; }
 
-#if !NETFX_CORE && !CODE_ANALYSIS
-        PCLStorage.IFileSystem FileSystem { get; set; }
-#endif
         // *** Methods ***
 
         Task<bool> RestoreNavigationStack();

@@ -16,7 +16,6 @@ using Okra.Sharing;
 using Okra.Helpers;
 #else
 using Xamarin.Forms;
-using PCLStorage;
 #endif
 
 #if WINDOWS_APP
@@ -31,30 +30,6 @@ namespace Okra
 
         private bool isActivated;
 
-#if !NETFX_CORE
-        private IFileSystem fileSystem;
-#endif
-
-        // *** Constructors ***
-#if !NETFX_CORE
-        /// <summary>
-        /// Creates and initializes a bootstrapper for the Okra framework.
-        /// </summary>
-        /// <param name="fileSystem">
-        /// A platform specific file system wrapper used for storing navigation stack and 
-        /// state when INavigationManager.NavigationStorageType is set to local or roaming.
-        /// <remarks>
-        /// Use the PCLStorage.FileSystem.Current instance.
-        /// </remarks>
-        /// </param>
-        public OkraBootstrapper(IFileSystem fileSystem)
-        {
-            if (fileSystem == null)
-                throw new ArgumentNullException("fileSystem", "A platform specific file system wrapper must be supplied.");
-
-            this.fileSystem = fileSystem;
-        }
-#endif
         // *** Imported Properties ***
 
         [Import]
@@ -69,6 +44,12 @@ namespace Okra
 #if !NETFX_CORE
         [Import]
         public ILifetimeManager LifetimeManager { get; set; }
+
+        //[Export]
+        //public PCLStorage.IFileSystem FileSystem
+        //{
+        //    get { return PCLStorage.FileSystem.Current; }
+        //}
 #endif        
 
         // *** Public Methods ***
@@ -86,9 +67,6 @@ namespace Okra
 
             if (!isActivated)
             {
-#if !NETFX_CORE
-                NavigationManager.FileSystem = fileSystem;
-#endif
                 SetupServices();
                 isActivated = true;
             }
@@ -150,7 +128,6 @@ namespace Okra
             okraConventionBuilder.ForType<ShareSourceManager>().Export<IShareSourceManager>().Shared();
             okraConventionBuilder.ForType<ShareTargetManager>().Export<IShareTargetManager>().Shared();
 #endif
-
             okraConventionBuilder.ForType<ActivationManager>().Export<IActivationManager>().Shared();
             okraConventionBuilder.ForType<LifetimeManager>().Export<ILifetimeManager>().Shared();
             okraConventionBuilder.ForType<StorageManager>().Export<IStorageManager>().Shared();

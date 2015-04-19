@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Okra.Navigation
@@ -15,7 +14,7 @@ namespace Okra.Navigation
 
         // *** Methods ***
 
-        public async void NavigateTo(object page, INavigationBase navigationManager)
+        public void NavigateTo(object page, INavigationBase navigationManager)
         {
             this.navigationManager = navigationManager;
 
