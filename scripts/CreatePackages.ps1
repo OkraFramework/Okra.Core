@@ -25,5 +25,3 @@ Install-NuGet
 
 Add-NuGetPackage .\src\Okra.Core\Okra.Core.nuspec .\artifacts
 Add-NuGetPackage .\src\Okra.MEF\Okra.MEF.nuspec .\artifacts
-Add-NuGetPackage .\src\Okra.Core\OkraUniversalPreview.Core.nuspec .\artifacts
-Add-NuGetPackage .\src\Okra.MEF\OkraUniversalPreview.MEF.nuspec .\artifacts

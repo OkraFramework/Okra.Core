@@ -17,5 +17,8 @@
   <files>
     <file src="Okra.Core.Windows\bin\Release\Okra.Core.dll" target="lib\netcore451\Okra.Core.dll" />
     <file src="Okra.Core.Windows\bin\Release\Okra.Core.pri" target="lib\netcore451\Okra.Core.pri" />
+
+    <file src="Okra.Core.WindowsPhone\bin\Release\Okra.Core.dll" target="lib\wpa81\Okra.Core.dll" />
+    <file src="Okra.Core.WindowsPhone\bin\Release\Okra.Core.pri" target="lib\wpa81\Okra.Core.pri" />
   </files>
 </package>
