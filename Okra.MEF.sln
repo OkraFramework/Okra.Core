@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.MEF.Tests.WindowsPhone
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.Core.Portable", "src\Okra.Core\Okra.Core.Portable\Okra.Core.Portable.csproj", "{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.MEF.Portable", "src\Okra.MEF\Okra.MEF.Portable\Okra.MEF.Portable.csproj", "{169468C7-E225-43D0-960C-D5BA4A1212D1}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		test\Okra.MEF.Tests\Okra.MEF.Tests.Shared\Okra.MEF.Tests.Shared.projitems*{8e2d1e6a-900e-4ef4-8fc5-a47326c97a22}*SharedItemsImports = 4
@@ -204,6 +206,20 @@ Global
 		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|x64.ActiveCfg = Release|Any CPU
 		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|x86.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|ARM.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|x64.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -219,5 +235,6 @@ Global
 		{DDEC51C1-5ED0-473A-B593-6BF291F1A55A} = {A8D2B638-A58D-4F7E-A4C7-720BA695DCEF}
 		{8E2D1E6A-900E-4EF4-8FC5-A47326C97A22} = {A8D2B638-A58D-4F7E-A4C7-720BA695DCEF}
 		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
+		{169468C7-E225-43D0-960C-D5BA4A1212D1} = {A605615E-DD69-4D49-B045-FAF5205FF4A2}
 	EndGlobalSection
 EndGlobal

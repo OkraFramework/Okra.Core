@@ -38,6 +38,8 @@ Remove-IfExists .\src\Okra.MEF\Okra.MEF.Windows\bin
 Remove-IfExists .\src\Okra.MEF\Okra.MEF.Windows\obj
 Remove-IfExists .\src\Okra.MEF\Okra.MEF.WindowsPhone\bin
 Remove-IfExists .\src\Okra.MEF\Okra.MEF.WindowsPhone\obj
+Remove-IfExists .\src\Okra.MEF\Okra.MEF.Portable\bin
+Remove-IfExists .\src\Okra.MEF\Okra.MEF.Portable\obj
 
 Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Windows\bin
 Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Windows\obj
