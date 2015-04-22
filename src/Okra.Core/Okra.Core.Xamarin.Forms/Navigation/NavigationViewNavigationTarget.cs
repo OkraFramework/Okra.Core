@@ -9,7 +9,6 @@ namespace Okra.Navigation
     {
         // *** Fields ***
 
-        private NavigationView navigationView;
         private INavigationBase navigationManager;
 
         // *** Methods ***
@@ -27,17 +26,10 @@ namespace Okra.Navigation
             if (nextPage == null)
                 throw new ArgumentException("Only objects of type 'Page' can be presented.", "page");
 
-            // If the content host has not been created then create this
-
+            var navigationView = Application.Current.MainPage as NavigationView;
             if (navigationView == null)
-            {
-                navigationView = new NavigationView(navigationManager);
-            }
-
-            // Ensure that the window content is set to the content host
-
-            if (Application.Current.MainPage != navigationView)
-                Application.Current.MainPage = navigationView;
+                // MainPage must be assigned from the Application constructor.
+                throw new InvalidOperationException("NavigationView missing as main page.");
 
             // Set the content to display
 

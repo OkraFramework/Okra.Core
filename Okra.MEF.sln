@@ -54,21 +54,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xamarin.Forms", "Xamarin.Fo
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{1e867ad0-88f1-4ad0-86b8-06332cf05429}*SharedItemsImports = 4
 		src\Okra.MEF\Xamarin.Forms\Okra.MEF\Okra.MEF.projitems*{1e867ad0-88f1-4ad0-86b8-06332cf05429}*SharedItemsImports = 4
-		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{fa7ac7ab-b0d0-4be1-a186-d9e47a409e07}*SharedItemsImports = 4
+		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{1e867ad0-88f1-4ad0-86b8-06332cf05429}*SharedItemsImports = 4
 		src\Okra.MEF\Xamarin.Forms\Okra.MEF\Okra.MEF.projitems*{fa7ac7ab-b0d0-4be1-a186-d9e47a409e07}*SharedItemsImports = 4
+		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{fa7ac7ab-b0d0-4be1-a186-d9e47a409e07}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{48114caf-c43a-4e92-a385-1a99705ece76}*SharedItemsImports = 13
 		test\Okra.MEF.Tests\Okra.MEF.Tests.Shared\Okra.MEF.Tests.Shared.projitems*{8e2d1e6a-900e-4ef4-8fc5-a47326c97a22}*SharedItemsImports = 4
-		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{b627a885-cf5c-4359-9533-bcc89804541b}*SharedItemsImports = 4
 		src\Okra.MEF\Okra.MEF.Shared\Okra.MEF.Shared.projitems*{b627a885-cf5c-4359-9533-bcc89804541b}*SharedItemsImports = 4
+		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{b627a885-cf5c-4359-9533-bcc89804541b}*SharedItemsImports = 4
 		test\Okra.MEF.Tests\Okra.MEF.Tests.Shared\Okra.MEF.Tests.Shared.projitems*{ddec51c1-5ed0-473a-b593-6bf291f1a55a}*SharedItemsImports = 4
 		src\Okra.MEF\Xamarin.Forms\Okra.MEF\Okra.MEF.projitems*{8558a844-17a8-4988-98fa-65bd8ff133f7}*SharedItemsImports = 13
 		src\Okra.MEF\Okra.MEF.Shared\Okra.MEF.Shared.projitems*{f25b0f1e-fe19-49b2-8bc3-f3ce168db5cd}*SharedItemsImports = 13
-		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{a98753ad-f740-4bd1-b34d-a1c170553982}*SharedItemsImports = 4
 		src\Okra.MEF\Okra.MEF.Shared\Okra.MEF.Shared.projitems*{a98753ad-f740-4bd1-b34d-a1c170553982}*SharedItemsImports = 4
-		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{586a8c08-23f3-4bda-98b1-798c732f7d0c}*SharedItemsImports = 4
+		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{a98753ad-f740-4bd1-b34d-a1c170553982}*SharedItemsImports = 4
 		src\Okra.MEF\Xamarin.Forms\Okra.MEF\Okra.MEF.projitems*{586a8c08-23f3-4bda-98b1-798c732f7d0c}*SharedItemsImports = 4
+		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{586a8c08-23f3-4bda-98b1-798c732f7d0c}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{fb719afe-8f13-4f65-a713-56c004fd2d5a}*SharedItemsImports = 13
 		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{f81956e7-0505-4c7d-b429-de8309303146}*SharedItemsImports = 13
 		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{d00dc503-cef6-4565-abea-3024d6b02851}*SharedItemsImports = 4
@@ -532,6 +532,7 @@ Global
 		{1E867AD0-88F1-4AD0-86B8-06332CF05429}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{1E867AD0-88F1-4AD0-86B8-06332CF05429}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{1E867AD0-88F1-4AD0-86B8-06332CF05429}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1E867AD0-88F1-4AD0-86B8-06332CF05429}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{1E867AD0-88F1-4AD0-86B8-06332CF05429}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
 		{1E867AD0-88F1-4AD0-86B8-06332CF05429}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{1E867AD0-88F1-4AD0-86B8-06332CF05429}.Debug|x86.ActiveCfg = Debug|x86

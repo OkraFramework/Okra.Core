@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>OkraUniversalPreview.Core</id>
-    <version>1.0.0</version>
+    <version>1.0.8</version>
     <title>PREVIEW - Okra App Framework - Universal Framework (Core only)</title>
     <authors>Andrew Wilkinson</authors>
     <owners>Andrew Wilkinson</owners>
@@ -15,15 +15,15 @@
     <tags>Okra MVVM WinRT Metro Windows8 Win8</tags>
       <dependencies>
        <group targetFramework="Xamarin.iOS10">
-        <dependency id="Xamarin.Forms" version="1.4.1.6349" />
+        <dependency id="Xamarin.Forms" version="1.4.2.6355" />
         <dependency id="PCLStorage" version="1.0.2" />        
       </group>
       <group targetFramework="MonoAndroid">
-        <dependency id="Xamarin.Forms" version="1.4.1.6349" />
+        <dependency id="Xamarin.Forms" version="1.4.2.6355" />
         <dependency id="PCLStorage" version="1.0.2" />        
       </group>
       <group targetFramework="wp8">
-        <dependency id="Xamarin.Forms" version="1.4.1.6349" />
+        <dependency id="Xamarin.Forms" version="1.4.2.6355" />
         <dependency id="PCLStorage" version="1.0.2" />        
     </group>
     </dependencies>

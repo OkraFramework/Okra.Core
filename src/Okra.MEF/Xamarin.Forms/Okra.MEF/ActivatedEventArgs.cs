@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Okra
 {
-    public class ActivatedEventArgs : EventArgs, IActivatedEventArgs
+    internal class ActivatedEventArgs : EventArgs, IActivatedEventArgs
     {
         public ActivatedEventArgs(ActivationKind kind, ApplicationExecutionState previousExecutionState)
         {

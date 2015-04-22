@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>OkraUniversalPreview.MEF</id>
-    <version>1.0.0</version>
+    <version>1.0.8</version>
     <title>PREVIEW - Okra App Framework - Universal Framework</title>
     <authors>Andrew Wilkinson</authors>
     <owners>Andrew Wilkinson</owners>
@@ -21,17 +21,14 @@
       <group targetFramework="Xamarin.iOS10">
         <dependency id="OkraUniversalPreview.Core" version="[1.0.0]"/>
         <dependency id="Microsoft.Composition" version="[1.0.30]"/>
-        <dependency id="Xamarin.Forms" version="1.4.1.6349" />
       </group>
       <group targetFramework="MonoAndroid">
         <dependency id="OkraUniversalPreview.Core" version="[1.0.0]"/>
         <dependency id="Microsoft.Composition" version="[1.0.30]"/>
-        <dependency id="Xamarin.Forms" version="1.4.1.6349" />
       </group>
       <group targetFramework="wp8">
         <dependency id="OkraUniversalPreview.Core" version="[1.0.0]"/>
         <dependency id="Microsoft.Composition" version="[1.0.30]"/>
-        <dependency id="Xamarin.Forms" version="1.4.1.6349" />
     </group>
     </dependencies>
   </metadata>
@@ -41,17 +38,14 @@
 
     <file src="Okra.MEF.WindowsPhone\bin\Release\Okra.MEF.dll" target="lib\wpa81\Okra.MEF.dll" />
     <file src="Okra.MEF.WindowsPhone\bin\Release\Okra.MEF.pri" target="lib\wpa81\Okra.MEF.pri" />
+<!--
+    <file src="Xamarin.Forms\Okra.MEF.iOS\bin\iPhone\Release\Okra.MEF.dll" target="lib\Xamarin.iOS10" />
+    <file src="Xamarin.Forms\Okra.MEF.iOS\bin\iPhone\Release\Okra.MEF.pdb" target="lib\Xamarin.iOS10" />
+-->
+    <file src="Xamarin.Forms\Okra.MEF.Android\bin\Release\Okra.MEF.dll" target="lib\MonoAndroid" />
+    <file src="Xamarin.Forms\Okra.MEF.Android\bin\Release\Okra.MEF.pdb" target="lib\MonoAndroid" />
 
-    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.dll" target="lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1" />
-    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.pdb" target="lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1" />
-
-    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.dll" target="lib\Xamarin.iOS10" />
-    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.pdb" target="lib\Xamarin.iOS10" />
-
-    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.dll" target="lib\MonoAndroid" />
-    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.pdb" target="lib\MonoAndroid" />
-
-    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.dll" target="lib\wp8" />
-    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.pdb" target="lib\wp8" />
+    <file src="Xamarin.Forms\Okra.MEF.WinPhone\Bin\Release\Okra.MEF.dll" target="lib\wp8" />
+    <file src="Xamarin.Forms\Okra.MEF.WinPhone\Bin\Release\Okra.MEF.pdb" target="lib\wp8" />
   </files>
 </package>

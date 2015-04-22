@@ -12,19 +12,7 @@ namespace Okra.Services
     {
         // Summary:
         //     The user launched the app or tapped a content tile.
-        Launch = 0,
-        //
-        // Summary:
-        //     The user wants to search with the app.
-        Search = 1,
-        //
-        // Summary:
-        //     The app is activated as a target for share operations.
-        ShareTarget = 2,
-        //
-        // Summary:
-        //     An app launched a file whose file type this app is registered to handle.
-        File = 3
+        Launch = 0
     }
 
     // Summary:

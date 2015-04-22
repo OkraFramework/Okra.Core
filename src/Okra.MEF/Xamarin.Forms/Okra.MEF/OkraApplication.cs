@@ -1,8 +1,14 @@
-﻿using Okra.Services;
+﻿using Okra.Navigation;
+using Okra.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
+using Okra.Navigation;
+
+#if SILVERLIGHT
+using Microsoft.Phone.Shell;
+#endif
 
 namespace Okra
 {
@@ -10,8 +16,9 @@ namespace Okra
     {
         // *** Fields ***
 
+        private const string AppTerminatedKey = "AppTerminated";
+
         private OkraBootstrapper bootstrapper;
-        //private bool isApplicationInstancePreserved;
 
         // *** Constructors ***
 
@@ -23,8 +30,7 @@ namespace Okra
             this.bootstrapper = bootstrapper;
             bootstrapper.Initialize(false);
 
-            var args = new ActivatedEventArgs(ActivationKind.Launch, ApplicationExecutionState.NotRunning);
-            Activate(args);
+            MainPage = new NavigationView(bootstrapper.NavigationManager);
         }
 
         // *** Overriden Base Methods ***
@@ -32,10 +38,26 @@ namespace Okra
         protected override void OnStart()
         {
             base.OnStart();
+
+            var applicationExecutionState = ApplicationExecutionState.NotRunning;
+
+            if (Properties.ContainsKey(AppTerminatedKey))
+            {
+                Properties.Remove(AppTerminatedKey);
+                applicationExecutionState = ApplicationExecutionState.Terminated;
+            }          
+
+            var args = new ActivatedEventArgs(ActivationKind.Launch, applicationExecutionState);
+            Activate(args);
         }
 
         protected override void OnSleep()
         {
+            if (bootstrapper.NavigationManager.NavigationStack.CanGoBack)
+            {
+                Properties.Add(AppTerminatedKey, true);
+            }
+
             var lifetimeManager = bootstrapper.LifetimeManager as ILifetimeAware;
             if (lifetimeManager != null)
             {
@@ -43,21 +65,20 @@ namespace Okra
             }
 
             base.OnSleep();
-
-            //isApplicationInstancePreserved = true;
         }
 
         protected override void OnResume()
         {
+            if (Properties.ContainsKey(AppTerminatedKey))
+            {
+                Properties.Remove(AppTerminatedKey);
+            }   
+
             var lifetimeManager = bootstrapper.LifetimeManager as ILifetimeAware;
             if (lifetimeManager != null)
             {
                 lifetimeManager.OnResuming().Wait();
             }
-
-            //var applicationExecutionState = isApplicationInstancePreserved ? ApplicationExecutionState.Suspended : ApplicationExecutionState.Terminated;
-            //var args = new ActivatedEventArgs(ActivationKind.Launch, applicationExecutionState);
-            //Activate(args);
 
             base.OnResume();
         }
