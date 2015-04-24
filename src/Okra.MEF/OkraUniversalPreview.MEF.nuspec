@@ -38,14 +38,27 @@
 
     <file src="Okra.MEF.WindowsPhone\bin\Release\Okra.MEF.dll" target="lib\wpa81\Okra.MEF.dll" />
     <file src="Okra.MEF.WindowsPhone\bin\Release\Okra.MEF.pri" target="lib\wpa81\Okra.MEF.pri" />
+
+    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.dll" target="lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1" />
+    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.pdb" target="lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1" />
+
+    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.dll" target="lib\Xamarin.iOS10" />
+    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.pdb" target="lib\Xamarin.iOS10" />
+
+    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.dll" target="lib\MonoAndroid" />
+    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.pdb" target="lib\MonoAndroid" />
+
+    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.dll" target="lib\wp8" />
+    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.pdb" target="lib\wp8" />
 <!--
     <file src="Xamarin.Forms\Okra.MEF.iOS\bin\iPhone\Release\Okra.MEF.dll" target="lib\Xamarin.iOS10" />
     <file src="Xamarin.Forms\Okra.MEF.iOS\bin\iPhone\Release\Okra.MEF.pdb" target="lib\Xamarin.iOS10" />
--->
+
     <file src="Xamarin.Forms\Okra.MEF.Android\bin\Release\Okra.MEF.dll" target="lib\MonoAndroid" />
     <file src="Xamarin.Forms\Okra.MEF.Android\bin\Release\Okra.MEF.pdb" target="lib\MonoAndroid" />
 
     <file src="Xamarin.Forms\Okra.MEF.WinPhone\Bin\Release\Okra.MEF.dll" target="lib\wp8" />
     <file src="Xamarin.Forms\Okra.MEF.WinPhone\Bin\Release\Okra.MEF.pdb" target="lib\wp8" />
+ --> 
   </files>
 </package>

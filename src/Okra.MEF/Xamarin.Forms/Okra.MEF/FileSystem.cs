@@ -4,10 +4,14 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Composition;
 
-namespace Okra.MEF
+namespace Okra
 {
+    /// <summary>
+    /// Exports a shared wrapper instance for IFileSystem.
+    /// </summary>
+    [Shared]
     [Export(typeof(PCLStorage.IFileSystem))]
-    public class FileSystem : PCLStorage.IFileSystem
+    internal class FileSystem : PCLStorage.IFileSystem
     {
         public Task<PCLStorage.IFile> GetFileFromPathAsync(string path, CancellationToken cancellationToken)
         {

@@ -16,6 +16,7 @@ using Okra.Sharing;
 using Okra.Helpers;
 #else
 using Xamarin.Forms;
+using PCLStorage;
 #endif
 
 #if WINDOWS_APP
@@ -29,6 +30,28 @@ namespace Okra
         // *** Fields ***
 
         private bool isActivated;
+
+        // *** Constructors ***
+#if !NETFX_CORE
+        /// <summary>
+        /// Creates and initializes a bootstrapper for the Okra framework.
+        /// </summary>
+        /// <param name="fileSystem">
+        /// A platform specific file system wrapper used for storing navigation stack and 
+        /// state when INavigationManager.NavigationStorageType is set to local or roaming.
+        /// <remarks>
+        /// Use the PCLStorage.FileSystem.Current instance for initialization.
+        /// When used from a PCL the FileSystem.Current property must first have been invoked
+        /// from the context of a specific platform target project in order initialize the correct 
+        /// native file system instance.
+        /// </remarks>
+        /// </param>
+        public OkraBootstrapper(IFileSystem fileSystem)
+        {
+            if (fileSystem == null)
+                throw new ArgumentNullException("fileSystem", "A platform specific file system wrapper must be supplied.");
+        }
+#endif
 
         // *** Imported Properties ***
 
@@ -44,12 +67,6 @@ namespace Okra
 #if !NETFX_CORE
         [Import]
         public ILifetimeManager LifetimeManager { get; set; }
-
-        //[Export]
-        //public PCLStorage.IFileSystem FileSystem
-        //{
-        //    get { return PCLStorage.FileSystem.Current; }
-        //}
 #endif        
 
         // *** Public Methods ***

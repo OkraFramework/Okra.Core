@@ -6,7 +6,7 @@
     <SharedGUID>8558a844-17a8-4988-98fa-65bd8ff133f7</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Okra.MEF</Import_RootNamespace>
+    <Import_RootNamespace>Okra</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ActivatedEventArgs.cs" />
