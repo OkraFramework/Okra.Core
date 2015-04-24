@@ -12,8 +12,13 @@ namespace Okra.Navigation
     public class NavigationView : NavigationPage
     {
         private readonly INavigationBase navigationManager;
-      
+              
         public NavigationView(INavigationBase navigationManager)
+        {
+            this.navigationManager = navigationManager;
+        }
+
+        public NavigationView(Page root, INavigationBase navigationManager) : base(root)
         {
             this.navigationManager = navigationManager;
         }

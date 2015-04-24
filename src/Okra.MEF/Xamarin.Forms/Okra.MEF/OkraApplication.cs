@@ -30,7 +30,7 @@ namespace Okra
             this.bootstrapper = bootstrapper;
             bootstrapper.Initialize(false);
 
-            MainPage = new NavigationView(bootstrapper.NavigationManager);
+            MainPage = new NavigationView(new Page(), bootstrapper.NavigationManager);
         }
 
         // *** Overriden Base Methods ***

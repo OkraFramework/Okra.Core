@@ -44,8 +44,13 @@ namespace Okra.Navigation
 
             await navigationView.Navigation.PushAsync(nextPage);
 
+            // Remove first empty page after navigating to home page for the first time.
+            if (!navigationManager.NavigationStack.CanGoBack && navigationView.Navigation.NavigationStack.Count == 2)
+            {
+                navigationView.Navigation.RemovePage(previousPage);
+            }
             // We only keep the home page and the current page in the navigation stack of Xamarin Forms.
-            if (previousPage != null && navigationView.Navigation.NavigationStack.Count > 2)
+            else if (previousPage != null && navigationView.Navigation.NavigationStack.Count > 2)
             {
                 navigationView.Navigation.RemovePage(previousPage);
             }
