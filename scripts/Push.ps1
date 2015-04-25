@@ -1,5 +1,5 @@
 [CmdletBinding()]
-Param([Parameter(Mandatory=$True)][Version]$versionNumber)
+Param([Parameter(Mandatory=$True)][string]$versionNumber)
 
 # Move to the project root folder (parent from current script folder)
 
