@@ -19,6 +19,7 @@
     <PackageCertificateKeyFile>Okra.Core.Tests.Windows_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxBundle>Never</AppxBundle>
     <AllowCrossPlatformRetargeting>False</AllowCrossPlatformRetargeting>
+    <PackageCertificateThumbprint>6431BCD25089138C415499E0838B9EBAD73CC6E0</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
