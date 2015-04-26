@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.Core.Portable", "src\O
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.Core.Xamarin.Forms", "src\Okra.Core\Okra.Core.Xamarin.Forms\Okra.Core.Xamarin.Forms.csproj", "{67F9D3A8-F71E-4428-913F-C37AE82CDB24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.MEF.Portable", "src\Okra.MEF\Okra.MEF.Portable\Okra.MEF.Portable.csproj", "{169468C7-E225-43D0-960C-D5BA4A1212D1}"
+EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Okra.Core.Portable.Shared", "src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.shproj", "{48114CAF-C43A-4E92-A385-1A99705ECE76}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Okra.MEF.Portable.Shared", "src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.shproj", "{F81956E7-0505-4C7D-B429-DE8309303146}"
@@ -51,16 +53,16 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{48114caf-c43a-4e92-a385-1a99705ece76}*SharedItemsImports = 13
-		src\Okra.MEF\Xamarin.Forms\Okra.MEF\Okra.MEF.projitems*{97b14871-ccc1-4fa5-82cb-efefec638c9e}*SharedItemsImports = 4
 		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{97b14871-ccc1-4fa5-82cb-efefec638c9e}*SharedItemsImports = 4
+		src\Okra.MEF\Xamarin.Forms\Okra.MEF\Okra.MEF.projitems*{97b14871-ccc1-4fa5-82cb-efefec638c9e}*SharedItemsImports = 4
 		test\Okra.MEF.Tests\Okra.MEF.Tests.Shared\Okra.MEF.Tests.Shared.projitems*{8e2d1e6a-900e-4ef4-8fc5-a47326c97a22}*SharedItemsImports = 4
-		src\Okra.MEF\Okra.MEF.Shared\Okra.MEF.Shared.projitems*{b627a885-cf5c-4359-9533-bcc89804541b}*SharedItemsImports = 4
 		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{b627a885-cf5c-4359-9533-bcc89804541b}*SharedItemsImports = 4
+		src\Okra.MEF\Okra.MEF.Shared\Okra.MEF.Shared.projitems*{b627a885-cf5c-4359-9533-bcc89804541b}*SharedItemsImports = 4
 		test\Okra.MEF.Tests\Okra.MEF.Tests.Shared\Okra.MEF.Tests.Shared.projitems*{ddec51c1-5ed0-473a-b593-6bf291f1a55a}*SharedItemsImports = 4
 		src\Okra.MEF\Xamarin.Forms\Okra.MEF\Okra.MEF.projitems*{8558a844-17a8-4988-98fa-65bd8ff133f7}*SharedItemsImports = 13
 		src\Okra.MEF\Okra.MEF.Shared\Okra.MEF.Shared.projitems*{f25b0f1e-fe19-49b2-8bc3-f3ce168db5cd}*SharedItemsImports = 13
-		src\Okra.MEF\Okra.MEF.Shared\Okra.MEF.Shared.projitems*{a98753ad-f740-4bd1-b34d-a1c170553982}*SharedItemsImports = 4
 		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{a98753ad-f740-4bd1-b34d-a1c170553982}*SharedItemsImports = 4
+		src\Okra.MEF\Okra.MEF.Shared\Okra.MEF.Shared.projitems*{a98753ad-f740-4bd1-b34d-a1c170553982}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{fb719afe-8f13-4f65-a713-56c004fd2d5a}*SharedItemsImports = 13
 		src\Okra.MEF\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems*{f81956e7-0505-4c7d-b429-de8309303146}*SharedItemsImports = 13
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{d00dc503-cef6-4565-abea-3024d6b02851}*SharedItemsImports = 4
@@ -485,6 +487,38 @@ Global
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|x64.ActiveCfg = Release|Any CPU
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|x86.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Ad-Hoc|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Ad-Hoc|x64.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Ad-Hoc|x86.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.AppStore|ARM.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.AppStore|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.AppStore|x64.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.AppStore|x86.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|ARM.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|x64.ActiveCfg = Release|Any CPU
+		{169468C7-E225-43D0-960C-D5BA4A1212D1}.Release|x86.ActiveCfg = Release|Any CPU
 		{97B14871-CCC1-4FA5-82CB-EFEFEC638C9E}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{97B14871-CCC1-4FA5-82CB-EFEFEC638C9E}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{97B14871-CCC1-4FA5-82CB-EFEFEC638C9E}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
@@ -537,6 +571,7 @@ Global
 		{8E2D1E6A-900E-4EF4-8FC5-A47326C97A22} = {A8D2B638-A58D-4F7E-A4C7-720BA695DCEF}
 		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
+		{169468C7-E225-43D0-960C-D5BA4A1212D1} = {A605615E-DD69-4D49-B045-FAF5205FF4A2}
 		{48114CAF-C43A-4E92-A385-1A99705ECE76} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
 		{F81956E7-0505-4C7D-B429-DE8309303146} = {A605615E-DD69-4D49-B045-FAF5205FF4A2}
 		{8558A844-17A8-4988-98FA-65BD8FF133F7} = {E16A789F-3EAF-45AF-9FBE-9D5D7621D4A9}

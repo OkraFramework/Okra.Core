@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Okra.Core</id>
-    <version>1.0.0</version>
+    <version>1.1.0-beta001</version>
     <title>Okra App Framework (Core only)</title>
     <authors>Andrew Wilkinson</authors>
     <owners>Andrew Wilkinson</owners>
@@ -11,11 +11,16 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The Okra App Framework is designed to support the development of .Net Windows 8 applications, in particular those following the MVVM pattern. This package contains only the core assembly.</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright 2014</copyright>
+    <copyright>Copyright 2015</copyright>
     <tags>Okra MVVM WinRT Metro Windows8 Win8</tags>
   </metadata>
   <files>
+    <file src="Okra.Core.Portable\bin\Release\Okra.Core.dll" target="lib\portable-netcore451+wpa81\Okra.Core.dll" />
+
     <file src="Okra.Core.Windows\bin\Release\Okra.Core.dll" target="lib\netcore451\Okra.Core.dll" />
     <file src="Okra.Core.Windows\bin\Release\Okra.Core.pri" target="lib\netcore451\Okra.Core.pri" />
+
+    <file src="Okra.Core.WindowsPhone\bin\Release\Okra.Core.dll" target="lib\wpa81\Okra.Core.dll" />
+    <file src="Okra.Core.WindowsPhone\bin\Release\Okra.Core.pri" target="lib\wpa81\Okra.Core.pri" />
   </files>
 </package>
