@@ -9,7 +9,10 @@ namespace Okra.Navigation
     public static class SpecialPageNames
     {
         public const string Home = "Home";
+
+#if NETFX_CORE
         public const string Search = "Search";
         public const string ShareTarget = "ShareTarget";
+#endif
     }
 }

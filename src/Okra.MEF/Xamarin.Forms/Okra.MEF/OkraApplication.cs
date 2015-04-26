@@ -30,7 +30,7 @@ namespace Okra
             this.bootstrapper = bootstrapper;
             bootstrapper.Initialize(false);
 
-            MainPage = new NavigationView(new Page(), bootstrapper.NavigationManager);
+            MainPage = new NavigationView(bootstrapper.NavigationManager);
         }
 
         // *** Overriden Base Methods ***
@@ -57,6 +57,10 @@ namespace Okra
             {
                 Properties.Add(AppTerminatedKey, true);
             }
+            else if (Properties.ContainsKey(AppTerminatedKey))
+            {
+                Properties.Remove(AppTerminatedKey);
+            }  
 
             var lifetimeManager = bootstrapper.LifetimeManager as ILifetimeAware;
             if (lifetimeManager != null)
