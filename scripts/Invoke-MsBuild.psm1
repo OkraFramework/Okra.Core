@@ -324,14 +324,17 @@ function Get-VisualStudioCommandPromptPath
 	$vs2010CommandPrompt = $env:VS100COMNTOOLS + "vcvarsall.bat"
 	$vs2012CommandPrompt = $env:VS110COMNTOOLS + "VsDevCmd.bat"
 	$vs2013CommandPrompt = $env:VS120COMNTOOLS + "VsDevCmd.bat"
+	$vs2014CommandPrompt = $env:VS140COMNTOOLS + "VsDevCmd.bat"
 
 	# Store the VS Command Prompt to do the build in, if one exists.
 	$vsCommandPrompt = $null
-	if (Test-Path $vs2013CommandPrompt) { $vsCommandPrompt = $vs2013CommandPrompt }
+	if (Test-Path $vs2014CommandPrompt) { $vsCommandPrompt = $vs2014CommandPrompt }
+	elseif (Test-Path $vs2013CommandPrompt) { $vsCommandPrompt = $vs2013CommandPrompt }
 	elseif (Test-Path $vs2012CommandPrompt) { $vsCommandPrompt = $vs2012CommandPrompt }
 	elseif (Test-Path $vs2010CommandPrompt) { $vsCommandPrompt = $vs2010CommandPrompt }
 
 	# Return the path to the VS Command Prompt if it was found.
+	Write-Host $vsCommandPrompt
 	return $vsCommandPrompt
 }
 
