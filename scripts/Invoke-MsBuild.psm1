@@ -362,6 +362,7 @@ function Get-MsBuildPath
 			$msBuildPath = Join-Path $itemProperty.MSBuildToolsPath -ChildPath "MsBuild.exe"
 			if (Test-Path $msBuildPath)
 			{
+				Write-Host $msBuildPath
 				return $msBuildPath
 			}
 		}
