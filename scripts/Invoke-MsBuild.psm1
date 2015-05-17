@@ -319,7 +319,7 @@ function Get-VisualStudioCommandPromptPath
 	.DESCRIPTION
 		Gets the file path to the latest Visual Studio Command Prompt. Returns $null if a path is not found.
 #>
-	# AJW - Disable use of Visual Studio 2015 Command Prompt - causes issues with AppVeyor?
+	# AJW - Disable use of Visual Studio Command Prompt due to issues building Win10 universal apps
 	return $null
 
 	# Get some environmental paths.
@@ -336,7 +336,6 @@ function Get-VisualStudioCommandPromptPath
 	elseif (Test-Path $vs2010CommandPrompt) { $vsCommandPrompt = $vs2010CommandPrompt }
 
 	# Return the path to the VS Command Prompt if it was found.
-	Write-Host $vsCommandPrompt
 	return $vsCommandPrompt
 }
 
@@ -367,14 +366,12 @@ function Get-MsBuildPath
 			$msBuildPath = Join-Path $itemProperty.MSBuildToolsPath -ChildPath "MsBuild.exe"
 			if (Test-Path $msBuildPath)
 			{
-				Write-Host $msBuildPath
 				return $msBuildPath
 			}
 		}
 	}
 
 	# Return that we were not able to find MsBuild.exe.
-	Write-Host "Cannot find MsBuild.exe"
 	return $null
 }
 Export-ModuleMember -Function Invoke-MsBuild
