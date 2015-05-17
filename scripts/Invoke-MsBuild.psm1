@@ -366,7 +366,16 @@ function Get-MsBuildPath
 				return $msBuildPath
 			}
 		}
-	} 
+
+		# Also check for the hardcoded path based upon the standard location
+
+		$msBuildPath = "C:\Program Files (x86)\MSBuild\${Version}\bin\amd64\MsBuild.exe"
+		if (Test-Path $msBuildPath)
+		{
+			Write-Host $msBuildPath
+			return $msBuildPath
+		}
+	}
 
 	# Return that we were not able to find MsBuild.exe.
 	return $null
