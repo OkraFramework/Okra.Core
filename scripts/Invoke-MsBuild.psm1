@@ -332,7 +332,7 @@ function Get-MsBuildPath
 #>
 
 	# Array of valid MsBuild versions
-	$versions = @("12.0", "4.0", "3.5", "2.0")
+	$versions = @("14.0", "12.0", "4.0", "3.5", "2.0")
 
 	# Loop through each version from largest to smallest.
 	foreach ($version in $versions) 

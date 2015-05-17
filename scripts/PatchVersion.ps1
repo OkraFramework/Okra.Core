@@ -33,20 +33,28 @@ write-host "Patching AssemblyInfo.cs files to" $versionNumber.ToString()
 
 Update-AssemblyInfo ".\src\Okra.Core\Okra.Core.Windows\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\src\Okra.Core\Okra.Core.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
+Update-AssemblyInfo ".\src\Okra.Core\Okra.Core.Universal\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\src\Okra.Core\Okra.Core.Portable\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\src\Okra.MEF\Okra.MEF.Windows\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\src\Okra.MEF\Okra.MEF.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
+Update-AssemblyInfo ".\src\Okra.MEF\Okra.MEF.Universal\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\src\Okra.MEF\Okra.MEF.Portable\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 
 Update-AssemblyInfo ".\test\Okra.Core.Tests\Okra.Core.Tests.Windows\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\test\Okra.Core.Tests\Okra.Core.Tests.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
+Update-AssemblyInfo ".\test\Okra.Core.Tests\Okra.Core.Tests.Universal\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
+Update-AssemblyInfo ".\test\Okra.Core.Tests\Okra.Core.Tests.Portable\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\test\Okra.MEF.Tests\Okra.MEF.Tests.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
+Update-AssemblyInfo ".\test\Okra.MEF.Tests\Okra.MEF.Tests.Universal\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
+Update-AssemblyInfo ".\test\Okra.MEF.Tests\Okra.MEF.Tests.Portable\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 
 write-host "Patching *.nuspec files to" $versionNumber
 
 Update-Nuspec ".\src\Okra.Core\Okra.Core.nuspec" $versionNumber $prereleaseType
 Update-Nuspec ".\src\Okra.MEF\Okra.MEF.nuspec" $versionNumber $prereleaseType
+Update-Nuspec ".\src\Okra.Core\OkraUniversalPreview.Core.nuspec" $versionNumber $prereleaseType
+Update-Nuspec ".\src\Okra.MEF\OkraUniversalPreview.MEF.nuspec" $versionNumber $prereleaseType
 
 write-host "Patching *.vsixmanifest files to" $versionNumber
 
