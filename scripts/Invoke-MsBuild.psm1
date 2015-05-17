@@ -369,7 +369,7 @@ function Get-MsBuildPath
 
 		# Also check for the hardcoded path based upon the standard location
 
-		$msBuildPath = "C:\Program Files (x86)\MSBuild\${Version}\bin\amd64\MsBuild.exe"
+		$msBuildPath = "C:\Program Files (x86)\MSBuild\${Version}\bin\MsBuild.exe"
 		if (Test-Path $msBuildPath)
 		{
 			Write-Host $msBuildPath
@@ -378,6 +378,7 @@ function Get-MsBuildPath
 	}
 
 	# Return that we were not able to find MsBuild.exe.
+	Write-Host "Cannot find MsBuild.exe"
 	return $null
 }
 Export-ModuleMember -Function Invoke-MsBuild
