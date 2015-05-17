@@ -27,6 +27,10 @@ function Invoke-MsBuild
 	.PARAMETER AutoLaunchBuildLog
 	If set, this switch will cause the build log to automatically be launched into the default viewer if the build fails.
 	NOTE: This switch cannot be used with the PassThru switch.
+
+	.PARAMETER AutoOutputBuildLog
+	If set, this switch will cause the build log to automatically be output if the build fails.
+	NOTE: This switch cannot be used with the PassThru switch.
 	
 	.PARAMETER KeepBuildLogOnSuccessfulBuilds
 	If set, this switch will cause the msbuild log file to not be deleted on successful builds; normally it is only kept around on failed builds.
@@ -150,6 +154,11 @@ function Invoke-MsBuild
 		[Alias("AutoLaunch")]
 		[Alias("A")]
 		[switch] $AutoLaunchBuildLogOnFailure,
+
+		[parameter(Mandatory=$false,ParameterSetName="Wait")]
+		[ValidateNotNullOrEmpty()]
+		[Alias("AutoOutput")]
+		[switch] $AutoOutputBuildLogOnFailure,
 
 		[parameter(Mandatory=$false,ParameterSetName="Wait")]
 		[ValidateNotNullOrEmpty()]
@@ -282,7 +291,12 @@ function Invoke-MsBuild
 		else
 		{
 			# Write the error message as a warning.
-			Write-Warning "FAILED to build ""$Path"". Please check the build log ""$buildLogFilePath"" for details." 
+			Write-Warning "FAILED to build ""$Path"". Please check the build log ""$buildLogFilePath"" for details."
+
+			if($AutoOutputBuildLogOnFailure)
+			{
+				Get-Content $buildLogFilePath | Out-Host
+			}
 
 			# If we should show the build log automatically, open it with the default viewer.
 			if($AutoLaunchBuildLogOnFailure)

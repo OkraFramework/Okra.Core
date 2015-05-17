@@ -28,7 +28,7 @@ function Invoke-MsBuildAndThrow
 
     write-host "MSBuild" $Path
 
-    $buildResult = Invoke-MsBuild -Path $Path -Params "/verbosity:minimal /property:Configuration=Release;VisualStudioVersion=14.0" -BuildLogDirectoryPath ".\artifacts"
+    $buildResult = Invoke-MsBuild -Path $Path -Params "/verbosity:minimal /property:Configuration=Release;VisualStudioVersion=14.0" -AutoOutput
 
     if (!$buildResult)
     {
@@ -41,10 +41,6 @@ function Invoke-MsBuildAndThrow
 Install-NuGet
 Restore-NuGetPackages ".\Okra.Core.sln"
 Restore-NuGetPackages ".\Okra.MEF.sln"
-
-# Create the artifacts folder to store build logs
-
-New-Item .\artifacts -type directory -Force | Out-Null
 
 # Perform builds
 
