@@ -319,16 +319,18 @@ function Get-VisualStudioCommandPromptPath
 	.DESCRIPTION
 		Gets the file path to the latest Visual Studio Command Prompt. Returns $null if a path is not found.
 #>
+	# AJW - Disable use of Visual Studio 2015 Command Prompt - causes issues with AppVeyor?
+	return $null
 
 	# Get some environmental paths.
 	$vs2010CommandPrompt = $env:VS100COMNTOOLS + "vcvarsall.bat"
 	$vs2012CommandPrompt = $env:VS110COMNTOOLS + "VsDevCmd.bat"
 	$vs2013CommandPrompt = $env:VS120COMNTOOLS + "VsDevCmd.bat"
-	$vs2014CommandPrompt = $env:VS140COMNTOOLS + "VsDevCmd.bat"
+	$vs2015CommandPrompt = $env:VS140COMNTOOLS + "VsDevCmd.bat"
 
 	# Store the VS Command Prompt to do the build in, if one exists.
 	$vsCommandPrompt = $null
-	if (Test-Path $vs2014CommandPrompt) { $vsCommandPrompt = $vs2014CommandPrompt }
+	if (Test-Path $vs2015CommandPrompt) { $vsCommandPrompt = $vs2015CommandPrompt }
 	elseif (Test-Path $vs2013CommandPrompt) { $vsCommandPrompt = $vs2013CommandPrompt }
 	elseif (Test-Path $vs2012CommandPrompt) { $vsCommandPrompt = $vs2012CommandPrompt }
 	elseif (Test-Path $vs2010CommandPrompt) { $vsCommandPrompt = $vs2010CommandPrompt }
@@ -368,15 +370,6 @@ function Get-MsBuildPath
 				Write-Host $msBuildPath
 				return $msBuildPath
 			}
-		}
-
-		# Also check for the hardcoded path based upon the standard location
-
-		$msBuildPath = "C:\Program Files (x86)\MSBuild\${Version}\bin\MsBuild.exe"
-		if (Test-Path $msBuildPath)
-		{
-			Write-Host $msBuildPath
-			return $msBuildPath
 		}
 	}
 
