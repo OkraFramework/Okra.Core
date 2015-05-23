@@ -223,6 +223,7 @@ function Invoke-MsBuild
 		try
 		{
 			# Build the arguments to pass to MsBuild.
+			$Path = Resolve-Path $Path
 			$buildArguments = """$Path"" $MsBuildParameters /fileLoggerParameters:LogFile=""$buildLogFilePath"""
 
 			# If a VS Command Prompt was found, call MSBuild from that since it sets environmental variables that may be needed to build some projects.
@@ -244,15 +245,24 @@ function Invoke-MsBuild
 
 			Write-Debug "Starting new cmd.exe process with arguments ""$cmdArgumentsToRunMsBuild""."
 
+			# Create the process start information
+			$startInfo = New-Object System.Diagnostics.ProcessStartInfo
+			$startInfo.FileName = "cmd.exe"
+			$startInfo.Arguments = $cmdArgumentsToRunMsBuild
+			$startInfo.CreateNoWindow = $true
+			$startInfo.UseShellExecute = $false
+
 			# Perform the build.
+			# NB: Use [Diagnostics.Process]::Start rather than Process-Start to stop MSBuild v14 holding onto the process
 			if ($PassThru)
 			{
-				return Start-Process cmd.exe -ArgumentList $cmdArgumentsToRunMsBuild -WindowStyle $windowStyle -PassThru
+				return [Diagnostics.Process]::Start($startInfo)
 			}
 			else
 			{
-				$process = Start-Process cmd.exe -ArgumentList $cmdArgumentsToRunMsBuild -WindowStyle $windowStyle -Wait -PassThru
-				$processExitCode = $process.ExitCode
+				$buildProcess = [Diagnostics.Process]::Start($startInfo)
+				$buildProcess.WaitForExit()
+				$processExitCode = $buildProcess.ExitCode
 			}
 		}
 		catch
