@@ -9,9 +9,6 @@
     <Import_RootNamespace>Okra</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Core\DelegateCommand.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Core\DelegateCommandT.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Core\NotifyPropertyChangedBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\IShareable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\IShareOperation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\ISharePackage.cs" />
@@ -29,43 +26,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\ShareTargetManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\StandardShareFormats.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ResourceHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\SerializationHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\IActivatable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigationAware.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigationBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigationContext.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigationManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigationStack.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigationTarget.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\IViewFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\IViewLifetimeContext.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationStackEx.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationCommands.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationContext.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationBaseEx.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationStack.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationStackWithHome.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationStorageType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageName.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageNavigationEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageNavigationMode.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\SpecialPageNames.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\StateChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\WindowNavigationTarget.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ActivationManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\IActivationHandler.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\IActivationManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ILaunchActivationHandler.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ILifetimeAware.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ILifetimeManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IStorageManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\LaunchActivationHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\LifetimeManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\StorageManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="$(MSBuildThisFileDirectory)strings\en-US\Errors.resw" />

@@ -144,6 +144,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\Okra.MEF.Shared\Okra.MEF.Shared.projitems" Label="Shared" />
+  <Import Project="..\Okra.MEF.Portable.Shared\Okra.MEF.Portable.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -39,46 +39,46 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Okra.Core.Shared\Navigation\IActivatable.cs">
+    <Compile Include="..\Okra.Core.Portable.Shared\Navigation\IActivatable.cs">
       <Link>Navigation\IActivatable.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\INavigationAware.cs">
+    <Compile Include="..\Okra.Core.Portable.Shared\Navigation\INavigationAware.cs">
       <Link>Navigation\INavigationAware.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\INavigationBase.cs">
+    <Compile Include="..\Okra.Core.Portable.Shared\Navigation\INavigationBase.cs">
       <Link>Navigation\INavigationBase.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\INavigationContext.cs">
+    <Compile Include="..\Okra.Core.Portable.Shared\Navigation\INavigationContext.cs">
       <Link>Navigation\INavigationContext.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\INavigationManager.cs">
+    <Compile Include="..\Okra.Core.Portable.Shared\Navigation\INavigationManager.cs">
       <Link>Navigation\INavigationManager.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\INavigationStack.cs">
+    <Compile Include="..\Okra.Core.Portable.Shared\Navigation\INavigationStack.cs">
       <Link>Navigation\INavigationStack.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\INavigationTarget.cs">
+    <Compile Include="..\Okra.Core.Portable.Shared\Navigation\INavigationTarget.cs">
       <Link>Navigation\INavigationTarget.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\IViewFactory.cs">
+    <Compile Include="..\Okra.Core.Portable.Shared\Navigation\IViewFactory.cs">
       <Link>Navigation\IViewFactory.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\IViewLifetimeContext.cs">
+    <Compile Include="..\Okra.Core.Portable.Shared\Navigation\IViewLifetimeContext.cs">
       <Link>Navigation\IViewLifetimeContext.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\NavigationStorageType.cs">
+    <Compile Include="..\Okra.Core.Portable.Shared\Navigation\NavigationStorageType.cs">
       <Link>Navigation\NavigationStorageType.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\PageNavigationMode.cs">
+    <Compile Include="..\Okra.Core.Portable.Shared\Navigation\PageNavigationMode.cs">
       <Link>Navigation\PageNavigationMode.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Navigation\SpecialPageNames.cs">
+    <Compile Include="..\Okra.Core.Portable.Shared\Navigation\SpecialPageNames.cs">
       <Link>Navigation\SpecialPageNames.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Services\ILifetimeAware.cs">
+    <Compile Include="..\Okra.Core.Portable.Shared\Services\ILifetimeAware.cs">
       <Link>Services\ILifetimeAware.cs</Link>
     </Compile>
-    <Compile Include="..\Okra.Core.Shared\Services\ILifetimeManager.cs">
+    <Compile Include="..\Okra.Core.Portable.Shared\Services\ILifetimeManager.cs">
       <Link>Services\ILifetimeManager.cs</Link>
     </Compile>
     <Compile Include="..\Okra.Core.Shared\Sharing\IShareable.cs">
