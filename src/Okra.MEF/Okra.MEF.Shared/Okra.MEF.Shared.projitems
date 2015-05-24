@@ -11,14 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ExceptionHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ResourceHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationContextProxy.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageExportAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageMetadata.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\ViewFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\ViewModelExportAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\ViewModelMetadata.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OkraApplication.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)OkraBootstrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="$(MSBuildThisFileDirectory)strings\en-US\Errors.resw" />

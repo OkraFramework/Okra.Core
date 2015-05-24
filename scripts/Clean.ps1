@@ -33,6 +33,8 @@ Remove-IfExists .\src\Okra.Core\Okra.Core.WindowsPhone\bin
 Remove-IfExists .\src\Okra.Core\Okra.Core.WindowsPhone\obj
 Remove-IfExists .\src\Okra.Core\Okra.Core.Universal\bin
 Remove-IfExists .\src\Okra.Core\Okra.Core.Universal\obj
+Remove-IfExists .\src\Okra.Core\Okra.Core.Xamarin.Forms\bin
+Remove-IfExists .\src\Okra.Core\Okra.Core.Xamarin.Forms\obj
 Remove-IfExists .\src\Okra.Core\Okra.Core.Portable\bin
 Remove-IfExists .\src\Okra.Core\Okra.Core.Portable\obj
 
@@ -42,23 +44,27 @@ Remove-IfExists .\src\Okra.MEF\Okra.MEF.WindowsPhone\bin
 Remove-IfExists .\src\Okra.MEF\Okra.MEF.WindowsPhone\obj
 Remove-IfExists .\src\Okra.MEF\Okra.MEF.Universal\bin
 Remove-IfExists .\src\Okra.MEF\Okra.MEF.Universal\obj
+Remove-IfExists .\src\Okra.MEF\Okra.Core.Xamarin.Forms\bin
+Remove-IfExists .\src\Okra.MEF\Okra.Core.Xamarin.Forms\obj
 Remove-IfExists .\src\Okra.MEF\Okra.MEF.Portable\bin
 Remove-IfExists .\src\Okra.MEF\Okra.MEF.Portable\obj
 
 Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Windows\bin
 Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Windows\obj
+Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Windows\AppPackages
 Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.WindowsPhone\bin
 Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.WindowsPhone\obj
+Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.WindowsPhone\AppPackages
 Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Universal\bin
 Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Universal\obj
-Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Windows\bin
-Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Windows\obj
+Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Universal\AppPackages
 
 Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\bin
 Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\obj
+Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\AppPackages
 Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.WindowsPhone\bin
 Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.WindowsPhone\obj
+Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.WindowsPhone\AppPackages
 Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.Universal\bin
 Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.Universal\obj
-Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.Portable\bin
-Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.Portable\obj
+Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.Universal\AppPackages
