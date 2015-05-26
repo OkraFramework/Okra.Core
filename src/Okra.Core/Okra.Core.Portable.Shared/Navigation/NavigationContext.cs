@@ -10,20 +10,20 @@ namespace Okra.Navigation
     {
         // *** Fields ***
 
-        private readonly INavigationBase current;
+        private readonly INavigationBase _current;
 
         // *** Constructors ***
 
         public NavigationContext(INavigationBase current)
         {
-            this.current = current;
+            _current = current;
         }
 
         // *** Methods ***
 
         public INavigationBase GetCurrent()
         {
-            return current;
+            return _current;
         }
     }
 }

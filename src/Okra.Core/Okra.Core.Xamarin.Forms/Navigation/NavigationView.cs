@@ -12,23 +12,23 @@ namespace Okra.Navigation
     /// </summary>
     public class NavigationView : NavigationPage
     {
-        private static readonly Page m_BackPage = new Page();
-        private static readonly Page m_EmptyPage = new Page();
-        private Page m_HomePage;
+        private static readonly Page s_backPage = new Page();
+        private static readonly Page s_emptyPage = new Page();
+        private Page _homePage;
 
         /// <summary>
         /// The current page property name
         /// </summary>
         private const string CURRENT_PAGE_PROPERTY_NAME = "CurrentPage";
 
-        private readonly INavigationBase navigationManager;
+        private readonly INavigationBase _navigationManager;
 
         public NavigationView(INavigationBase navigationManager)
-            : base(m_EmptyPage)
+            : base(s_emptyPage)
         {
-            this.navigationManager = navigationManager;
+            _navigationManager = navigationManager;
         }
-        
+
         protected override bool OnBackButtonPressed()
         {
             return base.OnBackButtonPressed();
@@ -46,15 +46,15 @@ namespace Okra.Navigation
         {
             if (propertyName == CURRENT_PAGE_PROPERTY_NAME)
             {
-                if ((CurrentPage == m_BackPage) && navigationManager.NavigationStack.CanGoBack)
+                if ((CurrentPage == s_backPage) && _navigationManager.NavigationStack.CanGoBack)
                 {
-                    navigationManager.GoBack();
+                    _navigationManager.GoBack();
                 }
             }
 
             base.OnPropertyChanged(propertyName);
         }
-        
+
         /// <summary>
         /// 
         /// Initial stack:
@@ -85,30 +85,30 @@ namespace Okra.Navigation
             var secondPage = Navigation.NavigationStack.LastOrDefault();
 
             // Here we handle initial navigation when EmptyPage is to be displayed.
-            if ((Navigation.NavigationStack.Count == 1) && (firstPage == m_EmptyPage))
+            if ((Navigation.NavigationStack.Count == 1) && (firstPage == s_emptyPage))
             {
                 // HomePage instance is normally set, but might not on 
                 // app resume when at the end of the navigation stack.
-                if (navigationManager.NavigationStack.CurrentPage.PageName == SpecialPageNames.Home)
+                if (_navigationManager.NavigationStack.CurrentPage.PageName == SpecialPageNames.Home)
                 {
-                    m_HomePage = nextPage;
+                    _homePage = nextPage;
                 }
 
                 await Navigation.PushAsync(nextPage);
 
                 // Make sure BackPage is inserted before last page if we should be able 
                 // to navigate back, in order for software back button to be displayed.
-                if (navigationManager.NavigationStack.CanGoBack && (firstPage != m_BackPage))
+                if (_navigationManager.NavigationStack.CanGoBack && (firstPage != s_backPage))
                 {
-                    Navigation.InsertPageBefore(m_BackPage, CurrentPage);
+                    Navigation.InsertPageBefore(s_backPage, CurrentPage);
                 }
 
                 // Remove first dummy page (EmpptyPage).
                 Navigation.RemovePage(firstPage);
                 return;
             }
-            
-            if ((nextPage == m_HomePage) && !navigationManager.NavigationStack.CanGoBack)
+
+            if ((nextPage == _homePage) && !_navigationManager.NavigationStack.CanGoBack)
             {
                 await Navigation.PopAsync();
                 return;
@@ -120,23 +120,23 @@ namespace Okra.Navigation
 
             // Make sure BackPage is inserted before last page if we should be able 
             // to navigate back, in order for software back button to be displayed.
-            if (navigationManager.NavigationStack.CanGoBack && (!Navigation.NavigationStack.Contains(m_BackPage)))
+            if (_navigationManager.NavigationStack.CanGoBack && (!Navigation.NavigationStack.Contains(s_backPage)))
             {
-                Navigation.InsertPageBefore(m_BackPage, CurrentPage);
+                Navigation.InsertPageBefore(s_backPage, CurrentPage);
             }
 
             // HomePage is kept in stack, since exception is thrown (at least on WP8) when trying 
             // to push that page again (upon back navigation) even after being removed from stack.
-            if ((secondPage != null) && (secondPage != m_BackPage) && (secondPage != m_HomePage))
+            if ((secondPage != null) && (secondPage != s_backPage) && (secondPage != _homePage))
             {
                 Navigation.RemovePage(secondPage);
             }
 
             // If navigation stack is empty, remove first page if it is a back 
             // page, in order for next back navigation to exit application.
-            if (!navigationManager.NavigationStack.CanGoBack && (firstPage == m_BackPage))
+            if (!_navigationManager.NavigationStack.CanGoBack && (firstPage == s_backPage))
             {
-                Navigation.RemovePage(m_BackPage);
+                Navigation.RemovePage(s_backPage);
             }
         }
     }

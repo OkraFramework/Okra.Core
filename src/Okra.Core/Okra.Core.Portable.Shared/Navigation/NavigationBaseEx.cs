@@ -18,7 +18,7 @@ namespace Okra.Navigation
 
             if (!navigationBase.NavigationStack.CanGoBack)
                 throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotGoBackWithEmptyBackStack"));
-            
+
             // Delegate to the INavigationStack
 
             navigationBase.NavigationStack.GoBack();

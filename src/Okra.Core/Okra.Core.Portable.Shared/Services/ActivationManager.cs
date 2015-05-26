@@ -15,7 +15,7 @@ namespace Okra.Services
     {
         // *** Fields ***
 
-        private HashSet<IActivationHandler> registeredServices = new HashSet<IActivationHandler>();
+        private HashSet<IActivationHandler> _registeredServices = new HashSet<IActivationHandler>();
 
         // *** Events ***
 
@@ -43,12 +43,12 @@ namespace Okra.Services
             if (service == null)
                 throw new ArgumentNullException("service");
 
-            if (registeredServices.Contains(service))
+            if (_registeredServices.Contains(service))
                 throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotRegisterServiceMultipleTimes"));
 
             // Add the service to the internal list
 
-            registeredServices.Add(service);
+            _registeredServices.Add(service);
         }
 
         public void Unregister(IActivationHandler service)
@@ -58,12 +58,12 @@ namespace Okra.Services
             if (service == null)
                 throw new ArgumentNullException("service");
 
-            if (!registeredServices.Contains(service))
+            if (!_registeredServices.Contains(service))
                 throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotUnregisterUnregisteredService"));
 
             // Remove the service from the internal list
 
-            registeredServices.Remove(service);
+            _registeredServices.Remove(service);
         }
 
         // *** Private Methods ***
@@ -85,7 +85,7 @@ namespace Okra.Services
             // Call activate on all activation handlers
             // NB: We convert to an array so that the Select is not called multiple times
 
-            IEnumerable<Task<bool>> activationTasks = registeredServices.Select(service => service.Activate(activatedEventArgs)).ToArray();
+            IEnumerable<Task<bool>> activationTasks = _registeredServices.Select(service => service.Activate(activatedEventArgs)).ToArray();
             await Task.WhenAll(activationTasks);
 
             // Raise Activated event

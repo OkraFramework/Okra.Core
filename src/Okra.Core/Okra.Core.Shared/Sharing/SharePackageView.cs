@@ -11,8 +11,8 @@ namespace Okra.Sharing
     {
         // *** Fields ***
 
-        private readonly DataPackageView dataPackageView;
-        private readonly SharePropertySet properties;
+        private readonly DataPackageView _dataPackageView;
+        private readonly SharePropertySet _properties;
 
         // *** Constructors ***
 
@@ -21,8 +21,8 @@ namespace Okra.Sharing
             if (dataPackageView == null)
                 throw new ArgumentNullException("dataPackageView");
 
-            this.dataPackageView = dataPackageView;
-            this.properties = new SharePropertySet(dataPackageView.Properties);
+            _dataPackageView = dataPackageView;
+            _properties = new SharePropertySet(dataPackageView.Properties);
         }
 
         // *** Properties ***
@@ -31,7 +31,7 @@ namespace Okra.Sharing
         {
             get
             {
-                return dataPackageView.AvailableFormats;
+                return _dataPackageView.AvailableFormats;
             }
         }
 
@@ -39,7 +39,7 @@ namespace Okra.Sharing
         {
             get
             {
-                return properties;
+                return _properties;
             }
         }
 
@@ -50,7 +50,7 @@ namespace Okra.Sharing
             if (string.IsNullOrEmpty(formatId))
                 throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "formatId");
 
-            return dataPackageView.Contains(formatId);
+            return _dataPackageView.Contains(formatId);
         }
 
         public Task<T> GetDataAsync<T>(string formatId)
@@ -63,7 +63,7 @@ namespace Okra.Sharing
 
         private async Task<T> GetDataAsyncInternal<T>(string formatId)
         {
-            object data = await dataPackageView.GetDataAsync(formatId);
+            object data = await _dataPackageView.GetDataAsync(formatId);
             return (T)data;
         }
 
@@ -73,13 +73,13 @@ namespace Okra.Sharing
         {
             // *** Fields ***
 
-            private readonly DataPackagePropertySetView propertySetView;
+            private readonly DataPackagePropertySetView _propertySetView;
 
             // *** Constructors ***
 
             public SharePropertySet(DataPackagePropertySetView propertySetView)
             {
-                this.propertySetView = propertySetView;
+                _propertySetView = propertySetView;
             }
 
             // *** Properties ***
@@ -88,7 +88,7 @@ namespace Okra.Sharing
             {
                 get
                 {
-                    return propertySetView.Title;
+                    return _propertySetView.Title;
                 }
                 set
                 {
@@ -100,7 +100,7 @@ namespace Okra.Sharing
             {
                 get
                 {
-                    return propertySetView.Description;
+                    return _propertySetView.Description;
                 }
                 set
                 {

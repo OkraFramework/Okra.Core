@@ -10,12 +10,12 @@ namespace Okra.Services
     {
         // *** Fields ***
 
-        private HashSet<ILifetimeAware> registeredServices = new HashSet<ILifetimeAware>();
+        private HashSet<ILifetimeAware> _registeredServices = new HashSet<ILifetimeAware>();
 
         // *** Constructors ***
 
         public LifetimeManagerBase()
-        {            
+        {
         }
 
         // *** Methods ***
@@ -27,12 +27,12 @@ namespace Okra.Services
             if (service == null)
                 throw new ArgumentNullException("service");
 
-            if (registeredServices.Contains(service))
+            if (_registeredServices.Contains(service))
                 throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotRegisterServiceMultipleTimes"));
 
             // Add the service to the internal list
 
-            registeredServices.Add(service);
+            _registeredServices.Add(service);
         }
 
         public void Unregister(ILifetimeAware service)
@@ -42,25 +42,25 @@ namespace Okra.Services
             if (service == null)
                 throw new ArgumentNullException("service");
 
-            if (!registeredServices.Contains(service))
+            if (!_registeredServices.Contains(service))
                 throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotUnregisterUnregisteredService"));
 
             // Remove the service from the internal list
 
-            registeredServices.Remove(service);
+            _registeredServices.Remove(service);
         }
 
         // *** Protected Methods ***
 
         protected virtual Task SuspendServicesAsync()
         {
-            IEnumerable<Task> resumingTasks = registeredServices.Select(service => service.OnSuspending());
+            IEnumerable<Task> resumingTasks = _registeredServices.Select(service => service.OnSuspending());
             return Task.WhenAll(resumingTasks);
         }
 
         protected virtual Task ResumeServicesAsync()
         {
-            IEnumerable<Task> resumingTasks = registeredServices.Select(service => service.OnResuming());
+            IEnumerable<Task> resumingTasks = _registeredServices.Select(service => service.OnResuming());
             return Task.WhenAll(resumingTasks);
         }
     }

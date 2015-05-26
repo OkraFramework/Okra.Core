@@ -14,13 +14,13 @@ namespace Okra.Navigation
         // *** Fields ***
 
         [DataMember]
-        private string pageName;
+        private string _pageName;
 
         [DataMember]
-        private StateData arguments;
+        private StateData _arguments;
 
         [DataMember]
-        private Dictionary<string, StateData> stateDictionary = new Dictionary<string, StateData>();
+        private Dictionary<string, StateData> _stateDictionary = new Dictionary<string, StateData>();
 
         // *** Events ***
 
@@ -37,8 +37,8 @@ namespace Okra.Navigation
 
             // Set properties
 
-            this.pageName = pageName;
-            this.arguments = StateData.Create(arguments);
+            _pageName = pageName;
+            _arguments = StateData.Create(arguments);
         }
 
         // *** Properties ***
@@ -47,7 +47,7 @@ namespace Okra.Navigation
         {
             get
             {
-                return pageName;
+                return _pageName;
             }
         }
 
@@ -55,7 +55,7 @@ namespace Okra.Navigation
 
         public T GetArguments<T>()
         {
-            return arguments.GetData<T>();
+            return _arguments.GetData<T>();
         }
 
         public T GetState<T>(string key)
@@ -67,7 +67,7 @@ namespace Okra.Navigation
 
             // Get value from dictionary
 
-            return (T)stateDictionary[key].GetData<T>();
+            return (T)_stateDictionary[key].GetData<T>();
         }
 
         public bool TryGetState<T>(string key, out T value)
@@ -80,7 +80,7 @@ namespace Okra.Navigation
             // Get value from dictionary
 
             StateData stateData;
-            bool success = stateDictionary.TryGetValue(key, out stateData);
+            bool success = _stateDictionary.TryGetValue(key, out stateData);
 
             if (success)
                 value = stateData.GetData<T>();
@@ -99,7 +99,7 @@ namespace Okra.Navigation
 
             // Set value into dictionary
 
-            stateDictionary[key] = StateData.Create<T>(value);
+            _stateDictionary[key] = StateData.Create<T>(value);
 
             // Raise events
 
@@ -120,7 +120,7 @@ namespace Okra.Navigation
 
         public override string ToString()
         {
-            return pageName;
+            return _pageName;
         }
 
         // *** Private Sub-classes ***
@@ -130,9 +130,9 @@ namespace Okra.Navigation
         {
             // *** Fields ***
 
-            private object data;
-            private Type dataType;
-            private byte[] rawData;
+            private object _data;
+            private Type _dataType;
+            private byte[] _rawData;
 
             // *** Properties ***
 
@@ -141,14 +141,14 @@ namespace Okra.Navigation
             {
                 get
                 {
-                    if (rawData == null && data != null)
-                        rawData = SerializationHelper.SerializeToArray(data, dataType);
+                    if (_rawData == null && _data != null)
+                        _rawData = SerializationHelper.SerializeToArray(_data, _dataType);
 
-                    return rawData;
+                    return _rawData;
                 }
                 set
                 {
-                    rawData = value;
+                    _rawData = value;
                 }
             }
 
@@ -156,21 +156,21 @@ namespace Okra.Navigation
 
             public T GetData<T>()
             {
-                if (data == null)
+                if (_data == null)
                 {
-                    if (rawData != null)
+                    if (_rawData != null)
                     {
-                        data = SerializationHelper.DeserializeFromArray(rawData, typeof(T));
+                        _data = SerializationHelper.DeserializeFromArray(_rawData, typeof(T));
                     }
                     else
                     {
-                        data = default(T);
+                        _data = default(T);
                     }
 
-                    dataType = typeof(T);
+                    _dataType = typeof(T);
                 }
 
-                return (T)data;
+                return (T)_data;
             }
 
             // *** Static Methods ***
@@ -179,18 +179,18 @@ namespace Okra.Navigation
             {
                 return new StateData()
                 {
-                    data = value,
-                    dataType = value != null ? value.GetType() : typeof(void)
+                    _data = value,
+                    _dataType = value != null ? value.GetType() : typeof(void)
                 };
             }
 
             public static StateData Create<T>(object value)
             {
                 return new StateData()
-                    {
-                        data = value,
-                        dataType = typeof(T)
-                    };
+                {
+                    _data = value,
+                    _dataType = typeof(T)
+                };
             }
         }
     }

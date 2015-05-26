@@ -15,20 +15,20 @@ namespace Okra.Navigation
     {
         // *** Fields ***
 
-        private bool eventHandlersRegistered;
-        private ContentControl contentHost;
-        private INavigationBase navigationManager;
+        private bool _eventHandlersRegistered;
+        private ContentControl _contentHost;
+        private INavigationBase _navigationManager;
 
         // *** Methods ***
 
         public void NavigateTo(object page, INavigationBase navigationManager)
         {
-            this.navigationManager = navigationManager;
+            _navigationManager = navigationManager;
 
-            if (!eventHandlersRegistered)
+            if (!_eventHandlersRegistered)
             {
                 RegisterEventHandlers();
-                eventHandlersRegistered = true;
+                _eventHandlersRegistered = true;
             }
 
             SetWindowContent(page);
@@ -59,9 +59,9 @@ namespace Okra.Navigation
         {
             // If the content host has not been created then create this
 
-            if (contentHost == null)
+            if (_contentHost == null)
             {
-                contentHost = new ContentControl()
+                _contentHost = new ContentControl()
                 {
                     HorizontalContentAlignment = HorizontalAlignment.Stretch,
                     VerticalContentAlignment = VerticalAlignment.Stretch
@@ -70,23 +70,23 @@ namespace Okra.Navigation
 
             // Ensure that the window content is set to the content host
 
-            if (Window.Current.Content != contentHost)
-                Window.Current.Content = contentHost;
+            if (Window.Current.Content != _contentHost)
+                Window.Current.Content = _contentHost;
 
             // Set the content to display
 
-            contentHost.Content = page;
+            _contentHost.Content = page;
         }
 
         // *** Event Handlers ***
 
 #if WINDOWS_PHONE_APP || WINDOWS_UAP
-        void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        private void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
         {
-            if (navigationManager != null && navigationManager.NavigationStack.CanGoBack)
+            if (_navigationManager != null && _navigationManager.NavigationStack.CanGoBack)
             {
                 e.Handled = true;
-                navigationManager.NavigationStack.GoBack();
+                _navigationManager.NavigationStack.GoBack();
             }
         }
 #endif
@@ -114,7 +114,7 @@ namespace Okra.Navigation
 
                 // Handle going back via keyboard (Alt+Left or GoBack)
 
-                if ((key == VirtualKey.Left && onlyAlt) || (key== VirtualKey.GoBack && noModifiers))
+                if ((key == VirtualKey.Left && onlyAlt) || (key == VirtualKey.GoBack && noModifiers))
                 {
                     args.Handled = true;
                     GoBack();
@@ -136,7 +136,8 @@ namespace Okra.Navigation
 
             // Ignore button chords with the left, right, and middle buttons
             if (properties.IsLeftButtonPressed || properties.IsRightButtonPressed ||
-                properties.IsMiddleButtonPressed) return;
+                properties.IsMiddleButtonPressed)
+                return;
 
             // If back or foward are pressed (but not both) navigate appropriately
             bool backPressed = properties.IsXButton1Pressed;
@@ -161,8 +162,8 @@ namespace Okra.Navigation
 
         private void GoBack()
         {
-            if (navigationManager != null && navigationManager.NavigationStack.CanGoBack)
-                navigationManager.NavigationStack.GoBack();
+            if (_navigationManager != null && _navigationManager.NavigationStack.CanGoBack)
+                _navigationManager.NavigationStack.GoBack();
         }
 
         private void GoForward()

@@ -12,8 +12,8 @@ namespace Okra.Sharing
     {
         // *** Fields ***
 
-        private bool isRegistered = false;
-        private INavigationBase navigationManager;
+        private bool _isRegistered = false;
+        private INavigationBase _navigationManager;
 
         // *** Constructors ***
 
@@ -22,7 +22,7 @@ namespace Okra.Sharing
             if (navigationManager == null)
                 throw new ArgumentNullException("navigationManager");
 
-            this.navigationManager = navigationManager;
+            _navigationManager = navigationManager;
             navigationManager.NavigationStack.NavigatedTo += NavigationManager_NavigatedTo;
         }
 
@@ -42,7 +42,7 @@ namespace Okra.Sharing
         }
 
         // *** Protected Methods ***
-        
+
         protected virtual void RegisterForSharing()
         {
             // Register with the DataTransferManager
@@ -63,12 +63,12 @@ namespace Okra.Sharing
         {
             // Find the first page element that implements IShareable and forward the data request
 
-            PageInfo currentPage = navigationManager.NavigationStack.CurrentPage;
+            PageInfo currentPage = _navigationManager.NavigationStack.CurrentPage;
             bool hasRequestBeenProcessed = false;
 
             if (currentPage != null)
             {
-                foreach (object element in navigationManager.GetPageElements(currentPage))
+                foreach (object element in _navigationManager.GetPageElements(currentPage))
                 {
                     if (element is IShareable)
                     {
@@ -99,10 +99,10 @@ namespace Okra.Sharing
             // On first navigation with the navigation manager then register with the DataTransferManager
             // NB: The INavigationManager import should only be created on the main application view
 
-            if (!isRegistered)
+            if (!_isRegistered)
             {
                 RegisterForSharing();
-                isRegistered = true;
+                _isRegistered = true;
             }
         }
 
@@ -112,15 +112,15 @@ namespace Okra.Sharing
         {
             // *** Fields ***
 
-            private readonly DataRequest dataRequest;
-            private readonly ISharePackage sharePackage;
+            private readonly DataRequest _dataRequest;
+            private readonly ISharePackage _sharePackage;
 
             // *** Constructors ***
 
             public ShareRequest(DataRequest dataRequest)
             {
-                this.dataRequest = dataRequest;
-                this.sharePackage = new SharePackage(dataRequest.Data);
+                _dataRequest = dataRequest;
+                _sharePackage = new SharePackage(dataRequest.Data);
             }
 
             // *** Properties ***
@@ -129,7 +129,7 @@ namespace Okra.Sharing
             {
                 get
                 {
-                    return sharePackage;
+                    return _sharePackage;
                 }
             }
 
@@ -137,7 +137,7 @@ namespace Okra.Sharing
 
             public void FailWithDisplayText(string displayText)
             {
-                dataRequest.FailWithDisplayText(displayText);
+                _dataRequest.FailWithDisplayText(displayText);
             }
         }
     }

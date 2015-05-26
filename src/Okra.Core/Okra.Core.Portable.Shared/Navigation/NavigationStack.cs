@@ -12,7 +12,7 @@ namespace Okra.Navigation
     {
         // *** Fields ***
 
-        private readonly List<PageInfo> internalStack = new List<PageInfo>();
+        private readonly List<PageInfo> _internalStack = new List<PageInfo>();
 
         // *** Events ***
 
@@ -34,7 +34,7 @@ namespace Okra.Navigation
         {
             get
             {
-                return internalStack[index];
+                return _internalStack[index];
             }
         }
 
@@ -42,7 +42,7 @@ namespace Okra.Navigation
         {
             get
             {
-                return internalStack.Count > 0;
+                return _internalStack.Count > 0;
             }
         }
 
@@ -50,7 +50,7 @@ namespace Okra.Navigation
         {
             get
             {
-                return internalStack.Count;
+                return _internalStack.Count;
             }
         }
 
@@ -58,10 +58,10 @@ namespace Okra.Navigation
         {
             get
             {
-                if (internalStack.Count == 0)
+                if (_internalStack.Count == 0)
                     return null;
                 else
-                    return internalStack[internalStack.Count - 1];
+                    return _internalStack[_internalStack.Count - 1];
             }
         }
 
@@ -71,7 +71,7 @@ namespace Okra.Navigation
         {
             // If the stack is already empty then just return (and don't raise any events)
 
-            if (internalStack.Count == 0)
+            if (_internalStack.Count == 0)
                 return;
 
             // Call NavigatingFrom on the existing navigation entry
@@ -80,7 +80,7 @@ namespace Okra.Navigation
 
             // Clear the navigation stack
 
-            internalStack.Clear();
+            _internalStack.Clear();
 
             // Raise property changed events
 
@@ -93,12 +93,12 @@ namespace Okra.Navigation
 
         public IEnumerator<PageInfo> GetEnumerator()
         {
-            return internalStack.GetEnumerator();
+            return _internalStack.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return internalStack.GetEnumerator();
+            return _internalStack.GetEnumerator();
         }
 
         public void GoBack()
@@ -120,7 +120,7 @@ namespace Okra.Navigation
 
             // Check that the specified page exists in the navigation stack
 
-            int pageIndex = internalStack.IndexOf(page);
+            int pageIndex = _internalStack.IndexOf(page);
 
             if (pageIndex == -1)
                 throw new InvalidOperationException(string.Format(ResourceHelper.GetErrorResource("Exception_InvalidOperation_SpecifiedPageDoesNotExistInNavigationStack"), page.PageName));
@@ -163,7 +163,7 @@ namespace Okra.Navigation
 
             // Add the pages to the stack
 
-            internalStack.AddRange(pages);
+            _internalStack.AddRange(pages);
 
             // Raise events
 
@@ -244,8 +244,8 @@ namespace Okra.Navigation
 
         private void GoBackToInternal(int removedPageIndex)
         {
-            int removedPageCount = internalStack.Count - removedPageIndex;
-            IList<PageInfo> removedPages = internalStack.GetRange(removedPageIndex, removedPageCount);
+            int removedPageCount = _internalStack.Count - removedPageIndex;
+            IList<PageInfo> removedPages = _internalStack.GetRange(removedPageIndex, removedPageCount);
 
             // Call NavigatingFrom on the existing navigation entry
 
@@ -253,7 +253,7 @@ namespace Okra.Navigation
 
             // Remove the pages from the navigation stack
 
-            internalStack.RemoveRange(removedPageIndex, removedPageCount);
+            _internalStack.RemoveRange(removedPageIndex, removedPageCount);
 
             // Raise property changed events
 
@@ -263,7 +263,7 @@ namespace Okra.Navigation
                 OnPropertyChanged("CanGoBack");
 
             if (removedPageCount == 1)
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedPages[0], internalStack.Count));
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedPages[0], _internalStack.Count));
             else
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 

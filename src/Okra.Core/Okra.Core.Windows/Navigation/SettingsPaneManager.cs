@@ -17,8 +17,8 @@ namespace Okra.Navigation
     {
         // *** Fields ***
 
-        private SettingsPaneHost settingsPaneHost;
-        private bool isUnloading = false;
+        private SettingsPaneHost _settingsPaneHost;
+        private bool _isUnloading = false;
 
         // *** Events ***
 
@@ -45,7 +45,7 @@ namespace Okra.Navigation
         }
 
         // *** Protected Methods ***
-        
+
         protected void OnSettingsPaneBackClick(object sender, BackClickEventArgs e)
         {
             if (e == null)
@@ -65,9 +65,9 @@ namespace Okra.Navigation
             // NB: Set the 'isUnloading' flag to stop reopening the system settings pane
             // TODO : Add some way to indicate to VMs that they are closing - IClosingAware?
 
-            isUnloading = true;
+            _isUnloading = true;
             NavigationStack.Clear();
-            isUnloading = false;
+            _isUnloading = false;
         }
 
         protected void OnSettingsFlyoutLoaded(object sender, object e)
@@ -81,15 +81,15 @@ namespace Okra.Navigation
         {
             // If we are responding to unloading of the settings pane, then just ignore this
 
-            if (isUnloading)
+            if (_isUnloading)
                 return;
 
             // If the page is null then close the flyout and show the system settings pane
 
             if (page == null)
             {
-                if (settingsPaneHost != null)
-                    settingsPaneHost.Hide();
+                if (_settingsPaneHost != null)
+                    _settingsPaneHost.Hide();
 
                 SettingsPane.Show();
             }
@@ -100,22 +100,22 @@ namespace Okra.Navigation
             {
                 // Lazy create the settings flyout
 
-                if (settingsPaneHost == null)
+                if (_settingsPaneHost == null)
                 {
-                    settingsPaneHost = new SettingsPaneHost();
+                    _settingsPaneHost = new SettingsPaneHost();
 
-                    settingsPaneHost.BackClick += OnSettingsPaneBackClick;
-                    settingsPaneHost.Loaded += OnSettingsFlyoutLoaded;
-                    settingsPaneHost.Unloaded += OnSettingsFlyoutUnloaded;
+                    _settingsPaneHost.BackClick += OnSettingsPaneBackClick;
+                    _settingsPaneHost.Loaded += OnSettingsFlyoutLoaded;
+                    _settingsPaneHost.Unloaded += OnSettingsFlyoutUnloaded;
                 }
 
                 // Set the content for the settings flyout
 
-                settingsPaneHost.Content = page;
-                
+                _settingsPaneHost.Content = page;
+
                 // Show the settings flyout
 
-                ShowSettingsFlyout(settingsPaneHost);
+                ShowSettingsFlyout(_settingsPaneHost);
             }
         }
 

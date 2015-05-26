@@ -10,16 +10,16 @@ namespace Okra.Helpers
 
         // *** Static Fields ***
 
-        private static ResourceLoader errorResourceLoader;
+        private static ResourceLoader s_errorResourceLoader;
 
         // *** Methods ***
 
         public static string GetErrorResource(string resourceName)
         {
-            if (errorResourceLoader == null)
-                errorResourceLoader = ResourceLoader.GetForViewIndependentUse(ERROR_RESOURCEMAP);
+            if (s_errorResourceLoader == null)
+                s_errorResourceLoader = ResourceLoader.GetForViewIndependentUse(ERROR_RESOURCEMAP);
 
-            return errorResourceLoader.GetString(resourceName);
+            return s_errorResourceLoader.GetString(resourceName);
         }
     }
 }

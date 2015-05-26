@@ -11,8 +11,8 @@ namespace Okra.Sharing
     {
         // *** Fields ***
 
-        private readonly DataPackage dataPackage;
-        private readonly SharePropertySet properties;
+        private readonly DataPackage _dataPackage;
+        private readonly SharePropertySet _properties;
 
         // *** Constructors ***
 
@@ -21,8 +21,8 @@ namespace Okra.Sharing
             if (dataPackage == null)
                 throw new ArgumentNullException("dataPackage");
 
-            this.dataPackage = dataPackage;
-            this.properties = new SharePropertySet(dataPackage.Properties);
+            _dataPackage = dataPackage;
+            _properties = new SharePropertySet(dataPackage.Properties);
         }
 
         // *** Properties ***
@@ -31,7 +31,7 @@ namespace Okra.Sharing
         {
             get
             {
-                return properties;
+                return _properties;
             }
         }
 
@@ -41,8 +41,8 @@ namespace Okra.Sharing
         {
             if (string.IsNullOrEmpty(formatId))
                 throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "formatId");
-            
-            dataPackage.SetData(formatId, value);
+
+            _dataPackage.SetData(formatId, value);
         }
 
         public void SetAsyncData<T>(string formatId, AsyncDataProvider<T> dataProvider)
@@ -53,7 +53,7 @@ namespace Okra.Sharing
             if (dataProvider == null)
                 throw new ArgumentNullException("dataProvider");
 
-            dataPackage.SetDataProvider(formatId, (DataProviderRequest request) => DataProviderRequestHandler<T>(request, dataProvider));
+            _dataPackage.SetDataProvider(formatId, (DataProviderRequest request) => DataProviderRequestHandler<T>(request, dataProvider));
         }
 
         // *** Private Methods ***
@@ -80,13 +80,13 @@ namespace Okra.Sharing
         {
             // *** Fields ***
 
-            private readonly DataPackagePropertySet propertySet;
+            private readonly DataPackagePropertySet _propertySet;
 
             // *** Constructors ***
 
             public SharePropertySet(DataPackagePropertySet propertySet)
             {
-                this.propertySet = propertySet;
+                _propertySet = propertySet;
             }
 
             // *** Properties ***
@@ -95,11 +95,11 @@ namespace Okra.Sharing
             {
                 get
                 {
-                    return propertySet.Title;
+                    return _propertySet.Title;
                 }
                 set
                 {
-                    propertySet.Title = value;
+                    _propertySet.Title = value;
                 }
             }
 
@@ -107,11 +107,11 @@ namespace Okra.Sharing
             {
                 get
                 {
-                    return propertySet.Description;
+                    return _propertySet.Description;
                 }
                 set
                 {
-                    propertySet.Description = value;
+                    _propertySet.Description = value;
                 }
             }
         }

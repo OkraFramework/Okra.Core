@@ -14,7 +14,7 @@ namespace Okra.Services
     {
         // *** Fields ***
 
-        private readonly INavigationManager navigationManager;
+        private readonly INavigationManager _navigationManager;
 
         // *** Constructors ***
 
@@ -30,7 +30,7 @@ namespace Okra.Services
 
             // Store state
 
-            this.navigationManager = navigationManager;
+            _navigationManager = navigationManager;
 
             // Register with the activation manager
 
@@ -58,12 +58,12 @@ namespace Okra.Services
                 // If the previous execution state was terminated then attempt to restore the navigation stack
 
                 if (activatedEventArgs.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                    await navigationManager.RestoreNavigationStack();
+                    await _navigationManager.RestoreNavigationStack();
 
                 // Otherwise navigate to the home page
 
                 else
-                    navigationManager.NavigateTo(navigationManager.HomePageName);
+                    _navigationManager.NavigateTo(_navigationManager.HomePageName);
 
                 return true;
             }

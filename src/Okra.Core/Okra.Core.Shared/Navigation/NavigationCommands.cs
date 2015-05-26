@@ -71,7 +71,7 @@ namespace Okra.Navigation
         {
             // *** Fields ***
 
-            private readonly INavigationBase navigationManager;
+            private readonly INavigationBase _navigationManager;
 
             // *** Events ***
 
@@ -81,7 +81,7 @@ namespace Okra.Navigation
 
             public GoBackCommand(INavigationBase navigationManager)
             {
-                this.navigationManager = navigationManager;
+                _navigationManager = navigationManager;
 
                 navigationManager.NavigationStack.PropertyChanged += NavigationStack_PropertyChanged;
             }
@@ -90,13 +90,13 @@ namespace Okra.Navigation
 
             public bool CanExecute(object parameter)
             {
-                return navigationManager.NavigationStack.CanGoBack;
+                return _navigationManager.NavigationStack.CanGoBack;
             }
 
             public void Execute(object parameter)
             {
-                if (navigationManager.NavigationStack.CanGoBack)
-                    navigationManager.NavigationStack.GoBack();
+                if (_navigationManager.NavigationStack.CanGoBack)
+                    _navigationManager.NavigationStack.GoBack();
             }
 
             // *** Private Methods ***
@@ -122,9 +122,9 @@ namespace Okra.Navigation
         {
             // *** Fields ***
 
-            private readonly INavigationBase navigationManager;
-            private readonly string pageName;
-            private readonly object arguments;
+            private readonly INavigationBase _navigationManager;
+            private readonly string _pageName;
+            private readonly object _arguments;
 
             // *** Events ***
 
@@ -134,9 +134,9 @@ namespace Okra.Navigation
 
             public NavigateToCommand(INavigationBase navigationManager, string pageName, object arguments)
             {
-                this.navigationManager = navigationManager;
-                this.pageName = pageName;
-                this.arguments = arguments;
+                _navigationManager = navigationManager;
+                _pageName = pageName;
+                _arguments = arguments;
             }
 
             // *** Methods ***
@@ -148,7 +148,7 @@ namespace Okra.Navigation
 
             public void Execute(object parameter)
             {
-                navigationManager.NavigateTo(pageName, arguments);
+                _navigationManager.NavigateTo(_pageName, _arguments);
             }
 
             protected void OnCanExecuteChanged()

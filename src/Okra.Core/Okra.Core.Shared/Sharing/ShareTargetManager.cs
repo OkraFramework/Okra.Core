@@ -19,9 +19,9 @@ namespace Okra.Sharing
     {
         // *** Fields ***
 
-        private readonly IViewFactory viewFactory;
+        private readonly IViewFactory _viewFactory;
 
-        private string shareTargetPageName = SpecialPageNames.ShareTarget;
+        private string _shareTargetPageName = SpecialPageNames.ShareTarget;
 
         // *** Constructors ***
 
@@ -32,8 +32,8 @@ namespace Okra.Sharing
 
             if (viewFactory == null)
                 throw new ArgumentNullException("viewFactory");
-            
-            this.viewFactory = viewFactory;
+
+            _viewFactory = viewFactory;
 
             // Register with the activation manager
 
@@ -46,7 +46,7 @@ namespace Okra.Sharing
         {
             get
             {
-                return shareTargetPageName;
+                return _shareTargetPageName;
             }
             set
             {
@@ -57,7 +57,7 @@ namespace Okra.Sharing
 
                 // Set the property
 
-                shareTargetPageName = value;
+                _shareTargetPageName = value;
             }
         }
 
@@ -75,7 +75,7 @@ namespace Okra.Sharing
 
                 // Create a new page to display the share target UI
 
-                IViewLifetimeContext viewLifetimeContext = viewFactory.CreateView(ShareTargetPageName, new NullNavigationContext());
+                IViewLifetimeContext viewLifetimeContext = _viewFactory.CreateView(ShareTargetPageName, new NullNavigationContext());
 
                 // Call Activate(...) methods
 
@@ -171,15 +171,15 @@ namespace Okra.Sharing
         {
             // *** Fields ***
 
-            private readonly ShareOperation shareOperation;
-            private readonly SharePackageView data;
+            private readonly ShareOperation _shareOperation;
+            private readonly SharePackageView _data;
 
             // *** Constructors ***
 
             public ShareOperationProxy(ShareOperation shareOperation)
             {
-                this.shareOperation = shareOperation;
-                this.data = new SharePackageView(shareOperation.Data);
+                _shareOperation = shareOperation;
+                _data = new SharePackageView(shareOperation.Data);
             }
 
             // *** Properties ***
@@ -188,7 +188,7 @@ namespace Okra.Sharing
             {
                 get
                 {
-                    return data;
+                    return _data;
                 }
             }
 
@@ -196,27 +196,27 @@ namespace Okra.Sharing
 
             public void ReportCompleted()
             {
-                shareOperation.ReportCompleted();
+                _shareOperation.ReportCompleted();
             }
 
             public void ReportDataRetrieved()
             {
-                shareOperation.ReportDataRetrieved();
+                _shareOperation.ReportDataRetrieved();
             }
 
             public void ReportError(string value)
             {
-                shareOperation.ReportError(value);
+                _shareOperation.ReportError(value);
             }
 
             public void ReportStarted()
             {
-                shareOperation.ReportStarted();
+                _shareOperation.ReportStarted();
             }
 
             public void ReportSubmittedBackgroundTask()
             {
-                shareOperation.ReportSubmittedBackgroundTask();
+                _shareOperation.ReportSubmittedBackgroundTask();
             }
         }
     }

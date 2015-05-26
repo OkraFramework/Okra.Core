@@ -15,10 +15,10 @@ namespace Okra.Search
     {
         // *** Fields ***
 
-        private readonly INavigationManager navigationManager;
+        private readonly INavigationManager _navigationManager;
 
-        private string searchPageName = SpecialPageNames.Search;
-        private bool isActivated;
+        private string _searchPageName = SpecialPageNames.Search;
+        private bool _isActivated;
 
         // *** Constructors ***
 
@@ -30,7 +30,7 @@ namespace Okra.Search
             if (activationManager == null)
                 throw new ArgumentNullException("activationManager");
 
-            this.navigationManager = navigationManager;
+            _navigationManager = navigationManager;
 
             // Register with the activation manager
 
@@ -44,7 +44,7 @@ namespace Okra.Search
         {
             get
             {
-                return searchPageName;
+                return _searchPageName;
             }
             set
             {
@@ -55,12 +55,12 @@ namespace Okra.Search
 
                 // If we have been activated then do not allow setting of this property
 
-                if (isActivated)
+                if (_isActivated)
                     throw new InvalidOperationException(string.Format(ResourceHelper.GetErrorResource("Exception_InvalidOperation_PropertyCannotBeSetAfterActivation"), "SearchPageName"));
 
                 // Set the property
 
-                searchPageName = value;
+                _searchPageName = value;
             }
         }
 
@@ -83,13 +83,13 @@ namespace Okra.Search
                 // If the previous execution state was terminated then attempt to restore the navigation stack
 
                 if (activatedEventArgs.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                    await navigationManager.RestoreNavigationStack();
+                    await _navigationManager.RestoreNavigationStack();
 
                 // Otherwise if the application is a new instance navigate to the home page
 
                 else if (activatedEventArgs.PreviousExecutionState == ApplicationExecutionState.ClosedByUser
                       || activatedEventArgs.PreviousExecutionState == ApplicationExecutionState.NotRunning)
-                    navigationManager.NavigateTo(navigationManager.HomePageName);
+                    _navigationManager.NavigateTo(_navigationManager.HomePageName);
 
                 // Then display the search results
 
@@ -110,14 +110,14 @@ namespace Okra.Search
 
             // Once the application is activated we register for the SearchPage.QuerySubmitted event
             // NB: This is a slightly more performant method of receiving search queries for running applications than via activation
-            
-            if (!isActivated)
+
+            if (!_isActivated)
             {
                 RegisterQuerySubmitted();
 
                 // Set the isActivated flag
 
-                isActivated = true;
+                _isActivated = true;
             }
         }
 
@@ -146,14 +146,14 @@ namespace Okra.Search
 
             // Navigate to the search page if it is not currently visible
 
-            PageInfo currentPage = navigationManager.NavigationStack.CurrentPage;
+            PageInfo currentPage = _navigationManager.NavigationStack.CurrentPage;
 
             if (currentPage == null || currentPage.PageName != SearchPageName)
-                navigationManager.NavigateTo(SearchPageName);
+                _navigationManager.NavigateTo(SearchPageName);
 
             // For all page elements that implement ISearchPage then execute the query
 
-            IEnumerable<ISearchPage> searchPages = navigationManager.GetPageElements(navigationManager.NavigationStack.CurrentPage).Where(page => page is ISearchPage).Cast<ISearchPage>();
+            IEnumerable<ISearchPage> searchPages = _navigationManager.GetPageElements(_navigationManager.NavigationStack.CurrentPage).Where(page => page is ISearchPage).Cast<ISearchPage>();
 
             foreach (ISearchPage searchPage in searchPages)
             {

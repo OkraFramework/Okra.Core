@@ -10,14 +10,14 @@ namespace Okra.Navigation
     {
         // *** Fields ***
 
-        private readonly IViewFactory viewFactory;
-        private readonly INavigationStack navigationStack;
-        private readonly NavigationContext navigationContext;
+        private readonly IViewFactory _viewFactory;
+        private readonly INavigationStack _navigationStack;
+        private readonly NavigationContext _navigationContext;
 
-        private readonly Dictionary<PageInfo, PageDetails> pageCache = new Dictionary<PageInfo, PageDetails>();
+        private readonly Dictionary<PageInfo, PageDetails> _pageCache = new Dictionary<PageInfo, PageDetails>();
 
-        private bool restoringState = false;
-        
+        private bool _restoringState = false;
+
         // *** Constructors ***
 
         public NavigationBase(IViewFactory viewFactory)
@@ -33,10 +33,10 @@ namespace Okra.Navigation
             if (navigationStack == null)
                 throw new ArgumentNullException("navigationStack");
 
-            this.viewFactory = viewFactory;
-            this.navigationStack = navigationStack;
+            _viewFactory = viewFactory;
+            _navigationStack = navigationStack;
 
-            this.navigationContext = new NavigationContext(this);
+            _navigationContext = new NavigationContext(this);
 
             navigationStack.NavigatedTo += navigationStack_NavigatedTo;
             navigationStack.NavigatingFrom += navigationStack_NavigatingFrom;
@@ -50,7 +50,7 @@ namespace Okra.Navigation
         {
             get
             {
-                return navigationStack;
+                return _navigationStack;
             }
         }
 
@@ -63,7 +63,7 @@ namespace Okra.Navigation
 
             // Query the underlying view factory to see if the page exists
 
-            return viewFactory.IsViewDefined(pageName);
+            return _viewFactory.IsViewDefined(pageName);
         }
 
         public IEnumerable<object> GetPageElements(PageInfo page)
@@ -75,7 +75,7 @@ namespace Okra.Navigation
 
             PageDetails pageDetails;
 
-            if (!pageCache.TryGetValue(page, out pageDetails))
+            if (!_pageCache.TryGetValue(page, out pageDetails))
                 return new object[] { };
 
             // Return in the following order,
@@ -102,7 +102,7 @@ namespace Okra.Navigation
             // Restore the navigation stack
             // NB: Flag that we are restoring state so we can pass a NavigationMode.Refresh to restored pages
 
-            restoringState = true;
+            _restoringState = true;
 
             try
             {
@@ -110,7 +110,7 @@ namespace Okra.Navigation
             }
             finally
             {
-                restoringState = false;
+                _restoringState = false;
             }
         }
 
@@ -129,7 +129,7 @@ namespace Okra.Navigation
 
                 PageDetails pageDetails;
 
-                if (pageCache.TryGetValue(pageInfo, out pageDetails))
+                if (_pageCache.TryGetValue(pageInfo, out pageDetails))
                 {
                     object viewModel = pageDetails.ViewLifetimeContext.ViewModel;
 
@@ -146,7 +146,7 @@ namespace Okra.Navigation
 
             return state;
         }
-        
+
         // *** Private Methods ***
 
         private void CallNavigatedTo(PageInfo pageInfo, PageNavigationMode navigationMode)
@@ -175,7 +175,7 @@ namespace Okra.Navigation
         {
             // Create the View
 
-            IViewLifetimeContext viewLifetimeContext = viewFactory.CreateView(pageInfo.PageName, navigationContext);
+            IViewLifetimeContext viewLifetimeContext = _viewFactory.CreateView(pageInfo.PageName, _navigationContext);
 
             // Activate the view model if it implements IActivatable
 
@@ -189,7 +189,7 @@ namespace Okra.Navigation
             // Add the page details to the cache and return
 
             PageDetails pageDetails = new PageDetails(viewLifetimeContext);
-            pageCache.Add(pageInfo, pageDetails);
+            _pageCache.Add(pageInfo, pageDetails);
 
             return pageDetails;
         }
@@ -198,7 +198,7 @@ namespace Okra.Navigation
         {
             PageDetails pageDetails = null;
 
-            if (pageCache.TryGetValue(pageInfo, out pageDetails))
+            if (_pageCache.TryGetValue(pageInfo, out pageDetails))
             {
                 // Dispose of the view and view-model
 
@@ -206,7 +206,7 @@ namespace Okra.Navigation
 
                 // Remove the page from the cache
 
-                pageCache.Remove(pageInfo);
+                _pageCache.Remove(pageInfo);
             }
         }
 
@@ -224,7 +224,7 @@ namespace Okra.Navigation
 
                 PageDetails pageDetails;
 
-                if (!pageCache.TryGetValue(pageInfo, out pageDetails))
+                if (!_pageCache.TryGetValue(pageInfo, out pageDetails))
                     pageDetails = CreatePage(pageInfo);
 
                 // Navigate to the relevant page
@@ -232,12 +232,12 @@ namespace Okra.Navigation
                 DisplayPage(pageDetails.ViewLifetimeContext.View);
             }
         }
-        
+
         // *** Event Handlers ***
 
         private void navigationStack_NavigatedTo(object sender, PageNavigationEventArgs e)
         {
-            if (restoringState)
+            if (_restoringState)
                 CallNavigatedTo((PageInfo)e.Page, PageNavigationMode.Refresh);
             else
                 CallNavigatedTo((PageInfo)e.Page, e.NavigationMode);
@@ -258,7 +258,7 @@ namespace Okra.Navigation
             switch (e.PropertyName)
             {
                 case "CurrentPage":
-                    DisplayNavigationEntry((PageInfo)navigationStack.CurrentPage);
+                    DisplayNavigationEntry((PageInfo)_navigationStack.CurrentPage);
                     break;
             }
         }
@@ -269,13 +269,13 @@ namespace Okra.Navigation
         {
             // *** Fields ***
 
-            private readonly IViewLifetimeContext viewLifetimeContext;
+            private readonly IViewLifetimeContext _viewLifetimeContext;
 
             // *** Constructors ***
 
             public PageDetails(IViewLifetimeContext viewLifetimeContext)
             {
-                this.viewLifetimeContext = viewLifetimeContext;
+                _viewLifetimeContext = viewLifetimeContext;
             }
 
             // *** Properties ***
@@ -284,7 +284,7 @@ namespace Okra.Navigation
             {
                 get
                 {
-                    return viewLifetimeContext;
+                    return _viewLifetimeContext;
                 }
             }
         }

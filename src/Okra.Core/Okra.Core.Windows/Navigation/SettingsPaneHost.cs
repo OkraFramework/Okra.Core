@@ -13,7 +13,7 @@ namespace Okra.Navigation
     {
         // *** Fields ***
 
-        private ControlTemplate chromelessTemplate;
+        private ControlTemplate _chromelessTemplate;
 
         // *** Events ***
 
@@ -24,7 +24,7 @@ namespace Okra.Navigation
         public SettingsPaneHost()
         {
             string chromelessXaml = "<ControlTemplate xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"><ContentPresenter/></ControlTemplate>";
-            chromelessTemplate = (ControlTemplate)Windows.UI.Xaml.Markup.XamlReader.Load(chromelessXaml);
+            _chromelessTemplate = (ControlTemplate)Windows.UI.Xaml.Markup.XamlReader.Load(chromelessXaml);
 
             base.BackClick += SettingsPaneHost_BackClick;
         }
@@ -44,12 +44,12 @@ namespace Okra.Navigation
 
             // If the content is a SettingsFlyout then remove the host chrome and attach to the BackClick event
             // Otherwise use the default SettingsFlyout chrome
-            
+
             if (newContent is SettingsFlyout)
             {
                 SettingsFlyout newContentFlyout = (SettingsFlyout)newContent;
 
-                this.Template = chromelessTemplate;
+                this.Template = _chromelessTemplate;
                 this.Width = newContentFlyout.Width;
 
                 newContentFlyout.BackClick += SettingsPaneHost_BackClick;
@@ -85,7 +85,7 @@ namespace Okra.Navigation
             }
         }
 
-        void SettingsPaneHost_BackClick(object sender, BackClickEventArgs e)
+        private void SettingsPaneHost_BackClick(object sender, BackClickEventArgs e)
         {
             OnBackClick(e);
         }

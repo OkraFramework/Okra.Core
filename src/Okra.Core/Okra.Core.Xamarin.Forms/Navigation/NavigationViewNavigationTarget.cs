@@ -9,13 +9,13 @@ namespace Okra.Navigation
     {
         // *** Fields ***
 
-        private INavigationBase navigationManager;
+        private INavigationBase _navigationManager;
 
         // *** Methods ***
 
         public void NavigateTo(object page, INavigationBase navigationManager)
         {
-            this.navigationManager = navigationManager;
+            _navigationManager = navigationManager;
 
             SetWindowContent(page);
         }

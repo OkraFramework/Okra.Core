@@ -11,8 +11,8 @@ namespace Okra.Core
     {
         // *** Fields ***
 
-        private Action<T> execute;
-        private Func<T, bool> canExecute;
+        private Action<T> _execute;
+        private Func<T, bool> _canExecute;
 
         // *** Events ***
 
@@ -32,8 +32,8 @@ namespace Okra.Core
 
             // Store parameters
 
-            this.execute = execute;
-            this.canExecute = canExecute;
+            _execute = execute;
+            _canExecute = canExecute;
         }
 
         public DelegateCommand(Action<T> execute)
@@ -51,12 +51,12 @@ namespace Okra.Core
             if (!(parameter is T) && parameter != (object)default(T))
                 return false;
 
-            return canExecute((T)parameter);
+            return _canExecute((T)parameter);
         }
 
         public void Execute(object parameter)
         {
-            execute((T)parameter);
+            _execute((T)parameter);
         }
 
         // *** Methods ***

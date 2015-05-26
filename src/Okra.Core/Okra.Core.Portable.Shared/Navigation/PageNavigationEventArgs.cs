@@ -9,8 +9,8 @@ namespace Okra.Navigation
     {
         // *** Fields ***
 
-        private readonly PageInfo page;
-        private readonly PageNavigationMode navigationMode;
+        private readonly PageInfo _page;
+        private readonly PageNavigationMode _navigationMode;
 
         // *** Constructors ***
 
@@ -26,8 +26,8 @@ namespace Okra.Navigation
 
             // Set properties
 
-            this.page = page;
-            this.navigationMode = navigationMode;
+            _page = page;
+            _navigationMode = navigationMode;
         }
 
         // *** Properties ***
@@ -36,7 +36,7 @@ namespace Okra.Navigation
         {
             get
             {
-                return navigationMode;
+                return _navigationMode;
             }
         }
 
@@ -44,7 +44,7 @@ namespace Okra.Navigation
         {
             get
             {
-                return page;
+                return _page;
             }
         }
     }
