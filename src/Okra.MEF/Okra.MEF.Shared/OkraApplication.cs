@@ -10,7 +10,7 @@ namespace Okra
     {
         // *** Fields ***
 
-        private OkraBootstrapper bootstrapper;
+        private OkraBootstrapper _bootstrapper;
 
         // *** Constructors ***
 
@@ -19,7 +19,7 @@ namespace Okra
             if (bootstrapper == null)
                 throw new ArgumentNullException("bootstrapper");
 
-            this.bootstrapper = bootstrapper;
+            _bootstrapper = bootstrapper;
             bootstrapper.Initialize(false);
         }
 
@@ -47,7 +47,7 @@ namespace Okra
         {
             base.OnFileOpenPickerActivated(args);
             Activate(args);
-       }
+        }
 
         protected override void OnFileSavePickerActivated(FileSavePickerActivatedEventArgs args)
         {
@@ -77,7 +77,7 @@ namespace Okra
 
         private void Activate(IActivatedEventArgs args)
         {
-            bootstrapper.Activate(args);
+            _bootstrapper.Activate(args);
         }
     }
 }

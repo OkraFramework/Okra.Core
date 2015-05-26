@@ -13,7 +13,7 @@ namespace Okra.Navigation
     {
         // *** Fields ***
 
-        private INavigationContext navigationContext;
+        private INavigationContext _navigationContext;
 
         // *** Constructors ***
 
@@ -25,7 +25,7 @@ namespace Okra.Navigation
 
         public INavigationBase GetCurrent()
         {
-            return navigationContext.GetCurrent();
+            return _navigationContext.GetCurrent();
         }
 
         public void SetNavigationContext(INavigationContext navigationContext)
@@ -33,7 +33,7 @@ namespace Okra.Navigation
             if (navigationContext == null)
                 throw new ArgumentNullException("navigationContext");
 
-            this.navigationContext = navigationContext;
+            _navigationContext = navigationContext;
         }
     }
 }

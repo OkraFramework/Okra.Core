@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Andrew Wilkinson")]
 [assembly: AssemblyProduct("Okra.MEF")]
-[assembly: AssemblyCopyright("Copyright © Andrew Wilkinson 2012")]
+[assembly: AssemblyCopyright("Copyright \u00A9 Andrew Wilkinson 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]

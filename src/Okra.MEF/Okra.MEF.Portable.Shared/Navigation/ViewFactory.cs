@@ -13,8 +13,8 @@ namespace Okra.Navigation
     {
         // *** Fields ***
 
-        private readonly ExportFactory<CompositionContext> compositionContextFactory;
-        private readonly Lazy<object, PageMetadata>[] lazyPageExports;
+        private readonly ExportFactory<CompositionContext> _compositionContextFactory;
+        private readonly Lazy<object, PageMetadata>[] _lazyPageExports;
 
         // *** Constructors ***
 
@@ -27,8 +27,8 @@ namespace Okra.Navigation
             if (lazyPageExports == null)
                 throw new ArgumentNullException("lazyPageExports");
 
-            this.compositionContextFactory = compositionContextFactory;
-            this.lazyPageExports = lazyPageExports;
+            _compositionContextFactory = compositionContextFactory;
+            _lazyPageExports = lazyPageExports;
         }
 
         // *** Methods ***
@@ -43,7 +43,7 @@ namespace Okra.Navigation
 
             // Create a new composition context for the page (this allows a sharing boundary to be formed)
 
-            Export<CompositionContext> compositionContextExport = compositionContextFactory.CreateExport();
+            Export<CompositionContext> compositionContextExport = _compositionContextFactory.CreateExport();
             CompositionContext compositionContext = compositionContextExport.Value;
 
             // Since MEF does not support parameterized composition, inject a proxy INavigationContext into this sharing boundary
@@ -62,7 +62,7 @@ namespace Okra.Navigation
 
             if (!compositionContext.TryGetExport(new CompositionContract(typeof(object), "OkraPage", metadataConstriants), out page))
                 throw new InvalidOperationException(string.Format(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotNavigateAsPageIsNotFound"), name));
-            
+
             // Get the requested view model (if one exists)
 
             object viewModel;
@@ -88,7 +88,7 @@ namespace Okra.Navigation
             // Check the list of page exports for the specified page name
             // NB: Since these are lazy exports they will never be created.
 
-            Lazy<object, PageMetadata> lazyPage = lazyPageExports.FirstOrDefault(p => p.Metadata.PageName == name);
+            Lazy<object, PageMetadata> lazyPage = _lazyPageExports.FirstOrDefault(p => p.Metadata.PageName == name);
             return lazyPage != null;
         }
 
@@ -116,17 +116,17 @@ namespace Okra.Navigation
         {
             // *** Fields ***
 
-            private readonly Export<CompositionContext> compositionContextExport;
-            private readonly object page;
-            private readonly object viewModel;
+            private readonly Export<CompositionContext> _compositionContextExport;
+            private readonly object _page;
+            private readonly object _viewModel;
 
             // *** Constructors ***
 
             public ViewLifetimeContext(Export<CompositionContext> compositionContextExport, object page, object viewModel)
             {
-                this.compositionContextExport = compositionContextExport;
-                this.page = page;
-                this.viewModel = viewModel;
+                _compositionContextExport = compositionContextExport;
+                _page = page;
+                _viewModel = viewModel;
             }
 
             // *** Properties ***
@@ -135,7 +135,7 @@ namespace Okra.Navigation
             {
                 get
                 {
-                    return page;
+                    return _page;
                 }
             }
 
@@ -143,7 +143,7 @@ namespace Okra.Navigation
             {
                 get
                 {
-                    return viewModel;
+                    return _viewModel;
                 }
             }
 
@@ -153,7 +153,7 @@ namespace Okra.Navigation
             {
                 // NB: No need for a more complex Dispose implementation as this class is sealed
 
-                compositionContextExport.Dispose();
+                _compositionContextExport.Dispose();
             }
         }
     }

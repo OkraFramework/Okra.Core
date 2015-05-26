@@ -29,7 +29,7 @@ namespace Okra
     {
         // *** Fields ***
 
-        private bool isActivated;
+        private bool _isActivated;
 
         // *** Constructors ***
 #if !NETFX_CORE
@@ -60,7 +60,7 @@ namespace Okra
 
         [Import]
         public INavigationManager NavigationManager { get; set; }
-        
+
         [Import]
         public ILaunchActivationHandler LaunchActivationHandler { get; set; }
 
@@ -82,10 +82,10 @@ namespace Okra
 
             // Setup services if this is the first activation
 
-            if (!isActivated)
+            if (!_isActivated)
             {
                 SetupServices();
-                isActivated = true;
+                _isActivated = true;
             }
 
             // Call the activation manager
@@ -140,7 +140,7 @@ namespace Okra
                                                                     if (info.ParameterType == typeof(INavigationTarget))
                                                                         builder.AllowDefault();
                                                                 });
-            
+
 #if NETFX_CORE
             okraConventionBuilder.ForType<ShareSourceManager>().Export<IShareSourceManager>().Shared();
             okraConventionBuilder.ForType<ShareTargetManager>().Export<IShareTargetManager>().Shared();
