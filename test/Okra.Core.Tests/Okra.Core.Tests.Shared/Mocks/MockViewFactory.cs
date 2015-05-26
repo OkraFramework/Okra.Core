@@ -9,30 +9,30 @@ namespace Okra.Tests.Mocks
     {
         // *** Fields ***
 
-        private readonly Func<string, INavigationContext, IViewLifetimeContext> viewLifetimeContextFactory;
+        private readonly Func<string, INavigationContext, IViewLifetimeContext> _viewLifetimeContextFactory;
 
         // *** Constructors ***
 
         public MockViewFactory(Func<string, INavigationContext, IViewLifetimeContext> viewLifetimeContextFactory)
         {
-            this.viewLifetimeContextFactory = viewLifetimeContextFactory;
+            _viewLifetimeContextFactory = viewLifetimeContextFactory;
         }
 
         // *** Methods ***
 
         public IViewLifetimeContext CreateView(string name, INavigationContext context)
         {
-            IViewLifetimeContext view = viewLifetimeContextFactory(name, null);
+            IViewLifetimeContext view = _viewLifetimeContextFactory(name, null);
 
             if (view == null)
                 throw new InvalidOperationException();
 
-            return viewLifetimeContextFactory(name, context);
+            return _viewLifetimeContextFactory(name, context);
         }
 
         public bool IsViewDefined(string name)
         {
-            IViewLifetimeContext view = viewLifetimeContextFactory(name, null);
+            IViewLifetimeContext view = _viewLifetimeContextFactory(name, null);
             return view != null;
         }
 

@@ -20,7 +20,7 @@ namespace Okra.Tests.Navigation
         {
             PageInfo navigationEntry = new PageInfo("SamplePage", null);
             PageNavigationEventArgs eventArgs = new PageNavigationEventArgs(navigationEntry, PageNavigationMode.Forward);
-            
+
             Assert.AreEqual(navigationEntry, eventArgs.Page);
         }
 

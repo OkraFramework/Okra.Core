@@ -25,7 +25,7 @@ namespace Okra.Tests.Navigation
             DependencyObject obj = new Page();
 
             Brush brush = SettingsPaneInfo.GetHeaderBackground(obj);
-            
+
             Assert.AreEqual(null, brush);
         }
 

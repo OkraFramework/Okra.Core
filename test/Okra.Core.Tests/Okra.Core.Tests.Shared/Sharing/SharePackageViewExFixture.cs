@@ -15,7 +15,7 @@ namespace Okra.Tests.Sharing
         public async Task GetApplicationLinkAsync_GetsDataFromSharePackageView()
         {
             MockSharePackageView sharePackageView = new MockSharePackageView();
-            sharePackageView.Data.Add(StandardDataFormats.ApplicationLink,new Uri("http://www.example.com"));
+            sharePackageView.Data.Add(StandardDataFormats.ApplicationLink, new Uri("http://www.example.com"));
 
             Uri data = await sharePackageView.GetApplicationLinkAsync();
 
@@ -100,7 +100,7 @@ namespace Okra.Tests.Sharing
 
         private class MockSharePackageView : ISharePackageView
         {
-            public Dictionary<string, object> Data = new Dictionary<string,object>();
+            public Dictionary<string, object> Data = new Dictionary<string, object>();
 
             public IReadOnlyList<string> AvailableFormats
             {

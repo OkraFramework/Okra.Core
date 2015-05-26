@@ -372,9 +372,9 @@ namespace Okra.Tests.Core
         {
             // *** Fields ***
 
-            private int myProperty;
-            private int mySetProperty;
-            private object myObjectProperty;
+            private int _myProperty;
+            private int _mySetProperty;
+            private object _myObjectProperty;
 
             // *** Properties ***
 
@@ -382,11 +382,11 @@ namespace Okra.Tests.Core
             {
                 get
                 {
-                    return myObjectProperty;
+                    return _myObjectProperty;
                 }
                 set
                 {
-                    SetProperty(ref myObjectProperty, value);
+                    SetProperty(ref _myObjectProperty, value);
                 }
             }
 
@@ -394,11 +394,11 @@ namespace Okra.Tests.Core
             {
                 get
                 {
-                    return myProperty;
+                    return _myProperty;
                 }
                 set
                 {
-                    myProperty = value;
+                    _myProperty = value;
                     OnPropertyChanged();
                 }
             }
@@ -407,11 +407,11 @@ namespace Okra.Tests.Core
             {
                 get
                 {
-                    return mySetProperty;
+                    return _mySetProperty;
                 }
                 set
                 {
-                    SetProperty(ref mySetProperty, value);
+                    SetProperty(ref _mySetProperty, value);
                 }
             }
 
@@ -434,17 +434,17 @@ namespace Okra.Tests.Core
 
             public bool SetProperty_MySetProperty(int value, string propertyName)
             {
-                return SetProperty(ref mySetProperty, value, propertyName);
+                return SetProperty(ref _mySetProperty, value, propertyName);
             }
 
             public bool SetProperty_MySetProperty(int value, Expression<Func<int>> propertyExpression)
             {
-                return SetProperty(ref mySetProperty, value, propertyExpression);
+                return SetProperty(ref _mySetProperty, value, propertyExpression);
             }
 
             public bool SetProperty_MyObjectProperty(object value, string propertyName)
             {
-                return SetProperty(ref myObjectProperty, value, propertyName);
+                return SetProperty(ref _myObjectProperty, value, propertyName);
             }
 
             // *** Static Methods ***

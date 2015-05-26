@@ -14,7 +14,7 @@ namespace Okra.Tests.Mocks
         public Func<PageInfo, IEnumerable<object>> pageElementFunc;
         public Dictionary<PageInfo, IEnumerable<object>> pageElementCache = new Dictionary<PageInfo, IEnumerable<object>>();
         public bool CanRestoreNavigationStack = false;
-        
+
         // *** Constructors ***
 
         public MockNavigationManager(Func<PageInfo, IEnumerable<object>> pageElementFunc = null)
@@ -26,7 +26,7 @@ namespace Okra.Tests.Mocks
         }
 
         // *** Properties ***
-        
+
         public string HomePageName
         {
             get;

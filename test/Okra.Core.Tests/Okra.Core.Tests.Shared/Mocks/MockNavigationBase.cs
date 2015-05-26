@@ -10,7 +10,7 @@ namespace Okra.Tests.Mocks
         // *** Constants ***
 
         public const string MOCKPAGE_NAME = "Okra.Tests.Mocks.MockNavigationBase+MockPage";
-        
+
         // *** Constructors ***
 
         public MockNavigationBase(INavigationStack navigationStack = null)
@@ -22,7 +22,7 @@ namespace Okra.Tests.Mocks
         }
 
         // *** Properties ***
-        
+
         public INavigationStack NavigationStack
         {
             get;

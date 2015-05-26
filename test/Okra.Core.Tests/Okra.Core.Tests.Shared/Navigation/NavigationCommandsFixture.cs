@@ -34,9 +34,9 @@ namespace Okra.Tests.Navigation
         public void GetGoBackCommand_CanExecute_IsFalseIfCannotGoBack()
         {
             MockNavigationManager navigationManager = new MockNavigationManager()
-                    {
-                        CanGoBack = false
-                    };
+            {
+                CanGoBack = false
+            };
 
             ICommand command = navigationManager.GetGoBackCommand();
 
@@ -92,7 +92,7 @@ namespace Okra.Tests.Navigation
             ICommand command = navigationManager.GetGoBackCommand();
 
             int canExecuteChangedCount = 0;
-            command.CanExecuteChanged += delegate(object sender, EventArgs e) { canExecuteChangedCount++; };
+            command.CanExecuteChanged += delegate (object sender, EventArgs e) { canExecuteChangedCount++; };
 
             navigationManager.RaiseCanGoBackChanged();
 
@@ -241,10 +241,10 @@ namespace Okra.Tests.Navigation
         {
             // *** Fields ***
 
-            private MockNavigationStack navigationStack;
+            private MockNavigationStack _navigationStack;
 
             public IList<string> MethodCallLog = new List<string>();
-            
+
             // *** Constructors ***
 
             public MockNavigationManager(MockNavigationStack navigationStack = null)
@@ -252,7 +252,7 @@ namespace Okra.Tests.Navigation
                 if (navigationStack == null)
                     navigationStack = new MockNavigationStack(this);
 
-                this.navigationStack = navigationStack;
+                _navigationStack = navigationStack;
             }
 
             // *** Properties ***
@@ -261,11 +261,11 @@ namespace Okra.Tests.Navigation
             {
                 get
                 {
-                    return navigationStack.CanGoBack;
+                    return _navigationStack.CanGoBack;
                 }
                 set
                 {
-                    navigationStack.CanGoBack = value;
+                    _navigationStack.CanGoBack = value;
                 }
             }
 
@@ -273,7 +273,7 @@ namespace Okra.Tests.Navigation
             {
                 get
                 {
-                    return navigationStack;
+                    return _navigationStack;
                 }
             }
 
@@ -302,7 +302,7 @@ namespace Okra.Tests.Navigation
         {
             // *** Fields ***
 
-            private MockNavigationManager navigationManager;
+            private MockNavigationManager _navigationManager;
 
             // *** Events ***
 
@@ -315,7 +315,7 @@ namespace Okra.Tests.Navigation
 
             public MockNavigationStack(MockNavigationManager navigationManager)
             {
-                this.navigationManager = navigationManager;
+                _navigationManager = navigationManager;
             }
 
             // *** Properties ***
@@ -335,7 +335,7 @@ namespace Okra.Tests.Navigation
 
             public void GoBack()
             {
-                navigationManager.MethodCallLog.Add("GoBack()");
+                _navigationManager.MethodCallLog.Add("GoBack()");
             }
 
             public void GoBackTo(PageInfo page)
@@ -345,7 +345,7 @@ namespace Okra.Tests.Navigation
 
             public void NavigateTo(PageInfo page)
             {
-                navigationManager.MethodCallLog.Add(string.Format("NavigateTo({0}, {1})", page.PageName, page.GetArguments<string>()));
+                _navigationManager.MethodCallLog.Add(string.Format("NavigateTo({0}, {1})", page.PageName, page.GetArguments<string>()));
             }
 
             public void Push(IEnumerable<PageInfo> pages)

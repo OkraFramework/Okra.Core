@@ -93,12 +93,12 @@ namespace Okra.Tests.Helpers
         private sealed class SingleThreadSynchronizationContext : SynchronizationContext
         {
             /// <summary>The queue of work items.</summary>
-            private readonly BlockingCollection<KeyValuePair<SendOrPostCallback, object>> m_queue =
+            private readonly BlockingCollection<KeyValuePair<SendOrPostCallback, object>> _queue =
                 new BlockingCollection<KeyValuePair<SendOrPostCallback, object>>();
             /// <summary>The processing thread.</summary>
             //private readonly Thread m_thread = Thread.CurrentThread;
             /// <summary>The number of outstanding operations.</summary>
-            private int m_operationCount = 0;
+            private int _operationCount = 0;
 
             /// <summary>Dispatches an asynchronous message to the synchronization context.</summary>
             /// <param name="d">The System.Threading.SendOrPostCallback delegate to call.</param>
@@ -106,7 +106,7 @@ namespace Okra.Tests.Helpers
             public override void Post(SendOrPostCallback d, object state)
             {
                 if (d == null) throw new ArgumentNullException("d");
-                m_queue.Add(new KeyValuePair<SendOrPostCallback, object>(d, state));
+                _queue.Add(new KeyValuePair<SendOrPostCallback, object>(d, state));
             }
 
             /// <summary>Not supported.</summary>
@@ -118,23 +118,23 @@ namespace Okra.Tests.Helpers
             /// <summary>Runs an loop to process all queued work items.</summary>
             public void RunOnCurrentThread()
             {
-                foreach (var workItem in m_queue.GetConsumingEnumerable())
+                foreach (var workItem in _queue.GetConsumingEnumerable())
                     workItem.Key(workItem.Value);
             }
 
             /// <summary>Notifies the context that no more work will arrive.</summary>
-            public void Complete() { m_queue.CompleteAdding(); }
+            public void Complete() { _queue.CompleteAdding(); }
 
             /// <summary>Invoked when an async operation is started.</summary>
             public override void OperationStarted()
             {
-                Interlocked.Increment(ref m_operationCount);
+                Interlocked.Increment(ref _operationCount);
             }
 
             /// <summary>Invoked when an async operation is completed.</summary>
             public override void OperationCompleted()
             {
-                if (Interlocked.Decrement(ref m_operationCount) == 0)
+                if (Interlocked.Decrement(ref _operationCount) == 0)
                     Complete();
             }
         }

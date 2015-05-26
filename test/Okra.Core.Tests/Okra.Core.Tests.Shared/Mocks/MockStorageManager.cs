@@ -12,7 +12,7 @@ namespace Okra.Tests.Mocks
     {
         // *** Fields ***
 
-        private Dictionary<string, byte[]> storageDictionary = new Dictionary<string, byte[]>();
+        private Dictionary<string, byte[]> _storageDictionary = new Dictionary<string, byte[]>();
 
         // *** IStorageManager Methods ***
 
@@ -20,8 +20,8 @@ namespace Okra.Tests.Mocks
         {
             await Task.Yield();
 
-            if (storageDictionary.ContainsKey(file.Path))
-                return SerializationHelper.DeserializeFromArray<T>(storageDictionary[file.Path]);
+            if (_storageDictionary.ContainsKey(file.Path))
+                return SerializationHelper.DeserializeFromArray<T>(_storageDictionary[file.Path]);
             else
                 return default(T);
         }
@@ -30,8 +30,8 @@ namespace Okra.Tests.Mocks
         {
             await Task.Yield();
 
-            if (storageDictionary.ContainsKey(folder.Path + @"\" + name))
-                return SerializationHelper.DeserializeFromArray<T>(storageDictionary[folder.Path + @"\" + name]);
+            if (_storageDictionary.ContainsKey(folder.Path + @"\" + name))
+                return SerializationHelper.DeserializeFromArray<T>(_storageDictionary[folder.Path + @"\" + name]);
             else
                 return default(T);
         }
@@ -40,14 +40,14 @@ namespace Okra.Tests.Mocks
         {
             await Task.Yield();
             byte[] data = SerializationHelper.SerializeToArray(value);
-            storageDictionary[file.Path] = data;
+            _storageDictionary[file.Path] = data;
         }
 
         public async Task StoreAsync<T>(StorageFolder folder, string name, T value)
         {
             await Task.Yield();
             byte[] data = SerializationHelper.SerializeToArray(value);
-            storageDictionary[folder.Path + @"\" + name] = data;
+            _storageDictionary[folder.Path + @"\" + name] = data;
         }
     }
 }

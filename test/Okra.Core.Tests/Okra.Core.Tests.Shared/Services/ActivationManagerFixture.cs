@@ -164,13 +164,13 @@ namespace Okra.Tests.Services
         {
             // *** Fields ***
 
-            private Task<bool> activatingCompleteTask;
+            private Task<bool> _activatingCompleteTask;
 
             // *** Constructors ***
 
             public MockService(Task<bool> activatingCompleteTask)
             {
-                this.activatingCompleteTask = activatingCompleteTask;
+                _activatingCompleteTask = activatingCompleteTask;
                 this.LifetimeEventCalls = new List<Tuple<string, IActivatedEventArgs>>();
             }
 
@@ -188,7 +188,7 @@ namespace Okra.Tests.Services
             public Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
             {
                 LifetimeEventCalls.Add(Tuple.Create("Activate", activatedEventArgs));
-                return activatingCompleteTask;
+                return _activatingCompleteTask;
             }
 
             public void OnActivating(object sender, IActivatedEventArgs activatedEventArgs)

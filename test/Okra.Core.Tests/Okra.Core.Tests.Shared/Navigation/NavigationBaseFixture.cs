@@ -52,10 +52,10 @@ namespace Okra.Tests.Navigation
 
             Assert.AreEqual(typeof(NavigationStack), navigationBase.NavigationStack.GetType());
         }
-        
+
         // *** NavigationStack Event Tests ***
 
-       
+
         [TestMethod]
         public void WhenNavigationStack_PropertyChanged_CurrentPage_NullPageCallsDisplayPageWithNull()
         {
@@ -86,7 +86,7 @@ namespace Okra.Tests.Navigation
             MockNavigationStack navigationStack = new MockNavigationStack();
             IViewFactory viewFactory = MockViewFactory.WithPageOnly;
             PageInfo pageInfo = new PageInfo("Page 1", null);
-            TestableNavigationBase navigationBase = CreateNavigationBase(viewFactory:viewFactory, navigationStack: navigationStack);
+            TestableNavigationBase navigationBase = CreateNavigationBase(viewFactory: viewFactory, navigationStack: navigationStack);
 
             navigationStack.SetCurrentPage(pageInfo);
 
@@ -293,7 +293,7 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
             IViewFactory viewFactory = MockViewFactory.WithPageOnly;
-            TestableNavigationBase navigationBase = CreateNavigationBase(viewFactory:viewFactory, navigationStack: navigationStack);
+            TestableNavigationBase navigationBase = CreateNavigationBase(viewFactory: viewFactory, navigationStack: navigationStack);
             PageInfo pageInfo = new PageInfo("Page 1", null);
 
             navigationStack.SetCurrentPage(pageInfo);
@@ -371,7 +371,7 @@ namespace Okra.Tests.Navigation
             {
                 MockNavigationStack navigationStack = new MockNavigationStack();
                 IViewFactory viewFactory = MockViewFactory.WithNavigationAware;
-                TestableNavigationBase navigationBase = CreateNavigationBase(viewFactory:viewFactory, navigationStack: navigationStack);
+                TestableNavigationBase navigationBase = CreateNavigationBase(viewFactory: viewFactory, navigationStack: navigationStack);
 
                 NavigationState state = SerializationHelper.DeserializeFromArray<NavigationState>(persistedData);
                 navigationBase.RestoreState(state);

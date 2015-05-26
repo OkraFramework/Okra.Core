@@ -81,7 +81,7 @@ namespace Okra.Tests.Services
 
             // Assert that the home page was navigated to
 
-            CollectionAssert.AreEqual(new string[] { "[Restored Pages]" }, navigationManager.NavigatedPages.Select(t =>t.Item1).ToArray());
+            CollectionAssert.AreEqual(new string[] { "[Restored Pages]" }, navigationManager.NavigatedPages.Select(t => t.Item1).ToArray());
         }
 
         [TestMethod]

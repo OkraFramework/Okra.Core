@@ -401,7 +401,7 @@ namespace Okra.Tests.Navigation
             NavigationStack navigationStack = new NavigationStack();
 
             List<NotifyCollectionChangedEventArgs> changeEvents = new List<NotifyCollectionChangedEventArgs>();
-            navigationStack.CollectionChanged += delegate(object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
+            navigationStack.CollectionChanged += delegate (object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
 
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
@@ -421,7 +421,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
             List<NotifyCollectionChangedEventArgs> changeEvents = new List<NotifyCollectionChangedEventArgs>();
-            navigationStack.CollectionChanged += delegate(object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
+            navigationStack.CollectionChanged += delegate (object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
 
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
@@ -442,7 +442,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             List<NotifyCollectionChangedEventArgs> changeEvents = new List<NotifyCollectionChangedEventArgs>();
-            navigationStack.CollectionChanged += delegate(object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
+            navigationStack.CollectionChanged += delegate (object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
 
             navigationStack.GoBack();
 
@@ -464,7 +464,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 3", null));
 
             List<NotifyCollectionChangedEventArgs> changeEvents = new List<NotifyCollectionChangedEventArgs>();
-            navigationStack.CollectionChanged += delegate(object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
+            navigationStack.CollectionChanged += delegate (object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
 
             navigationStack.GoBackTo(navigationStack[0]);
 
@@ -483,7 +483,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 3", null));
 
             List<NotifyCollectionChangedEventArgs> changeEvents = new List<NotifyCollectionChangedEventArgs>();
-            navigationStack.CollectionChanged += delegate(object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
+            navigationStack.CollectionChanged += delegate (object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
 
             navigationStack.GoBackTo(navigationStack[1]);
 
@@ -504,7 +504,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             List<NotifyCollectionChangedEventArgs> changeEvents = new List<NotifyCollectionChangedEventArgs>();
-            navigationStack.CollectionChanged += delegate(object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
+            navigationStack.CollectionChanged += delegate (object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
 
             navigationStack.Clear();
 
@@ -522,7 +522,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             List<NotifyCollectionChangedEventArgs> changeEvents = new List<NotifyCollectionChangedEventArgs>();
-            navigationStack.CollectionChanged += delegate(object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
+            navigationStack.CollectionChanged += delegate (object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
 
             navigationStack.Push(new[]
                     {
@@ -548,7 +548,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             List<NotifyCollectionChangedEventArgs> changeEvents = new List<NotifyCollectionChangedEventArgs>();
-            navigationStack.CollectionChanged += delegate(object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
+            navigationStack.CollectionChanged += delegate (object sender, NotifyCollectionChangedEventArgs e) { changeEvents.Add(e); };
 
             navigationStack.Push(new PageInfo[]
                     {
@@ -563,7 +563,7 @@ namespace Okra.Tests.Navigation
             NavigationStack navigationStack = new NavigationStack();
 
             List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
-            navigationStack.NavigatedTo += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+            navigationStack.NavigatedTo += delegate (object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
 
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
@@ -581,7 +581,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
             List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
-            navigationStack.NavigatedTo += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+            navigationStack.NavigatedTo += delegate (object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
 
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
@@ -599,7 +599,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
             List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
-            navigationStack.NavigatedTo += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+            navigationStack.NavigatedTo += delegate (object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
 
             navigationStack.GoBack();
 
@@ -615,7 +615,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
-            navigationStack.NavigatedTo += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+            navigationStack.NavigatedTo += delegate (object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
 
             navigationStack.GoBack();
 
@@ -635,7 +635,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 3", null));
 
             List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
-            navigationStack.NavigatedTo += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+            navigationStack.NavigatedTo += delegate (object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
 
             navigationStack.GoBackTo(navigationStack[0]);
 
@@ -654,7 +654,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
-            navigationStack.NavigatedTo += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+            navigationStack.NavigatedTo += delegate (object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
 
             navigationStack.Push(new[]
                     {
@@ -677,7 +677,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
-            navigationStack.NavigatedTo += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+            navigationStack.NavigatedTo += delegate (object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
 
             navigationStack.Push(new PageInfo[]
                     {
@@ -692,7 +692,7 @@ namespace Okra.Tests.Navigation
             NavigationStack navigationStack = new NavigationStack();
 
             List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
-            navigationStack.NavigatingFrom += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+            navigationStack.NavigatingFrom += delegate (object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
 
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
@@ -707,7 +707,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
             List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
-            navigationStack.NavigatingFrom += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+            navigationStack.NavigatingFrom += delegate (object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
 
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
@@ -726,7 +726,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
-            navigationStack.NavigatingFrom += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+            navigationStack.NavigatingFrom += delegate (object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
 
             navigationStack.GoBack();
 
@@ -745,7 +745,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
-            navigationStack.NavigatingFrom += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+            navigationStack.NavigatingFrom += delegate (object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
 
             navigationStack.Clear();
 
@@ -765,7 +765,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 3", null));
 
             List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
-            navigationStack.NavigatingFrom += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+            navigationStack.NavigatingFrom += delegate (object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
 
             navigationStack.GoBackTo(navigationStack[0]);
 
@@ -784,7 +784,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             List<PageNavigationEventArgs> navigationEvents = new List<PageNavigationEventArgs>();
-            navigationStack.NavigatingFrom += delegate(object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
+            navigationStack.NavigatingFrom += delegate (object sender, PageNavigationEventArgs e) { navigationEvents.Add(e); };
 
             navigationStack.Push(new PageInfo[]
                     {
@@ -802,7 +802,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             List<PageNavigationEventArgs> pageDisposedEvents = new List<PageNavigationEventArgs>();
-            navigationStack.PageDisposed += delegate(object sender, PageNavigationEventArgs e) { pageDisposedEvents.Add(e); };
+            navigationStack.PageDisposed += delegate (object sender, PageNavigationEventArgs e) { pageDisposedEvents.Add(e); };
 
             navigationStack.GoBack();
 
@@ -822,7 +822,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 3", null));
 
             List<PageNavigationEventArgs> pageDisposedEvents = new List<PageNavigationEventArgs>();
-            navigationStack.PageDisposed += delegate(object sender, PageNavigationEventArgs e) { pageDisposedEvents.Add(e); };
+            navigationStack.PageDisposed += delegate (object sender, PageNavigationEventArgs e) { pageDisposedEvents.Add(e); };
 
             navigationStack.GoBackTo(navigationStack[0]);
 
@@ -843,7 +843,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
             List<PageNavigationEventArgs> pageDisposedEvents = new List<PageNavigationEventArgs>();
-            navigationStack.PageDisposed += delegate(object sender, PageNavigationEventArgs e) { pageDisposedEvents.Add(e); };
+            navigationStack.PageDisposed += delegate (object sender, PageNavigationEventArgs e) { pageDisposedEvents.Add(e); };
 
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
@@ -856,7 +856,7 @@ namespace Okra.Tests.Navigation
             NavigationStack navigationStack = new NavigationStack();
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
@@ -871,7 +871,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
@@ -887,7 +887,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.GoBack();
 
@@ -902,7 +902,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.GoBack();
 
@@ -919,7 +919,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 3", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.GoBackTo(navigationStack[0]);
 
@@ -934,7 +934,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.Clear();
 
@@ -947,7 +947,7 @@ namespace Okra.Tests.Navigation
             NavigationStack navigationStack = new NavigationStack();
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.Clear();
 
@@ -960,7 +960,7 @@ namespace Okra.Tests.Navigation
             NavigationStack navigationStack = new NavigationStack();
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.Push(new[]
                     {
@@ -979,7 +979,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.Push(new[]
                     {
@@ -996,7 +996,7 @@ namespace Okra.Tests.Navigation
             NavigationStack navigationStack = new NavigationStack();
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.Push(new PageInfo[]
                     {
@@ -1011,7 +1011,7 @@ namespace Okra.Tests.Navigation
             NavigationStack navigationStack = new NavigationStack();
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
 
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
@@ -1026,7 +1026,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
 
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
@@ -1042,7 +1042,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
 
             navigationStack.GoBack();
 
@@ -1059,7 +1059,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 3", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
 
             navigationStack.GoBackTo(navigationStack[0]);
 
@@ -1075,7 +1075,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
 
             navigationStack.Clear();
 
@@ -1088,7 +1088,7 @@ namespace Okra.Tests.Navigation
             NavigationStack navigationStack = new NavigationStack();
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
 
             navigationStack.Clear();
 
@@ -1104,7 +1104,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
 
             navigationStack.Push(new[]
                     {
@@ -1124,7 +1124,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "Count") changedCount++; };
 
             navigationStack.Push(new PageInfo[]
                     {
@@ -1139,7 +1139,7 @@ namespace Okra.Tests.Navigation
             NavigationStack navigationStack = new NavigationStack();
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
 
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
@@ -1154,7 +1154,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
 
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
@@ -1170,7 +1170,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
 
             navigationStack.GoBack();
 
@@ -1187,7 +1187,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 3", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
 
             navigationStack.GoBackTo(navigationStack[0]);
 
@@ -1203,7 +1203,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
 
             navigationStack.Clear();
 
@@ -1216,7 +1216,7 @@ namespace Okra.Tests.Navigation
             NavigationStack navigationStack = new NavigationStack();
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
 
             navigationStack.Clear();
 
@@ -1232,7 +1232,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
 
             navigationStack.Push(new[]
                     {
@@ -1252,7 +1252,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CurrentPage") changedCount++; };
 
             navigationStack.Push(new PageInfo[]
                     {

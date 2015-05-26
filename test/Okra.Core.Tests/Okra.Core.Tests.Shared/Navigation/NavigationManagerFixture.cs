@@ -154,7 +154,7 @@ namespace Okra.Tests.Navigation
 
             navigationManager.DisplayPage(page);
 
-            CollectionAssert.AreEqual(new object[] { page }, navigationTarget.NavigateToCalls.Select(c=>c.Item1).ToArray());
+            CollectionAssert.AreEqual(new object[] { page }, navigationTarget.NavigateToCalls.Select(c => c.Item1).ToArray());
         }
 
         [TestMethod]
@@ -169,7 +169,7 @@ namespace Okra.Tests.Navigation
 
             CollectionAssert.AreEqual(new INavigationBase[] { navigationManager }, navigationTarget.NavigateToCalls.Select(c => c.Item2).ToArray());
         }
-                
+
         [TestMethod]
         public async Task RestoreNavigationStack_NavigatesToHomePageIfNoPreviousNavigationStack()
         {
@@ -259,7 +259,7 @@ namespace Okra.Tests.Navigation
                 // Restore the navigation stack
 
                 bool success = await navigationManager.RestoreNavigationStack();
-                
+
                 // Assert that the current page is restored from storage
 
                 Assert.AreEqual(true, success);

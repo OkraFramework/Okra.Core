@@ -32,7 +32,7 @@ namespace Okra.Tests.Navigation
         {
             Assert.ThrowsException<ArgumentNullException>(() => NavigationBaseEx.GoBack(null));
         }
-        
+
         [TestMethod]
         public void GoBack_Exception_CannotGoBack()
         {

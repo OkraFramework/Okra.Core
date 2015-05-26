@@ -82,7 +82,7 @@ namespace Okra.Tests.Navigation
             NavigationStackWithHome navigationStack = new NavigationStackWithHome();
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
@@ -97,7 +97,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
@@ -113,8 +113,8 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
-                        
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+
             navigationStack.NavigateTo(new PageInfo("Page 3", null));
 
             Assert.AreEqual(0, changedCount);
@@ -130,7 +130,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 3", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.GoBack();
 
@@ -146,7 +146,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 2", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.GoBack();
 
@@ -163,7 +163,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 3", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.GoBackTo(navigationStack[0]);
 
@@ -180,7 +180,7 @@ namespace Okra.Tests.Navigation
             navigationStack.NavigateTo(new PageInfo("Page 3", null));
 
             int changedCount = 0;
-            navigationStack.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
+            navigationStack.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { if (e.PropertyName == "CanGoBack") changedCount++; };
 
             navigationStack.GoBackTo(navigationStack[1]);
 

@@ -98,7 +98,7 @@ namespace Okra.Tests.Navigation
 
             Assert.ThrowsException<ArgumentException>(() => navigationStack.NavigateTo(""));
         }
-        
+
         [TestMethod]
         public void NavigateTo_WithPageNameAndParameter_NavigatesToPage()
         {
@@ -131,7 +131,7 @@ namespace Okra.Tests.Navigation
 
             Assert.ThrowsException<ArgumentException>(() => navigationStack.NavigateTo("", "Parameter 1"));
         }
-        
+
         [TestMethod]
         public void NavigateTo_WithType_NavigatesToPageWithFullTypeName()
         {
@@ -156,7 +156,7 @@ namespace Okra.Tests.Navigation
 
             Assert.ThrowsException<ArgumentNullException>(() => navigationStack.NavigateTo((Type)null));
         }
-        
+
         [TestMethod]
         public void NavigateTo_WithTypeAndParameter_NavigatesToPageWithFullTypeName()
         {
@@ -181,7 +181,7 @@ namespace Okra.Tests.Navigation
 
             Assert.ThrowsException<ArgumentNullException>(() => navigationStack.NavigateTo((Type)null, "Parameter"));
         }
-        
+
         // *** Sub-classes ***
 
         public class InvalidPage

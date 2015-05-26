@@ -176,13 +176,13 @@ namespace Okra.Tests.Services
         {
             // *** Fields ***
 
-            private Task suspensionCompleteTask;
+            private Task _suspensionCompleteTask;
 
             // *** Constructors ***
 
             public MockService(Task suspensionCompleteTask)
             {
-                this.suspensionCompleteTask = suspensionCompleteTask;
+                _suspensionCompleteTask = suspensionCompleteTask;
                 this.LifetimeEventCalls = new List<string>();
             }
 
@@ -206,7 +206,7 @@ namespace Okra.Tests.Services
             public Task OnSuspending()
             {
                 LifetimeEventCalls.Add("OnSuspending");
-                return suspensionCompleteTask;
+                return _suspensionCompleteTask;
             }
         }
 
