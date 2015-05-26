@@ -9,20 +9,20 @@ namespace Okra.MEF.Tests.Mocks
     {
         // *** Fields ***
 
-        private readonly INavigationBase current;
+        private readonly INavigationBase _current;
 
         // *** Constructors ***
 
         public MockNavigationContext(INavigationBase current)
         {
-            this.current = current;
+            _current = current;
         }
 
         // *** Methods ***
 
         public INavigationBase GetCurrent()
         {
-            return current;
+            return _current;
         }
     }
 }

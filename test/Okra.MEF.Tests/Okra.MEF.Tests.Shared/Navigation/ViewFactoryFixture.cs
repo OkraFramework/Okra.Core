@@ -141,7 +141,7 @@ namespace Okra.MEF.Tests.Navigation
             NavigationContextProxy proxy = new NavigationContextProxy();
             IViewFactory viewFactory = CreateViewFactory(proxy);
             INavigationContext navigationContext = CreateNavigationContext();
-            
+
             IViewLifetimeContext lifetimeContext = viewFactory.CreateView("Page 2", navigationContext);
 
             Assert.AreEqual(navigationContext.GetCurrent(), proxy.GetCurrent());
@@ -360,14 +360,14 @@ namespace Okra.MEF.Tests.Navigation
 
         private class MockCompositionContext : CompositionContext
         {
-            private Dictionary<CompositionContract, Func<object>> exportFactories;
-            private IList<object> exports = new List<object>();
+            private Dictionary<CompositionContract, Func<object>> _exportFactories;
+            private IList<object> _exports = new List<object>();
 
             // *** Constructors ***
 
             public MockCompositionContext(Dictionary<CompositionContract, Func<object>> exportFactories)
             {
-                this.exportFactories = exportFactories;
+                _exportFactories = exportFactories;
             }
 
             // *** Overriden Base Methods ***
@@ -376,10 +376,10 @@ namespace Okra.MEF.Tests.Navigation
             {
                 Func<object> exportFactory;
 
-                if (exportFactories.TryGetValue(contract, out exportFactory))
+                if (_exportFactories.TryGetValue(contract, out exportFactory))
                 {
                     export = exportFactory();
-                    exports.Add(export);
+                    _exports.Add(export);
                     return true;
                 }
 
@@ -391,7 +391,7 @@ namespace Okra.MEF.Tests.Navigation
 
             public void Dispose()
             {
-                foreach (object export in exports)
+                foreach (object export in _exports)
                 {
                     if (export is IDisposable)
                         ((IDisposable)export).Dispose();

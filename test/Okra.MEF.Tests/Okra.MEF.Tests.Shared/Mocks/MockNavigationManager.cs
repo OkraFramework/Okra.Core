@@ -11,27 +11,27 @@ namespace Okra.MEF.Tests.Mocks
     {
         // *** Fields ***
 
-        private readonly Func<string, PageInfo> pageEntryCreator;
+        private readonly Func<string, PageInfo> _pageEntryCreator;
 
         public IList<Tuple<string, object>> NavigatedPages = new List<Tuple<string, object>>();
         public bool CanRestoreNavigationStack = false;
-        
+
         // *** Constructors ***
 
         public MockNavigationManager()
-            :this(pageName => new PageInfo(pageName, null))
+            : this(pageName => new PageInfo(pageName, null))
         {
         }
 
         public MockNavigationManager(Func<string, PageInfo> pageEntryCreator)
         {
-            this.pageEntryCreator = pageEntryCreator;
+            _pageEntryCreator = pageEntryCreator;
 
             this.HomePageName = "Home";
         }
 
         // *** Properties ***
-        
+
         public string HomePageName
         {
             get;

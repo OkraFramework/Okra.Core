@@ -141,7 +141,7 @@ namespace Okra.MEF.Tests
 
             public event EventHandler<IActivatedEventArgs> Activating;
             public event EventHandler<IActivatedEventArgs> Activated;
-            
+
             // *** Methods ***
 
             public Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
