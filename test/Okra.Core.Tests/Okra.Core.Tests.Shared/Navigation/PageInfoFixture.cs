@@ -1,101 +1,100 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Navigation;
+﻿using Okra.Navigation;
 using Okra.Tests.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using Xunit;
 
 namespace Okra.Tests.Navigation
 {
-    [TestClass]
     public class PageInfoFixture
     {
         // *** Constructor Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsPageName()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
-            Assert.AreEqual("Page Name", navigationEntry.PageName);
+            Assert.Equal("Page Name", navigationEntry.PageName);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsArguments_String()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
-            Assert.AreEqual("Arguments", navigationEntry.GetArguments<string>());
+            Assert.Equal("Arguments", navigationEntry.GetArguments<string>());
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsArguments_NullString()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", (string)null);
 
-            Assert.AreEqual(null, navigationEntry.GetArguments<string>());
+            Assert.Equal(null, navigationEntry.GetArguments<string>());
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsArguments_Int()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", 42);
 
-            Assert.AreEqual(42, navigationEntry.GetArguments<int>());
+            Assert.Equal(42, navigationEntry.GetArguments<int>());
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsArguments_Class()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", new ClassState() { Text = "Text Value", Number = 42 });
 
             var args = navigationEntry.GetArguments<ClassState>();
-            Assert.AreEqual("Text Value", args.Text);
-            Assert.AreEqual(42, args.Number);
+            Assert.Equal("Text Value", args.Text);
+            Assert.Equal(42, args.Number);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsArguments_NullClass()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", (ClassState)null);
 
-            Assert.AreEqual(null, navigationEntry.GetArguments<ClassState>());
+            Assert.Equal(null, navigationEntry.GetArguments<ClassState>());
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsArguments_Struct()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", new StructState() { Text = "Text Value", Number = 42 });
 
             var args = navigationEntry.GetArguments<StructState>();
-            Assert.AreEqual("Text Value", args.Text);
-            Assert.AreEqual(42, args.Number);
+            Assert.Equal("Text Value", args.Text);
+            Assert.Equal(42, args.Number);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsArguments_NullReturnsDefaultInt()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", null);
 
-            Assert.AreEqual(0, navigationEntry.GetArguments<int>());
+            Assert.Equal(0, navigationEntry.GetArguments<int>());
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_WhenPageNameIsNull()
         {
-            Assert.ThrowsException<ArgumentException>(() => new PageInfo(null, "Arguments"));
+            Assert.Throws<ArgumentException>(() => new PageInfo(null, "Arguments"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_WhenPageNameIsEmpty()
         {
-            Assert.ThrowsException<ArgumentException>(() => new PageInfo("", "Arguments"));
+            Assert.Throws<ArgumentException>(() => new PageInfo("", "Arguments"));
         }
 
         // *** Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public void GetSetState_String_StoresState()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -103,10 +102,10 @@ namespace Okra.Tests.Navigation
             navigationEntry.SetState<string>("MyKey", "Test State");
             var result = navigationEntry.GetState<string>("MyKey");
 
-            Assert.AreEqual("Test State", result);
+            Assert.Equal("Test State", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetSetState_String_StoresNullState()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -114,10 +113,10 @@ namespace Okra.Tests.Navigation
             navigationEntry.SetState<string>("MyKey", null);
             var result = navigationEntry.GetState<string>("MyKey");
 
-            Assert.AreEqual(null, result);
+            Assert.Equal(null, result);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetSetState_Int_StoresState()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -125,10 +124,10 @@ namespace Okra.Tests.Navigation
             navigationEntry.SetState<int>("MyKey", 42);
             var result = navigationEntry.GetState<int>("MyKey");
 
-            Assert.AreEqual(42, result);
+            Assert.Equal(42, result);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetSetState_Class_StoresState()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -136,11 +135,11 @@ namespace Okra.Tests.Navigation
             navigationEntry.SetState<ClassState>("MyKey", new ClassState() { Text = "Text Value", Number = 42 });
             var result = navigationEntry.GetState<ClassState>("MyKey");
 
-            Assert.AreEqual("Text Value", result.Text);
-            Assert.AreEqual(42, result.Number);
+            Assert.Equal("Text Value", result.Text);
+            Assert.Equal(42, result.Number);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetSetState_Class_StoresNullState()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -148,10 +147,10 @@ namespace Okra.Tests.Navigation
             navigationEntry.SetState<ClassState>("MyKey", null);
             var result = navigationEntry.GetState<ClassState>("MyKey");
 
-            Assert.AreEqual(null, result);
+            Assert.Equal(null, result);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetSetState_Struct_StoresState()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -159,11 +158,11 @@ namespace Okra.Tests.Navigation
             navigationEntry.SetState<StructState>("MyKey", new StructState() { Text = "Text Value", Number = 42 });
             var result = navigationEntry.GetState<StructState>("MyKey");
 
-            Assert.AreEqual("Text Value", result.Text);
-            Assert.AreEqual(42, result.Number);
+            Assert.Equal("Text Value", result.Text);
+            Assert.Equal(42, result.Number);
         }
 
-        [TestMethod]
+        [Fact]
         public void TryGetSetState_String_StoresState()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -172,11 +171,11 @@ namespace Okra.Tests.Navigation
             string result;
             bool success = navigationEntry.TryGetState<string>("MyKey", out result);
 
-            Assert.AreEqual(true, success);
-            Assert.AreEqual("Test State", result);
+            Assert.Equal(true, success);
+            Assert.Equal("Test State", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TryGetSetState_String_StoresNullState()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -185,11 +184,11 @@ namespace Okra.Tests.Navigation
             string result;
             bool success = navigationEntry.TryGetState<string>("MyKey", out result);
 
-            Assert.AreEqual(true, success);
-            Assert.AreEqual(null, result);
+            Assert.Equal(true, success);
+            Assert.Equal(null, result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TryGetSetState_Int_StoresState()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -198,11 +197,11 @@ namespace Okra.Tests.Navigation
             int result;
             bool success = navigationEntry.TryGetState<int>("MyKey", out result);
 
-            Assert.AreEqual(true, success);
-            Assert.AreEqual(42, result);
+            Assert.Equal(true, success);
+            Assert.Equal(42, result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TryGetSetState_Class_StoresState()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -211,12 +210,12 @@ namespace Okra.Tests.Navigation
             ClassState result;
             bool success = navigationEntry.TryGetState<ClassState>("MyKey", out result);
 
-            Assert.AreEqual(true, success);
-            Assert.AreEqual("Text Value", result.Text);
-            Assert.AreEqual(42, result.Number);
+            Assert.Equal(true, success);
+            Assert.Equal("Text Value", result.Text);
+            Assert.Equal(42, result.Number);
         }
 
-        [TestMethod]
+        [Fact]
         public void TryGetSetState_Class_StoresNullState()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -225,11 +224,11 @@ namespace Okra.Tests.Navigation
             ClassState result;
             bool success = navigationEntry.TryGetState<ClassState>("MyKey", out result);
 
-            Assert.AreEqual(true, success);
-            Assert.AreEqual(null, result);
+            Assert.Equal(true, success);
+            Assert.Equal(null, result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TryGetSetState_Struct_StoresState()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -238,45 +237,45 @@ namespace Okra.Tests.Navigation
             StructState result;
             bool success = navigationEntry.TryGetState<StructState>("MyKey", out result);
 
-            Assert.AreEqual(true, success);
-            Assert.AreEqual("Text Value", result.Text);
-            Assert.AreEqual(42, result.Number);
+            Assert.Equal(true, success);
+            Assert.Equal("Text Value", result.Text);
+            Assert.Equal(42, result.Number);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetState_Exception_KeyIsNull()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
-            Assert.ThrowsException<ArgumentException>(() => navigationEntry.GetState<string>(null));
+            Assert.Throws<ArgumentException>(() => navigationEntry.GetState<string>(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetState_Exception_KeyIsEmpty()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
-            Assert.ThrowsException<ArgumentException>(() => navigationEntry.GetState<string>(""));
+            Assert.Throws<ArgumentException>(() => navigationEntry.GetState<string>(""));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetState_Exception_KeyIsUndefined()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
-            Assert.ThrowsException<KeyNotFoundException>(() => navigationEntry.GetState<string>("Undefined"));
+            Assert.Throws<KeyNotFoundException>(() => navigationEntry.GetState<string>("Undefined"));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetState_Exception_IncorrectType()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
             navigationEntry.SetState<string>("MyKey", "Test State");
 
-            Assert.ThrowsException<InvalidCastException>(() => navigationEntry.GetState<int>("MyKey"));
+            Assert.Throws<InvalidCastException>(() => navigationEntry.GetState<int>("MyKey"));
         }
 
-        [TestMethod]
+        [Fact]
         public void TryGetState_ReturnsFalseIfKeyIsUndefined()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -284,39 +283,39 @@ namespace Okra.Tests.Navigation
             string result = "Old Value";
             bool success = navigationEntry.TryGetState<string>("Undefined", out result);
 
-            Assert.AreEqual(false, success);
-            Assert.AreEqual(null, result);
+            Assert.Equal(false, success);
+            Assert.Equal(null, result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TryGetState_Exception_KeyIsNull()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
             string result;
-            Assert.ThrowsException<ArgumentException>(() => navigationEntry.TryGetState<string>(null, out result));
+            Assert.Throws<ArgumentException>(() => navigationEntry.TryGetState<string>(null, out result));
         }
 
-        [TestMethod]
+        [Fact]
         public void TryGetState_Exception_KeyIsEmpty()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
             string result;
-            Assert.ThrowsException<ArgumentException>(() => navigationEntry.TryGetState<string>("", out result));
+            Assert.Throws<ArgumentException>(() => navigationEntry.TryGetState<string>("", out result));
         }
 
-        [TestMethod]
+        [Fact]
         public void TryGetState_Exception_IncorrectType()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
             navigationEntry.SetState<string>("MyKey", "Test State");
 
             int result;
-            Assert.ThrowsException<InvalidCastException>(() => navigationEntry.TryGetState<int>("MyKey", out result));
+            Assert.Throws<InvalidCastException>(() => navigationEntry.TryGetState<int>("MyKey", out result));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetState_SameStateKeyOverwritesPreviousValue()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -327,11 +326,11 @@ namespace Okra.Tests.Navigation
             string result;
             bool success = navigationEntry.TryGetState<string>("MyKey", out result);
 
-            Assert.AreEqual(true, success);
-            Assert.AreEqual("State B", result);
+            Assert.Equal(true, success);
+            Assert.Equal("State B", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetState_RaisesStateChangedEvent()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
@@ -341,38 +340,38 @@ namespace Okra.Tests.Navigation
 
             navigationEntry.SetState<string>("MyKey", "Test State");
 
-            CollectionAssert.AreEqual(new[] { "MyKey" }, stateChangedKeys);
+            Assert.Equal(new[] { "MyKey" }, stateChangedKeys);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetState_Exception_KeyIsNull()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
-            Assert.ThrowsException<ArgumentException>(() => navigationEntry.SetState<string>(null, "Test"));
+            Assert.Throws<ArgumentException>(() => navigationEntry.SetState<string>(null, "Test"));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetState_Exception_KeyIsEmpty()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
-            Assert.ThrowsException<ArgumentException>(() => navigationEntry.SetState<string>("", "Test"));
+            Assert.Throws<ArgumentException>(() => navigationEntry.SetState<string>("", "Test"));
         }
 
-        [TestMethod]
+        [Fact]
         public void ToString_ReturnsReadableString_IfArgumentsAreNull()
         {
             PageInfo navigationEntry = new PageInfo("Page Name", null);
 
             string str = navigationEntry.ToString();
 
-            Assert.AreEqual("Page Name", str);
+            Assert.Equal("Page Name", str);
         }
 
         // *** Serialization Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Serialization_PersistsPageName()
         {
             PageInfo sourceEntry = new PageInfo("Page Name", "Arguments");
@@ -380,10 +379,10 @@ namespace Okra.Tests.Navigation
             byte[] data = SerializationHelper.SerializeToArray(sourceEntry);
             PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
 
-            Assert.AreEqual("Page Name", newEntry.PageName);
+            Assert.Equal("Page Name", newEntry.PageName);
         }
 
-        [TestMethod]
+        [Fact]
         public void Serialization_PersistsArguments_String()
         {
             PageInfo sourceEntry = new PageInfo("Page Name", "Arguments");
@@ -391,10 +390,10 @@ namespace Okra.Tests.Navigation
             byte[] data = SerializationHelper.SerializeToArray(sourceEntry);
             PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
 
-            Assert.AreEqual("Arguments", newEntry.GetArguments<string>());
+            Assert.Equal("Arguments", newEntry.GetArguments<string>());
         }
 
-        [TestMethod]
+        [Fact]
         public void Serialization_PersistsArguments_NullString()
         {
             PageInfo sourceEntry = new PageInfo("Page Name", (string)null);
@@ -402,10 +401,10 @@ namespace Okra.Tests.Navigation
             byte[] data = SerializationHelper.SerializeToArray(sourceEntry);
             PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
 
-            Assert.AreEqual(null, newEntry.GetArguments<string>());
+            Assert.Equal(null, newEntry.GetArguments<string>());
         }
 
-        [TestMethod]
+        [Fact]
         public void Serialization_PersistsArguments_Int()
         {
             PageInfo sourceEntry = new PageInfo("Page Name", 42);
@@ -413,10 +412,10 @@ namespace Okra.Tests.Navigation
             byte[] data = SerializationHelper.SerializeToArray(sourceEntry);
             PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
 
-            Assert.AreEqual(42, newEntry.GetArguments<int>());
+            Assert.Equal(42, newEntry.GetArguments<int>());
         }
 
-        [TestMethod]
+        [Fact]
         public void Serialization_PersistsArguments_Class()
         {
             PageInfo sourceEntry = new PageInfo("Page Name", new ClassState() { Text = "Text Value", Number = 42 });
@@ -425,11 +424,11 @@ namespace Okra.Tests.Navigation
             PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
 
             var args = newEntry.GetArguments<ClassState>();
-            Assert.AreEqual("Text Value", args.Text);
-            Assert.AreEqual(42, args.Number);
+            Assert.Equal("Text Value", args.Text);
+            Assert.Equal(42, args.Number);
         }
 
-        [TestMethod]
+        [Fact]
         public void Serialization_PersistsArguments_NullClass()
         {
             PageInfo sourceEntry = new PageInfo("Page Name", (ClassState)null);
@@ -437,10 +436,10 @@ namespace Okra.Tests.Navigation
             byte[] data = SerializationHelper.SerializeToArray(sourceEntry);
             PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
 
-            Assert.AreEqual(null, newEntry.GetArguments<ClassState>());
+            Assert.Equal(null, newEntry.GetArguments<ClassState>());
         }
 
-        [TestMethod]
+        [Fact]
         public void Serialization_PersistsArguments_Struct()
         {
             PageInfo sourceEntry = new PageInfo("Page Name", new StructState() { Text = "Text Value", Number = 42 });
@@ -449,11 +448,11 @@ namespace Okra.Tests.Navigation
             PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
 
             var args = newEntry.GetArguments<StructState>();
-            Assert.AreEqual("Text Value", args.Text);
-            Assert.AreEqual(42, args.Number);
+            Assert.Equal("Text Value", args.Text);
+            Assert.Equal(42, args.Number);
         }
 
-        [TestMethod]
+        [Fact]
         public void Serialization_PersistsArguments_NullReturnsDefaultInt()
         {
             PageInfo sourceEntry = new PageInfo("Page Name", null);
@@ -461,10 +460,10 @@ namespace Okra.Tests.Navigation
             byte[] data = SerializationHelper.SerializeToArray(sourceEntry);
             PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
 
-            Assert.AreEqual(0, newEntry.GetArguments<int>());
+            Assert.Equal(0, newEntry.GetArguments<int>());
         }
 
-        [TestMethod]
+        [Fact]
         public void Serialization_PersistsState_String()
         {
             PageInfo sourceEntry = new PageInfo("Page Name", "Arguments");
@@ -473,10 +472,10 @@ namespace Okra.Tests.Navigation
             byte[] data = SerializationHelper.SerializeToArray(sourceEntry);
             PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
 
-            Assert.AreEqual("Test State", newEntry.GetState<string>("MyKey"));
+            Assert.Equal("Test State", newEntry.GetState<string>("MyKey"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Serialization_PersistsState_Int()
         {
             PageInfo sourceEntry = new PageInfo("Page Name", "Arguments");
@@ -485,10 +484,10 @@ namespace Okra.Tests.Navigation
             byte[] data = SerializationHelper.SerializeToArray(sourceEntry);
             PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
 
-            Assert.AreEqual(42, newEntry.GetState<int>("MyKey"));
+            Assert.Equal(42, newEntry.GetState<int>("MyKey"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Serialization_PersistsState_Class()
         {
             PageInfo sourceEntry = new PageInfo("Page Name", "Arguments");
@@ -498,11 +497,11 @@ namespace Okra.Tests.Navigation
             PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
 
             var state = newEntry.GetState<ClassState>("MyKey");
-            Assert.AreEqual("Text Value", state.Text);
-            Assert.AreEqual(42, state.Number);
+            Assert.Equal("Text Value", state.Text);
+            Assert.Equal(42, state.Number);
         }
 
-        [TestMethod]
+        [Fact]
         public void Serialization_PersistsState_Struct()
         {
             PageInfo sourceEntry = new PageInfo("Page Name", "Arguments");
@@ -512,11 +511,11 @@ namespace Okra.Tests.Navigation
             PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
 
             var state = newEntry.GetState<StructState>("MyKey");
-            Assert.AreEqual("Text Value", state.Text);
-            Assert.AreEqual(42, state.Number);
+            Assert.Equal("Text Value", state.Text);
+            Assert.Equal(42, state.Number);
         }
 
-        [TestMethod]
+        [Fact]
         public void Serialization_PersistsState_NullString()
         {
             PageInfo sourceEntry = new PageInfo("Page Name", "Arguments");
@@ -525,10 +524,10 @@ namespace Okra.Tests.Navigation
             byte[] data = SerializationHelper.SerializeToArray(sourceEntry);
             PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
 
-            Assert.AreEqual(null, newEntry.GetState<string>("MyKey"));
+            Assert.Equal(null, newEntry.GetState<string>("MyKey"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Serialization_PersistsState_NullClass()
         {
             PageInfo sourceEntry = new PageInfo("Page Name", "Arguments");
@@ -537,7 +536,7 @@ namespace Okra.Tests.Navigation
             byte[] data = SerializationHelper.SerializeToArray(sourceEntry);
             PageInfo newEntry = SerializationHelper.DeserializeFromArray<PageInfo>(data);
 
-            Assert.AreEqual(null, newEntry.GetState<ClassState>("MyKey"));
+            Assert.Equal(null, newEntry.GetState<ClassState>("MyKey"));
         }
 
         // *** Private Classes ***

@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Navigation;
+﻿using Okra.Navigation;
 using Okra.Tests.Mocks;
 using System;
 using System.Collections.Generic;
@@ -7,47 +6,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
+using Xunit;
 
 namespace Okra.Tests.Navigation
 {
-    [TestClass]
     public class PageNavigationEventArgsFixture
     {
         // *** Constructor Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsPageProperty()
         {
             PageInfo navigationEntry = new PageInfo("SamplePage", null);
             PageNavigationEventArgs eventArgs = new PageNavigationEventArgs(navigationEntry, PageNavigationMode.Forward);
 
-            Assert.AreEqual(navigationEntry, eventArgs.Page);
+            Assert.Equal(navigationEntry, eventArgs.Page);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsNavigationMode()
         {
             PageInfo navigationEntry = new PageInfo("SamplePage", null);
             PageNavigationEventArgs eventArgs = new PageNavigationEventArgs(navigationEntry, PageNavigationMode.Forward);
 
-            Assert.AreEqual(PageNavigationMode.Forward, eventArgs.NavigationMode);
+            Assert.Equal(PageNavigationMode.Forward, eventArgs.NavigationMode);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_Exception_PageIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.Throws<ArgumentNullException>(() =>
                 {
                     PageNavigationEventArgs eventArgs = new PageNavigationEventArgs(null, PageNavigationMode.Forward);
                 });
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_Exception_InvalidNavigationMode()
         {
             PageInfo navigationEntry = new PageInfo("SamplePage", null);
 
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.Throws<ArgumentException>(() =>
             {
                 PageNavigationEventArgs eventArgs = new PageNavigationEventArgs(navigationEntry, (PageNavigationMode)100);
             });

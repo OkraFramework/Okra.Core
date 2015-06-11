@@ -2,28 +2,27 @@
 using System.Text;
 using System.Linq;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Okra.Services;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using System.Collections;
+using Xunit;
 
 namespace Okra.Tests.Services
 {
-    [TestClass]
     public class LifetimeManagerFixture
     {
         // *** Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Register_ThrowsException_IfServiceIsNull()
         {
             LifetimeManager lifetimeManager = new LifetimeManager();
 
-            Assert.ThrowsException<ArgumentNullException>(() => lifetimeManager.Register(null));
+            Assert.Throws<ArgumentNullException>(() => lifetimeManager.Register(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Register_ThrowsException_WithMultipleRegistrationOfSameService()
         {
             MockService service = new MockService();
@@ -31,18 +30,18 @@ namespace Okra.Tests.Services
 
             lifetimeManager.Register(service);
 
-            Assert.ThrowsException<InvalidOperationException>(() => lifetimeManager.Register(service));
+            Assert.Throws<InvalidOperationException>(() => lifetimeManager.Register(service));
         }
 
-        [TestMethod]
+        [Fact]
         public void Unregister_ThrowsException_IfServiceIsNull()
         {
             LifetimeManager lifetimeManager = new LifetimeManager();
 
-            Assert.ThrowsException<ArgumentNullException>(() => lifetimeManager.Unregister(null));
+            Assert.Throws<ArgumentNullException>(() => lifetimeManager.Unregister(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Unregister_ThrowsException_IfServiceIsNotRegistered()
         {
             MockService service1 = new MockService();
@@ -51,12 +50,12 @@ namespace Okra.Tests.Services
 
             lifetimeManager.Register(service1);
 
-            Assert.ThrowsException<InvalidOperationException>(() => lifetimeManager.Unregister(service2));
+            Assert.Throws<InvalidOperationException>(() => lifetimeManager.Unregister(service2));
         }
 
         // *** Behavior Tests ***
 
-        [TestMethod]
+        [Fact]
         public void RegistedServices_ReceiveSuspendingEvent()
         {
             MockService service1 = new MockService();
@@ -66,11 +65,11 @@ namespace Okra.Tests.Services
 
             lifetimeManager.Suspend(new MockSuspendingEventArgs());
 
-            CollectionAssert.AreEqual(new string[] { "OnSuspending" }, service1.LifetimeEventCalls);
-            CollectionAssert.AreEqual(new string[] { "OnSuspending" }, service2.LifetimeEventCalls);
+            Assert.Equal<string>(new string[] { "OnSuspending" }, service1.LifetimeEventCalls);
+            Assert.Equal<string>(new string[] { "OnSuspending" }, service2.LifetimeEventCalls);
         }
 
-        [TestMethod]
+        [Fact]
         public void RegistedServices_ReceiveResumingEvent()
         {
             MockService service1 = new MockService();
@@ -80,11 +79,11 @@ namespace Okra.Tests.Services
 
             lifetimeManager.Resume();
 
-            CollectionAssert.AreEqual(new string[] { "OnResuming" }, service1.LifetimeEventCalls);
-            CollectionAssert.AreEqual(new string[] { "OnResuming" }, service2.LifetimeEventCalls);
+            Assert.Equal<string>(new string[] { "OnResuming" }, service1.LifetimeEventCalls);
+            Assert.Equal<string>(new string[] { "OnResuming" }, service2.LifetimeEventCalls);
         }
 
-        [TestMethod]
+        [Fact]
         public void RegistedServices_ReceiveMultipleEvents()
         {
             MockService service1 = new MockService();
@@ -95,11 +94,11 @@ namespace Okra.Tests.Services
             lifetimeManager.Suspend(new MockSuspendingEventArgs());
             lifetimeManager.Resume();
 
-            CollectionAssert.AreEqual(new string[] { "OnSuspending", "OnResuming" }, service1.LifetimeEventCalls);
-            CollectionAssert.AreEqual(new string[] { "OnSuspending", "OnResuming" }, service2.LifetimeEventCalls);
+            Assert.Equal<string>(new string[] { "OnSuspending", "OnResuming" }, service1.LifetimeEventCalls);
+            Assert.Equal<string>(new string[] { "OnSuspending", "OnResuming" }, service2.LifetimeEventCalls);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task RegistedServices_CausesDeferralOfSuspension()
         {
             // Create two services which will complete suspension when their tasks complete
@@ -121,19 +120,19 @@ namespace Okra.Tests.Services
 
             // Check that the suspension is deferred
 
-            Assert.IsTrue(suspendingEventArgs.IsDeferred);
+            Assert.True(suspendingEventArgs.IsDeferred);
 
             // Check that the suspension is deferred on completion of first service
 
             tcs1.SetResult(true);
             await Task.Yield();
-            Assert.IsTrue(suspendingEventArgs.IsDeferred);
+            Assert.True(suspendingEventArgs.IsDeferred);
 
             // Check that the suspension is completed on completion of second service
 
             tcs2.SetResult(true);
             await Task.Yield();
-            Assert.IsFalse(suspendingEventArgs.IsDeferred);
+            Assert.False(suspendingEventArgs.IsDeferred);
         }
 
         // *** Private Methods ***
@@ -193,7 +192,7 @@ namespace Okra.Tests.Services
 
             // *** Properties ***
 
-            public IList LifetimeEventCalls { get; private set; }
+            public IList<string> LifetimeEventCalls { get; private set; }
 
             // *** Methods ***
 

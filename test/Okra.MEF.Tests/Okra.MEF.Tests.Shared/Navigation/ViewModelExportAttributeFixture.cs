@@ -4,65 +4,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Okra.Navigation;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Xunit;
 
 namespace Okra.MEF.Tests.Navigation
 {
-    [TestClass]
     public class ViewModelExportAttributeFixture
     {
         // *** Constructor Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsPageName_ByString()
         {
             ViewModelExportAttribute attribute = new ViewModelExportAttribute("Page X");
 
-            Assert.AreEqual("Page X", attribute.PageName);
+            Assert.Equal("Page X", attribute.PageName);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsPageName_ByType()
         {
             ViewModelExportAttribute attribute = new ViewModelExportAttribute(typeof(ViewModelExportAttributeFixture));
 
-            Assert.AreEqual("Okra.MEF.Tests.Navigation.ViewModelExportAttributeFixture", attribute.PageName);
+            Assert.Equal("Okra.MEF.Tests.Navigation.ViewModelExportAttributeFixture", attribute.PageName);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfPageNameIsNull()
         {
-            Assert.ThrowsException<ArgumentException>(() => new ViewModelExportAttribute((string)null));
+            Assert.Throws<ArgumentException>(() => new ViewModelExportAttribute((string)null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfPageNameIsEmpty()
         {
-            Assert.ThrowsException<ArgumentException>(() => new ViewModelExportAttribute(""));
+            Assert.Throws<ArgumentException>(() => new ViewModelExportAttribute(""));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfPageTypeIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new ViewModelExportAttribute((Type)null));
+            Assert.Throws<ArgumentNullException>(() => new ViewModelExportAttribute((Type)null));
         }
 
         // *** Property Tests ***
 
-        [TestMethod]
+        [Fact]
         public void ContractName_IsCorrect()
         {
             ViewModelExportAttribute attribute = new ViewModelExportAttribute("Page X");
 
-            Assert.AreEqual("OkraViewModel", attribute.ContractName);
+            Assert.Equal("OkraViewModel", attribute.ContractName);
         }
 
-        [TestMethod]
+        [Fact]
         public void ContractType_IsObject()
         {
             ViewModelExportAttribute attribute = new ViewModelExportAttribute("Page X");
 
-            Assert.AreEqual(typeof(object), attribute.ContractType);
+            Assert.Equal(typeof(object), attribute.ContractType);
         }
     }
 }

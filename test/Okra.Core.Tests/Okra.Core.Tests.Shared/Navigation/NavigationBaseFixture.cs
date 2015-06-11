@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Navigation;
+﻿using Okra.Navigation;
 using Okra.Tests.Helpers;
 using Okra.Tests.Mocks;
 using System;
@@ -10,53 +9,53 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
+using Xunit;
 
 namespace Okra.Tests.Navigation
 {
-    [TestClass]
     public class NavigationBaseFixture
     {
         // *** Constructor Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Constructor_Exception_NullViewFactory()
         {
             INavigationStack navigationStack = new MockNavigationStack();
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TestableNavigationBase(null, navigationStack));
+            Assert.Throws<ArgumentNullException>(() => new TestableNavigationBase(null, navigationStack));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_Exception_NullNavigationStack()
         {
             IViewFactory viewFactory = MockViewFactory.WithPageAndViewModel;
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TestableNavigationBase(viewFactory, null));
+            Assert.Throws<ArgumentNullException>(() => new TestableNavigationBase(viewFactory, null));
         }
 
         // *** Property Test ***
 
-        [TestMethod]
+        [Fact]
         public void NavigationStack_SetByConstructor()
         {
             INavigationStack navigationStack = new MockNavigationStack();
             INavigationBase navigationBase = new TestableNavigationBase(MockViewFactory.WithPageAndViewModel, navigationStack);
 
-            Assert.AreEqual(navigationStack, navigationBase.NavigationStack);
+            Assert.Equal(navigationStack, navigationBase.NavigationStack);
         }
 
-        [TestMethod]
+        [Fact]
         public void NavigationStack_DefaultsToNavigationStack()
         {
             INavigationBase navigationBase = new TestableNavigationBase(MockViewFactory.WithPageAndViewModel);
 
-            Assert.AreEqual(typeof(NavigationStack), navigationBase.NavigationStack.GetType());
+            Assert.Equal(typeof(NavigationStack), navigationBase.NavigationStack.GetType());
         }
 
         // *** NavigationStack Event Tests ***
 
 
-        [TestMethod]
+        [Fact]
         public void WhenNavigationStack_PropertyChanged_CurrentPage_NullPageCallsDisplayPageWithNull()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -64,10 +63,10 @@ namespace Okra.Tests.Navigation
 
             navigationStack.SetCurrentPage(null);
 
-            CollectionAssert.AreEqual(new PageInfo[] { null }, navigationBase.DisplayPageCalls);
+            Assert.Equal(new PageInfo[] { null }, navigationBase.DisplayPageCalls);
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenNavigationStack_PropertyChanged_CurrentPage_DisplaysSpecifiedPage_WithViewModel()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -77,10 +76,10 @@ namespace Okra.Tests.Navigation
             navigationStack.SetCurrentPage(pageInfo);
 
             string[] pageNames = navigationBase.DisplayPageCalls.Cast<MockPage>().Select(page => page.PageName).ToArray();
-            CollectionAssert.AreEqual(new string[] { "Page 1" }, pageNames);
+            Assert.Equal(new string[] { "Page 1" }, pageNames);
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenNavigationStack_PropertyChanged_CurrentPage_DisplaysSpecifiedPage_WithoutViewModel()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -91,10 +90,10 @@ namespace Okra.Tests.Navigation
             navigationStack.SetCurrentPage(pageInfo);
 
             string[] pageNames = navigationBase.DisplayPageCalls.Cast<MockPage>().Select(page => page.PageName).ToArray();
-            CollectionAssert.AreEqual(new string[] { "Page 1" }, pageNames);
+            Assert.Equal(new string[] { "Page 1" }, pageNames);
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenNavigationStack_PropertyChanged_CurrentPage_ActivatesViewModel()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -107,10 +106,10 @@ namespace Okra.Tests.Navigation
             MockPage currentPage = (MockPage)navigationBase.DisplayPageCalls.Last();
             MockViewModel_Activatable currentViewModel = (MockViewModel_Activatable)currentPage.DataContext;
 
-            CollectionAssert.AreEqual(new[] { pageInfo }, currentViewModel.ActivationCalls);
+            Assert.Equal(new[] { pageInfo }, currentViewModel.ActivationCalls);
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenNavigationStack_PropertyChanged_CurrentPage_PassesNavigationContextToViewFactory()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -122,11 +121,11 @@ namespace Okra.Tests.Navigation
             MockPage currentPage = (MockPage)navigationBase.DisplayPageCalls.Last();
             INavigationContext navigationContext = currentPage.NavigationContext;
 
-            Assert.IsNotNull(navigationContext);
-            Assert.AreEqual(navigationBase, navigationContext.GetCurrent());
+            Assert.NotNull(navigationContext);
+            Assert.Equal(navigationBase, navigationContext.GetCurrent());
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenNavigationStack_PageDisposed_DisposesCurrentViewModel()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -139,10 +138,10 @@ namespace Okra.Tests.Navigation
 
             navigationStack.RaisePageDisposed(pageInfo, PageNavigationMode.Back);
 
-            Assert.AreEqual(true, currentViewModel.IsDisposed);
+            Assert.Equal(true, currentViewModel.IsDisposed);
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenNavigationStack_PageDisposed_DisposesCurrentPage()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -154,10 +153,10 @@ namespace Okra.Tests.Navigation
 
             navigationStack.RaisePageDisposed(pageInfo, PageNavigationMode.Back);
 
-            Assert.AreEqual(true, currentPage.IsDisposed);
+            Assert.Equal(true, currentPage.IsDisposed);
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenNavigationStack_NavigatingFrom_CallsNavigatedToOnPage()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -170,10 +169,10 @@ namespace Okra.Tests.Navigation
 
             MockPage_NavigationAware currentPage = (MockPage_NavigationAware)navigationBase.DisplayPageCalls.Last();
 
-            CollectionAssert.AreEqual(new string[] { "NavigatingFrom(Forward)" }, currentPage.NavigationEvents);
+            Assert.Equal(new string[] { "NavigatingFrom(Forward)" }, currentPage.NavigationEvents);
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenNavigationStack_NavigatingFrom_CallsNavigatedToOnViewModel()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -187,10 +186,10 @@ namespace Okra.Tests.Navigation
             MockPage currentPage = (MockPage)navigationBase.DisplayPageCalls.Last();
             MockViewModel_NavigationAware currentViewModel = (MockViewModel_NavigationAware)currentPage.DataContext;
 
-            CollectionAssert.AreEqual(new string[] { "NavigatingFrom(Forward)" }, currentViewModel.NavigationEvents);
+            Assert.Equal(new string[] { "NavigatingFrom(Forward)" }, currentViewModel.NavigationEvents);
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenNavigationStack_NavigatedTo_CallsNavigatedToOnPage()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -203,10 +202,10 @@ namespace Okra.Tests.Navigation
 
             MockPage_NavigationAware currentPage = (MockPage_NavigationAware)navigationBase.DisplayPageCalls.Last();
 
-            CollectionAssert.AreEqual(new string[] { "NavigatedTo(Forward)" }, currentPage.NavigationEvents);
+            Assert.Equal(new string[] { "NavigatedTo(Forward)" }, currentPage.NavigationEvents);
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenNavigationStack_NavigatedTo_CallsNavigatedToOnViewModel()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -220,22 +219,22 @@ namespace Okra.Tests.Navigation
             MockPage currentPage = (MockPage)navigationBase.DisplayPageCalls.Last();
             MockViewModel_NavigationAware currentViewModel = (MockViewModel_NavigationAware)currentPage.DataContext;
 
-            CollectionAssert.AreEqual(new string[] { "NavigatedTo(Forward)" }, currentViewModel.NavigationEvents);
+            Assert.Equal(new string[] { "NavigatedTo(Forward)" }, currentViewModel.NavigationEvents);
         }
 
         // *** Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public void CanNavigateTo_ReturnsTrue_PageExistsWithSpecifiedName()
         {
             INavigationBase navigationBase = CreateNavigationBase();
 
             bool canNavigateTo = navigationBase.CanNavigateTo("Page 1");
 
-            Assert.AreEqual(true, canNavigateTo);
+            Assert.Equal(true, canNavigateTo);
         }
 
-        [TestMethod]
+        [Fact]
         public void CanNavigateTo_ReturnsFalse_NoPageWithSpecifiedName()
         {
             IViewFactory viewFactory = MockViewFactory.NoPageDefined;
@@ -243,26 +242,26 @@ namespace Okra.Tests.Navigation
 
             bool canNavigateTo = navigationBase.CanNavigateTo("Page X");
 
-            Assert.AreEqual(false, canNavigateTo);
+            Assert.Equal(false, canNavigateTo);
         }
 
-        [TestMethod]
+        [Fact]
         public void CanNavigateTo_Exception_NullPageName()
         {
             INavigationBase navigationBase = CreateNavigationBase();
 
-            Assert.ThrowsException<ArgumentException>(() => navigationBase.CanNavigateTo(null));
+            Assert.Throws<ArgumentException>(() => navigationBase.CanNavigateTo(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void CanNavigateTo_Exception_EmptyPageName()
         {
             INavigationBase navigationBase = CreateNavigationBase();
 
-            Assert.ThrowsException<ArgumentException>(() => navigationBase.CanNavigateTo(""));
+            Assert.Throws<ArgumentException>(() => navigationBase.CanNavigateTo(""));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetPageElements_ReturnsEmptyArrayIfNotCached()
         {
             TestableNavigationBase navigationBase = CreateNavigationBase();
@@ -270,10 +269,10 @@ namespace Okra.Tests.Navigation
 
             object[] pageElements = navigationBase.GetPageElements(pageInfo).ToArray();
 
-            CollectionAssert.AreEqual(new object[] { }, pageElements);
+            Assert.Equal(new object[] { }, pageElements);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetPageElements_ReturnsViewModelThenPageIfBothPresent()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -285,10 +284,10 @@ namespace Okra.Tests.Navigation
             MockPage currentPage = navigationBase.DisplayPageCalls.Cast<MockPage>().LastOrDefault();
             MockViewModel currentViewModel = (MockViewModel)currentPage.DataContext;
 
-            CollectionAssert.AreEqual(new object[] { currentViewModel, currentPage }, navigationBase.GetPageElements(pageInfo).ToList());
+            Assert.Equal(new object[] { currentViewModel, currentPage }, navigationBase.GetPageElements(pageInfo).ToList());
         }
 
-        [TestMethod]
+        [Fact]
         public void GetPageElements_ReturnsPageIfNoViewModelPresent()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -300,18 +299,18 @@ namespace Okra.Tests.Navigation
 
             MockPage currentPage = navigationBase.DisplayPageCalls.Cast<MockPage>().LastOrDefault();
 
-            CollectionAssert.AreEqual(new object[] { currentPage }, navigationBase.GetPageElements(pageInfo).ToList());
+            Assert.Equal(new object[] { currentPage }, navigationBase.GetPageElements(pageInfo).ToList());
         }
 
-        [TestMethod]
+        [Fact]
         public void GetPageElements_Exception_NullPageInfo()
         {
             INavigationBase navigationBase = CreateNavigationBase();
 
-            Assert.ThrowsException<ArgumentNullException>(() => navigationBase.GetPageElements(null));
+            Assert.Throws<ArgumentNullException>(() => navigationBase.GetPageElements(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void StoreRestoreState_PersistsNavigationStack()
         {
             byte[] persistedData;
@@ -340,13 +339,13 @@ namespace Okra.Tests.Navigation
                 NavigationState state = SerializationHelper.DeserializeFromArray<NavigationState>(persistedData);
                 navigationBase.RestoreState(state);
 
-                Assert.AreEqual(2, navigationBase.NavigationStack.Count);
-                Assert.AreEqual("Page 1", navigationBase.NavigationStack[0].PageName);
-                Assert.AreEqual("Page 2", navigationBase.NavigationStack[1].PageName);
+                Assert.Equal(2, navigationBase.NavigationStack.Count);
+                Assert.Equal("Page 1", navigationBase.NavigationStack[0].PageName);
+                Assert.Equal("Page 2", navigationBase.NavigationStack[1].PageName);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void StoreRestoreState_CallsNavigatedToOnPage()
         {
             byte[] persistedData;
@@ -377,11 +376,11 @@ namespace Okra.Tests.Navigation
                 navigationBase.RestoreState(state);
 
                 MockPage_NavigationAware currentPage = (MockPage_NavigationAware)navigationBase.DisplayPageCalls.Last();
-                CollectionAssert.AreEqual(new string[] { "NavigatedTo(Refresh)" }, currentPage.NavigationEvents);
+                Assert.Equal(new string[] { "NavigatedTo(Refresh)" }, currentPage.NavigationEvents);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void StoreRestoreState_CallsNavigatedToOnViewModel()
         {
             byte[] persistedData;
@@ -413,16 +412,16 @@ namespace Okra.Tests.Navigation
 
                 MockPage currentPage = (MockPage)navigationBase.DisplayPageCalls.Last();
                 MockViewModel_NavigationAware currentViewModel = (MockViewModel_NavigationAware)currentPage.DataContext;
-                CollectionAssert.AreEqual(new string[] { "NavigatedTo(Refresh)" }, currentViewModel.NavigationEvents);
+                Assert.Equal(new string[] { "NavigatedTo(Refresh)" }, currentViewModel.NavigationEvents);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void RestoreState_Exception_NullState()
         {
             TestableNavigationBase navigationBase = CreateNavigationBase();
 
-            Assert.ThrowsException<ArgumentNullException>(() => navigationBase.RestoreState(null));
+            Assert.Throws<ArgumentNullException>(() => navigationBase.RestoreState(null));
         }
 
         // *** Private Methods ***

@@ -1,16 +1,15 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Navigation;
+﻿using Okra.Navigation;
 using Okra.MEF.Tests.Mocks;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xunit;
 
 namespace Okra.MEF.Tests.Navigation
 {
-    [TestClass]
     public class NavigationContextProxyFixture
     {
-        [TestMethod]
+        [Fact]
         public void GetCurrent_ReturnsResultFromWrappedContext()
         {
             INavigationBase navigationBase = new MockNavigationManager();
@@ -19,14 +18,14 @@ namespace Okra.MEF.Tests.Navigation
             NavigationContextProxy proxy = new NavigationContextProxy();
             proxy.SetNavigationContext(context);
 
-            Assert.AreEqual(navigationBase, proxy.GetCurrent());
+            Assert.Equal(navigationBase, proxy.GetCurrent());
         }
 
-        [TestMethod]
+        [Fact]
         public void SetNavigationContext_ThrowsException_IfNavigationContextIsNull()
         {
             NavigationContextProxy proxy = new NavigationContextProxy();
-            Assert.ThrowsException<ArgumentNullException>(() => proxy.SetNavigationContext(null));
+            Assert.Throws<ArgumentNullException>(() => proxy.SetNavigationContext(null));
         }
     }
 }

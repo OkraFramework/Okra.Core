@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Navigation;
+﻿using Okra.Navigation;
+using Okra.Tests.Helpers;
 using Okra.Tests.Mocks;
 using System;
 using System.Collections.Generic;
@@ -12,45 +12,44 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using UITestMethodAttribute = Microsoft.VisualStudio.TestPlatform.UnitTestFramework.AppContainer.UITestMethodAttribute;
+using Xunit;
 
 namespace Okra.Tests.Navigation
 {
-    [TestClass]
     public class SettingsPaneManagerFixture
     {
         // *** Constructor Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Constructor_WithViewFactory_ThrowsException_WhenViewFactoryIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new SettingsPaneManager(null));
+            Assert.Throws<ArgumentNullException>(() => new SettingsPaneManager(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_WithViewFactoryAndNavigationStack_ThrowsException_WhenViewFactoryIsNull()
         {
             INavigationStack navigationStack = new MockNavigationStack();
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TestableSettingsPaneManager(null, navigationStack));
+            Assert.Throws<ArgumentNullException>(() => new TestableSettingsPaneManager(null, navigationStack));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_WithViewFactoryAndNavigationStack_ThrowsException_WhenNavigationStackIsNull()
         {
             IViewFactory viewFactory = MockViewFactory.NoPageDefined;
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TestableSettingsPaneManager(viewFactory, null));
+            Assert.Throws<ArgumentNullException>(() => new TestableSettingsPaneManager(viewFactory, null));
         }
 
         // *** Property Tests ***
 
-        [TestMethod]
+        [Fact]
         public void NavigationStack_DefaultsToNavigationStack()
         {
             ISettingsPaneManager settingsPaneManager = new SettingsPaneManager(MockViewFactory.WithPageAndViewModel);
 
-            Assert.AreEqual(typeof(NavigationStack), settingsPaneManager.NavigationStack.GetType());
+            Assert.Equal(typeof(NavigationStack), settingsPaneManager.NavigationStack.GetType());
         }
 
         // *** Method Tests ***
@@ -63,8 +62,8 @@ namespace Okra.Tests.Navigation
             object page = new object();
             settingsPaneManager.CallDisplayPage(page);
 
-            Assert.AreEqual(1, settingsPaneManager.ShowSettingsFlyoutCalls.Count);
-            Assert.IsNotNull(settingsPaneManager.ShowSettingsFlyoutCalls[0]);
+            Assert.Equal(1, settingsPaneManager.ShowSettingsFlyoutCalls.Count);
+            Assert.NotNull(settingsPaneManager.ShowSettingsFlyoutCalls[0]);
         }
 
         [UITestMethod]
@@ -76,8 +75,8 @@ namespace Okra.Tests.Navigation
             settingsPaneManager.CallDisplayPage(page);
             settingsPaneManager.CallDisplayPage(page);
 
-            Assert.AreEqual(2, settingsPaneManager.ShowSettingsFlyoutCalls.Count);
-            Assert.AreEqual(settingsPaneManager.ShowSettingsFlyoutCalls[0], settingsPaneManager.ShowSettingsFlyoutCalls[1]);
+            Assert.Equal(2, settingsPaneManager.ShowSettingsFlyoutCalls.Count);
+            Assert.Equal(settingsPaneManager.ShowSettingsFlyoutCalls[0], settingsPaneManager.ShowSettingsFlyoutCalls[1]);
         }
 
         [UITestMethod]
@@ -89,7 +88,7 @@ namespace Okra.Tests.Navigation
             settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
-            Assert.AreEqual(page, flyout.Content);
+            Assert.Equal(page, flyout.Content);
         }
 
         [UITestMethod]
@@ -101,7 +100,7 @@ namespace Okra.Tests.Navigation
             settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
-            Assert.AreEqual(page, flyout.Content);
+            Assert.Equal(page, flyout.Content);
         }
 
         [UITestMethod]
@@ -114,7 +113,7 @@ namespace Okra.Tests.Navigation
             settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
-            Assert.AreEqual(null, flyout.Template);
+            Assert.Equal(null, flyout.Template);
         }
 
         [UITestMethod]
@@ -127,7 +126,7 @@ namespace Okra.Tests.Navigation
             settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
-            Assert.IsNotNull(flyout.Template);
+            Assert.NotNull(flyout.Template);
         }
 
         [UITestMethod]
@@ -140,7 +139,7 @@ namespace Okra.Tests.Navigation
             settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
-            Assert.AreEqual("Test Title", flyout.Title);
+            Assert.Equal("Test Title", flyout.Title);
         }
 
         [UITestMethod]
@@ -153,7 +152,7 @@ namespace Okra.Tests.Navigation
             settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
-            Assert.AreEqual(420, flyout.Width);
+            Assert.Equal(420, flyout.Width);
         }
 
         [UITestMethod]
@@ -169,7 +168,7 @@ namespace Okra.Tests.Navigation
             settingsPaneManager.CallDisplayPage(page2);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
-            Assert.AreEqual(500, flyout.Width);
+            Assert.Equal(500, flyout.Width);
         }
 
         [UITestMethod]
@@ -183,7 +182,7 @@ namespace Okra.Tests.Navigation
             settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
-            Assert.AreEqual(icon, flyout.IconSource);
+            Assert.Equal(icon, flyout.IconSource);
         }
 
         [UITestMethod]
@@ -197,7 +196,7 @@ namespace Okra.Tests.Navigation
             settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
-            Assert.AreEqual(brush, flyout.HeaderBackground);
+            Assert.Equal(brush, flyout.HeaderBackground);
         }
 
         [UITestMethod]
@@ -211,7 +210,7 @@ namespace Okra.Tests.Navigation
             settingsPaneManager.CallDisplayPage(page);
 
             SettingsFlyout flyout = settingsPaneManager.ShowSettingsFlyoutCalls.First();
-            Assert.AreEqual(brush, flyout.HeaderForeground);
+            Assert.Equal(brush, flyout.HeaderForeground);
         }
 
         [UITestMethod]
@@ -219,7 +218,7 @@ namespace Okra.Tests.Navigation
         {
             TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
 
-            Assert.ThrowsException<ArgumentNullException>(() => settingsPaneManager.CallOnSettingsPaneBackClick(null));
+            Assert.Throws<ArgumentNullException>(() => settingsPaneManager.CallOnSettingsPaneBackClick(null));
         }
 
         [UITestMethod]
@@ -227,7 +226,7 @@ namespace Okra.Tests.Navigation
         {
             TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
 
-            Assert.ThrowsException<ArgumentNullException>(() => settingsPaneManager.CallShowSettingsFlyoutDirect(null));
+            Assert.Throws<ArgumentNullException>(() => settingsPaneManager.CallShowSettingsFlyoutDirect(null));
         }
 
         // *** Behaviour Tests ***
@@ -244,7 +243,7 @@ namespace Okra.Tests.Navigation
             settingsPaneManager.CallOnSettingsFlyoutClosed();
 
             string[] pageNames = navigationStack.Select(page => page.PageName).ToArray();
-            CollectionAssert.AreEqual(new string[] { }, pageNames);
+            Assert.Equal(new string[] { }, pageNames);
         }
 
         [UITestMethod]
@@ -259,8 +258,8 @@ namespace Okra.Tests.Navigation
 
             settingsPaneManager.CallOnSettingsFlyoutClosed();
 
-            Assert.AreEqual(1, flyoutClosedCount);
-            Assert.AreEqual(0, flyoutOpenedCount);
+            Assert.Equal(1, flyoutClosedCount);
+            Assert.Equal(0, flyoutOpenedCount);
         }
 
         [UITestMethod]
@@ -275,8 +274,8 @@ namespace Okra.Tests.Navigation
 
             settingsPaneManager.CallOnSettingsFlyoutOpened();
 
-            Assert.AreEqual(0, flyoutClosedCount);
-            Assert.AreEqual(1, flyoutOpenedCount);
+            Assert.Equal(0, flyoutClosedCount);
+            Assert.Equal(1, flyoutOpenedCount);
         }
 
         [UITestMethod]
@@ -291,7 +290,7 @@ namespace Okra.Tests.Navigation
             BackClickEventArgs e = new BackClickEventArgs() { Handled = false };
             settingsPaneManager.CallOnSettingsPaneBackClick(e);
 
-            Assert.AreEqual(true, e.Handled);
+            Assert.Equal(true, e.Handled);
         }
 
         [UITestMethod]
@@ -307,7 +306,7 @@ namespace Okra.Tests.Navigation
             settingsPaneManager.CallOnSettingsPaneBackClick(e);
 
             string[] pageNames = navigationStack.Select(page => page.PageName).ToArray();
-            CollectionAssert.AreEqual(new string[] { "Page 1" }, pageNames);
+            Assert.Equal(new string[] { "Page 1" }, pageNames);
         }
 
         // *** Private Methods ***

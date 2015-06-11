@@ -4,27 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Okra.Navigation;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Xunit;
 
 namespace Okra.Tests.Navigation
 {
-    [TestClass]
     public class PageNameFixture
     {
         // *** Static Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public void FromType_ReturnsFullName()
         {
             string pageName = PageName.FromType(typeof(PageNameFixture));
 
-            Assert.AreEqual("Okra.Tests.Navigation.PageNameFixture", pageName);
+            Assert.Equal("Okra.Tests.Navigation.PageNameFixture", pageName);
         }
 
-        [TestMethod]
+        [Fact]
         public void FromType_Exception_NullType()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => PageName.FromType(null));
+            Assert.Throws<ArgumentNullException>(() => PageName.FromType(null));
         }
     }
 }

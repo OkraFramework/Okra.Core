@@ -4,65 +4,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Okra.Navigation;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Xunit;
 
 namespace Okra.MEF.Tests.Navigation
 {
-    [TestClass]
     public class PageExportAttributeFixture
     {
         // *** Constructor Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsPageName_ByString()
         {
             PageExportAttribute attribute = new PageExportAttribute("Page X");
 
-            Assert.AreEqual("Page X", attribute.PageName);
+            Assert.Equal("Page X", attribute.PageName);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsPageName_ByType()
         {
             PageExportAttribute attribute = new PageExportAttribute(typeof(PageExportAttributeFixture));
 
-            Assert.AreEqual("Okra.MEF.Tests.Navigation.PageExportAttributeFixture", attribute.PageName);
+            Assert.Equal("Okra.MEF.Tests.Navigation.PageExportAttributeFixture", attribute.PageName);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfPageNameIsNull()
         {
-            Assert.ThrowsException<ArgumentException>(() => new PageExportAttribute((string)null));
+            Assert.Throws<ArgumentException>(() => new PageExportAttribute((string)null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfPageNameIsEmpty()
         {
-            Assert.ThrowsException<ArgumentException>(() => new PageExportAttribute(""));
+            Assert.Throws<ArgumentException>(() => new PageExportAttribute(""));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfPageTypeIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new PageExportAttribute((Type)null));
+            Assert.Throws<ArgumentNullException>(() => new PageExportAttribute((Type)null));
         }
 
         // *** Property Tests ***
 
-        [TestMethod]
+        [Fact]
         public void ContractName_IsCorrect()
         {
             PageExportAttribute attribute = new PageExportAttribute("Page X");
 
-            Assert.AreEqual("OkraPage", attribute.ContractName);
+            Assert.Equal("OkraPage", attribute.ContractName);
         }
 
-        [TestMethod]
+        [Fact]
         public void ContractType_IsObject()
         {
             PageExportAttribute attribute = new PageExportAttribute("Page X");
 
-            Assert.AreEqual(typeof(object), attribute.ContractType);
+            Assert.Equal(typeof(object), attribute.ContractType);
         }
     }
 }

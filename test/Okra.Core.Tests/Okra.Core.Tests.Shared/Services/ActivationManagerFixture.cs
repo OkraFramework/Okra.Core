@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 using Okra.Navigation;
 using Okra.Services;
 using Okra.Tests.Mocks;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Windows.ApplicationModel.Activation;
+using Xunit;
 
 namespace Okra.Tests.Services
 {
-    [TestClass]
     public class ActivationManagerFixture
     {
         // *** Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_ReturnsFalseIfAllHandlersReturnFalse()
         {
             MockService service1 = new MockService(Task.FromResult(false));
@@ -27,10 +26,10 @@ namespace Okra.Tests.Services
 
             bool result = await activationManager.Activate(new MockActivatedEventArgs());
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_ReturnsTrueIfAnyHandlerReturnTrue()
         {
             MockService service1 = new MockService(Task.FromResult(false));
@@ -40,10 +39,10 @@ namespace Okra.Tests.Services
 
             bool result = await activationManager.Activate(new MockActivatedEventArgs());
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_RegistedServicesReceiveActivateEvents()
         {
             MockService service1 = new MockService();
@@ -53,11 +52,11 @@ namespace Okra.Tests.Services
 
             await activationManager.Activate(new MockActivatedEventArgs());
 
-            CollectionAssert.AreEqual(new[] { "Activating", "Activate", "Activated" }, service1.LifetimeEventCalls.Select(e => e.Item1).ToArray());
-            CollectionAssert.AreEqual(new[] { "Activating", "Activate", "Activated" }, service2.LifetimeEventCalls.Select(e => e.Item1).ToArray());
+            Assert.Equal(new[] { "Activating", "Activate", "Activated" }, service1.LifetimeEventCalls.Select(e => e.Item1).ToArray());
+            Assert.Equal(new[] { "Activating", "Activate", "Activated" }, service2.LifetimeEventCalls.Select(e => e.Item1).ToArray());
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_RegistedServicesReceiveActivatedEventArgs()
         {
             MockService service1 = new MockService();
@@ -68,11 +67,11 @@ namespace Okra.Tests.Services
             MockActivatedEventArgs eventArgs = new MockActivatedEventArgs();
             await activationManager.Activate(eventArgs);
 
-            CollectionAssert.AreEqual(new[] { eventArgs, eventArgs, eventArgs }, service1.LifetimeEventCalls.Select(e => e.Item2).ToArray());
-            CollectionAssert.AreEqual(new[] { eventArgs, eventArgs, eventArgs }, service2.LifetimeEventCalls.Select(e => e.Item2).ToArray());
+            Assert.Equal<IActivatedEventArgs>(new[] { eventArgs, eventArgs, eventArgs }, service1.LifetimeEventCalls.Select(e => e.Item2).ToArray());
+            Assert.Equal<IActivatedEventArgs>(new[] { eventArgs, eventArgs, eventArgs }, service2.LifetimeEventCalls.Select(e => e.Item2).ToArray());
         }
 
-        [TestMethod]
+        [Fact]
         public void Activate_DoesNotRaiseActivatedEventUntilAllHandlersComplete()
         {
             MockService service1 = new MockService();
@@ -84,31 +83,31 @@ namespace Okra.Tests.Services
             // NB: Do not await this as will only complete when all tasks complete!
             Task<bool> result = activationManager.Activate(new MockActivatedEventArgs());
 
-            Assert.AreEqual(false, result.IsCompleted);
-            CollectionAssert.AreEqual(new[] { "Activating", "Activate" }, service1.LifetimeEventCalls.Select(e => e.Item1).ToArray());
-            CollectionAssert.AreEqual(new[] { "Activating", "Activate" }, service2.LifetimeEventCalls.Select(e => e.Item1).ToArray());
+            Assert.Equal(false, result.IsCompleted);
+            Assert.Equal(new[] { "Activating", "Activate" }, service1.LifetimeEventCalls.Select(e => e.Item1).ToArray());
+            Assert.Equal(new[] { "Activating", "Activate" }, service2.LifetimeEventCalls.Select(e => e.Item1).ToArray());
         }
 
-        [TestMethod]
-        public void Activate_ThrowsException_IfEventArgsIsNull()
+        [Fact]
+        public async void Activate_ThrowsException_IfEventArgsIsNull()
         {
             MockService service1 = new MockService(Task.FromResult(false));
             MockService service2 = new MockService(Task.FromResult(false));
 
             ActivationManager activationManager = CreateActivationManager(services: new[] { service1, service2 });
 
-            Assert.ThrowsException<ArgumentNullException>(() => activationManager.Activate(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => activationManager.Activate(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Register_ThrowsException_IfServiceIsNull()
         {
             ActivationManager activationManager = CreateActivationManager();
 
-            Assert.ThrowsException<ArgumentNullException>(() => activationManager.Register(null));
+            Assert.Throws<ArgumentNullException>(() => activationManager.Register(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Register_ThrowsException_WithMultipleRegistrationOfSameService()
         {
             MockService service = new MockService();
@@ -116,18 +115,18 @@ namespace Okra.Tests.Services
 
             activationManager.Register(service);
 
-            Assert.ThrowsException<InvalidOperationException>(() => activationManager.Register(service));
+            Assert.Throws<InvalidOperationException>(() => activationManager.Register(service));
         }
 
-        [TestMethod]
+        [Fact]
         public void Unregister_ThrowsException_IfServiceIsNull()
         {
             ActivationManager activationManager = CreateActivationManager();
 
-            Assert.ThrowsException<ArgumentNullException>(() => activationManager.Unregister(null));
+            Assert.Throws<ArgumentNullException>(() => activationManager.Unregister(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Unregister_ThrowsException_IfServiceIsNotRegistered()
         {
             MockService service1 = new MockService();
@@ -136,7 +135,7 @@ namespace Okra.Tests.Services
 
             activationManager.Register(service1);
 
-            Assert.ThrowsException<InvalidOperationException>(() => activationManager.Unregister(service2));
+            Assert.Throws<InvalidOperationException>(() => activationManager.Unregister(service2));
         }
 
         // *** Private Methods ***

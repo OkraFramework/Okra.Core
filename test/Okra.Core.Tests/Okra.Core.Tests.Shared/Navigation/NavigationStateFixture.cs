@@ -1,25 +1,24 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Navigation;
+﻿using Okra.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace Okra.Tests.Navigation
 {
-    [TestClass]
     public class NavigationStateFixture
     {
         // *** Property Tests ***
 
-        [TestMethod]
+        [Fact]
         public void NavigationStack_IsEmptyCollection()
         {
             NavigationState state = new NavigationState();
 
-            Assert.IsNotNull(state.NavigationStack);
-            Assert.AreEqual(0, state.NavigationStack.Count);
+            Assert.NotNull(state.NavigationStack);
+            Assert.Equal(0, state.NavigationStack.Count);
         }
     }
 }

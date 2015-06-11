@@ -7,17 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Okra.Services;
 using Okra.Tests.Helpers;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Windows.Storage;
+using Xunit;
 
 namespace Okra.Tests.Services
 {
-    [TestClass]
     public class StorageManagerFixture
     {
         // *** Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public async Task StoreAsync_WithStorageFile_ThrowsException_IfFileIsNull()
         {
             StorageManager storageManager = new StorageManager();
@@ -26,7 +25,7 @@ namespace Okra.Tests.Services
             await AssertEx.ThrowsExceptionAsync<ArgumentNullException>(() => storageManager.StoreAsync(null, data));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task StoreAsync_WithStorageFolder_ThrowsException_IfFolderIsNull()
         {
             StorageManager storageManager = new StorageManager();
@@ -37,7 +36,7 @@ namespace Okra.Tests.Services
             await AssertEx.ThrowsExceptionAsync<ArgumentNullException>(() => storageManager.StoreAsync(folder, name, data));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task StoreAsync_WithStorageFolder_ThrowsException_IfNameIsNull()
         {
             StorageManager storageManager = new StorageManager();
@@ -47,7 +46,7 @@ namespace Okra.Tests.Services
             await AssertEx.ThrowsExceptionAsync<ArgumentException>(() => storageManager.StoreAsync(folder, null, data));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task StoreAsync_WithStorageFolder_ThrowsException_IfNameIsEmpty()
         {
             StorageManager storageManager = new StorageManager();
@@ -57,7 +56,7 @@ namespace Okra.Tests.Services
             await AssertEx.ThrowsExceptionAsync<ArgumentException>(() => storageManager.StoreAsync(folder, "", data));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task RetrieveAsync_WithStorageFolder_ReturnsNullIfFileDoesNotExist()
         {
             StorageManager storageManager = new StorageManager();
@@ -67,10 +66,10 @@ namespace Okra.Tests.Services
 
             TestData retrievedData = await storageManager.RetrieveAsync<TestData>(folder, name);
 
-            Assert.IsNull(retrievedData);
+            Assert.Null(retrievedData);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task RetrieveAsync_WithStorageFile_ThrowsException_IfFileIsNull()
         {
             StorageManager storageManager = new StorageManager();
@@ -78,7 +77,7 @@ namespace Okra.Tests.Services
             await AssertEx.ThrowsExceptionAsync<ArgumentNullException>(() => storageManager.RetrieveAsync<TestData>(null));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task RetrieveAsync_WithStorageFolder_ThrowsException_IfFolderIsNull()
         {
             StorageManager storageManager = new StorageManager();
@@ -88,7 +87,7 @@ namespace Okra.Tests.Services
             await AssertEx.ThrowsExceptionAsync<ArgumentNullException>(() => storageManager.RetrieveAsync<TestData>(folder, name));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task RetrieveAsync_WithStorageFolder_ThrowsException_IfNameIsNull()
         {
             StorageManager storageManager = new StorageManager();
@@ -97,7 +96,7 @@ namespace Okra.Tests.Services
             await AssertEx.ThrowsExceptionAsync<ArgumentException>(() => storageManager.RetrieveAsync<TestData>(folder, null));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task RetrieveAsync_WithStorageFolder_ThrowsException_IfNameIsEmpty()
         {
             StorageManager storageManager = new StorageManager();
@@ -106,7 +105,7 @@ namespace Okra.Tests.Services
             await AssertEx.ThrowsExceptionAsync<ArgumentException>(() => storageManager.RetrieveAsync<TestData>(folder, ""));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task StoreAsyncRetrieveAsync_WithStorageFile_PersistsFileViaStorage()
         {
             StorageManager storageManager = new StorageManager();
@@ -122,8 +121,8 @@ namespace Okra.Tests.Services
 
             TestData retrievedData = await storageManager.RetrieveAsync<TestData>(file);
 
-            Assert.AreEqual("Test Text", retrievedData.Text);
-            Assert.AreEqual(42, retrievedData.Number);
+            Assert.Equal("Test Text", retrievedData.Text);
+            Assert.Equal(42, retrievedData.Number);
         }
 
         //[TestMethod]

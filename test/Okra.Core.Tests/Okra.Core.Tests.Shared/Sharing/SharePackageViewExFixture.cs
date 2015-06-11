@@ -1,17 +1,16 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Sharing;
+﻿using Okra.Sharing;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
+using Xunit;
 
 namespace Okra.Tests.Sharing
 {
-    [TestClass]
     public class SharePackageViewExFixture
     {
-        [TestMethod]
+        [Fact]
         public async Task GetApplicationLinkAsync_GetsDataFromSharePackageView()
         {
             MockSharePackageView sharePackageView = new MockSharePackageView();
@@ -19,16 +18,16 @@ namespace Okra.Tests.Sharing
 
             Uri data = await sharePackageView.GetApplicationLinkAsync();
 
-            Assert.AreEqual(new Uri("http://www.example.com"), data);
+            Assert.Equal(new Uri("http://www.example.com"), data);
         }
 
-        [TestMethod]
-        public void GetApplicationLinkAsync_ThrowsException_IfSharePackageViewIsNull()
+        [Fact]
+        public async void GetApplicationLinkAsync_ThrowsException_IfSharePackageViewIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageViewEx.GetApplicationLinkAsync(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetApplicationLinkAsync(null));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task GetHtmlFormatAsync_GetsDataFromSharePackageView()
         {
             MockSharePackageView sharePackageView = new MockSharePackageView();
@@ -36,16 +35,16 @@ namespace Okra.Tests.Sharing
 
             string data = await sharePackageView.GetHtmlFormatAsync();
 
-            Assert.AreEqual("Test Html", data);
+            Assert.Equal("Test Html", data);
         }
 
-        [TestMethod]
-        public void GetHtmlFormatAsync_ThrowsException_IfSharePackageViewIsNull()
+        [Fact]
+        public async void GetHtmlFormatAsync_ThrowsException_IfSharePackageViewIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageViewEx.GetHtmlFormatAsync(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetHtmlFormatAsync(null));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task GetRtfAsync_GetsDataFromSharePackageView()
         {
             MockSharePackageView sharePackageView = new MockSharePackageView();
@@ -53,16 +52,16 @@ namespace Okra.Tests.Sharing
 
             string data = await sharePackageView.GetRtfAsync();
 
-            Assert.AreEqual("Test Rtf", data);
+            Assert.Equal("Test Rtf", data);
         }
 
-        [TestMethod]
-        public void GetRtfAsync_ThrowsException_IfSharePackageViewIsNull()
+        [Fact]
+        public async void GetRtfAsync_ThrowsException_IfSharePackageViewIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageViewEx.GetRtfAsync(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetRtfAsync(null));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task GetTextAsync_GetsDataFromSharePackageView()
         {
             MockSharePackageView sharePackageView = new MockSharePackageView();
@@ -70,16 +69,16 @@ namespace Okra.Tests.Sharing
 
             string data = await sharePackageView.GetTextAsync();
 
-            Assert.AreEqual("Test Text", data);
+            Assert.Equal("Test Text", data);
         }
 
-        [TestMethod]
-        public void GetTextAsync_ThrowsException_IfSharePackageViewIsNull()
+        [Fact]
+        public async void GetTextAsync_ThrowsException_IfSharePackageViewIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageViewEx.GetTextAsync(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetTextAsync(null));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task GetWebLinkAsync_GetsDataFromSharePackageView()
         {
             MockSharePackageView sharePackageView = new MockSharePackageView();
@@ -87,13 +86,13 @@ namespace Okra.Tests.Sharing
 
             Uri data = await sharePackageView.GetWebLinkAsync();
 
-            Assert.AreEqual(new Uri("http://www.example.com"), data);
+            Assert.Equal(new Uri("http://www.example.com"), data);
         }
 
-        [TestMethod]
-        public void GetWebLinkAsync_ThrowsException_IfSharePackageViewIsNull()
+        [Fact]
+        public async void GetWebLinkAsync_ThrowsException_IfSharePackageViewIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageViewEx.GetWebLinkAsync(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetWebLinkAsync(null));
         }
 
         // *** Private sub-classes ***

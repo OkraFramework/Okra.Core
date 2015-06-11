@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Sharing;
+﻿using Okra.Sharing;
 using Okra.Navigation;
 using Okra.Tests.Mocks;
 using System;
@@ -9,63 +8,63 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml.Navigation;
+using Xunit;
 
 namespace Okra.Tests.Sharing
 {
-    [TestClass]
     public class ShareSourceManagerFixture
     {
         // *** Constructor Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfNavigationManagerIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new ShareSourceManager(null));
+            Assert.Throws<ArgumentNullException>(() => new ShareSourceManager(null));
         }
 
         // *** Property Tests ***
 
-        [TestMethod]
+        [Fact]
         public void DefaultFailureText_IsNullByDefault()
         {
             IShareSourceManager sharingManager = CreateSharingManager();
 
-            Assert.AreEqual(null, sharingManager.DefaultFailureText);
+            Assert.Equal(null, sharingManager.DefaultFailureText);
         }
 
-        [TestMethod]
+        [Fact]
         public void DefaultFailureText_SetterSetsValue()
         {
             IShareSourceManager sharingManager = CreateSharingManager();
 
             sharingManager.DefaultFailureText = "Test Text";
 
-            Assert.AreEqual("Test Text", sharingManager.DefaultFailureText);
+            Assert.Equal("Test Text", sharingManager.DefaultFailureText);
         }
 
         // *** Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public void ShareRequested_ThrowsException_IfShareRequestIsNull()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
             TestableSharingManager sharingManager = CreateSharingManager(navigationManager);
 
-            Assert.ThrowsException<ArgumentNullException>(() => sharingManager.ShareRequested(null));
+            Assert.Throws<ArgumentNullException>(() => sharingManager.ShareRequested(null));
         }
 
         // *** Behaviour Tests ***
 
-        [TestMethod]
+        [Fact]
         public void BeforeNavigation_IsNotRegisteredWithDataTransferManager()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
             TestableSharingManager sharingManager = CreateSharingManager(navigationManager);
 
-            Assert.AreEqual(0, sharingManager.RegisterForSharingCount);
+            Assert.Equal(0, sharingManager.RegisterForSharingCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void OnFirstPageNavigation_RegistersWithDataTransferManager()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
@@ -73,10 +72,10 @@ namespace Okra.Tests.Sharing
 
             navigationManager.RaiseNavigatedTo(new PageNavigationEventArgs(new PageInfo("Page 1", null), PageNavigationMode.Forward));
 
-            Assert.AreEqual(1, sharingManager.RegisterForSharingCount);
+            Assert.Equal(1, sharingManager.RegisterForSharingCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void OnSecondPageNavigation_OnlyRegistersWithDataTransferManagerOnce()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
@@ -85,10 +84,10 @@ namespace Okra.Tests.Sharing
             navigationManager.RaiseNavigatedTo(new PageNavigationEventArgs(new PageInfo("Page 1", null), PageNavigationMode.Forward));
             navigationManager.RaiseNavigatedTo(new PageNavigationEventArgs(new PageInfo("Page 2", null), PageNavigationMode.Forward));
 
-            Assert.AreEqual(1, sharingManager.RegisterForSharingCount);
+            Assert.Equal(1, sharingManager.RegisterForSharingCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenNothingToShare_DoesNotSetDisplayText_IfDefaultFailureTextIsNull()
         {
             TestableSharingManager sharingManager = CreateSharingManager();
@@ -97,10 +96,10 @@ namespace Okra.Tests.Sharing
             MockShareRequest shareRequest = new MockShareRequest();
             sharingManager.ShareRequested(shareRequest);
 
-            CollectionAssert.AreEqual(new string[] { }, shareRequest.FailureText);
+            Assert.Equal(new string[] { }, shareRequest.FailureText);
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenNothingToShare_DoesNotSetDisplayText_IfDefaultFailureTextIsEmpty()
         {
             TestableSharingManager sharingManager = CreateSharingManager();
@@ -109,10 +108,10 @@ namespace Okra.Tests.Sharing
             MockShareRequest shareRequest = new MockShareRequest();
             sharingManager.ShareRequested(shareRequest);
 
-            CollectionAssert.AreEqual(new string[] { }, shareRequest.FailureText);
+            Assert.Equal(new string[] { }, shareRequest.FailureText);
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenNothingToShare_ReturnsDisplayText_IfDefaultFailureTextIsSpecified()
         {
             TestableSharingManager sharingManager = CreateSharingManager();
@@ -121,10 +120,10 @@ namespace Okra.Tests.Sharing
             MockShareRequest shareRequest = new MockShareRequest();
             sharingManager.ShareRequested(shareRequest);
 
-            CollectionAssert.AreEqual(new string[] { "Test Text" }, shareRequest.FailureText);
+            Assert.Equal(new string[] { "Test Text" }, shareRequest.FailureText);
         }
 
-        [TestMethod]
+        [Fact]
         public void WithSharableElement_ForwardsShareRequest()
         {
             INavigationManager navigationManager = new MockNavigationManager(_ => new object[] { new MockPageElement(), new MockShareablePageElement(), new MockPageElement() });
@@ -137,10 +136,10 @@ namespace Okra.Tests.Sharing
             sharingManager.ShareRequested(shareRequest);
 
             MockShareablePageElement sharableElement = navigationManager.GetPageElements(navigationManager.NavigationStack.CurrentPage).First(e => e is MockShareablePageElement) as MockShareablePageElement;
-            CollectionAssert.AreEqual(new object[] { shareRequest }, sharableElement.ShareRequests);
+            Assert.Equal(new object[] { shareRequest }, sharableElement.ShareRequests);
         }
 
-        [TestMethod]
+        [Fact]
         public void WithSharableElement_DoesNotSetDisplayText()
         {
             INavigationManager navigationManager = new MockNavigationManager(_ => new object[] { new MockShareablePageElement() });
@@ -152,7 +151,7 @@ namespace Okra.Tests.Sharing
             MockShareRequest shareRequest = new MockShareRequest();
             sharingManager.ShareRequested(shareRequest);
 
-            CollectionAssert.AreEqual(new string[] { }, shareRequest.FailureText);
+            Assert.Equal(new string[] { }, shareRequest.FailureText);
         }
 
         // *** Private Methods ***

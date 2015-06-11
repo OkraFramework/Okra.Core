@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Navigation;
+﻿using Okra.Navigation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xunit;
+using Okra.Tests.Helpers;
 
 #if WINDOWS_APP || WINDOWS_UAP
 using Windows.UI.ApplicationSettings;
@@ -15,22 +16,21 @@ using Windows.UI.ApplicationSettings;
 
 namespace Okra.Tests.Navigation
 {
-    [TestClass]
     public class NavigationCommandsFixture
     {
         // *** Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public void GetGoBackCommand_ReturnsNewICommand()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
             ICommand command = navigationManager.GetGoBackCommand();
 
-            Assert.IsNotNull(command);
+            Assert.NotNull(command);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetGoBackCommand_CanExecute_IsFalseIfCannotGoBack()
         {
             MockNavigationManager navigationManager = new MockNavigationManager()
@@ -40,10 +40,10 @@ namespace Okra.Tests.Navigation
 
             ICommand command = navigationManager.GetGoBackCommand();
 
-            Assert.AreEqual(false, command.CanExecute(null));
+            Assert.Equal(false, command.CanExecute(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetGoBackCommand_CanExecute_IsTrueIfCanGoBack()
         {
             MockNavigationManager navigationManager = new MockNavigationManager()
@@ -53,10 +53,10 @@ namespace Okra.Tests.Navigation
 
             ICommand command = navigationManager.GetGoBackCommand();
 
-            Assert.AreEqual(true, command.CanExecute(null));
+            Assert.Equal(true, command.CanExecute(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetGoBackCommand_Execute_CallsGoBackIfCanGoBack()
         {
             MockNavigationManager navigationManager = new MockNavigationManager()
@@ -67,10 +67,10 @@ namespace Okra.Tests.Navigation
             ICommand command = navigationManager.GetGoBackCommand();
             command.Execute(null);
 
-            CollectionAssert.AreEqual(new string[] { "GoBack()" }, (ICollection)navigationManager.MethodCallLog);
+            Assert.Equal<string>(new string[] { "GoBack()" }, navigationManager.MethodCallLog);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetGoBackCommand_Execute_DoesNothingIfCannotGoBack()
         {
             MockNavigationManager navigationManager = new MockNavigationManager()
@@ -81,10 +81,10 @@ namespace Okra.Tests.Navigation
             ICommand command = navigationManager.GetGoBackCommand();
             command.Execute(null);
 
-            CollectionAssert.AreEqual(new string[] { }, (ICollection)navigationManager.MethodCallLog);
+            Assert.Equal<string>(new string[] { }, navigationManager.MethodCallLog);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetGoBackCommand_CanExecuteChanged_IsCalledWhenCanGoBackChanged()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
@@ -96,36 +96,36 @@ namespace Okra.Tests.Navigation
 
             navigationManager.RaiseCanGoBackChanged();
 
-            Assert.AreEqual(1, canExecuteChangedCount);
+            Assert.Equal(1, canExecuteChangedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetGoBackCommand_Exception_NavigationBaseIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => NavigationCommands.GetGoBackCommand(null));
+            Assert.Throws<ArgumentNullException>(() => NavigationCommands.GetGoBackCommand(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNavigateToCommand_ReturnsNewICommand()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
             ICommand command = navigationManager.GetNavigateToCommand("Page Name", "Arguments");
 
-            Assert.IsNotNull(command);
+            Assert.NotNull(command);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNavigateToCommand_CanExecute_IsTrue()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
             ICommand command = navigationManager.GetNavigateToCommand("Page Name", "Arguments");
 
-            Assert.AreEqual(true, command.CanExecute(null));
+            Assert.Equal(true, command.CanExecute(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNavigateToCommand_Execute_CallsNavigateToWithSpecifiedArguments()
         {
             MockNavigationManager navigationManager = new MockNavigationManager()
@@ -136,53 +136,53 @@ namespace Okra.Tests.Navigation
             ICommand command = navigationManager.GetNavigateToCommand("PageName", "Arguments");
             command.Execute(null);
 
-            CollectionAssert.AreEqual(new string[] { "NavigateTo(PageName, Arguments)" }, (ICollection)navigationManager.MethodCallLog);
+            Assert.Equal<string>(new string[] { "NavigateTo(PageName, Arguments)" }, navigationManager.MethodCallLog);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNavigateToCommand_Exception_NavigationBaseIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => NavigationCommands.GetNavigateToCommand(null, "Page Name", new object()));
+            Assert.Throws<ArgumentNullException>(() => NavigationCommands.GetNavigateToCommand(null, "Page Name", new object()));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNavigateToCommand_Exception_PageNameIsNull()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
-            Assert.ThrowsException<ArgumentException>(() => NavigationCommands.GetNavigateToCommand(navigationManager, null, new object()));
+            Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToCommand(navigationManager, null, new object()));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNavigateToCommand_Exception_PageNameIsEmpty()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
-            Assert.ThrowsException<ArgumentException>(() => NavigationCommands.GetNavigateToCommand(navigationManager, "", new object()));
+            Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToCommand(navigationManager, "", new object()));
         }
 
 #if WINDOWS_APP || WINDOWS_UAP
-        [TestMethod]
+        [UITestMethod]
         public void GetNavigateToSettingsCommand_ReturnsNewSettingsCommand()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
             SettingsCommand command = navigationManager.GetNavigateToSettingsCommand("MyLabel", "Page Name", "Arguments");
 
-            Assert.IsNotNull(command);
+            Assert.NotNull(command);
         }
 
-        [TestMethod]
+        [UITestMethod]
         public void GetNavigateToSettingsCommand_Label_IsAsSpecified()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
             SettingsCommand command = navigationManager.GetNavigateToSettingsCommand("MyLabel", "Page Name", "Arguments");
 
-            Assert.AreEqual("MyLabel", command.Label);
+            Assert.Equal("MyLabel", command.Label);
         }
 
-        [TestMethod]
+        [UITestMethod]
         public void GetNavigateToSettingsCommand_Invoked_CallsNavigateToWithSpecifiedArguments()
         {
             MockNavigationManager navigationManager = new MockNavigationManager()
@@ -193,45 +193,45 @@ namespace Okra.Tests.Navigation
             SettingsCommand command = navigationManager.GetNavigateToSettingsCommand("MyLabel", "PageName", "Arguments");
             command.Invoked(command);
 
-            CollectionAssert.AreEqual(new string[] { "NavigateTo(PageName, Arguments)" }, (ICollection)navigationManager.MethodCallLog);
+            Assert.Equal<string>(new string[] { "NavigateTo(PageName, Arguments)" }, navigationManager.MethodCallLog);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNavigateToSettingsCommand_Exception_NavigationBaseIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => NavigationCommands.GetNavigateToSettingsCommand(null, "Label", "Page Name", new object()));
+            Assert.Throws<ArgumentNullException>(() => NavigationCommands.GetNavigateToSettingsCommand(null, "Label", "Page Name", new object()));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNavigateToSettingsCommand_Exception_PageNameIsNull()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
-            Assert.ThrowsException<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, "Label", null, new object()));
+            Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, "Label", null, new object()));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNavigateToSettingsCommand_Exception_PageNameIsEmpty()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
-            Assert.ThrowsException<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, "Label", "", new object()));
+            Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, "Label", "", new object()));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNavigateToSettingsCommand_Exception_LabelIsNull()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
-            Assert.ThrowsException<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, null, "Page Name", new object()));
+            Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, null, "Page Name", new object()));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNavigateToSettingsCommand_Exception_LabelIsEmpty()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
-            Assert.ThrowsException<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, "", "Page Name", new object()));
+            Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, "", "Page Name", new object()));
         }
 #endif
 

@@ -5,37 +5,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Okra.Core;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using System.Linq.Expressions;
+using Xunit;
 
 namespace Okra.Tests.Core
 {
-    [TestClass]
     public class NotifyPropertyChangedFixture
     {
         // *** Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public void GetPropertyName_ReturnsNameOfProperty()
         {
             string propertyName = TestableNotifyPropertyChanged.GetPropertyName(o => o.MyProperty);
 
-            Assert.AreEqual("MyProperty", propertyName);
+            Assert.Equal("MyProperty", propertyName);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetPropertyName_Exception_LambdaExpressionIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => TestableNotifyPropertyChanged.GetPropertyName(null));
+            Assert.Throws<ArgumentNullException>(() => TestableNotifyPropertyChanged.GetPropertyName(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetPropertyName_Exception_LambdaExpressionIsNotMemberAccess()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestableNotifyPropertyChanged.GetPropertyName(o => 42));
+            Assert.Throws<ArgumentException>(() => TestableNotifyPropertyChanged.GetPropertyName(o => 42));
         }
 
-        [TestMethod]
+        [Fact]
         public void OnPropertyChanged_FiresPropertyChangedEvent_Void()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
@@ -44,17 +43,17 @@ namespace Okra.Tests.Core
 
             obj.PropertyChanged += (sender, e) =>
                 {
-                    Assert.AreEqual(obj, sender);
-                    Assert.AreEqual("MyProperty", e.PropertyName);
+                    Assert.Equal(obj, sender);
+                    Assert.Equal("MyProperty", e.PropertyName);
                     propertyChangedCount++;
                 };
 
             obj.MyProperty = 42;
 
-            Assert.AreEqual(1, propertyChangedCount);
+            Assert.Equal(1, propertyChangedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void OnPropertyChanged_FiresPropertyChangedEvent_String()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
@@ -63,17 +62,17 @@ namespace Okra.Tests.Core
 
             obj.PropertyChanged += (sender, e) =>
             {
-                Assert.AreEqual(obj, sender);
-                Assert.AreEqual("MyProperty", e.PropertyName);
+                Assert.Equal(obj, sender);
+                Assert.Equal("MyProperty", e.PropertyName);
                 propertyChangedCount++;
             };
 
             obj.FirePropertyChangedWithString("MyProperty");
 
-            Assert.AreEqual(1, propertyChangedCount);
+            Assert.Equal(1, propertyChangedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void OnPropertyChanged_FiresPropertyChangedEvent_PropertyChangedEventArgs()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
@@ -82,17 +81,17 @@ namespace Okra.Tests.Core
 
             obj.PropertyChanged += (sender, e) =>
             {
-                Assert.AreEqual(obj, sender);
-                Assert.AreEqual("MyProperty", e.PropertyName);
+                Assert.Equal(obj, sender);
+                Assert.Equal("MyProperty", e.PropertyName);
                 propertyChangedCount++;
             };
 
             obj.FirePropertyChangedWithEventArgs(new PropertyChangedEventArgs("MyProperty"));
 
-            Assert.AreEqual(1, propertyChangedCount);
+            Assert.Equal(1, propertyChangedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void OnPropertyChanged_FiresPropertyChangedEvent_LambdaExpression()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
@@ -101,33 +100,33 @@ namespace Okra.Tests.Core
 
             obj.PropertyChanged += (sender, e) =>
             {
-                Assert.AreEqual(obj, sender);
-                Assert.AreEqual("MyProperty", e.PropertyName);
+                Assert.Equal(obj, sender);
+                Assert.Equal("MyProperty", e.PropertyName);
                 propertyChangedCount++;
             };
 
             obj.FirePropertyChangedWithLambda(() => obj.MyProperty);
 
-            Assert.AreEqual(1, propertyChangedCount);
+            Assert.Equal(1, propertyChangedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void OnPropertyChanged_Exception_LambdaExpression_ExpressionIsNull()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
 
-            Assert.ThrowsException<ArgumentNullException>(() => obj.FirePropertyChangedWithLambda<int>(null));
+            Assert.Throws<ArgumentNullException>(() => obj.FirePropertyChangedWithLambda<int>(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void OnPropertyChanged_Exception_LambdaExpression_IsNotMemberAccess()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
 
-            Assert.ThrowsException<ArgumentException>(() => obj.FirePropertyChangedWithLambda<int>(() => 42));
+            Assert.Throws<ArgumentException>(() => obj.FirePropertyChangedWithLambda<int>(() => 42));
         }
 
-        [TestMethod]
+        [Fact]
         public void OnPropertyChanged_IgnoresIfNoEventHandlerAttached()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
@@ -135,7 +134,7 @@ namespace Okra.Tests.Core
             obj.FirePropertyChangedWithEventArgs(new PropertyChangedEventArgs("MyProperty"));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_FiresPropertyChangedEvent_Void_Struct()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
@@ -144,17 +143,17 @@ namespace Okra.Tests.Core
 
             obj.PropertyChanged += (sender, e) =>
             {
-                Assert.AreEqual(obj, sender);
-                Assert.AreEqual("MySetProperty", e.PropertyName);
+                Assert.Equal(obj, sender);
+                Assert.Equal("MySetProperty", e.PropertyName);
                 propertyChangedCount++;
             };
 
             obj.MySetProperty = 42;
 
-            Assert.AreEqual(1, propertyChangedCount);
+            Assert.Equal(1, propertyChangedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_FiresPropertyChangedEvent_Void_Object()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged() { MyObjectProperty = new object() };
@@ -163,17 +162,17 @@ namespace Okra.Tests.Core
 
             obj.PropertyChanged += (sender, e) =>
             {
-                Assert.AreEqual(obj, sender);
-                Assert.AreEqual("MyObjectProperty", e.PropertyName);
+                Assert.Equal(obj, sender);
+                Assert.Equal("MyObjectProperty", e.PropertyName);
                 propertyChangedCount++;
             };
 
             obj.MyObjectProperty = new object();
 
-            Assert.AreEqual(1, propertyChangedCount);
+            Assert.Equal(1, propertyChangedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_FiresPropertyChangedEvent_Void_Object_FromNull()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged() { MyObjectProperty = null };
@@ -182,17 +181,17 @@ namespace Okra.Tests.Core
 
             obj.PropertyChanged += (sender, e) =>
             {
-                Assert.AreEqual(obj, sender);
-                Assert.AreEqual("MyObjectProperty", e.PropertyName);
+                Assert.Equal(obj, sender);
+                Assert.Equal("MyObjectProperty", e.PropertyName);
                 propertyChangedCount++;
             };
 
             obj.MyObjectProperty = new object();
 
-            Assert.AreEqual(1, propertyChangedCount);
+            Assert.Equal(1, propertyChangedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_FiresPropertyChangedEvent_Void_Object_ToNull()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged() { MyObjectProperty = new object() };
@@ -201,17 +200,17 @@ namespace Okra.Tests.Core
 
             obj.PropertyChanged += (sender, e) =>
             {
-                Assert.AreEqual(obj, sender);
-                Assert.AreEqual("MyObjectProperty", e.PropertyName);
+                Assert.Equal(obj, sender);
+                Assert.Equal("MyObjectProperty", e.PropertyName);
                 propertyChangedCount++;
             };
 
             obj.MyObjectProperty = null;
 
-            Assert.AreEqual(1, propertyChangedCount);
+            Assert.Equal(1, propertyChangedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_FiresPropertyChangedEvent_String()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
@@ -220,17 +219,17 @@ namespace Okra.Tests.Core
 
             obj.PropertyChanged += (sender, e) =>
             {
-                Assert.AreEqual(obj, sender);
-                Assert.AreEqual("MySetProperty", e.PropertyName);
+                Assert.Equal(obj, sender);
+                Assert.Equal("MySetProperty", e.PropertyName);
                 propertyChangedCount++;
             };
 
             obj.SetProperty_MySetProperty(42, "MySetProperty");
 
-            Assert.AreEqual(1, propertyChangedCount);
+            Assert.Equal(1, propertyChangedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_FiresPropertyChangedEvent_LambdaExpression()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
@@ -239,34 +238,34 @@ namespace Okra.Tests.Core
 
             obj.PropertyChanged += (sender, e) =>
             {
-                Assert.AreEqual(obj, sender);
-                Assert.AreEqual("MySetProperty", e.PropertyName);
+                Assert.Equal(obj, sender);
+                Assert.Equal("MySetProperty", e.PropertyName);
                 propertyChangedCount++;
             };
 
             obj.SetProperty_MySetProperty(42, () => obj.MySetProperty);
 
-            Assert.AreEqual(1, propertyChangedCount);
+            Assert.Equal(1, propertyChangedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_Exception_LambdaExpression_ExpressionIsNull()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
 
             Expression<Func<int>> propertyExpression = null;
-            Assert.ThrowsException<ArgumentNullException>(() => obj.SetProperty_MySetProperty(10, propertyExpression));
+            Assert.Throws<ArgumentNullException>(() => obj.SetProperty_MySetProperty(10, propertyExpression));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_Exception_LambdaExpression_IsNotMemberAccess()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
 
-            Assert.ThrowsException<ArgumentException>(() => obj.SetProperty_MySetProperty(10, () => 42));
+            Assert.Throws<ArgumentException>(() => obj.SetProperty_MySetProperty(10, () => 42));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_DoesNotFireEventIfNotChanged_Struct()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged() { MySetProperty = 10 };
@@ -275,17 +274,17 @@ namespace Okra.Tests.Core
 
             obj.PropertyChanged += (sender, e) =>
             {
-                Assert.AreEqual(obj, sender);
-                Assert.AreEqual("MySetProperty", e.PropertyName);
+                Assert.Equal(obj, sender);
+                Assert.Equal("MySetProperty", e.PropertyName);
                 propertyChangedCount++;
             };
 
             obj.MySetProperty = 10;
 
-            Assert.AreEqual(0, propertyChangedCount);
+            Assert.Equal(0, propertyChangedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_DoesNotFireEventIfNotChanged_Object()
         {
             object value = new object();
@@ -295,17 +294,17 @@ namespace Okra.Tests.Core
 
             obj.PropertyChanged += (sender, e) =>
             {
-                Assert.AreEqual(obj, sender);
-                Assert.AreEqual("MyObjectProperty", e.PropertyName);
+                Assert.Equal(obj, sender);
+                Assert.Equal("MyObjectProperty", e.PropertyName);
                 propertyChangedCount++;
             };
 
             obj.MyObjectProperty = value;
 
-            Assert.AreEqual(0, propertyChangedCount);
+            Assert.Equal(0, propertyChangedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_DoesNotFireEventIfNotChanged_ObjectNull()
         {
             object value = new object();
@@ -315,47 +314,47 @@ namespace Okra.Tests.Core
 
             obj.PropertyChanged += (sender, e) =>
             {
-                Assert.AreEqual(obj, sender);
-                Assert.AreEqual("MyObjectProperty", e.PropertyName);
+                Assert.Equal(obj, sender);
+                Assert.Equal("MyObjectProperty", e.PropertyName);
                 propertyChangedCount++;
             };
 
             obj.MyObjectProperty = null;
 
-            Assert.AreEqual(0, propertyChangedCount);
+            Assert.Equal(0, propertyChangedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_ReturnsTrue_IfValueHasChanged()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged() { MySetProperty = 5 };
 
             bool changed = obj.SetProperty_MySetProperty(10, "MySetProperty");
 
-            Assert.AreEqual(true, changed);
+            Assert.Equal(true, changed);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_ReturnsTrue_IfValueHasNotChanged()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged() { MySetProperty = 10 };
 
             bool changed = obj.SetProperty_MySetProperty(10, "MySetProperty");
 
-            Assert.AreEqual(false, changed);
+            Assert.Equal(false, changed);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_SetsProperty_Struct()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged() { MySetProperty = 5 };
 
             obj.SetProperty_MySetProperty(10, "MySetProperty");
 
-            Assert.AreEqual(10, obj.MySetProperty);
+            Assert.Equal(10, obj.MySetProperty);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetProperty_SetsProperty_Object()
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
@@ -363,7 +362,7 @@ namespace Okra.Tests.Core
 
             obj.SetProperty_MyObjectProperty(value, "MyObjectProperty");
 
-            Assert.AreEqual(value, obj.MyObjectProperty);
+            Assert.Equal(value, obj.MyObjectProperty);
         }
 
         // *** Private Sub-classes ***

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Xunit;
 
 namespace Okra.Tests.Helpers
 {
@@ -24,7 +24,7 @@ namespace Okra.Tests.Helpers
                 capturedException = exception;
             }
 
-            return Assert.ThrowsException<T>(() => ThrowException(capturedException));
+            return Assert.Throws<T>(() => ThrowException(capturedException));
         }
 
         // *** Private Static Methods ***

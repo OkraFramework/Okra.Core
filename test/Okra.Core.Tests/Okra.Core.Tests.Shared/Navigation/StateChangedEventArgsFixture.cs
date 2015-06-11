@@ -1,28 +1,27 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Navigation;
+﻿using Okra.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xunit;
 
 namespace Okra.Tests.Navigation
 {
-    [TestClass]
     public class StateChangedEventArgsFixture
     {
         // *** Constructor Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Constructor_SetsStateKey()
         {
             StateChangedEventArgs eventArgs = new StateChangedEventArgs("Test Key");
 
-            Assert.AreEqual("Test Key", eventArgs.StateKey);
+            Assert.Equal("Test Key", eventArgs.StateKey);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_WhenStateKeyIsNull()
         {
-            Assert.ThrowsException<ArgumentException>(() => new StateChangedEventArgs(null));
+            Assert.Throws<ArgumentException>(() => new StateChangedEventArgs(null));
         }
     }
 }

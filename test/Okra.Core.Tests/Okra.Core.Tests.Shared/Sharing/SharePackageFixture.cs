@@ -1,23 +1,22 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Sharing;
+﻿using Okra.Sharing;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
+using Xunit;
 
 namespace Okra.Tests.Sharing
 {
-    [TestClass]
     public class SharePackageFixture
     {
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfDataPackageIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new SharePackage(null));
+            Assert.Throws<ArgumentNullException>(() => new SharePackage(null));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task SetData_SetsDataOnDataPackage()
         {
             DataPackage dataPackage = new DataPackage();
@@ -26,28 +25,28 @@ namespace Okra.Tests.Sharing
             sharePackage.SetData<string>("Test Format", "Test Value");
 
             object data = await dataPackage.GetView().GetDataAsync("Test Format");
-            Assert.AreEqual("Test Value", data);
+            Assert.Equal("Test Value", data);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetData_ThrowsException_IfFormatIdIsNull()
         {
             DataPackage dataPackage = new DataPackage();
             SharePackage sharePackage = new SharePackage(dataPackage);
 
-            Assert.ThrowsException<ArgumentException>(() => sharePackage.SetData<string>(null, "Test Value"));
+            Assert.Throws<ArgumentException>(() => sharePackage.SetData<string>(null, "Test Value"));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetData_ThrowsException_IfFormatIdIsEmpty()
         {
             DataPackage dataPackage = new DataPackage();
             SharePackage sharePackage = new SharePackage(dataPackage);
 
-            Assert.ThrowsException<ArgumentException>(() => sharePackage.SetData<string>("", "Test Value"));
+            Assert.Throws<ArgumentException>(() => sharePackage.SetData<string>("", "Test Value"));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task SetAsyncData_SetsDataOnDataPackage()
         {
             DataPackage dataPackage = new DataPackage();
@@ -60,45 +59,45 @@ namespace Okra.Tests.Sharing
                 });
 
             object data = await dataPackage.GetView().GetDataAsync("Test Format");
-            Assert.AreEqual("Test Value", data);
+            Assert.Equal("Test Value", data);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetAsyncData_ThrowsException_IfFormatIdIsNull()
         {
             DataPackage dataPackage = new DataPackage();
             SharePackage sharePackage = new SharePackage(dataPackage);
 
-            Assert.ThrowsException<ArgumentException>(() => sharePackage.SetAsyncData<string>(null, async (state) =>
+            Assert.Throws<ArgumentException>(() => sharePackage.SetAsyncData<string>(null, async (state) =>
             {
                 await Task.Delay(200);
                 return "Test Value";
             }));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetAsyncData_ThrowsException_IfFormatIdIsEmpty()
         {
             DataPackage dataPackage = new DataPackage();
             SharePackage sharePackage = new SharePackage(dataPackage);
 
-            Assert.ThrowsException<ArgumentException>(() => sharePackage.SetAsyncData<string>("", async (state) =>
+            Assert.Throws<ArgumentException>(() => sharePackage.SetAsyncData<string>("", async (state) =>
             {
                 await Task.Delay(200);
                 return "Test Value";
             }));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetAsyncData_ThrowsException_IfDataProviderIsNull()
         {
             DataPackage dataPackage = new DataPackage();
             SharePackage sharePackage = new SharePackage(dataPackage);
 
-            Assert.ThrowsException<ArgumentNullException>(() => sharePackage.SetAsyncData<string>("Test Format", null));
+            Assert.Throws<ArgumentNullException>(() => sharePackage.SetAsyncData<string>("Test Format", null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Properties_Description_SetsValueOnDataPackage()
         {
             DataPackage dataPackage = new DataPackage();
@@ -106,10 +105,10 @@ namespace Okra.Tests.Sharing
 
             sharePackage.Properties.Description = "Test Value";
 
-            Assert.AreEqual("Test Value", dataPackage.Properties.Description);
+            Assert.Equal("Test Value", dataPackage.Properties.Description);
         }
 
-        [TestMethod]
+        [Fact]
         public void Properties_Description_GetsValueFromDataPackage()
         {
             DataPackage dataPackage = new DataPackage();
@@ -117,10 +116,10 @@ namespace Okra.Tests.Sharing
 
             dataPackage.Properties.Description = "Test Value";
 
-            Assert.AreEqual("Test Value", sharePackage.Properties.Description);
+            Assert.Equal("Test Value", sharePackage.Properties.Description);
         }
 
-        [TestMethod]
+        [Fact]
         public void Properties_Title_SetsValueOnDataPackage()
         {
             DataPackage dataPackage = new DataPackage();
@@ -128,10 +127,10 @@ namespace Okra.Tests.Sharing
 
             sharePackage.Properties.Title = "Test Value";
 
-            Assert.AreEqual("Test Value", dataPackage.Properties.Title);
+            Assert.Equal("Test Value", dataPackage.Properties.Title);
         }
 
-        [TestMethod]
+        [Fact]
         public void Properties_Title_GetsValueFromDataPackage()
         {
             DataPackage dataPackage = new DataPackage();
@@ -139,7 +138,7 @@ namespace Okra.Tests.Sharing
 
             dataPackage.Properties.Title = "Test Value";
 
-            Assert.AreEqual("Test Value", sharePackage.Properties.Title);
+            Assert.Equal("Test Value", sharePackage.Properties.Title);
         }
     }
 }

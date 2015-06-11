@@ -2,7 +2,6 @@
 using System.Text;
 using System.Linq;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Okra.Navigation;
 using Windows.UI.Xaml;
 using Okra.Services;
@@ -14,15 +13,15 @@ using Okra.Tests.Helpers;
 using System.Runtime.Serialization;
 using Windows.UI.Xaml.Navigation;
 using Okra.Tests.Mocks;
+using Xunit;
 
 namespace Okra.Tests.Navigation
 {
-    [TestClass]
     public class NavigationManagerFixture
     {
         // *** Constructor Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Constructor_Exception_NullViewFactory()
         {
             INavigationTarget navigationTarget = new MockNavigationTarget();
@@ -30,10 +29,10 @@ namespace Okra.Tests.Navigation
             ILifetimeManager lifetimeManager = new MockLifetimeManager();
             IStorageManager storageManager = new MockStorageManager();
 
-            Assert.ThrowsException<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
+            Assert.Throws<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_Exception_NullLifetimeManager()
         {
             INavigationTarget navigationTarget = new MockNavigationTarget();
@@ -41,10 +40,10 @@ namespace Okra.Tests.Navigation
             ILifetimeManager lifetimeManager = null;
             IStorageManager storageManager = new MockStorageManager();
 
-            Assert.ThrowsException<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
+            Assert.Throws<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_Exception_NullStorageManager()
         {
             INavigationTarget navigationTarget = new MockNavigationTarget();
@@ -52,99 +51,99 @@ namespace Okra.Tests.Navigation
             ILifetimeManager lifetimeManager = new MockLifetimeManager();
             IStorageManager storageManager = null;
 
-            Assert.ThrowsException<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
+            Assert.Throws<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
         }
 
         // *** Property Tests ***
 
-        [TestMethod]
+        [Fact]
         public void HomePageName_DefaultsToSpecialPageName()
         {
             INavigationManager navigationManager = CreateNavigationManager();
 
-            Assert.AreEqual(SpecialPageNames.Home, navigationManager.HomePageName);
+            Assert.Equal(SpecialPageNames.Home, navigationManager.HomePageName);
         }
 
-        [TestMethod]
+        [Fact]
         public void HomePage_CanSetValue()
         {
             INavigationManager navigationManager = CreateNavigationManager();
 
             navigationManager.HomePageName = "Test Home Page";
 
-            Assert.AreEqual("Test Home Page", navigationManager.HomePageName);
+            Assert.Equal("Test Home Page", navigationManager.HomePageName);
         }
 
-        [TestMethod]
+        [Fact]
         public void HomePage_ThrowsException_IfHomePageNameIsNull()
         {
             INavigationManager navigationManager = CreateNavigationManager();
 
-            Assert.ThrowsException<ArgumentException>(() => navigationManager.HomePageName = null);
+            Assert.Throws<ArgumentException>(() => navigationManager.HomePageName = null);
         }
 
-        [TestMethod]
+        [Fact]
         public void HomePage_ThrowsException_IfHomePageNameIsEmpty()
         {
             INavigationManager navigationManager = CreateNavigationManager();
 
-            Assert.ThrowsException<ArgumentException>(() => navigationManager.HomePageName = "");
+            Assert.Throws<ArgumentException>(() => navigationManager.HomePageName = "");
         }
 
-        [TestMethod]
+        [Fact]
         public void NavigationStack_DefaultsToNavigationStackWithHome()
         {
             INavigationBase navigationManager = new NavigationManager(new MockNavigationTarget(), MockViewFactory.WithPageAndViewModel, new MockLifetimeManager(), new MockStorageManager());
 
-            Assert.AreEqual(typeof(NavigationStackWithHome), navigationManager.NavigationStack.GetType());
+            Assert.Equal(typeof(NavigationStackWithHome), navigationManager.NavigationStack.GetType());
         }
 
-        [TestMethod]
+        [Fact]
         public void NavigationStorageType_DefaultsToNone()
         {
             INavigationManager navigationManager = CreateNavigationManager();
 
-            Assert.AreEqual(NavigationStorageType.None, navigationManager.NavigationStorageType);
+            Assert.Equal(NavigationStorageType.None, navigationManager.NavigationStorageType);
         }
 
-        [TestMethod]
+        [Fact]
         public void NavigationStorageType_CanSetValue()
         {
             INavigationManager navigationManager = CreateNavigationManager();
 
             navigationManager.NavigationStorageType = NavigationStorageType.Local;
 
-            Assert.AreEqual(NavigationStorageType.Local, navigationManager.NavigationStorageType);
+            Assert.Equal(NavigationStorageType.Local, navigationManager.NavigationStorageType);
         }
 
-        [TestMethod]
+        [Fact]
         public void NavigationStorageType_Exception_InvalidEnum()
         {
             INavigationManager navigationManager = CreateNavigationManager();
 
-            Assert.ThrowsException<ArgumentException>(() => navigationManager.NavigationStorageType = (NavigationStorageType)100);
+            Assert.Throws<ArgumentException>(() => navigationManager.NavigationStorageType = (NavigationStorageType)100);
         }
 
-        [TestMethod]
+        [Fact]
         public void NavigationTarget_SetViaConstructor()
         {
             MockNavigationTarget navigationTarget = new MockNavigationTarget();
             TestableNavigationManager navigationManager = CreateNavigationManager(navigationTarget: navigationTarget);
 
-            Assert.AreEqual(navigationTarget, navigationManager.NavigationTarget);
+            Assert.Equal(navigationTarget, navigationManager.NavigationTarget);
         }
 
-        [TestMethod]
+        [Fact]
         public void NavigationTarget_DefaultsToWindowNavigationTarget()
         {
             TestableNavigationManager navigationManager = CreateNavigationManager(navigationTargetIsNull: true);
 
-            Assert.IsInstanceOfType(navigationManager.NavigationTarget, typeof(WindowNavigationTarget));
+            Assert.IsAssignableFrom(typeof(WindowNavigationTarget),navigationManager.NavigationTarget);
         }
 
         // *** Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public void DisplayPage_PassesPageToNavigationTarget()
         {
             MockNavigationTarget navigationTarget = new MockNavigationTarget();
@@ -154,10 +153,10 @@ namespace Okra.Tests.Navigation
 
             navigationManager.DisplayPage(page);
 
-            CollectionAssert.AreEqual(new object[] { page }, navigationTarget.NavigateToCalls.Select(c => c.Item1).ToArray());
+            Assert.Equal(new object[] { page }, navigationTarget.NavigateToCalls.Select(c => c.Item1).ToArray());
         }
 
-        [TestMethod]
+        [Fact]
         public void DisplayPage_PassesNavigationManagerToNavigationTarget()
         {
             MockNavigationTarget navigationTarget = new MockNavigationTarget();
@@ -167,10 +166,10 @@ namespace Okra.Tests.Navigation
 
             navigationManager.DisplayPage(page);
 
-            CollectionAssert.AreEqual(new INavigationBase[] { navigationManager }, navigationTarget.NavigateToCalls.Select(c => c.Item2).ToArray());
+            Assert.Equal(new INavigationBase[] { navigationManager }, navigationTarget.NavigateToCalls.Select(c => c.Item2).ToArray());
         }
 
-        [TestMethod]
+        [Fact]
         public async Task RestoreNavigationStack_NavigatesToHomePageIfNoPreviousNavigationStack()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -179,12 +178,12 @@ namespace Okra.Tests.Navigation
 
             bool success = await navigationManager.RestoreNavigationStack();
 
-            Assert.AreEqual(false, success);
+            Assert.Equal(false, success);
             string[] pageNames = navigationStack.Select(page => page.PageName).ToArray();
-            CollectionAssert.AreEqual(new string[] { "Home" }, pageNames);
+            Assert.Equal(new string[] { "Home" }, pageNames);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task RestoreNavigationStack_NavigatesToHomePageIfNavigationStorageTypeIsNone()
         {
             IStorageManager storageManager = new MockStorageManager();
@@ -220,13 +219,13 @@ namespace Okra.Tests.Navigation
 
                 // Assert that the current page is restored from storage
 
-                Assert.AreEqual(false, success);
+                Assert.Equal(false, success);
                 string[] pageNames = navigationStack.Select(page => page.PageName).ToArray();
-                CollectionAssert.AreEqual(new string[] { "Home" }, pageNames);
+                Assert.Equal(new string[] { "Home" }, pageNames);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public async Task RestoreNavigationStack_RestoresPreviousNavigationStackViaLocalStorage()
         {
             IStorageManager storageManager = new MockStorageManager();
@@ -262,13 +261,13 @@ namespace Okra.Tests.Navigation
 
                 // Assert that the current page is restored from storage
 
-                Assert.AreEqual(true, success);
+                Assert.Equal(true, success);
                 string[] pageNames = navigationStack.Select(page => page.PageName).ToArray();
-                CollectionAssert.AreEqual(new string[] { "Page 1", "Page 2" }, pageNames);
+                Assert.Equal(new string[] { "Page 1", "Page 2" }, pageNames);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public async Task RestoreNavigationStack_RestoresPreviousNavigationStackViaRoamingStorage()
         {
             IStorageManager storageManager = new MockStorageManager();
@@ -304,13 +303,13 @@ namespace Okra.Tests.Navigation
 
                 // Assert that the current page is restored from storage
 
-                Assert.AreEqual(true, success);
+                Assert.Equal(true, success);
                 string[] pageNames = navigationStack.Select(page => page.PageName).ToArray();
-                CollectionAssert.AreEqual(new string[] { "Page 1", "Page 2" }, pageNames);
+                Assert.Equal(new string[] { "Page 1", "Page 2" }, pageNames);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public async Task RestoreNavigationStack_NavigatesToHomePageIfStateFileIsCorrupt()
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
@@ -323,20 +322,20 @@ namespace Okra.Tests.Navigation
 
             bool success = await navigationManager.RestoreNavigationStack();
 
-            Assert.AreEqual(false, success);
+            Assert.Equal(false, success);
             string[] pageNames = navigationStack.Select(page => page.PageName).ToArray();
-            CollectionAssert.AreEqual(new string[] { "Home" }, pageNames);
+            Assert.Equal(new string[] { "Home" }, pageNames);
         }
 
         // *** Behavior Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Constructor_RegistersWithLifetimeManager()
         {
             MockLifetimeManager lifetimeManager = new MockLifetimeManager();
             INavigationManager navigationManager = CreateNavigationManager(lifetimeManager: lifetimeManager);
 
-            CollectionAssert.Contains(lifetimeManager.RegisteredServices, navigationManager);
+            Assert.Contains((ILifetimeAware)navigationManager, lifetimeManager.RegisteredServices);
         }
 
         // *** Private Methods ***

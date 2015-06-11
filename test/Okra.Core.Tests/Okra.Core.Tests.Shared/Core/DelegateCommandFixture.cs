@@ -5,150 +5,149 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Okra.Core;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Xunit;
 
 namespace Okra.Tests.Core
 {
-    [TestClass]
     public class DelegateCommandFixture
     {
         // *** Constructor Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ReturnsCommand_NonGeneric()
         {
             MockCommandHandler handler = new MockCommandHandler();
             DelegateCommand command = new DelegateCommand(handler.Execute);
 
-            Assert.IsNotNull(command);
+            Assert.NotNull(command);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ReturnsCommand_GenericClass()
         {
             MockCommandHandler<MockArgumentClass> handler = new MockCommandHandler<MockArgumentClass>();
             DelegateCommand<MockArgumentClass> command = new DelegateCommand<MockArgumentClass>(handler.Execute);
 
-            Assert.IsNotNull(command);
+            Assert.NotNull(command);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ReturnsCommand_GenericStruct()
         {
             MockCommandHandler<int> handler = new MockCommandHandler<int>();
             DelegateCommand<int> command = new DelegateCommand<int>(handler.Execute);
 
-            Assert.IsNotNull(command);
+            Assert.NotNull(command);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ReturnsCommandWithCanExecute_NonGeneric()
         {
             MockCommandHandler handler = new MockCommandHandler();
             DelegateCommand command = new DelegateCommand(handler.Execute, handler.CanExecute);
 
-            Assert.IsNotNull(command);
+            Assert.NotNull(command);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ReturnsCommandWithCanExecute_GenericClass()
         {
             MockCommandHandler<MockArgumentClass> handler = new MockCommandHandler<MockArgumentClass>();
             DelegateCommand<MockArgumentClass> command = new DelegateCommand<MockArgumentClass>(handler.Execute, handler.CanExecute);
 
-            Assert.IsNotNull(command);
+            Assert.NotNull(command);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ReturnsCommandWithCanExecute_GenericStruct()
         {
             MockCommandHandler<int> handler = new MockCommandHandler<int>();
             DelegateCommand<int> command = new DelegateCommand<int>(handler.Execute, handler.CanExecute);
 
-            Assert.IsNotNull(command);
+            Assert.NotNull(command);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_Exception_ExecuteMethodIsNull_NonGeneric()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new DelegateCommand(null));
+            Assert.Throws<ArgumentNullException>(() => new DelegateCommand(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_Exception_ExecuteMethodIsNull_GenericClass()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new DelegateCommand<MockArgumentClass>(null));
+            Assert.Throws<ArgumentNullException>(() => new DelegateCommand<MockArgumentClass>(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_Exception_ExecuteMethodIsNull_GenericStruct()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new DelegateCommand<int>(null));
+            Assert.Throws<ArgumentNullException>(() => new DelegateCommand<int>(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_Exception_CanExecuteMethodIsNull_NonGeneric()
         {
             MockCommandHandler handler = new MockCommandHandler();
-            Assert.ThrowsException<ArgumentNullException>(() => new DelegateCommand(handler.Execute, null));
+            Assert.Throws<ArgumentNullException>(() => new DelegateCommand(handler.Execute, null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_Exception_CanExecuteMethodIsNull_GenericClass()
         {
             MockCommandHandler<MockArgumentClass> handler = new MockCommandHandler<MockArgumentClass>();
-            Assert.ThrowsException<ArgumentNullException>(() => new DelegateCommand<MockArgumentClass>(handler.Execute, null));
+            Assert.Throws<ArgumentNullException>(() => new DelegateCommand<MockArgumentClass>(handler.Execute, null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_Exception_CanExecuteMethodIsNull_GenericStruct()
         {
             MockCommandHandler<int> handler = new MockCommandHandler<int>();
-            Assert.ThrowsException<ArgumentNullException>(() => new DelegateCommand<int>(handler.Execute, null));
+            Assert.Throws<ArgumentNullException>(() => new DelegateCommand<int>(handler.Execute, null));
         }
 
         // *** Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Execute_CallsExecuteMethod_NonGeneric()
         {
             MockCommandHandler handler = new MockCommandHandler();
             DelegateCommand command = new DelegateCommand(handler.Execute);
 
-            Assert.AreEqual(0, handler.ExecuteCallCount);
+            Assert.Equal(0, handler.ExecuteCallCount);
 
             command.Execute(new MockArgumentClass());
 
-            Assert.AreEqual(1, handler.ExecuteCallCount);
+            Assert.Equal(1, handler.ExecuteCallCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void Execute_CallsExecuteMethod_GenericClass()
         {
             MockCommandHandler<MockArgumentClass> handler = new MockCommandHandler<MockArgumentClass>();
             DelegateCommand<MockArgumentClass> command = new DelegateCommand<MockArgumentClass>(handler.Execute);
 
-            Assert.AreEqual(0, handler.ExecuteCallCount);
+            Assert.Equal(0, handler.ExecuteCallCount);
 
             command.Execute(new MockArgumentClass());
 
-            Assert.AreEqual(1, handler.ExecuteCallCount);
+            Assert.Equal(1, handler.ExecuteCallCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void Execute_CallsExecuteMethod_GenericStruct()
         {
             MockCommandHandler<int> handler = new MockCommandHandler<int>();
             DelegateCommand<int> command = new DelegateCommand<int>(handler.Execute);
 
-            Assert.AreEqual(0, handler.ExecuteCallCount);
+            Assert.Equal(0, handler.ExecuteCallCount);
 
             command.Execute(42);
 
-            Assert.AreEqual(1, handler.ExecuteCallCount);
+            Assert.Equal(1, handler.ExecuteCallCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void Execute_PassesArgument_GenericClass()
         {
             MockCommandHandler<MockArgumentClass> handler = new MockCommandHandler<MockArgumentClass>();
@@ -157,10 +156,10 @@ namespace Okra.Tests.Core
 
             command.Execute(argument);
 
-            CollectionAssert.AreEqual(new[] { argument }, (ICollection)handler.ArgumentList);
+            Assert.Equal<MockArgumentClass>(new[] { argument }, handler.ArgumentList);
         }
 
-        [TestMethod]
+        [Fact]
         public void Execute_PassesArgument_GenericStruct()
         {
             MockCommandHandler<int> handler = new MockCommandHandler<int>();
@@ -168,49 +167,49 @@ namespace Okra.Tests.Core
 
             command.Execute(42);
 
-            CollectionAssert.AreEqual(new[] { 42 }, (ICollection)handler.ArgumentList);
+            Assert.Equal<int>(new[] { 42 }, handler.ArgumentList);
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_CallsCanExecuteMethod_NonGeneric()
         {
             MockCommandHandler handler = new MockCommandHandler();
             DelegateCommand command = new DelegateCommand(handler.Execute, handler.CanExecute);
 
-            Assert.AreEqual(0, handler.CanExecuteCallCount);
+            Assert.Equal(0, handler.CanExecuteCallCount);
 
             command.CanExecute(new MockArgumentClass());
 
-            Assert.AreEqual(1, handler.CanExecuteCallCount);
+            Assert.Equal(1, handler.CanExecuteCallCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_CallsCanExecuteMethod_GenericClass()
         {
             MockCommandHandler<MockArgumentClass> handler = new MockCommandHandler<MockArgumentClass>();
             DelegateCommand<MockArgumentClass> command = new DelegateCommand<MockArgumentClass>(handler.Execute, handler.CanExecute);
 
-            Assert.AreEqual(0, handler.CanExecuteCallCount);
+            Assert.Equal(0, handler.CanExecuteCallCount);
 
             command.CanExecute(new MockArgumentClass());
 
-            Assert.AreEqual(1, handler.CanExecuteCallCount);
+            Assert.Equal(1, handler.CanExecuteCallCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_CallsCanExecuteMethod_GenericStruct()
         {
             MockCommandHandler<int> handler = new MockCommandHandler<int>();
             DelegateCommand<int> command = new DelegateCommand<int>(handler.Execute, handler.CanExecute);
 
-            Assert.AreEqual(0, handler.CanExecuteCallCount);
+            Assert.Equal(0, handler.CanExecuteCallCount);
 
             command.CanExecute(42);
 
-            Assert.AreEqual(1, handler.CanExecuteCallCount);
+            Assert.Equal(1, handler.CanExecuteCallCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_PassesArgument_GenericClass()
         {
             MockCommandHandler<MockArgumentClass> handler = new MockCommandHandler<MockArgumentClass>();
@@ -219,10 +218,10 @@ namespace Okra.Tests.Core
 
             command.CanExecute(argument);
 
-            CollectionAssert.AreEqual(new[] { argument }, (ICollection)handler.ArgumentList);
+            Assert.Equal<MockArgumentClass>(new[] { argument }, handler.ArgumentList);
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_PassesArgument_GenericStruct()
         {
             MockCommandHandler<int> handler = new MockCommandHandler<int>();
@@ -230,100 +229,100 @@ namespace Okra.Tests.Core
 
             command.CanExecute(42);
 
-            CollectionAssert.AreEqual(new[] { 42 }, (ICollection)handler.ArgumentList);
+            Assert.Equal<int>(new[] { 42 }, handler.ArgumentList);
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_WillReturnTrue_NonGeneric()
         {
             MockCommandHandler handler = new MockCommandHandler() { CanExecuteValue = true };
             DelegateCommand command = new DelegateCommand(handler.Execute, handler.CanExecute);
 
-            Assert.IsTrue(command.CanExecute(new MockArgumentClass()));
+            Assert.True(command.CanExecute(new MockArgumentClass()));
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_WillReturnTrue_GenericClass()
         {
             MockCommandHandler<MockArgumentClass> handler = new MockCommandHandler<MockArgumentClass>() { CanExecuteValue = true };
             DelegateCommand<MockArgumentClass> command = new DelegateCommand<MockArgumentClass>(handler.Execute, handler.CanExecute);
 
-            Assert.IsTrue(command.CanExecute(new MockArgumentClass()));
+            Assert.True(command.CanExecute(new MockArgumentClass()));
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_WillReturnTrue_GenericStruct()
         {
             MockCommandHandler<int> handler = new MockCommandHandler<int>() { CanExecuteValue = true };
             DelegateCommand<int> command = new DelegateCommand<int>(handler.Execute, handler.CanExecute);
 
-            Assert.IsTrue(command.CanExecute(42));
+            Assert.True(command.CanExecute(42));
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_WillReturnFalse_NonGeneric()
         {
             MockCommandHandler handler = new MockCommandHandler() { CanExecuteValue = false };
             DelegateCommand command = new DelegateCommand(handler.Execute, handler.CanExecute);
 
-            Assert.IsFalse(command.CanExecute(new MockArgumentClass()));
+            Assert.False(command.CanExecute(new MockArgumentClass()));
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_WillReturnFalse_GenericClass()
         {
             MockCommandHandler<MockArgumentClass> handler = new MockCommandHandler<MockArgumentClass>() { CanExecuteValue = false };
             DelegateCommand<MockArgumentClass> command = new DelegateCommand<MockArgumentClass>(handler.Execute, handler.CanExecute);
 
-            Assert.IsFalse(command.CanExecute(new MockArgumentClass()));
+            Assert.False(command.CanExecute(new MockArgumentClass()));
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_WillReturnFalse_GenericStruct()
         {
             MockCommandHandler<int> handler = new MockCommandHandler<int>() { CanExecuteValue = false };
             DelegateCommand<int> command = new DelegateCommand<int>(handler.Execute, handler.CanExecute);
 
-            Assert.IsFalse(command.CanExecute(42));
+            Assert.False(command.CanExecute(42));
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_ReturnsFalseIfIncorrectType_GenericClass()
         {
             MockCommandHandler<MockArgumentClass> handler = new MockCommandHandler<MockArgumentClass>() { CanExecuteValue = true };
             DelegateCommand<MockArgumentClass> command = new DelegateCommand<MockArgumentClass>(handler.Execute, handler.CanExecute);
 
-            Assert.IsFalse(command.CanExecute(42));
+            Assert.False(command.CanExecute(42));
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_ReturnsFalseIfIncorrectType_GenericStruct()
         {
             MockCommandHandler<int> handler = new MockCommandHandler<int>() { CanExecuteValue = true };
             DelegateCommand<int> command = new DelegateCommand<int>(handler.Execute, handler.CanExecute);
 
-            Assert.IsFalse(command.CanExecute(new MockArgumentClass()));
+            Assert.False(command.CanExecute(new MockArgumentClass()));
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_ReturnsTrueIfNullParameter_GenericClass()
         {
             MockCommandHandler<MockArgumentClass> handler = new MockCommandHandler<MockArgumentClass>() { CanExecuteValue = true };
             DelegateCommand<MockArgumentClass> command = new DelegateCommand<MockArgumentClass>(handler.Execute, handler.CanExecute);
 
-            Assert.IsTrue(command.CanExecute(null));
+            Assert.True(command.CanExecute(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void CanExecute_ReturnsFalseIfNullParameter_GenericStruct()
         {
             MockCommandHandler<int> handler = new MockCommandHandler<int>() { CanExecuteValue = true };
             DelegateCommand<int> command = new DelegateCommand<int>(handler.Execute, handler.CanExecute);
 
-            Assert.IsFalse(command.CanExecute(null));
+            Assert.False(command.CanExecute(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void NotifyCanExecuteChanged_FiresCanExecuteChangedEvent()
         {
             MockCommandHandler<MockArgumentClass> handler = new MockCommandHandler<MockArgumentClass>();
@@ -337,7 +336,7 @@ namespace Okra.Tests.Core
 
             command.NotifyCanExecuteChanged();
 
-            Assert.AreEqual(1, canExecuteChangedCount);
+            Assert.Equal(1, canExecuteChangedCount);
         }
 
         // *** Private Sub-classes ***

@@ -6,40 +6,39 @@ using System.Threading.Tasks;
 using Okra.Navigation;
 using Okra.Services;
 using Okra.Tests.Mocks;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Windows.ApplicationModel.Activation;
+using Xunit;
 
 namespace Okra.Tests.Services
 {
-    [TestClass]
     public class LaunchActivationHandlerFixture
     {
         // *** Constructor Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Constructor_RegistersWithActivationManager()
         {
             MockActivationManager activationManager = new MockActivationManager();
             LaunchActivationHandler activationHandler = CreateLaunchActivationHandler(activationManager: activationManager);
 
-            CollectionAssert.Contains(activationManager.RegisteredServices, activationHandler);
+            Assert.Contains(activationHandler, activationManager.RegisteredServices);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfActivationManagerIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new LaunchActivationHandler(null, new MockNavigationManager()));
+            Assert.Throws<ArgumentNullException>(() => new LaunchActivationHandler(null, new MockNavigationManager()));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfNavigationManagerIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new LaunchActivationHandler(new MockActivationManager(), null));
+            Assert.Throws<ArgumentNullException>(() => new LaunchActivationHandler(new MockActivationManager(), null));
         }
 
         // *** Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_ReturnsTrueIfActivationKindIsLaunch()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -51,10 +50,10 @@ namespace Okra.Tests.Services
 
             // Check the result
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_ReturnsFalseIfActivationKindIsNotLaunch()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -66,10 +65,10 @@ namespace Okra.Tests.Services
 
             // Check the result
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_RestoresNavigationIfPreviousExecutionTerminated()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -81,10 +80,10 @@ namespace Okra.Tests.Services
 
             // Assert that the home page was navigated to
 
-            CollectionAssert.AreEqual(new string[] { "[Restored Pages]" }, navigationManager.NavigatedPages.Select(t => t.Item1).ToArray());
+            Assert.Equal(new string[] { "[Restored Pages]" }, navigationManager.NavigatedPages.Select(t => t.Item1).ToArray());
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_Launch_NavigatesToHomePageIfPreviousExecutionClosedByUser()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -96,10 +95,10 @@ namespace Okra.Tests.Services
 
             // Assert that the home page was navigated to
 
-            CollectionAssert.AreEqual(new string[] { "Home" }, navigationManager.NavigatedPages.Select(t => t.Item1).ToArray());
+            Assert.Equal(new string[] { "Home" }, navigationManager.NavigatedPages.Select(t => t.Item1).ToArray());
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_Launch_NavigatesToHomePageIfPreviousExecutionNotRunning()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -111,10 +110,10 @@ namespace Okra.Tests.Services
 
             // Assert that the home page was navigated to
 
-            CollectionAssert.AreEqual(new string[] { "Home" }, navigationManager.NavigatedPages.Select(t => t.Item1).ToArray());
+            Assert.Equal(new string[] { "Home" }, navigationManager.NavigatedPages.Select(t => t.Item1).ToArray());
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_DoesNotNavigateIfActivationKindIsNotLaunch()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -126,15 +125,15 @@ namespace Okra.Tests.Services
 
             // Assert that the home page was navigated to
 
-            CollectionAssert.AreEqual(new string[] { }, navigationManager.NavigatedPages.Select(t => t.Item1).ToArray());
+            Assert.Equal(new string[] { }, navigationManager.NavigatedPages.Select(t => t.Item1).ToArray());
         }
 
-        [TestMethod]
-        public void Activate_ThrowsException_IfEventArgsIsNull()
+        [Fact]
+        public async void Activate_ThrowsException_IfEventArgsIsNull()
         {
             LaunchActivationHandler activationHandler = CreateLaunchActivationHandler();
 
-            Assert.ThrowsException<ArgumentNullException>(() => activationHandler.Activate(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => activationHandler.Activate(null));
         }
 
         // *** Private Methods ***

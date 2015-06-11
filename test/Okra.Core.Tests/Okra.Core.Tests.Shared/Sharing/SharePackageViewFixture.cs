@@ -1,24 +1,23 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Sharing;
+﻿using Okra.Sharing;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Windows.ApplicationModel.DataTransfer;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace Okra.Tests.Sharing
 {
-    [TestClass]
     public class SharePackageViewFixture
     {
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfDataPackageViewIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new SharePackageView(null));
+            Assert.Throws<ArgumentNullException>(() => new SharePackageView(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void AvailableFormats_ReturnsValuesFromDataPackageView()
         {
             DataPackage dataPackage = new DataPackage();
@@ -27,12 +26,12 @@ namespace Okra.Tests.Sharing
 
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.AreEqual(2, sharePackage.AvailableFormats.Count);
-            CollectionAssert.Contains(sharePackage.AvailableFormats.ToList(), "Format A");
-            CollectionAssert.Contains(sharePackage.AvailableFormats.ToList(), "Format B");
+            Assert.Equal(2, sharePackage.AvailableFormats.Count);
+            Assert.Contains("Format A", sharePackage.AvailableFormats.ToList());
+            Assert.Contains("Format B", sharePackage.AvailableFormats.ToList());
         }
 
-        [TestMethod]
+        [Fact]
         public void Properties_Description_GetsValueFromDataPackageView()
         {
             DataPackage dataPackage = new DataPackage();
@@ -40,10 +39,10 @@ namespace Okra.Tests.Sharing
 
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.AreEqual("Test Value", sharePackage.Properties.Description);
+            Assert.Equal("Test Value", sharePackage.Properties.Description);
         }
 
-        [TestMethod]
+        [Fact]
         public void Properties_Title_GetsValueFromDataPackageView()
         {
             DataPackage dataPackage = new DataPackage();
@@ -51,28 +50,28 @@ namespace Okra.Tests.Sharing
 
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.AreEqual("Test Value", sharePackage.Properties.Title);
+            Assert.Equal("Test Value", sharePackage.Properties.Title);
         }
 
-        [TestMethod]
+        [Fact]
         public void Properties_Description_SettingValueThrowsException()
         {
             DataPackage dataPackage = new DataPackage();
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.ThrowsException<InvalidOperationException>(() => sharePackage.Properties.Description = "Test Value");
+            Assert.Throws<InvalidOperationException>(() => sharePackage.Properties.Description = "Test Value");
         }
 
-        [TestMethod]
+        [Fact]
         public void Properties_Title_SettingValueThrowsException()
         {
             DataPackage dataPackage = new DataPackage();
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.ThrowsException<InvalidOperationException>(() => sharePackage.Properties.Description = "Test Value");
+            Assert.Throws<InvalidOperationException>(() => sharePackage.Properties.Description = "Test Value");
         }
 
-        [TestMethod]
+        [Fact]
         public void Contains_ReturnsTrueIfFormatIsAvailable()
         {
             DataPackage dataPackage = new DataPackage();
@@ -81,10 +80,10 @@ namespace Okra.Tests.Sharing
 
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.IsTrue(sharePackage.Contains("Format A"));
+            Assert.True(sharePackage.Contains("Format A"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Contains_ReturnsFalseIfFormatIsNotAvailable()
         {
             DataPackage dataPackage = new DataPackage();
@@ -93,10 +92,10 @@ namespace Okra.Tests.Sharing
 
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.IsFalse(sharePackage.Contains("Format C"));
+            Assert.False(sharePackage.Contains("Format C"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Contains_ThrowsException_IfFormatIdIsNull()
         {
             DataPackage dataPackage = new DataPackage();
@@ -105,10 +104,10 @@ namespace Okra.Tests.Sharing
 
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.ThrowsException<ArgumentException>(() => sharePackage.Contains(null));
+            Assert.Throws<ArgumentException>(() => sharePackage.Contains(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Contains_ThrowsException_IfFormatIdIsEmpty()
         {
             DataPackage dataPackage = new DataPackage();
@@ -117,10 +116,10 @@ namespace Okra.Tests.Sharing
 
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.ThrowsException<ArgumentException>(() => sharePackage.Contains(""));
+            Assert.Throws<ArgumentException>(() => sharePackage.Contains(""));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task GetDataAsync_GetsDataFromDataPackage()
         {
             DataPackage dataPackage = new DataPackage();
@@ -129,11 +128,11 @@ namespace Okra.Tests.Sharing
             SharePackageView sharePackageView = new SharePackageView(dataPackage.GetView());
             string data = await sharePackageView.GetDataAsync<string>("Test Format");
 
-            Assert.AreEqual("Test Value", data);
+            Assert.Equal("Test Value", data);
         }
 
-        [TestMethod]
-        public void GetDataAsync_ThrowsException_IfFormatIdIsNull()
+        [Fact]
+        public async void GetDataAsync_ThrowsException_IfFormatIdIsNull()
         {
             DataPackage dataPackage = new DataPackage();
             dataPackage.SetData("Format A", "Some data");
@@ -141,11 +140,11 @@ namespace Okra.Tests.Sharing
 
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.ThrowsException<ArgumentException>(() => sharePackage.GetDataAsync<string>(null));
+            await Assert.ThrowsAsync<ArgumentException>(() => sharePackage.GetDataAsync<string>(null));
         }
 
-        [TestMethod]
-        public void GetDataAsync_ThrowsException_IfFormatIdIsEmpty()
+        [Fact]
+        public async void GetDataAsync_ThrowsException_IfFormatIdIsEmpty()
         {
             DataPackage dataPackage = new DataPackage();
             dataPackage.SetData("Format A", "Some data");
@@ -153,7 +152,7 @@ namespace Okra.Tests.Sharing
 
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.ThrowsException<ArgumentException>(() => sharePackage.GetDataAsync<string>(""));
+            await Assert.ThrowsAsync<ArgumentException>(() => sharePackage.GetDataAsync<string>(""));
         }
     }
 }

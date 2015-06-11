@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Navigation;
+﻿using Okra.Navigation;
+using Okra.Tests.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +10,10 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using UITestMethodAttribute = Microsoft.VisualStudio.TestPlatform.UnitTestFramework.AppContainer.UITestMethodAttribute;
+using Xunit;
 
 namespace Okra.Tests.Navigation
 {
-    [TestClass]
     public class SettingsPaneInfoFixture
     {
         // *** Property Getter/Setter Tests ***
@@ -26,7 +25,7 @@ namespace Okra.Tests.Navigation
 
             Brush brush = SettingsPaneInfo.GetHeaderBackground(obj);
 
-            Assert.AreEqual(null, brush);
+            Assert.Equal(null, brush);
         }
 
         [UITestMethod]
@@ -38,13 +37,13 @@ namespace Okra.Tests.Navigation
             SettingsPaneInfo.SetHeaderBackground(obj, red);
             Brush brush = SettingsPaneInfo.GetHeaderBackground(obj);
 
-            Assert.AreEqual(red, brush);
+            Assert.Equal(red, brush);
         }
 
         [UITestMethod]
         public void HeaderBackground_ThrowsException_IfGetterObjectIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.GetHeaderBackground(null));
+            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetHeaderBackground(null));
         }
 
         [UITestMethod]
@@ -52,7 +51,7 @@ namespace Okra.Tests.Navigation
         {
             Brush red = new SolidColorBrush(Colors.Red);
 
-            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.SetHeaderBackground(null, red));
+            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetHeaderBackground(null, red));
         }
 
         [UITestMethod]
@@ -62,7 +61,7 @@ namespace Okra.Tests.Navigation
 
             Brush brush = SettingsPaneInfo.GetHeaderForeground(obj);
 
-            Assert.AreEqual(null, brush);
+            Assert.Equal(null, brush);
         }
 
         [UITestMethod]
@@ -74,13 +73,13 @@ namespace Okra.Tests.Navigation
             SettingsPaneInfo.SetHeaderForeground(obj, red);
             Brush brush = SettingsPaneInfo.GetHeaderForeground(obj);
 
-            Assert.AreEqual(red, brush);
+            Assert.Equal(red, brush);
         }
 
         [UITestMethod]
         public void HeaderForeground_ThrowsException_IfGetterObjectIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.GetHeaderForeground(null));
+            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetHeaderForeground(null));
         }
 
         [UITestMethod]
@@ -88,7 +87,7 @@ namespace Okra.Tests.Navigation
         {
             Brush red = new SolidColorBrush(Colors.Red);
 
-            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.SetHeaderForeground(null, red));
+            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetHeaderForeground(null, red));
         }
 
         [UITestMethod]
@@ -98,8 +97,8 @@ namespace Okra.Tests.Navigation
 
             ImageSource icon = SettingsPaneInfo.GetIconSource(obj);
 
-            Assert.IsInstanceOfType(icon, typeof(BitmapImage));
-            Assert.AreEqual("ms-appx:/Assets/SmallLogo.png", ((BitmapImage)icon).UriSource.AbsoluteUri);
+            Assert.IsAssignableFrom(typeof(BitmapImage),icon);
+            Assert.Equal("ms-appx:/Assets/SmallLogo.png", ((BitmapImage)icon).UriSource.AbsoluteUri);
         }
 
         [UITestMethod]
@@ -110,14 +109,14 @@ namespace Okra.Tests.Navigation
             SettingsPaneInfo.SetIconSource(obj, new BitmapImage(new Uri("ms-appx:/Test")));
             ImageSource icon = SettingsPaneInfo.GetIconSource(obj);
 
-            Assert.IsInstanceOfType(icon, typeof(BitmapImage));
-            Assert.AreEqual("ms-appx:/Test", ((BitmapImage)icon).UriSource.AbsoluteUri);
+            Assert.IsAssignableFrom(typeof(BitmapImage),icon);
+            Assert.Equal("ms-appx:/Test", ((BitmapImage)icon).UriSource.AbsoluteUri);
         }
 
         [UITestMethod]
         public void IconSource_ThrowsException_IfGetterObjectIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.GetIconSource(null));
+            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetIconSource(null));
         }
 
         [UITestMethod]
@@ -125,7 +124,7 @@ namespace Okra.Tests.Navigation
         {
             ImageSource iconSource = new BitmapImage(new Uri("ms-appx:/Test"));
 
-            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.SetIconSource(null, iconSource));
+            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetIconSource(null, iconSource));
         }
 
         [UITestMethod]
@@ -135,7 +134,7 @@ namespace Okra.Tests.Navigation
 
             string title = SettingsPaneInfo.GetTitle(obj);
 
-            Assert.AreEqual("", title);
+            Assert.Equal("", title);
         }
 
         [UITestMethod]
@@ -146,19 +145,19 @@ namespace Okra.Tests.Navigation
             SettingsPaneInfo.SetTitle(obj, "Title");
             string title = SettingsPaneInfo.GetTitle(obj);
 
-            Assert.AreEqual("Title", title);
+            Assert.Equal("Title", title);
         }
 
         [UITestMethod]
         public void Title_ThrowsException_IfGetterObjectIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.GetTitle(null));
+            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetTitle(null));
         }
 
         [UITestMethod]
         public void Title_ThrowsException_IfSetterObjectIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.SetTitle(null, "Title"));
+            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetTitle(null, "Title"));
         }
 
         [UITestMethod]
@@ -168,7 +167,7 @@ namespace Okra.Tests.Navigation
 
             double width = SettingsPaneInfo.GetWidth(obj);
 
-            Assert.AreEqual(346, width);
+            Assert.Equal(346, width);
         }
 
         [UITestMethod]
@@ -179,19 +178,19 @@ namespace Okra.Tests.Navigation
             SettingsPaneInfo.SetWidth(obj, 500);
             double width = SettingsPaneInfo.GetWidth(obj);
 
-            Assert.AreEqual(500, width);
+            Assert.Equal(500, width);
         }
 
         [UITestMethod]
         public void Width_ThrowsException_IfGetterObjectIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.GetWidth(null));
+            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetWidth(null));
         }
 
         [UITestMethod]
         public void Width_ThrowsException_IfSetterObjectIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SettingsPaneInfo.SetWidth(null, 500));
+            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetWidth(null, 500));
         }
     }
 }

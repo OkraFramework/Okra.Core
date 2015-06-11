@@ -7,80 +7,79 @@ using System.Threading.Tasks;
 using Okra.Navigation;
 using Okra.Search;
 using Okra.Tests.Mocks;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Search;
 using Okra.Services;
+using Xunit;
 
 namespace Okra.Tests.Search
 {
-    [TestClass]
     public class SearchManagerFixture
     {
         // *** Constructor Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Constructor_RegistersWithActivationManager()
         {
             MockActivationManager activationManager = new MockActivationManager();
             SearchManager searchManager = CreateSearchMananger(activationManager: activationManager);
 
-            CollectionAssert.Contains(activationManager.RegisteredServices, searchManager);
+            Assert.Contains(searchManager, activationManager.RegisteredServices);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfNavigationManagerIsNull()
         {
             MockActivationManager activationManager = new MockActivationManager();
 
-            Assert.ThrowsException<ArgumentNullException>(() => new SearchManager(null, activationManager));
+            Assert.Throws<ArgumentNullException>(() => new SearchManager(null, activationManager));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfActivationManagerIsNull()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
-            Assert.ThrowsException<ArgumentNullException>(() => new SearchManager(navigationManager, null));
+            Assert.Throws<ArgumentNullException>(() => new SearchManager(navigationManager, null));
         }
 
         // *** Property Tests ***
 
-        [TestMethod]
+        [Fact]
         public void SearchPageName_IsInitiallySpecialPageName()
         {
             SearchManager searchManager = CreateSearchMananger(setSearchPageName: false);
 
-            Assert.AreEqual(SpecialPageNames.Search, searchManager.SearchPageName);
+            Assert.Equal(SpecialPageNames.Search, searchManager.SearchPageName);
         }
 
-        [TestMethod]
+        [Fact]
         public void SearchPageName_CanSetValue()
         {
             SearchManager searchManager = CreateSearchMananger();
 
             searchManager.SearchPageName = "MySearchPage";
 
-            Assert.AreEqual("MySearchPage", searchManager.SearchPageName);
+            Assert.Equal("MySearchPage", searchManager.SearchPageName);
         }
 
-        [TestMethod]
+        [Fact]
         public void SearchPageName_Exception_CannotSetToNull()
         {
             SearchManager searchManager = CreateSearchMananger();
 
-            Assert.ThrowsException<ArgumentException>(() => searchManager.SearchPageName = null);
+            Assert.Throws<ArgumentException>(() => searchManager.SearchPageName = null);
         }
 
-        [TestMethod]
+        [Fact]
         public void SearchPageName_Exception_CannotSetToEmptyString()
         {
             SearchManager searchManager = CreateSearchMananger();
 
-            Assert.ThrowsException<ArgumentException>(() => searchManager.SearchPageName = "");
+            Assert.Throws<ArgumentException>(() => searchManager.SearchPageName = "");
         }
 
-        [TestMethod]
+        [Fact]
         public void SearchPageName_Exception_CannotSetValueOnceActivated()
         {
             MockActivationManager activationManager = new MockActivationManager();
@@ -88,12 +87,12 @@ namespace Okra.Tests.Search
 
             activationManager.RaiseActivatedEvent(new MockActivatedEventArgs());
 
-            Assert.ThrowsException<InvalidOperationException>(() => searchManager.SearchPageName = "MySearchPage");
+            Assert.Throws<InvalidOperationException>(() => searchManager.SearchPageName = "MySearchPage");
         }
 
         // *** Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_ReturnsTrueIfActivationKindIsSearch()
         {
             SearchManager searchManager = CreateSearchMananger();
@@ -104,10 +103,10 @@ namespace Okra.Tests.Search
 
             // Check the result
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_ReturnsFalseIfActivationKindIsNotLaunch()
         {
             SearchManager searchManager = CreateSearchMananger();
@@ -118,10 +117,10 @@ namespace Okra.Tests.Search
 
             // Check the result
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_NavigatesToSearchPageIfPreviousExecutionRunning()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -129,10 +128,10 @@ namespace Okra.Tests.Search
 
             await searchManager.Activate(new MockSearchActivatedEventArgs() { QueryText = "MyQuery", Language = "en-GB", PreviousExecutionState = ApplicationExecutionState.Running });
 
-            CollectionAssert.AreEqual(new[] { Tuple.Create("Search", (object)null) }, (ICollection)navigationManager.NavigatedPages);
+            Assert.Equal<Tuple<string, object>>(new[] { Tuple.Create("Search", (object)null) }, navigationManager.NavigatedPages);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_NavigatesToSearchPageIfPreviousExecutionSuspended()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -140,10 +139,10 @@ namespace Okra.Tests.Search
 
             await searchManager.Activate(new MockSearchActivatedEventArgs() { QueryText = "MyQuery", Language = "en-GB", PreviousExecutionState = ApplicationExecutionState.Suspended });
 
-            CollectionAssert.AreEqual(new[] { Tuple.Create("Search", (object)null) }, (ICollection)navigationManager.NavigatedPages);
+            Assert.Equal<Tuple<string, object>>(new[] { Tuple.Create("Search", (object)null) }, navigationManager.NavigatedPages);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_NavigatesToSearchPageWithRestoredNavigationIfPreviousExecutionTerminated()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -151,10 +150,10 @@ namespace Okra.Tests.Search
 
             await searchManager.Activate(new MockSearchActivatedEventArgs() { QueryText = "MyQuery", Language = "en-GB", PreviousExecutionState = ApplicationExecutionState.Terminated });
 
-            CollectionAssert.AreEqual(new[] { Tuple.Create("[Restored Pages]", (object)null), Tuple.Create("Search", (object)null) }, (ICollection)navigationManager.NavigatedPages);
+            Assert.Equal<Tuple<string, object>>(new[] { Tuple.Create("[Restored Pages]", (object)null), Tuple.Create("Search", (object)null) }, navigationManager.NavigatedPages);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_NavigatesToSearchPageAfterHomePageIfPreviousExecutionClosedByUser()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -162,10 +161,10 @@ namespace Okra.Tests.Search
 
             await searchManager.Activate(new MockSearchActivatedEventArgs() { QueryText = "MyQuery", Language = "en-GB", PreviousExecutionState = ApplicationExecutionState.ClosedByUser });
 
-            CollectionAssert.AreEqual(new[] { Tuple.Create("Home", (object)null), Tuple.Create("Search", (object)null) }, (ICollection)navigationManager.NavigatedPages);
+            Assert.Equal<Tuple<string, object>>(new[] { Tuple.Create("Home", (object)null), Tuple.Create("Search", (object)null) }, navigationManager.NavigatedPages);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_NavigatesToSearchPageAfterHomePageIfPreviousExecutionNotRunning()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -173,10 +172,10 @@ namespace Okra.Tests.Search
 
             await searchManager.Activate(new MockSearchActivatedEventArgs() { QueryText = "MyQuery", Language = "en-GB", PreviousExecutionState = ApplicationExecutionState.NotRunning });
 
-            CollectionAssert.AreEqual(new[] { Tuple.Create("Home", (object)null), Tuple.Create("Search", (object)null) }, (ICollection)navigationManager.NavigatedPages);
+            Assert.Equal<Tuple<string, object>>(new[] { Tuple.Create("Home", (object)null), Tuple.Create("Search", (object)null) }, navigationManager.NavigatedPages);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_EmptySearch_NoNavigationIfPreviousExecutionRunning()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -184,10 +183,10 @@ namespace Okra.Tests.Search
 
             await searchManager.Activate(new MockSearchActivatedEventArgs() { QueryText = "", Language = "en-GB", PreviousExecutionState = ApplicationExecutionState.Running });
 
-            CollectionAssert.AreEqual(new Tuple<string, object>[] { }, (ICollection)navigationManager.NavigatedPages);
+            Assert.Equal<Tuple<string, object>>(new Tuple<string, object>[] { }, navigationManager.NavigatedPages);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_EmptySearch_NoNavigationIfPreviousExecutionSuspended()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -195,10 +194,10 @@ namespace Okra.Tests.Search
 
             await searchManager.Activate(new MockSearchActivatedEventArgs() { QueryText = "", Language = "en-GB", PreviousExecutionState = ApplicationExecutionState.Suspended });
 
-            CollectionAssert.AreEqual(new Tuple<string, object>[] { }, (ICollection)navigationManager.NavigatedPages);
+            Assert.Equal<Tuple<string, object>>(new Tuple<string, object>[] { }, navigationManager.NavigatedPages);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_EmptySearch_RestoresNavigationIfPreviousExecutionTerminated()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -206,10 +205,10 @@ namespace Okra.Tests.Search
 
             await searchManager.Activate(new MockSearchActivatedEventArgs() { QueryText = "", Language = "en-GB", PreviousExecutionState = ApplicationExecutionState.Terminated });
 
-            CollectionAssert.AreEqual(new[] { Tuple.Create("[Restored Pages]", (object)null) }, (ICollection)navigationManager.NavigatedPages);
+            Assert.Equal<Tuple<string, object>>(new[] { Tuple.Create("[Restored Pages]", (object)null) }, navigationManager.NavigatedPages);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_EmptySearch_NavigatesToHomePageIfPreviousExecutionClosedByUser()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -217,10 +216,10 @@ namespace Okra.Tests.Search
 
             await searchManager.Activate(new MockSearchActivatedEventArgs() { QueryText = "", Language = "en-GB", PreviousExecutionState = ApplicationExecutionState.ClosedByUser });
 
-            CollectionAssert.AreEqual(new[] { Tuple.Create("Home", (object)null) }, (ICollection)navigationManager.NavigatedPages);
+            Assert.Equal<Tuple<string, object>>(new[] { Tuple.Create("Home", (object)null) }, navigationManager.NavigatedPages);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_EmptySearch_NavigatesToHomePageIfPreviousExecutionNotRunning()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -228,10 +227,10 @@ namespace Okra.Tests.Search
 
             await searchManager.Activate(new MockSearchActivatedEventArgs() { QueryText = "", Language = "en-GB", PreviousExecutionState = ApplicationExecutionState.NotRunning });
 
-            CollectionAssert.AreEqual(new[] { Tuple.Create("Home", (object)null) }, (ICollection)navigationManager.NavigatedPages);
+            Assert.Equal<Tuple<string, object>>(new[] { Tuple.Create("Home", (object)null) }, navigationManager.NavigatedPages);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_DoesNotNavigateIfAlreadyShowingSearchPage()
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
@@ -241,10 +240,10 @@ namespace Okra.Tests.Search
 
             await searchManager.Activate(new MockSearchActivatedEventArgs() { QueryText = "MyQuery", Language = "en-GB", PreviousExecutionState = ApplicationExecutionState.Running });
 
-            CollectionAssert.AreEqual(new Tuple<string, object>[] { Tuple.Create("Search", (object)null) }, (ICollection)navigationManager.NavigatedPages);
+            Assert.Equal<Tuple<string, object>>(new Tuple<string, object>[] { Tuple.Create("Search", (object)null) }, navigationManager.NavigatedPages);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_CallsPerformQueryOnAllElements()
         {
             MockNavigationManager navigationManager = new MockNavigationManager(_ => new object[] { new MockSearchPageElement(), new MockSearchPageElement() });
@@ -255,11 +254,11 @@ namespace Okra.Tests.Search
             PageInfo searchPage = navigationManager.NavigationStack.CurrentPage;
             IList<object> searchElements = navigationManager.GetPageElements(searchPage).ToList();
 
-            CollectionAssert.AreEqual(new[] { Tuple.Create("MyQuery", "en-GB") }, (ICollection)((MockSearchPageElement)searchElements[1]).Queries);
-            CollectionAssert.AreEqual(new[] { Tuple.Create("MyQuery", "en-GB") }, (ICollection)((MockSearchPageElement)searchElements[0]).Queries);
+            Assert.Equal<Tuple<string, string>>(new[] { Tuple.Create("MyQuery", "en-GB") }, ((MockSearchPageElement)searchElements[1]).Queries);
+            Assert.Equal<Tuple<string, string>>(new[] { Tuple.Create("MyQuery", "en-GB") }, ((MockSearchPageElement)searchElements[0]).Queries);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_CallsPerformQueryOnlyOnSearchPageImplementors()
         {
             MockNavigationManager navigationManager = new MockNavigationManager(_ => new object[] { new MockSearchPageElement(), new MockPageElement() });
@@ -270,10 +269,10 @@ namespace Okra.Tests.Search
             PageInfo searchPage = navigationManager.NavigationStack.CurrentPage;
             IList<object> searchElements = navigationManager.GetPageElements(searchPage).ToList();
 
-            CollectionAssert.AreEqual(new[] { Tuple.Create("MyQuery", "en-GB") }, (ICollection)((MockSearchPageElement)searchElements[0]).Queries);
+            Assert.Equal<Tuple<string, string>>(new[] { Tuple.Create("MyQuery", "en-GB") }, ((MockSearchPageElement)searchElements[0]).Queries);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_SuccessfulEvenWhenNoSearchPageImplementors()
         {
             MockNavigationManager navigationManager = new MockNavigationManager(_ => new object[] { new MockPageElement(), new MockPageElement() });
@@ -282,7 +281,7 @@ namespace Okra.Tests.Search
             await searchManager.Activate(new MockSearchActivatedEventArgs() { QueryText = "MyQuery", Language = "en-GB" });
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_DoesNotCallPerformQueryIfSameQueryAsVisible()
         {
             MockNavigationManager navigationManager = new MockNavigationManager(_ => new object[] { new MockSearchPageElement(), new MockSearchPageElement() });
@@ -293,11 +292,11 @@ namespace Okra.Tests.Search
             PageInfo searchPage = navigationManager.NavigationStack.CurrentPage;
             IList<object> searchElements = navigationManager.GetPageElements(searchPage).ToList();
 
-            CollectionAssert.AreEqual(new[] { Tuple.Create("MyQuery", "en-GB") }, (ICollection)((MockSearchPageElement)searchElements[1]).Queries);
-            CollectionAssert.AreEqual(new[] { Tuple.Create("MyQuery", "en-GB") }, (ICollection)((MockSearchPageElement)searchElements[0]).Queries);
+            Assert.Equal<Tuple<string, string>>(new[] { Tuple.Create("MyQuery", "en-GB") }, ((MockSearchPageElement)searchElements[1]).Queries);
+            Assert.Equal<Tuple<string, string>>(new[] { Tuple.Create("MyQuery", "en-GB") }, ((MockSearchPageElement)searchElements[0]).Queries);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_DoesNotNavigateIfActivationKindIsNotSearch()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
@@ -309,45 +308,45 @@ namespace Okra.Tests.Search
 
             // Assert that no pages were navigated
 
-            CollectionAssert.AreEqual(new string[] { }, navigationManager.NavigatedPages.Select(t => t.Item1).ToArray());
+            Assert.Equal(new string[] { }, navigationManager.NavigatedPages.Select(t => t.Item1).ToArray());
         }
 
-        [TestMethod]
-        public void Activate_ThrowsException_IfEventArgsIsNull()
+        [Fact]
+        public async void Activate_ThrowsException_IfEventArgsIsNull()
         {
             SearchManager searchManager = CreateSearchMananger();
 
-            Assert.ThrowsException<ArgumentNullException>(() => searchManager.Activate(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => searchManager.Activate(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void OnActivationManagerActivated_ThrowsException_IfEventArgsIsNull()
         {
             TestableSearchManager searchManager = CreateSearchMananger();
 
-            Assert.ThrowsException<ArgumentNullException>(() => searchManager.CallOnActivationManagerActivated(null));
+            Assert.Throws<ArgumentNullException>(() => searchManager.CallOnActivationManagerActivated(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void OnQuerySubmitted_ThrowsException_IfEventArgsIsNull()
         {
             TestableSearchManager searchManager = CreateSearchMananger();
 
-            Assert.ThrowsException<ArgumentNullException>(() => searchManager.CallOnQuerySubmitted(null));
+            Assert.Throws<ArgumentNullException>(() => searchManager.CallOnQuerySubmitted(null));
         }
 
         // *** Behaviour Tests ***
 
-        [TestMethod]
+        [Fact]
         public void BeforeFirstActivation_DoesNotCallRegisterQuerySubmitted()
         {
             MockActivationManager activationManager = new MockActivationManager();
             TestableSearchManager searchManager = CreateSearchMananger(activationManager: activationManager);
 
-            Assert.AreEqual(0, searchManager.RegisterQuerySubmittedCount);
+            Assert.Equal(0, searchManager.RegisterQuerySubmittedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void OnFirstActivation_CallsRegisterQuerySubmitted()
         {
             MockActivationManager activationManager = new MockActivationManager();
@@ -355,10 +354,10 @@ namespace Okra.Tests.Search
 
             activationManager.RaiseActivatedEvent(new MockActivatedEventArgs());
 
-            Assert.AreEqual(1, searchManager.RegisterQuerySubmittedCount);
+            Assert.Equal(1, searchManager.RegisterQuerySubmittedCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void OnMultipleActivations_CallsRegisterQuerySubmittedOnlyOnce()
         {
             MockActivationManager activationManager = new MockActivationManager();
@@ -367,7 +366,7 @@ namespace Okra.Tests.Search
             activationManager.RaiseActivatedEvent(new MockActivatedEventArgs());
             activationManager.RaiseActivatedEvent(new MockActivatedEventArgs());
 
-            Assert.AreEqual(1, searchManager.RegisterQuerySubmittedCount);
+            Assert.Equal(1, searchManager.RegisterQuerySubmittedCount);
         }
 
         // *** Private Methods ***

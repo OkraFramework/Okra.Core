@@ -1,17 +1,16 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Navigation;
+﻿using Okra.Navigation;
 using Okra.Tests.Mocks;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Windows.UI.Core;
+using Xunit;
 
 namespace Okra.Tests.Navigation
 {
-    [TestClass]
     public class WindowNavigationTargetFixture
     {
-        [TestMethod]
+        [Fact]
         public void NavigateTo_SetsWindowContent()
         {
             TestableWindowNavigationTarget target = new TestableWindowNavigationTarget();
@@ -20,36 +19,36 @@ namespace Okra.Tests.Navigation
             object page = new object();
             target.NavigateTo(page, navigationBase);
 
-            CollectionAssert.AreEqual(new object[] { page }, target.SetWindowContentCalls);
+            Assert.Equal(new object[] { page }, target.SetWindowContentCalls);
         }
 
-        [TestMethod]
+        [Fact]
         public void NavigateTo_FirstCallRegistersEventHandlers()
         {
             TestableWindowNavigationTarget target = new TestableWindowNavigationTarget();
             MockNavigationBase navigationBase = new MockNavigationBase();
             object page = new object();
 
-            Assert.AreEqual(0, target.RegisterEventHandlersCallCount);
+            Assert.Equal(0, target.RegisterEventHandlersCallCount);
 
             target.NavigateTo(page, navigationBase);
 
-            Assert.AreEqual(1, target.RegisterEventHandlersCallCount);
+            Assert.Equal(1, target.RegisterEventHandlersCallCount);
         }
 
-        [TestMethod]
+        [Fact]
         public void NavigateTo_RegisterEventHandlersIsOnlyCalledOnce()
         {
             TestableWindowNavigationTarget target = new TestableWindowNavigationTarget();
             MockNavigationBase navigationBase = new MockNavigationBase();
             object page = new object();
 
-            Assert.AreEqual(0, target.RegisterEventHandlersCallCount);
+            Assert.Equal(0, target.RegisterEventHandlersCallCount);
 
             target.NavigateTo(page, navigationBase);
             target.NavigateTo(page, navigationBase);
 
-            Assert.AreEqual(1, target.RegisterEventHandlersCallCount);
+            Assert.Equal(1, target.RegisterEventHandlersCallCount);
         }
 
         // *** Private classes ***

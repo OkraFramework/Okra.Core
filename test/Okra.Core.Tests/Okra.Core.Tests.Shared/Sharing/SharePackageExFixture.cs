@@ -1,107 +1,106 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Sharing;
+﻿using Okra.Sharing;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
+using Xunit;
 
 namespace Okra.Tests.Sharing
 {
-    [TestClass]
     public class SharePackageExFixture
     {
-        [TestMethod]
+        [Fact]
         public void SetApplicationLink_SetsDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
 
             sharePackage.SetApplicationLink(new Uri("http://www.example.com"));
 
-            Assert.AreEqual(1, sharePackage.SetDataCalls.Count);
-            Assert.AreEqual(StandardDataFormats.ApplicationLink, sharePackage.SetDataCalls[0].Item1);
-            Assert.AreEqual(new Uri("http://www.example.com"), sharePackage.SetDataCalls[0].Item2);
+            Assert.Equal(1, sharePackage.SetDataCalls.Count);
+            Assert.Equal(StandardDataFormats.ApplicationLink, sharePackage.SetDataCalls[0].Item1);
+            Assert.Equal(new Uri("http://www.example.com"), sharePackage.SetDataCalls[0].Item2);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetApplicationLink_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetApplicationLink(null, new Uri("http://www.example.com")));
+            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetApplicationLink(null, new Uri("http://www.example.com")));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetHtmlFormat_SetsDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
 
             sharePackage.SetHtmlFormat("Test Html");
 
-            Assert.AreEqual(1, sharePackage.SetDataCalls.Count);
-            Assert.AreEqual(StandardDataFormats.Html, sharePackage.SetDataCalls[0].Item1);
-            Assert.AreEqual("Test Html", sharePackage.SetDataCalls[0].Item2);
+            Assert.Equal(1, sharePackage.SetDataCalls.Count);
+            Assert.Equal(StandardDataFormats.Html, sharePackage.SetDataCalls[0].Item1);
+            Assert.Equal("Test Html", sharePackage.SetDataCalls[0].Item2);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetHtmlFormat_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetHtmlFormat(null, "Test Html"));
+            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetHtmlFormat(null, "Test Html"));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetRtf_SetsDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
 
             sharePackage.SetRtf("Test Rtf");
 
-            Assert.AreEqual(1, sharePackage.SetDataCalls.Count);
-            Assert.AreEqual(StandardDataFormats.Rtf, sharePackage.SetDataCalls[0].Item1);
-            Assert.AreEqual("Test Rtf", sharePackage.SetDataCalls[0].Item2);
+            Assert.Equal(1, sharePackage.SetDataCalls.Count);
+            Assert.Equal(StandardDataFormats.Rtf, sharePackage.SetDataCalls[0].Item1);
+            Assert.Equal("Test Rtf", sharePackage.SetDataCalls[0].Item2);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetRtf_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetRtf(null, "Test Rtf"));
+            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetRtf(null, "Test Rtf"));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetText_SetsDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
 
             sharePackage.SetText("Test Text");
 
-            Assert.AreEqual(1, sharePackage.SetDataCalls.Count);
-            Assert.AreEqual(StandardDataFormats.Text, sharePackage.SetDataCalls[0].Item1);
-            Assert.AreEqual("Test Text", sharePackage.SetDataCalls[0].Item2);
+            Assert.Equal(1, sharePackage.SetDataCalls.Count);
+            Assert.Equal(StandardDataFormats.Text, sharePackage.SetDataCalls[0].Item1);
+            Assert.Equal("Test Text", sharePackage.SetDataCalls[0].Item2);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetText_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetText(null, "Test Text"));
+            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetText(null, "Test Text"));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetWebLink_SetsDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
 
             sharePackage.SetWebLink(new Uri("http://www.example.com"));
 
-            Assert.AreEqual(1, sharePackage.SetDataCalls.Count);
-            Assert.AreEqual(StandardDataFormats.WebLink, sharePackage.SetDataCalls[0].Item1);
-            Assert.AreEqual(new Uri("http://www.example.com"), sharePackage.SetDataCalls[0].Item2);
+            Assert.Equal(1, sharePackage.SetDataCalls.Count);
+            Assert.Equal(StandardDataFormats.WebLink, sharePackage.SetDataCalls[0].Item1);
+            Assert.Equal(new Uri("http://www.example.com"), sharePackage.SetDataCalls[0].Item2);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetWebLink_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetWebLink(null, new Uri("http://www.example.com")));
+            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetWebLink(null, new Uri("http://www.example.com")));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task SetAsyncApplicationLink_SetsAsyncDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
@@ -112,22 +111,22 @@ namespace Okra.Tests.Sharing
                 return new Uri("http://www.example.com");
             });
 
-            Assert.AreEqual(1, sharePackage.SetAsyncDataCalls.Count);
-            Assert.AreEqual(StandardDataFormats.ApplicationLink, sharePackage.SetAsyncDataCalls[0].Item1);
-            Assert.AreEqual(new Uri("http://www.example.com"), await sharePackage.SetAsyncDataCalls[0].Item2(""));
+            Assert.Equal(1, sharePackage.SetAsyncDataCalls.Count);
+            Assert.Equal(StandardDataFormats.ApplicationLink, sharePackage.SetAsyncDataCalls[0].Item1);
+            Assert.Equal(new Uri("http://www.example.com"), await sharePackage.SetAsyncDataCalls[0].Item2(""));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetAsyncApplicationLink_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetAsyncApplicationLink(null, async (state) =>
+            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncApplicationLink(null, async (state) =>
             {
                 await Task.Delay(200);
                 return new Uri("http://www.example.com");
             }));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task SetAsyncHtmlFormat_SetsAsyncDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
@@ -138,22 +137,22 @@ namespace Okra.Tests.Sharing
                 return "Test Html";
             });
 
-            Assert.AreEqual(1, sharePackage.SetAsyncDataCalls.Count);
-            Assert.AreEqual(StandardDataFormats.Html, sharePackage.SetAsyncDataCalls[0].Item1);
-            Assert.AreEqual("Test Html", await sharePackage.SetAsyncDataCalls[0].Item2(""));
+            Assert.Equal(1, sharePackage.SetAsyncDataCalls.Count);
+            Assert.Equal(StandardDataFormats.Html, sharePackage.SetAsyncDataCalls[0].Item1);
+            Assert.Equal("Test Html", await sharePackage.SetAsyncDataCalls[0].Item2(""));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetAsyncHtmlFormat_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetAsyncHtmlFormat(null, async (state) =>
+            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncHtmlFormat(null, async (state) =>
             {
                 await Task.Delay(200);
                 return "Test Html";
             }));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task SetAsyncRtf_SetsAsyncDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
@@ -164,22 +163,22 @@ namespace Okra.Tests.Sharing
                 return "Test Rtf";
             });
 
-            Assert.AreEqual(1, sharePackage.SetAsyncDataCalls.Count);
-            Assert.AreEqual(StandardDataFormats.Rtf, sharePackage.SetAsyncDataCalls[0].Item1);
-            Assert.AreEqual("Test Rtf", await sharePackage.SetAsyncDataCalls[0].Item2(""));
+            Assert.Equal(1, sharePackage.SetAsyncDataCalls.Count);
+            Assert.Equal(StandardDataFormats.Rtf, sharePackage.SetAsyncDataCalls[0].Item1);
+            Assert.Equal("Test Rtf", await sharePackage.SetAsyncDataCalls[0].Item2(""));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetAsyncRtf_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetAsyncRtf(null, async (state) =>
+            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncRtf(null, async (state) =>
             {
                 await Task.Delay(200);
                 return "Test Rtf";
             }));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task SetAsyncText_SetsAsyncDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
@@ -190,22 +189,22 @@ namespace Okra.Tests.Sharing
                 return "Test Text";
             });
 
-            Assert.AreEqual(1, sharePackage.SetAsyncDataCalls.Count);
-            Assert.AreEqual(StandardDataFormats.Text, sharePackage.SetAsyncDataCalls[0].Item1);
-            Assert.AreEqual("Test Text", await sharePackage.SetAsyncDataCalls[0].Item2(""));
+            Assert.Equal(1, sharePackage.SetAsyncDataCalls.Count);
+            Assert.Equal(StandardDataFormats.Text, sharePackage.SetAsyncDataCalls[0].Item1);
+            Assert.Equal("Test Text", await sharePackage.SetAsyncDataCalls[0].Item2(""));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetAsyncText_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetAsyncText(null, async (state) =>
+            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncText(null, async (state) =>
             {
                 await Task.Delay(200);
                 return "Test Text";
             }));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task SetAsyncWebLink_SetsAsyncDataOnSharePackage()
         {
             MockSharePackage sharePackage = new MockSharePackage();
@@ -216,15 +215,15 @@ namespace Okra.Tests.Sharing
                 return new Uri("http://www.example.com");
             });
 
-            Assert.AreEqual(1, sharePackage.SetAsyncDataCalls.Count);
-            Assert.AreEqual(StandardDataFormats.WebLink, sharePackage.SetAsyncDataCalls[0].Item1);
-            Assert.AreEqual(new Uri("http://www.example.com"), await sharePackage.SetAsyncDataCalls[0].Item2(""));
+            Assert.Equal(1, sharePackage.SetAsyncDataCalls.Count);
+            Assert.Equal(StandardDataFormats.WebLink, sharePackage.SetAsyncDataCalls[0].Item1);
+            Assert.Equal(new Uri("http://www.example.com"), await sharePackage.SetAsyncDataCalls[0].Item2(""));
         }
 
-        [TestMethod]
+        [Fact]
         public void SetAsyncWebLink_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => SharePackageEx.SetAsyncWebLink(null, async (state) =>
+            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncWebLink(null, async (state) =>
             {
                 await Task.Delay(200);
                 return new Uri("http://www.example.com");

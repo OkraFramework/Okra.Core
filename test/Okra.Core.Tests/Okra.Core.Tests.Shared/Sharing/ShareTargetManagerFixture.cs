@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Okra.Sharing;
+﻿using Okra.Sharing;
 using Okra.Navigation;
 using Okra.Services;
 using Okra.Tests.Mocks;
@@ -12,74 +11,74 @@ using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.DataTransfer.ShareTarget;
 using Windows.UI.Xaml.Navigation;
+using Xunit;
 
 namespace Okra.Tests.Sharing
 {
-    [TestClass]
     public class ShareTargetManagerFixture
     {
         // *** Constructor Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Constructor_RegistersWithActivationManager()
         {
             MockActivationManager activationManager = new MockActivationManager();
             ShareTargetManager shareTargetManager = CreateShareTargetManager(activationManager: activationManager);
 
-            CollectionAssert.Contains(activationManager.RegisteredServices, shareTargetManager);
+            Assert.Contains(shareTargetManager, activationManager.RegisteredServices);
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfActivationManagerIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new ShareTargetManager(null, new MockViewFactory()));
+            Assert.Throws<ArgumentNullException>(() => new ShareTargetManager(null, new MockViewFactory()));
         }
 
-        [TestMethod]
+        [Fact]
         public void Constructor_ThrowsException_IfViewFactoryIsNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new ShareTargetManager(new MockActivationManager(), null));
+            Assert.Throws<ArgumentNullException>(() => new ShareTargetManager(new MockActivationManager(), null));
         }
 
         // *** Property Tests ***
 
-        [TestMethod]
+        [Fact]
         public void ShareTargetPageName_IsInitiallySpecialPageName()
         {
             ShareTargetManager shareTargetManager = CreateShareTargetManager(setShareTargetPageName: false);
 
-            Assert.AreEqual(SpecialPageNames.ShareTarget, shareTargetManager.ShareTargetPageName);
+            Assert.Equal(SpecialPageNames.ShareTarget, shareTargetManager.ShareTargetPageName);
         }
 
-        [TestMethod]
+        [Fact]
         public void ShareTargetPageName_CanSetValue()
         {
             ShareTargetManager shareTargetManager = CreateShareTargetManager();
 
             shareTargetManager.ShareTargetPageName = "MyShareTargetPage";
 
-            Assert.AreEqual("MyShareTargetPage", shareTargetManager.ShareTargetPageName);
+            Assert.Equal("MyShareTargetPage", shareTargetManager.ShareTargetPageName);
         }
 
-        [TestMethod]
+        [Fact]
         public void ShareTargetPageName_Exception_CannotSetToNull()
         {
             ShareTargetManager shareTargetManager = CreateShareTargetManager();
 
-            Assert.ThrowsException<ArgumentException>(() => shareTargetManager.ShareTargetPageName = null);
+            Assert.Throws<ArgumentException>(() => shareTargetManager.ShareTargetPageName = null);
         }
 
-        [TestMethod]
+        [Fact]
         public void ShareTargetPageName_Exception_CannotSetToEmptyString()
         {
             ShareTargetManager shareTargetManager = CreateShareTargetManager();
 
-            Assert.ThrowsException<ArgumentException>(() => shareTargetManager.ShareTargetPageName = "");
+            Assert.Throws<ArgumentException>(() => shareTargetManager.ShareTargetPageName = "");
         }
 
         // *** Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_ReturnsTrueIfActivationKindIsShareTarget()
         {
             ShareTargetManager shareTargetManager = CreateShareTargetManager();
@@ -90,10 +89,10 @@ namespace Okra.Tests.Sharing
 
             // Check the result
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_ReturnsFalseIfActivationKindIsLaunch()
         {
             ShareTargetManager shareTargetManager = CreateShareTargetManager();
@@ -104,10 +103,10 @@ namespace Okra.Tests.Sharing
 
             // Check the result
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_DisplaysThePage_WithCorrectName()
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
@@ -118,10 +117,10 @@ namespace Okra.Tests.Sharing
             string[] navigatedPageNames = shareTargetManager.DisplayedViews
                                                 .Select(viewLifetimeContext => viewLifetimeContext.PageName).ToArray();
 
-            CollectionAssert.AreEqual(new string[] { "ShareTarget" }, navigatedPageNames);
+            Assert.Equal(new string[] { "ShareTarget" }, navigatedPageNames);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_DisplaysThePage_WithNullReturningNavigationContext()
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
@@ -132,20 +131,20 @@ namespace Okra.Tests.Sharing
             INavigationBase[] navigatedNavigationContexts = shareTargetManager.DisplayedViews
                                                 .Select(viewLifetimeContext => viewLifetimeContext.NavigationContext.GetCurrent()).ToArray();
 
-            CollectionAssert.AreEqual(new INavigationBase[] { null }, navigatedNavigationContexts);
+            Assert.Equal(new INavigationBase[] { null }, navigatedNavigationContexts);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_DoesNotNavigateIfActivationKindIsLaunch()
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
 
             await shareTargetManager.Activate(new MockActivatedEventArgs() { Kind = ActivationKind.Launch });
 
-            Assert.AreEqual(0, shareTargetManager.DisplayedViews.Count);
+            Assert.Equal(0, shareTargetManager.DisplayedViews.Count);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_CallsNavigatedTo_OnView()
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
@@ -155,10 +154,10 @@ namespace Okra.Tests.Sharing
 
             MockViewLifetimeContext viewLifetimeContext = shareTargetManager.DisplayedViews.First();
             MockPageElement pageView = viewLifetimeContext.View as MockPageElement;
-            CollectionAssert.AreEqual(new string[] { "NavigatedTo(New)" }, pageView.NavigationEvents);
+            Assert.Equal(new string[] { "NavigatedTo(New)" }, pageView.NavigationEvents);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_CallsNavigatedTo_OnViewModel()
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
@@ -168,10 +167,10 @@ namespace Okra.Tests.Sharing
 
             MockViewLifetimeContext viewLifetimeContext = shareTargetManager.DisplayedViews.First();
             MockPageElement pageViewModel = viewLifetimeContext.ViewModel as MockPageElement;
-            CollectionAssert.AreEqual(new string[] { "NavigatedTo(New)" }, pageViewModel.NavigationEvents);
+            Assert.Equal(new string[] { "NavigatedTo(New)" }, pageViewModel.NavigationEvents);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_CallsActivate_OnView()
         {
             IViewFactory viewFactory = new MockShareTargetViewFactory();
@@ -182,10 +181,10 @@ namespace Okra.Tests.Sharing
 
             MockViewLifetimeContext viewLifetimeContext = shareTargetManager.DisplayedViews.First();
             MockShareTargetPageElement pageView = viewLifetimeContext.View as MockShareTargetPageElement;
-            Assert.AreEqual(1, pageView.ActivateEvents.Count);
+            Assert.Equal(1, pageView.ActivateEvents.Count);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_CallsActivate_OnViewModel()
         {
             IViewFactory viewFactory = new MockShareTargetViewFactory();
@@ -196,10 +195,10 @@ namespace Okra.Tests.Sharing
 
             MockViewLifetimeContext viewLifetimeContext = shareTargetManager.DisplayedViews.First();
             MockShareTargetPageElement pageViewModel = viewLifetimeContext.ViewModel as MockShareTargetPageElement;
-            Assert.AreEqual(1, pageViewModel.ActivateEvents.Count);
+            Assert.Equal(1, pageViewModel.ActivateEvents.Count);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_CallsActivateWithShareOperation_OnView()
         {
             IViewFactory viewFactory = new MockShareTargetViewFactory();
@@ -211,11 +210,11 @@ namespace Okra.Tests.Sharing
 
             MockViewLifetimeContext viewLifetimeContext = shareTargetManager.DisplayedViews.First();
             MockShareTargetPageElement pageView = viewLifetimeContext.View as MockShareTargetPageElement;
-            Assert.IsInstanceOfType(pageView.ActivateEvents[0], typeof(MockShareOperation));
-            Assert.AreEqual(activatedEventArgs, ((MockShareOperation)pageView.ActivateEvents[0]).ActivatedEventArgs);
+            Assert.IsAssignableFrom(typeof(MockShareOperation),pageView.ActivateEvents[0]);
+            Assert.Equal(activatedEventArgs, ((MockShareOperation)pageView.ActivateEvents[0]).ActivatedEventArgs);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Activate_CallsActivateWithShareOperation_OnViewModel()
         {
             IViewFactory viewFactory = new MockShareTargetViewFactory();
@@ -227,45 +226,45 @@ namespace Okra.Tests.Sharing
 
             MockViewLifetimeContext viewLifetimeContext = shareTargetManager.DisplayedViews.First();
             MockShareTargetPageElement pageViewModel = viewLifetimeContext.ViewModel as MockShareTargetPageElement;
-            Assert.IsInstanceOfType(pageViewModel.ActivateEvents[0], typeof(MockShareOperation));
-            Assert.AreEqual(activatedEventArgs, ((MockShareOperation)pageViewModel.ActivateEvents[0]).ActivatedEventArgs);
+            Assert.IsAssignableFrom(typeof(MockShareOperation),pageViewModel.ActivateEvents[0]);
+            Assert.Equal(activatedEventArgs, ((MockShareOperation)pageViewModel.ActivateEvents[0]).ActivatedEventArgs);
         }
 
-        [TestMethod]
-        public void Activate_ThrowsException_IfEventArgsIsNull()
+        [Fact]
+        public async void Activate_ThrowsException_IfEventArgsIsNull()
         {
             ShareTargetManager shareTargetManager = CreateShareTargetManager();
 
-            Assert.ThrowsException<ArgumentNullException>(() => shareTargetManager.Activate(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => shareTargetManager.Activate(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void DisplayPage_ThrowsException_IfViewLifetimeContextIsNull()
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
 
-            Assert.ThrowsException<ArgumentNullException>(() => shareTargetManager.DisplayPageDirect(null));
+            Assert.Throws<ArgumentNullException>(() => shareTargetManager.DisplayPageDirect(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void OnWindowClosing_ThrowsException_IfViewLifetimeContextIsNull()
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
 
-            Assert.ThrowsException<ArgumentNullException>(() => shareTargetManager.OnWindowClosing(null));
+            Assert.Throws<ArgumentNullException>(() => shareTargetManager.OnWindowClosing(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void WrapShareOperation_ThrowsException_IfEventArgsIsNull()
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
 
-            Assert.ThrowsException<ArgumentNullException>(() => shareTargetManager.WrapShareOperationDirect(null));
+            Assert.Throws<ArgumentNullException>(() => shareTargetManager.WrapShareOperationDirect(null));
         }
 
         // *** Behaviour Tests ***
 
-        [TestMethod]
+        [Fact]
         public async Task ClosingWindow_DisposesPage()
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
@@ -276,10 +275,10 @@ namespace Okra.Tests.Sharing
             MockViewLifetimeContext viewLifetimeContext = shareTargetManager.DisplayedViews.First();
             shareTargetManager.OnWindowClosing(viewLifetimeContext);
 
-            Assert.AreEqual(true, viewLifetimeContext.IsDisposed);
+            Assert.Equal(true, viewLifetimeContext.IsDisposed);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task ClosingWindow_CallsNavigatingFrom_OnView()
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
@@ -293,10 +292,10 @@ namespace Okra.Tests.Sharing
 
             shareTargetManager.OnWindowClosing(viewLifetimeContext);
 
-            CollectionAssert.AreEqual(new string[] { "NavigatingFrom(Back)" }, pageView.NavigationEvents);
+            Assert.Equal(new string[] { "NavigatingFrom(Back)" }, pageView.NavigationEvents);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task ClosingWindow_CallsNavigatingFrom_OnViewModel()
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
@@ -311,7 +310,7 @@ namespace Okra.Tests.Sharing
             shareTargetManager.OnWindowClosing(viewLifetimeContext);
 
 
-            CollectionAssert.AreEqual(new string[] { "NavigatingFrom(Back)" }, pageViewModel.NavigationEvents);
+            Assert.Equal(new string[] { "NavigatingFrom(Back)" }, pageViewModel.NavigationEvents);
         }
 
         // *** Private Methods ***

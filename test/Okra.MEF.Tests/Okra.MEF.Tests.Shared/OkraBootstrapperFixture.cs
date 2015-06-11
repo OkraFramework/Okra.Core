@@ -2,7 +2,6 @@
 using System.Text;
 using System.Linq;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Okra.Navigation;
 using Windows.ApplicationModel.Activation;
 using System.Threading.Tasks;
@@ -11,6 +10,7 @@ using System.Composition;
 using System.Collections;
 using Windows.ApplicationModel.Core;
 using Okra.Services;
+using Xunit;
 
 #if WINDOWS_APP
 using Okra.Search;
@@ -18,31 +18,30 @@ using Okra.Search;
 
 namespace Okra.MEF.Tests
 {
-    [TestClass]
     public class OkraBootstrapperFixture
     {
         // *** Method Tests ***
 
-        [TestMethod]
+        [Fact]
         public void Activate_ThrowsException_IfEventArgsAreNull()
         {
             TestableBootstrapper bootstrapper = new TestableBootstrapper();
             bootstrapper.Initialize();
 
-            Assert.ThrowsException<ArgumentNullException>(() => bootstrapper.Activate(null));
+            Assert.Throws<ArgumentNullException>(() => bootstrapper.Activate(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void Initialize_ComposesProperties()
         {
             TestableBootstrapper bootstrapper = new TestableBootstrapper();
 
             bootstrapper.Initialize();
 
-            Assert.IsInstanceOfType(bootstrapper.ActivationManager, typeof(MockActivationManager));
+            Assert.IsAssignableFrom(typeof(MockActivationManager),bootstrapper.ActivationManager);
         }
 
-        [TestMethod]
+        [Fact]
         public void OnActivated_CallsSetupServices()
         {
             TestableBootstrapper bootstrapper = new TestableBootstrapper();
@@ -50,10 +49,10 @@ namespace Okra.MEF.Tests
 
             bootstrapper.SimulateActivate(new MockActivatedEventArgs(ActivationKind.Launch));
 
-            CollectionAssert.Contains((ICollection)bootstrapper.SetupMethodCalls, "SetupServices");
+            Assert.Contains("SetupServices", bootstrapper.SetupMethodCalls);
         }
 
-        [TestMethod]
+        [Fact]
         public void OnActivated_CallsSetupServices_OnlyOnce()
         {
             TestableBootstrapper bootstrapper = new TestableBootstrapper();
@@ -63,10 +62,10 @@ namespace Okra.MEF.Tests
             bootstrapper.SimulateActivate(new MockActivatedEventArgs(ActivationKind.Launch));
             bootstrapper.SimulateActivate(new MockActivatedEventArgs(ActivationKind.Launch));
 
-            Assert.AreEqual(1, bootstrapper.SetupMethodCalls.Count(str => str == "SetupServices"));
+            Assert.Equal(1, bootstrapper.SetupMethodCalls.Count(str => str == "SetupServices"));
         }
 
-        [TestMethod]
+        [Fact]
         public void OnActivated_Launch_PassesActivationEventToNavigationManager()
         {
             TestableBootstrapper bootstrapper = new TestableBootstrapper();
@@ -75,18 +74,18 @@ namespace Okra.MEF.Tests
             bootstrapper.SimulateActivate(new MockActivatedEventArgs(ActivationKind.Launch));
 
             MockActivationManager activationManager = (MockActivationManager)bootstrapper.ActivationManager;
-            Assert.AreEqual(1, activationManager.ActivationEventArgs.Count);
-            Assert.IsInstanceOfType(activationManager.ActivationEventArgs[0], typeof(MockActivatedEventArgs));
-            Assert.AreEqual(ActivationKind.Launch, activationManager.ActivationEventArgs[0].Kind);
+            Assert.Equal(1, activationManager.ActivationEventArgs.Count);
+            Assert.IsAssignableFrom(typeof(MockActivatedEventArgs),activationManager.ActivationEventArgs[0]);
+            Assert.Equal(ActivationKind.Launch, activationManager.ActivationEventArgs[0].Kind);
         }
 
-        [TestMethod]
+        [Fact]
         public void OnActivated_ThrowsException_IfEventArgsAreNull()
         {
             TestableBootstrapper bootstrapper = new TestableBootstrapper();
             bootstrapper.Initialize();
 
-            Assert.ThrowsException<ArgumentNullException>(() => bootstrapper.SimulateActivate(null));
+            Assert.Throws<ArgumentNullException>(() => bootstrapper.SimulateActivate(null));
         }
 
         // *** Private Sub-classes ***
