@@ -25,3 +25,5 @@ Install-NuGet
 
 Add-NuGetPackage .\src\Okra.Core\Okra.Core.nuspec .\artifacts
 Add-NuGetPackage .\src\Okra.MEF\Okra.MEF.nuspec .\artifacts
+Add-NuGetPackage .\src\Okra.Core\Okra.Core.Xamarin.Forms.nuspec .\artifacts
+Add-NuGetPackage .\src\Okra.MEF\Okra.MEF.Xamarin.Forms.nuspec .\artifacts

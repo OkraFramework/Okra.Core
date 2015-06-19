@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Okra.MEF.Xamarin.Forms</id>
+    <version>1.1.0-beta001</version>
+    <title>Okra App Framework for Xamarin.Forms</title>
+    <authors>Andrew Wilkinson</authors>
+    <owners>Andrew Wilkinson</owners>
+    <licenseUrl>https://raw.githubusercontent.com/Andy-Wilkinson/Okra.Core/master/LICENSE</licenseUrl>
+    <projectUrl>http://okraframework.github.io</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The Okra App Framework is an app centric MVVM framework. This package targets Xamarin Forms and is designed for use with MEF.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>Okra MVVM Xamarin Android Apple iOS MEF</tags>
+    <dependencies>
+      <dependency id="Okra.Core.Xamarin.Forms" version="[1.1.0-beta001]"/>
+      <dependency id="Microsoft.Composition" version="[1.0.30]"/>
+      <dependency id="PCLStorage" version="1.0.2"/>
+      <dependency id="Xamarin.Forms" version="1.4.2.6355"/>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Okra.MEF.Xamarin.Forms\bin\Release\Okra.MEF.dll" target="lib\portable-netcore451+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\Okra.MEF.dll" />
+  </files>
+</package>
