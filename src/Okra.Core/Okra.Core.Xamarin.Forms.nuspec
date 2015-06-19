@@ -15,7 +15,7 @@
     <tags>Okra MVVM Xamarin Android Apple iOS</tags>
     <dependencies>
       <dependency id="PCLStorage" version="1.0.2"/>
-      <dependency id="Xamarin.Forms" version="1.4.2.6355"/>
+      <dependency id="Xamarin.Forms" version="1.4.2.6359"/>
     </dependencies>
   </metadata>
   <files>
