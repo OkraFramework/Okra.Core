@@ -28,7 +28,7 @@ If ($VersionNumber -ne $null)
 }
 
 write-host "--- Building release binaries ---"
-.\scripts\BuildRelease.ps1
+.\scripts\BuildRelease.ps1 -noTests
 
 write-host "--- Creating NuGet packages ---"
 .\scripts\CreatePackages.ps1
