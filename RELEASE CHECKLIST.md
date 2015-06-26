@@ -2,6 +2,7 @@
 
 * Pre-release checks
   * Run https://github.com/dotnet/codeformatter to fix any deviations from dotNet coding guidelines
+  * Run the Coverity Scan static analysis tool to check for defects (https://scan.coverity.com)
   * Check that the Okra.Core.Portable API matches the platform specific ones
 * Rebuild all artifacts using the 'build.ps1' script
   * NB: Pass the new version number as the first parameter
