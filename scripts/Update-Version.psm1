@@ -46,18 +46,18 @@ function Update-Nuspec
     $okraMefRegex = '<dependency id="Okra.MEF" version="[^"]+"/>'
     $okraMef = '<dependency id="Okra.MEF" version="[' + $semver + ']"/>'
 
-    $okraUniCoreRegex = '<dependency id="OkraUniversalPreview.Core" version="[^"]+"/>'
-    $okraUniCore = '<dependency id="OkraUniversalPreview.Core" version="[' + $semver + ']"/>'
+    $okraXamarinCoreRegex = '<dependency id="Okra.Core.Xamarin.Forms" version="[^"]+"/>'
+    $okraXamarinCore = '<dependency id="Okra.Core.Xamarin.Forms" version="[' + $semver + ']"/>'
 
-    $okraUniMefRegex = '<dependency id="OkraUniversalPreview.MEF" version="[^"]+"/>'
-    $okraUniMef = '<dependency id="OkraUniversalPreview.MEF" version="[' + $semver + ']"/>'
+    $okraXamarinMefRegex = '<dependency id="Okra.MEF.Xamarin.Forms" version="[^"]+"/>'
+    $okraXamarinMef = '<dependency id="Okra.MEF.Xamarin.Forms" version="[' + $semver + ']"/>'
 
     (Get-Content $FileName) |
         ForEach-Object {$_ -replace $versionRegex, $version} |
         ForEach-Object {$_ -replace $okraCoreRegex, $okraCore} |
         ForEach-Object {$_ -replace $okraMefRegex, $okraMef} |
-        ForEach-Object {$_ -replace $okraUniCoreRegex, $okraUniCore} |
-        ForEach-Object {$_ -replace $okraUniMefRegex, $okraUniMef} |
+        ForEach-Object {$_ -replace $okraXamarinCoreRegex, $okraXamarinCore} |
+        ForEach-Object {$_ -replace $okraXamarinMefRegex, $okraXamarinMef} |
         Set-Content $FileName
 }
 
