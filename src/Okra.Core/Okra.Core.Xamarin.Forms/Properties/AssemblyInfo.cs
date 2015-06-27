@@ -1,4 +1,4 @@
-﻿using System.Resources;
+using System.Resources;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 //      Minor Version 
 //      Build Number
 //      Revision
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.1.0-beta001")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: AssemblyInformationalVersion("1.1.0")]
 [assembly: ComVisible(false)]
