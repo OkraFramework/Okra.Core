@@ -24,7 +24,7 @@ Install-DotNetZip
 
 # Run the Coverity Build tool
 
-& "C:\Program Files\cov-analysis-win64-7.5.0\bin\cov-build" --dir artifacts\cov-int powershell ./scripts/BuildRelease.ps1 -noTests
+& "C:\Program Files\cov-analysis-win64-7.6.0\bin\cov-build" --dir artifacts\cov-int powershell ./scripts/BuildRelease.ps1 -noTests
 
 # Zip the resulting files
 
