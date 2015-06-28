@@ -60,7 +60,9 @@ namespace Okra.Tests.Navigation
         {
             NavigationStackWithHome navigationStack = new NavigationStackWithHome();
 
-            Assert.Throws<InvalidOperationException>(() => navigationStack.GoBack());
+            var e = Assert.Throws<InvalidOperationException>(() => navigationStack.GoBack());
+
+            Assert.Equal("You cannot navigate backwards as the back stack is empty.", e.Message);
         }
 
         [Fact]
@@ -70,7 +72,9 @@ namespace Okra.Tests.Navigation
 
             navigationStack.NavigateTo(new PageInfo("Page 1", null));
 
-            Assert.Throws<InvalidOperationException>(() => navigationStack.GoBack());
+            var e = Assert.Throws<InvalidOperationException>(() => navigationStack.GoBack());
+
+            Assert.Equal("You cannot navigate backwards as the back stack is empty.", e.Message);
         }
 
         // *** Behavior Tests ***

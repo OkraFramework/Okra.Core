@@ -14,7 +14,10 @@ namespace Okra.Tests.Sharing
         [Fact]
         public void Constructor_ThrowsException_IfDataPackageViewIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new SharePackageView(null));
+            var e = Assert.Throws<ArgumentNullException>(() => new SharePackageView(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: dataPackageView", e.Message);
+            Assert.Equal("dataPackageView", e.ParamName);
         }
 
         [Fact]
@@ -59,7 +62,9 @@ namespace Okra.Tests.Sharing
             DataPackage dataPackage = new DataPackage();
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.Throws<InvalidOperationException>(() => sharePackage.Properties.Description = "Test Value");
+            var e = Assert.Throws<InvalidOperationException>(() => sharePackage.Properties.Description = "Test Value");
+
+            Assert.Equal("Cannot modify share properties as a share target.", e.Message);
         }
 
         [Fact]
@@ -68,7 +73,9 @@ namespace Okra.Tests.Sharing
             DataPackage dataPackage = new DataPackage();
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.Throws<InvalidOperationException>(() => sharePackage.Properties.Description = "Test Value");
+            var e = Assert.Throws<InvalidOperationException>(() => sharePackage.Properties.Description = "Test Value");
+
+            Assert.Equal("Cannot modify share properties as a share target.", e.Message);
         }
 
         [Fact]
@@ -104,7 +111,10 @@ namespace Okra.Tests.Sharing
 
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.Throws<ArgumentException>(() => sharePackage.Contains(null));
+            var e = Assert.Throws<ArgumentException>(() => sharePackage.Contains(null));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: formatId", e.Message);
+            Assert.Equal("formatId", e.ParamName);
         }
 
         [Fact]
@@ -116,7 +126,10 @@ namespace Okra.Tests.Sharing
 
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            Assert.Throws<ArgumentException>(() => sharePackage.Contains(""));
+            var e = Assert.Throws<ArgumentException>(() => sharePackage.Contains(""));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: formatId", e.Message);
+            Assert.Equal("formatId", e.ParamName);
         }
 
         [Fact]
@@ -140,7 +153,10 @@ namespace Okra.Tests.Sharing
 
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            await Assert.ThrowsAsync<ArgumentException>(() => sharePackage.GetDataAsync<string>(null));
+            var e = await Assert.ThrowsAsync<ArgumentException>(() => sharePackage.GetDataAsync<string>(null));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: formatId", e.Message);
+            Assert.Equal("formatId", e.ParamName);
         }
 
         [Fact]
@@ -152,7 +168,10 @@ namespace Okra.Tests.Sharing
 
             SharePackageView sharePackage = new SharePackageView(dataPackage.GetView());
 
-            await Assert.ThrowsAsync<ArgumentException>(() => sharePackage.GetDataAsync<string>(""));
+            var e = await Assert.ThrowsAsync<ArgumentException>(() => sharePackage.GetDataAsync<string>(""));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: formatId", e.Message);
+            Assert.Equal("formatId", e.ParamName);
         }
     }
 }

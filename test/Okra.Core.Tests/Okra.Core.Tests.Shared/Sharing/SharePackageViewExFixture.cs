@@ -24,7 +24,10 @@ namespace Okra.Tests.Sharing
         [Fact]
         public async void GetApplicationLinkAsync_ThrowsException_IfSharePackageViewIsNull()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetApplicationLinkAsync(null));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetApplicationLinkAsync(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackageView", e.Message);
+            Assert.Equal("sharePackageView", e.ParamName);
         }
 
         [Fact]
@@ -41,7 +44,10 @@ namespace Okra.Tests.Sharing
         [Fact]
         public async void GetHtmlFormatAsync_ThrowsException_IfSharePackageViewIsNull()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetHtmlFormatAsync(null));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetHtmlFormatAsync(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackageView", e.Message);
+            Assert.Equal("sharePackageView", e.ParamName);
         }
 
         [Fact]
@@ -58,7 +64,10 @@ namespace Okra.Tests.Sharing
         [Fact]
         public async void GetRtfAsync_ThrowsException_IfSharePackageViewIsNull()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetRtfAsync(null));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetRtfAsync(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackageView", e.Message);
+            Assert.Equal("sharePackageView", e.ParamName);
         }
 
         [Fact]
@@ -75,7 +84,10 @@ namespace Okra.Tests.Sharing
         [Fact]
         public async void GetTextAsync_ThrowsException_IfSharePackageViewIsNull()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetTextAsync(null));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetTextAsync(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackageView", e.Message);
+            Assert.Equal("sharePackageView", e.ParamName);
         }
 
         [Fact]
@@ -92,7 +104,10 @@ namespace Okra.Tests.Sharing
         [Fact]
         public async void GetWebLinkAsync_ThrowsException_IfSharePackageViewIsNull()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetWebLinkAsync(null));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => SharePackageViewEx.GetWebLinkAsync(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackageView", e.Message);
+            Assert.Equal("sharePackageView", e.ParamName);
         }
 
         // *** Private sub-classes ***

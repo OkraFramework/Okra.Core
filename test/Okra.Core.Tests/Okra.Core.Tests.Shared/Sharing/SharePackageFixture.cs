@@ -13,7 +13,10 @@ namespace Okra.Tests.Sharing
         [Fact]
         public void Constructor_ThrowsException_IfDataPackageIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new SharePackage(null));
+            var e = Assert.Throws<ArgumentNullException>(() => new SharePackage(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: dataPackage", e.Message);
+            Assert.Equal("dataPackage", e.ParamName);
         }
 
         [Fact]
@@ -34,7 +37,10 @@ namespace Okra.Tests.Sharing
             DataPackage dataPackage = new DataPackage();
             SharePackage sharePackage = new SharePackage(dataPackage);
 
-            Assert.Throws<ArgumentException>(() => sharePackage.SetData<string>(null, "Test Value"));
+            var e = Assert.Throws<ArgumentException>(() => sharePackage.SetData<string>(null, "Test Value"));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: formatId", e.Message);
+            Assert.Equal("formatId", e.ParamName);
         }
 
         [Fact]
@@ -43,7 +49,10 @@ namespace Okra.Tests.Sharing
             DataPackage dataPackage = new DataPackage();
             SharePackage sharePackage = new SharePackage(dataPackage);
 
-            Assert.Throws<ArgumentException>(() => sharePackage.SetData<string>("", "Test Value"));
+            var e = Assert.Throws<ArgumentException>(() => sharePackage.SetData<string>("", "Test Value"));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: formatId", e.Message);
+            Assert.Equal("formatId", e.ParamName);
         }
 
         [Fact]
@@ -68,11 +77,14 @@ namespace Okra.Tests.Sharing
             DataPackage dataPackage = new DataPackage();
             SharePackage sharePackage = new SharePackage(dataPackage);
 
-            Assert.Throws<ArgumentException>(() => sharePackage.SetAsyncData<string>(null, async (state) =>
+            var e = Assert.Throws<ArgumentException>(() => sharePackage.SetAsyncData<string>(null, async (state) =>
             {
                 await Task.Delay(200);
                 return "Test Value";
             }));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: formatId", e.Message);
+            Assert.Equal("formatId", e.ParamName);
         }
 
         [Fact]
@@ -81,11 +93,14 @@ namespace Okra.Tests.Sharing
             DataPackage dataPackage = new DataPackage();
             SharePackage sharePackage = new SharePackage(dataPackage);
 
-            Assert.Throws<ArgumentException>(() => sharePackage.SetAsyncData<string>("", async (state) =>
+            var e = Assert.Throws<ArgumentException>(() => sharePackage.SetAsyncData<string>("", async (state) =>
             {
                 await Task.Delay(200);
                 return "Test Value";
             }));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: formatId", e.Message);
+            Assert.Equal("formatId", e.ParamName);
         }
 
         [Fact]
@@ -94,7 +109,10 @@ namespace Okra.Tests.Sharing
             DataPackage dataPackage = new DataPackage();
             SharePackage sharePackage = new SharePackage(dataPackage);
 
-            Assert.Throws<ArgumentNullException>(() => sharePackage.SetAsyncData<string>("Test Format", null));
+            var e = Assert.Throws<ArgumentNullException>(() => sharePackage.SetAsyncData<string>("Test Format", null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: dataProvider", e.Message);
+            Assert.Equal("dataProvider", e.ParamName);
         }
 
         [Fact]

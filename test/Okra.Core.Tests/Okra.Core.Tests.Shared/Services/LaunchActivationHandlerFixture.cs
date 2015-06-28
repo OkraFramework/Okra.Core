@@ -27,13 +27,19 @@ namespace Okra.Tests.Services
         [Fact]
         public void Constructor_ThrowsException_IfActivationManagerIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new LaunchActivationHandler(null, new MockNavigationManager()));
+            var e = Assert.Throws<ArgumentNullException>(() => new LaunchActivationHandler(null, new MockNavigationManager()));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: activationManager", e.Message);
+            Assert.Equal("activationManager", e.ParamName);
         }
 
         [Fact]
         public void Constructor_ThrowsException_IfNavigationManagerIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new LaunchActivationHandler(new MockActivationManager(), null));
+            var e = Assert.Throws<ArgumentNullException>(() => new LaunchActivationHandler(new MockActivationManager(), null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: navigationManager", e.Message);
+            Assert.Equal("navigationManager", e.ParamName);
         }
 
         // *** Method Tests ***
@@ -133,7 +139,10 @@ namespace Okra.Tests.Services
         {
             LaunchActivationHandler activationHandler = CreateLaunchActivationHandler();
 
-            await Assert.ThrowsAsync<ArgumentNullException>(() => activationHandler.Activate(null));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => activationHandler.Activate(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: activatedEventArgs", e.Message);
+            Assert.Equal("activatedEventArgs", e.ParamName);
         }
 
         // *** Private Methods ***

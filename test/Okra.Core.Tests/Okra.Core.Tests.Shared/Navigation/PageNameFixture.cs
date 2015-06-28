@@ -23,7 +23,10 @@ namespace Okra.Tests.Navigation
         [Fact]
         public void FromType_Exception_NullType()
         {
-            Assert.Throws<ArgumentNullException>(() => PageName.FromType(null));
+            var e = Assert.Throws<ArgumentNullException>(() => PageName.FromType(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: type", e.Message);
+            Assert.Equal("type", e.ParamName);
         }
     }
 }

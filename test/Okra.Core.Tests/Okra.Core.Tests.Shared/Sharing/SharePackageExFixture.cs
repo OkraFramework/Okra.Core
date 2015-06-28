@@ -25,7 +25,10 @@ namespace Okra.Tests.Sharing
         [Fact]
         public void SetApplicationLink_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetApplicationLink(null, new Uri("http://www.example.com")));
+            var e = Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetApplicationLink(null, new Uri("http://www.example.com")));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackage", e.Message);
+            Assert.Equal("sharePackage", e.ParamName);
         }
 
         [Fact]
@@ -43,7 +46,10 @@ namespace Okra.Tests.Sharing
         [Fact]
         public void SetHtmlFormat_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetHtmlFormat(null, "Test Html"));
+            var e = Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetHtmlFormat(null, "Test Html"));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackage", e.Message);
+            Assert.Equal("sharePackage", e.ParamName);
         }
 
         [Fact]
@@ -61,7 +67,10 @@ namespace Okra.Tests.Sharing
         [Fact]
         public void SetRtf_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetRtf(null, "Test Rtf"));
+            var e = Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetRtf(null, "Test Rtf"));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackage", e.Message);
+            Assert.Equal("sharePackage", e.ParamName);
         }
 
         [Fact]
@@ -79,7 +88,10 @@ namespace Okra.Tests.Sharing
         [Fact]
         public void SetText_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetText(null, "Test Text"));
+            var e = Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetText(null, "Test Text"));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackage", e.Message);
+            Assert.Equal("sharePackage", e.ParamName);
         }
 
         [Fact]
@@ -97,7 +109,10 @@ namespace Okra.Tests.Sharing
         [Fact]
         public void SetWebLink_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetWebLink(null, new Uri("http://www.example.com")));
+            var e = Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetWebLink(null, new Uri("http://www.example.com")));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackage", e.Message);
+            Assert.Equal("sharePackage", e.ParamName);
         }
 
         [Fact]
@@ -119,11 +134,14 @@ namespace Okra.Tests.Sharing
         [Fact]
         public void SetAsyncApplicationLink_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncApplicationLink(null, async (state) =>
+            var e = Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncApplicationLink(null, async (state) =>
             {
                 await Task.Delay(200);
                 return new Uri("http://www.example.com");
             }));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackage", e.Message);
+            Assert.Equal("sharePackage", e.ParamName);
         }
 
         [Fact]
@@ -145,11 +163,14 @@ namespace Okra.Tests.Sharing
         [Fact]
         public void SetAsyncHtmlFormat_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncHtmlFormat(null, async (state) =>
+            var e = Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncHtmlFormat(null, async (state) =>
             {
                 await Task.Delay(200);
                 return "Test Html";
             }));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackage", e.Message);
+            Assert.Equal("sharePackage", e.ParamName);
         }
 
         [Fact]
@@ -171,11 +192,14 @@ namespace Okra.Tests.Sharing
         [Fact]
         public void SetAsyncRtf_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncRtf(null, async (state) =>
+            var e = Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncRtf(null, async (state) =>
             {
                 await Task.Delay(200);
                 return "Test Rtf";
             }));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackage", e.Message);
+            Assert.Equal("sharePackage", e.ParamName);
         }
 
         [Fact]
@@ -197,11 +221,14 @@ namespace Okra.Tests.Sharing
         [Fact]
         public void SetAsyncText_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncText(null, async (state) =>
+            var e = Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncText(null, async (state) =>
             {
                 await Task.Delay(200);
                 return "Test Text";
             }));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackage", e.Message);
+            Assert.Equal("sharePackage", e.ParamName);
         }
 
         [Fact]
@@ -223,11 +250,14 @@ namespace Okra.Tests.Sharing
         [Fact]
         public void SetAsyncWebLink_ThrowsException_IfSharePackageIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncWebLink(null, async (state) =>
+            var e = Assert.Throws<ArgumentNullException>(() => SharePackageEx.SetAsyncWebLink(null, async (state) =>
             {
                 await Task.Delay(200);
                 return new Uri("http://www.example.com");
             }));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: sharePackage", e.Message);
+            Assert.Equal("sharePackage", e.ParamName);
         }
 
         // *** Private sub-classes ***

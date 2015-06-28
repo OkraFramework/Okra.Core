@@ -96,7 +96,10 @@ namespace Okra.Tests.Services
 
             ActivationManager activationManager = CreateActivationManager(services: new[] { service1, service2 });
 
-            await Assert.ThrowsAsync<ArgumentNullException>(() => activationManager.Activate(null));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => activationManager.Activate(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: activatedEventArgs", e.Message);
+            Assert.Equal("activatedEventArgs", e.ParamName);
         }
 
         [Fact]
@@ -104,7 +107,10 @@ namespace Okra.Tests.Services
         {
             ActivationManager activationManager = CreateActivationManager();
 
-            Assert.Throws<ArgumentNullException>(() => activationManager.Register(null));
+            var e = Assert.Throws<ArgumentNullException>(() => activationManager.Register(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: service", e.Message);
+            Assert.Equal("service", e.ParamName);
         }
 
         [Fact]
@@ -115,7 +121,9 @@ namespace Okra.Tests.Services
 
             activationManager.Register(service);
 
-            Assert.Throws<InvalidOperationException>(() => activationManager.Register(service));
+            var e = Assert.Throws<InvalidOperationException>(() => activationManager.Register(service));
+
+            Assert.Equal("Cannot register the service as it is already registered.", e.Message);
         }
 
         [Fact]
@@ -123,7 +131,10 @@ namespace Okra.Tests.Services
         {
             ActivationManager activationManager = CreateActivationManager();
 
-            Assert.Throws<ArgumentNullException>(() => activationManager.Unregister(null));
+            var e = Assert.Throws<ArgumentNullException>(() => activationManager.Unregister(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: service", e.Message);
+            Assert.Equal("service", e.ParamName);
         }
 
         [Fact]
@@ -135,7 +146,9 @@ namespace Okra.Tests.Services
 
             activationManager.Register(service1);
 
-            Assert.Throws<InvalidOperationException>(() => activationManager.Unregister(service2));
+            var e = Assert.Throws<InvalidOperationException>(() => activationManager.Unregister(service2));
+
+            Assert.Equal("Cannot unregister the service as it is not currently registered.", e.Message);
         }
 
         // *** Private Methods ***

@@ -25,13 +25,19 @@ namespace Okra.Tests.Core
         [Fact]
         public void GetPropertyName_Exception_LambdaExpressionIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => TestableNotifyPropertyChanged.GetPropertyName(null));
+            var e = Assert.Throws<ArgumentNullException>(() => TestableNotifyPropertyChanged.GetPropertyName(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: propertyExpression", e.Message);
+            Assert.Equal("propertyExpression", e.ParamName);
         }
 
         [Fact]
         public void GetPropertyName_Exception_LambdaExpressionIsNotMemberAccess()
         {
-            Assert.Throws<ArgumentException>(() => TestableNotifyPropertyChanged.GetPropertyName(o => 42));
+            var e = Assert.Throws<ArgumentException>(() => TestableNotifyPropertyChanged.GetPropertyName(o => 42));
+
+            Assert.Equal("The argument must be a member access lambda expression.\r\nParameter name: propertyExpression", e.Message);
+            Assert.Equal("propertyExpression", e.ParamName);
         }
 
         [Fact]
@@ -115,7 +121,10 @@ namespace Okra.Tests.Core
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
 
-            Assert.Throws<ArgumentNullException>(() => obj.FirePropertyChangedWithLambda<int>(null));
+            var e = Assert.Throws<ArgumentNullException>(() => obj.FirePropertyChangedWithLambda<int>(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: propertyExpression", e.Message);
+            Assert.Equal("propertyExpression", e.ParamName);
         }
 
         [Fact]
@@ -123,7 +132,10 @@ namespace Okra.Tests.Core
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
 
-            Assert.Throws<ArgumentException>(() => obj.FirePropertyChangedWithLambda<int>(() => 42));
+            var e = Assert.Throws<ArgumentException>(() => obj.FirePropertyChangedWithLambda<int>(() => 42));
+
+            Assert.Equal("The argument must be a member access lambda expression.\r\nParameter name: propertyExpression", e.Message);
+            Assert.Equal("propertyExpression", e.ParamName);
         }
 
         [Fact]
@@ -254,7 +266,10 @@ namespace Okra.Tests.Core
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
 
             Expression<Func<int>> propertyExpression = null;
-            Assert.Throws<ArgumentNullException>(() => obj.SetProperty_MySetProperty(10, propertyExpression));
+            var e = Assert.Throws<ArgumentNullException>(() => obj.SetProperty_MySetProperty(10, propertyExpression));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: propertyExpression", e.Message);
+            Assert.Equal("propertyExpression", e.ParamName);
         }
 
         [Fact]
@@ -262,7 +277,10 @@ namespace Okra.Tests.Core
         {
             TestableNotifyPropertyChanged obj = new TestableNotifyPropertyChanged();
 
-            Assert.Throws<ArgumentException>(() => obj.SetProperty_MySetProperty(10, () => 42));
+            var e = Assert.Throws<ArgumentException>(() => obj.SetProperty_MySetProperty(10, () => 42));
+
+            Assert.Equal("The argument must be a member access lambda expression.\r\nParameter name: propertyExpression", e.Message);
+            Assert.Equal("propertyExpression", e.ParamName);
         }
 
         [Fact]

@@ -23,7 +23,10 @@ namespace Okra.Tests.Navigation
         [Fact]
         public void Constructor_WithViewFactory_ThrowsException_WhenViewFactoryIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new SettingsPaneManager(null));
+            var e = Assert.Throws<ArgumentNullException>(() => new SettingsPaneManager(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: viewFactory", e.Message);
+            Assert.Equal("viewFactory", e.ParamName);
         }
 
         [Fact]
@@ -31,7 +34,10 @@ namespace Okra.Tests.Navigation
         {
             INavigationStack navigationStack = new MockNavigationStack();
 
-            Assert.Throws<ArgumentNullException>(() => new TestableSettingsPaneManager(null, navigationStack));
+            var e = Assert.Throws<ArgumentNullException>(() => new TestableSettingsPaneManager(null, navigationStack));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: viewFactory", e.Message);
+            Assert.Equal("viewFactory", e.ParamName);
         }
 
         [Fact]
@@ -39,7 +45,10 @@ namespace Okra.Tests.Navigation
         {
             IViewFactory viewFactory = MockViewFactory.NoPageDefined;
 
-            Assert.Throws<ArgumentNullException>(() => new TestableSettingsPaneManager(viewFactory, null));
+            var e = Assert.Throws<ArgumentNullException>(() => new TestableSettingsPaneManager(viewFactory, null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: navigationStack", e.Message);
+            Assert.Equal("navigationStack", e.ParamName);
         }
 
         // *** Property Tests ***
@@ -218,7 +227,10 @@ namespace Okra.Tests.Navigation
         {
             TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
 
-            Assert.Throws<ArgumentNullException>(() => settingsPaneManager.CallOnSettingsPaneBackClick(null));
+            var e = Assert.Throws<ArgumentNullException>(() => settingsPaneManager.CallOnSettingsPaneBackClick(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: e", e.Message);
+            Assert.Equal("e", e.ParamName);
         }
 
         [UITestMethod]
@@ -226,7 +238,10 @@ namespace Okra.Tests.Navigation
         {
             TestableSettingsPaneManager settingsPaneManager = CreateSettingsPaneManager();
 
-            Assert.Throws<ArgumentNullException>(() => settingsPaneManager.CallShowSettingsFlyoutDirect(null));
+            var e = Assert.Throws<ArgumentNullException>(() => settingsPaneManager.CallShowSettingsFlyoutDirect(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: e", e.Message);
+            Assert.Equal("e", e.ParamName);
         }
 
         // *** Behaviour Tests ***

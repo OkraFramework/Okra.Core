@@ -70,40 +70,58 @@ namespace Okra.Tests.Core
         [Fact]
         public void Constructor_Exception_ExecuteMethodIsNull_NonGeneric()
         {
-            Assert.Throws<ArgumentNullException>(() => new DelegateCommand(null));
+            var e = Assert.Throws<ArgumentNullException>(() => new DelegateCommand(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: execute", e.Message);
+            Assert.Equal("execute", e.ParamName);
         }
 
         [Fact]
         public void Constructor_Exception_ExecuteMethodIsNull_GenericClass()
         {
-            Assert.Throws<ArgumentNullException>(() => new DelegateCommand<MockArgumentClass>(null));
+            var e = Assert.Throws<ArgumentNullException>(() => new DelegateCommand<MockArgumentClass>(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: execute", e.Message);
+            Assert.Equal("execute", e.ParamName);
         }
 
         [Fact]
         public void Constructor_Exception_ExecuteMethodIsNull_GenericStruct()
         {
-            Assert.Throws<ArgumentNullException>(() => new DelegateCommand<int>(null));
+            var e = Assert.Throws<ArgumentNullException>(() => new DelegateCommand<int>(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: execute", e.Message);
+            Assert.Equal("execute", e.ParamName);
         }
 
         [Fact]
         public void Constructor_Exception_CanExecuteMethodIsNull_NonGeneric()
         {
             MockCommandHandler handler = new MockCommandHandler();
-            Assert.Throws<ArgumentNullException>(() => new DelegateCommand(handler.Execute, null));
+            var e = Assert.Throws<ArgumentNullException>(() => new DelegateCommand(handler.Execute, null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: canExecute", e.Message);
+            Assert.Equal("canExecute", e.ParamName);
         }
 
         [Fact]
         public void Constructor_Exception_CanExecuteMethodIsNull_GenericClass()
         {
             MockCommandHandler<MockArgumentClass> handler = new MockCommandHandler<MockArgumentClass>();
-            Assert.Throws<ArgumentNullException>(() => new DelegateCommand<MockArgumentClass>(handler.Execute, null));
+            var e = Assert.Throws<ArgumentNullException>(() => new DelegateCommand<MockArgumentClass>(handler.Execute, null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: canExecute", e.Message);
+            Assert.Equal("canExecute", e.ParamName);
         }
 
         [Fact]
         public void Constructor_Exception_CanExecuteMethodIsNull_GenericStruct()
         {
             MockCommandHandler<int> handler = new MockCommandHandler<int>();
-            Assert.Throws<ArgumentNullException>(() => new DelegateCommand<int>(handler.Execute, null));
+            var e = Assert.Throws<ArgumentNullException>(() => new DelegateCommand<int>(handler.Execute, null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: canExecute", e.Message);
+            Assert.Equal("canExecute", e.ParamName);
         }
 
         // *** Method Tests ***

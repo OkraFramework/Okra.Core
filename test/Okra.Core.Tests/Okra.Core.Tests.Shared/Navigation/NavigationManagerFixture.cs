@@ -29,7 +29,10 @@ namespace Okra.Tests.Navigation
             ILifetimeManager lifetimeManager = new MockLifetimeManager();
             IStorageManager storageManager = new MockStorageManager();
 
-            Assert.Throws<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
+            var e = Assert.Throws<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: viewFactory", e.Message);
+            Assert.Equal("viewFactory", e.ParamName);
         }
 
         [Fact]
@@ -40,7 +43,10 @@ namespace Okra.Tests.Navigation
             ILifetimeManager lifetimeManager = null;
             IStorageManager storageManager = new MockStorageManager();
 
-            Assert.Throws<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
+            var e = Assert.Throws<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: lifetimeManager", e.Message);
+            Assert.Equal("lifetimeManager", e.ParamName);
         }
 
         [Fact]
@@ -51,7 +57,10 @@ namespace Okra.Tests.Navigation
             ILifetimeManager lifetimeManager = new MockLifetimeManager();
             IStorageManager storageManager = null;
 
-            Assert.Throws<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
+            var e = Assert.Throws<ArgumentNullException>(() => new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: storageManager", e.Message);
+            Assert.Equal("storageManager", e.ParamName);
         }
 
         // *** Property Tests ***
@@ -79,7 +88,10 @@ namespace Okra.Tests.Navigation
         {
             INavigationManager navigationManager = CreateNavigationManager();
 
-            Assert.Throws<ArgumentException>(() => navigationManager.HomePageName = null);
+            var e = Assert.Throws<ArgumentException>(() => navigationManager.HomePageName = null);
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: HomePageName", e.Message);
+            Assert.Equal("HomePageName", e.ParamName);
         }
 
         [Fact]
@@ -87,7 +99,10 @@ namespace Okra.Tests.Navigation
         {
             INavigationManager navigationManager = CreateNavigationManager();
 
-            Assert.Throws<ArgumentException>(() => navigationManager.HomePageName = "");
+            var e = Assert.Throws<ArgumentException>(() => navigationManager.HomePageName = "");
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: HomePageName", e.Message);
+            Assert.Equal("HomePageName", e.ParamName);
         }
 
         [Fact]
@@ -121,7 +136,10 @@ namespace Okra.Tests.Navigation
         {
             INavigationManager navigationManager = CreateNavigationManager();
 
-            Assert.Throws<ArgumentException>(() => navigationManager.NavigationStorageType = (NavigationStorageType)100);
+            var e = Assert.Throws<ArgumentException>(() => navigationManager.NavigationStorageType = (NavigationStorageType)100);
+
+            Assert.Equal("The argument contains an undefined enumeration value.\r\nParameter name: NavigationStorageType", e.Message);
+            Assert.Equal("NavigationStorageType", e.ParamName);
         }
 
         [Fact]
