@@ -26,14 +26,7 @@ namespace Okra.Sharing
 
         // *** Properties ***
 
-        public IReadOnlyList<string> AvailableFormats
-        {
-            get
-            {
-                return _dataPackageView.AvailableFormats;
-            }
-        }
-
+        public IReadOnlyList<string> AvailableFormats => _dataPackageView.AvailableFormats;
         public ISharePropertySet Properties { get; }
 
         // *** Methods ***

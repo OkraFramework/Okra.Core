@@ -118,10 +118,7 @@ namespace Okra.Navigation
 
         // *** Overriden Base Methods ***
 
-        public override string ToString()
-        {
-            return _pageName;
-        }
+        public override string ToString() => _pageName;
 
         // *** Private Sub-classes ***
 

@@ -54,10 +54,7 @@ namespace Okra.Core
             return _canExecute((T)parameter);
         }
 
-        public void Execute(object parameter)
-        {
-            _execute((T)parameter);
-        }
+        public void Execute(object parameter) => _execute((T)parameter);
 
         // *** Methods ***
 

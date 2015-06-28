@@ -17,10 +17,7 @@ namespace Okra.Helpers
             }
         }
 
-        public static T DeserializeFromArray<T>(byte[] data)
-        {
-            return (T)DeserializeFromArray(data, typeof(T));
-        }
+        public static T DeserializeFromArray<T>(byte[] data) => (T)DeserializeFromArray(data, typeof(T));
 
         public static byte[] SerializeToArray(object value, Type type)
         {
@@ -32,9 +29,6 @@ namespace Okra.Helpers
             }
         }
 
-        public static byte[] SerializeToArray<T>(T value)
-        {
-            return SerializeToArray(value, typeof(T));
-        }
+        public static byte[] SerializeToArray<T>(T value) => SerializeToArray(value, typeof(T));
     }
 }

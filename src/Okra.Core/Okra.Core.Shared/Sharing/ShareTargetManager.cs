@@ -161,10 +161,7 @@ namespace Okra.Sharing
         {
             // *** Methods ***
 
-            public INavigationBase GetCurrent()
-            {
-                return null;
-            }
+            public INavigationBase GetCurrent() => null;
         }
 
         private class ShareOperationProxy : IShareOperation
@@ -187,30 +184,11 @@ namespace Okra.Sharing
 
             // *** Methods ***
 
-            public void ReportCompleted()
-            {
-                _shareOperation.ReportCompleted();
-            }
-
-            public void ReportDataRetrieved()
-            {
-                _shareOperation.ReportDataRetrieved();
-            }
-
-            public void ReportError(string value)
-            {
-                _shareOperation.ReportError(value);
-            }
-
-            public void ReportStarted()
-            {
-                _shareOperation.ReportStarted();
-            }
-
-            public void ReportSubmittedBackgroundTask()
-            {
-                _shareOperation.ReportSubmittedBackgroundTask();
-            }
+            public void ReportCompleted() => _shareOperation.ReportCompleted();
+            public void ReportDataRetrieved() => _shareOperation.ReportDataRetrieved();
+            public void ReportError(string value) => _shareOperation.ReportError(value);
+            public void ReportStarted() => _shareOperation.ReportStarted();
+            public void ReportSubmittedBackgroundTask() => _shareOperation.ReportSubmittedBackgroundTask();
         }
     }
 }

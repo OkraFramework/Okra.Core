@@ -85,10 +85,7 @@ namespace Okra.Navigation
             }
         }
 
-        private void SettingsPaneHost_BackClick(object sender, BackClickEventArgs e)
-        {
-            OnBackClick(e);
-        }
+        private void SettingsPaneHost_BackClick(object sender, BackClickEventArgs e) => OnBackClick(e);
 
         // *** Protected Methods ***
 

@@ -20,7 +20,6 @@ namespace Okra.Navigation
         public string StateKey
         {
             get;
-            private set;
         }
     }
 }

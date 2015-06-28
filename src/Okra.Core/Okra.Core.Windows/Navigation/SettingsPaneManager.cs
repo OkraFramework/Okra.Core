@@ -39,10 +39,7 @@ namespace Okra.Navigation
 
         // *** Methods ***
 
-        public void ShowSettingsPane()
-        {
-            SettingsPane.Show();
-        }
+        public void ShowSettingsPane() => SettingsPane.Show();
 
         // *** Protected Methods ***
 

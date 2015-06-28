@@ -36,10 +36,7 @@ namespace Okra.Sharing
 
         // *** Methods ***
 
-        public void ShowShareUI()
-        {
-            DataTransferManager.ShowShareUI();
-        }
+        public void ShowShareUI() => DataTransferManager.ShowShareUI();
 
         // *** Protected Methods ***
 
@@ -128,10 +125,7 @@ namespace Okra.Sharing
 
             // *** Methods ***
 
-            public void FailWithDisplayText(string displayText)
-            {
-                _dataRequest.FailWithDisplayText(displayText);
-            }
+            public void FailWithDisplayText(string displayText) => _dataRequest.FailWithDisplayText(displayText);
         }
     }
 }

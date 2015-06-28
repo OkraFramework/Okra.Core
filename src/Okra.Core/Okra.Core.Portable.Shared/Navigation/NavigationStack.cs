@@ -30,40 +30,10 @@ namespace Okra.Navigation
 
         // *** Properties ***
 
-        public PageInfo this[int index]
-        {
-            get
-            {
-                return _internalStack[index];
-            }
-        }
-
-        public virtual bool CanGoBack
-        {
-            get
-            {
-                return _internalStack.Count > 0;
-            }
-        }
-
-        public int Count
-        {
-            get
-            {
-                return _internalStack.Count;
-            }
-        }
-
-        public PageInfo CurrentPage
-        {
-            get
-            {
-                if (_internalStack.Count == 0)
-                    return null;
-                else
-                    return _internalStack[_internalStack.Count - 1];
-            }
-        }
+        public PageInfo this[int index] =>_internalStack[index];
+        public virtual bool CanGoBack =>_internalStack.Count > 0;
+        public int Count => _internalStack.Count;
+        public PageInfo CurrentPage => _internalStack.Count ==0 ? null : _internalStack[_internalStack.Count - 1];
 
         // *** Methods ***
 
@@ -91,15 +61,8 @@ namespace Okra.Navigation
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
-        public IEnumerator<PageInfo> GetEnumerator()
-        {
-            return _internalStack.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _internalStack.GetEnumerator();
-        }
+        public IEnumerator<PageInfo> GetEnumerator() => _internalStack.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => _internalStack.GetEnumerator();
 
         public void GoBack()
         {

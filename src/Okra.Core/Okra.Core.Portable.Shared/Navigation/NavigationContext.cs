@@ -21,9 +21,6 @@ namespace Okra.Navigation
 
         // *** Methods ***
 
-        public INavigationBase GetCurrent()
-        {
-            return _current;
-        }
+        public INavigationBase GetCurrent() => _current;
     }
 }
