@@ -17,7 +17,7 @@ namespace Okra
         public OkraApplication(OkraBootstrapper bootstrapper)
         {
             if (bootstrapper == null)
-                throw new ArgumentNullException("bootstrapper");
+                throw new ArgumentNullException(nameof(bootstrapper));
 
             _bootstrapper = bootstrapper;
             bootstrapper.Initialize(false);

@@ -28,7 +28,10 @@ namespace Okra.MEF.Tests
             TestableBootstrapper bootstrapper = new TestableBootstrapper();
             bootstrapper.Initialize();
 
-            Assert.Throws<ArgumentNullException>(() => bootstrapper.Activate(null));
+            var e = Assert.Throws<ArgumentNullException>(() => bootstrapper.Activate(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: args", e.Message);
+            Assert.Equal("args", e.ParamName);
         }
 
         [Fact]
@@ -85,7 +88,10 @@ namespace Okra.MEF.Tests
             TestableBootstrapper bootstrapper = new TestableBootstrapper();
             bootstrapper.Initialize();
 
-            Assert.Throws<ArgumentNullException>(() => bootstrapper.SimulateActivate(null));
+            var e = Assert.Throws<ArgumentNullException>(() => bootstrapper.SimulateActivate(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: args", e.Message);
+            Assert.Equal("args", e.ParamName);
         }
 
         // *** Private Sub-classes ***
@@ -98,9 +104,9 @@ namespace Okra.MEF.Tests
 
             // *** Methods ***
 
-            public void SimulateActivate(IActivatedEventArgs activatedEventArgs)
+            public void SimulateActivate(IActivatedEventArgs args)
             {
-                base.OnActivated(CoreApplication.MainView, activatedEventArgs);
+                base.OnActivated(CoreApplication.MainView, args);
             }
 
             // *** Overriden base methods ***

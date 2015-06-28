@@ -29,13 +29,7 @@ namespace Okra.Core
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
 
-        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            PropertyChangedEventHandler eventHandler = PropertyChanged;
-
-            if (eventHandler != null)
-                eventHandler(this, e);
-        }
+        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e) => PropertyChanged?.Invoke(this, e);
 
         protected bool SetProperty<T>(ref T storage, T value, Expression<Func<T>> propertyExpression)
         {
@@ -64,7 +58,7 @@ namespace Okra.Core
             // Validate arguments
 
             if (propertyExpression == null)
-                throw new ArgumentNullException("propertyExpression");
+                throw new ArgumentNullException(nameof(propertyExpression));
 
             // Extract the unary
 
@@ -73,7 +67,7 @@ namespace Okra.Core
             // Validate operand type
 
             if (unaryExpression.Operand.NodeType != ExpressionType.MemberAccess)
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_ShouldBeAMemberAccessLambdaExpression"), "propertyExpression");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_ShouldBeAMemberAccessLambdaExpression"), nameof(propertyExpression));
 
             // Extract the property name
 
@@ -88,10 +82,10 @@ namespace Okra.Core
             // Validate arguments
 
             if (propertyExpression == null)
-                throw new ArgumentNullException("propertyExpression");
+                throw new ArgumentNullException(nameof(propertyExpression));
 
             if (propertyExpression.Body.NodeType != ExpressionType.MemberAccess)
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_ShouldBeAMemberAccessLambdaExpression"), "propertyExpression");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_ShouldBeAMemberAccessLambdaExpression"), nameof(propertyExpression));
 
             // Extract the property name
 

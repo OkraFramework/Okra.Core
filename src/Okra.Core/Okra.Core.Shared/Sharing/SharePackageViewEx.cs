@@ -12,7 +12,7 @@ namespace Okra.Sharing
         public static Task<Uri> GetApplicationLinkAsync(this ISharePackageView sharePackageView)
         {
             if (sharePackageView == null)
-                throw new ArgumentNullException("sharePackageView");
+                throw new ArgumentNullException(nameof(sharePackageView));
 
             return GetApplicationLinkAsyncInternal(sharePackageView);
         }
@@ -25,7 +25,7 @@ namespace Okra.Sharing
         public static Task<string> GetHtmlFormatAsync(this ISharePackageView sharePackageView)
         {
             if (sharePackageView == null)
-                throw new ArgumentNullException("sharePackageView");
+                throw new ArgumentNullException(nameof(sharePackageView));
 
             return GetHtmlFormatAsyncInternal(sharePackageView);
         }
@@ -38,7 +38,7 @@ namespace Okra.Sharing
         public static Task<string> GetRtfAsync(this ISharePackageView sharePackageView)
         {
             if (sharePackageView == null)
-                throw new ArgumentNullException("sharePackageView");
+                throw new ArgumentNullException(nameof(sharePackageView));
 
             return GetRtfAsyncInternal(sharePackageView);
         }
@@ -51,7 +51,7 @@ namespace Okra.Sharing
         public static Task<string> GetTextAsync(this ISharePackageView sharePackageView)
         {
             if (sharePackageView == null)
-                throw new ArgumentNullException("sharePackageView");
+                throw new ArgumentNullException(nameof(sharePackageView));
 
             return GetTextAsyncInternal(sharePackageView);
         }
@@ -64,7 +64,7 @@ namespace Okra.Sharing
         public static Task<Uri> GetWebLinkAsync(this ISharePackageView sharePackageView)
         {
             if (sharePackageView == null)
-                throw new ArgumentNullException("sharePackageView");
+                throw new ArgumentNullException(nameof(sharePackageView));
 
             return GetWebLinkAsyncInternal(sharePackageView);
         }

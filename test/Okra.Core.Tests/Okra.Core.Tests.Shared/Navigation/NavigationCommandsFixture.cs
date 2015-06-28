@@ -102,7 +102,10 @@ namespace Okra.Tests.Navigation
         [Fact]
         public void GetGoBackCommand_Exception_NavigationBaseIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => NavigationCommands.GetGoBackCommand(null));
+            var e = Assert.Throws<ArgumentNullException>(() => NavigationCommands.GetGoBackCommand(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: navigationBase", e.Message);
+            Assert.Equal("navigationBase", e.ParamName);
         }
 
         [Fact]
@@ -142,7 +145,10 @@ namespace Okra.Tests.Navigation
         [Fact]
         public void GetNavigateToCommand_Exception_NavigationBaseIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => NavigationCommands.GetNavigateToCommand(null, "Page Name", new object()));
+            var e = Assert.Throws<ArgumentNullException>(() => NavigationCommands.GetNavigateToCommand(null, "Page Name", new object()));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: navigationBase", e.Message);
+            Assert.Equal("navigationBase", e.ParamName);
         }
 
         [Fact]
@@ -150,7 +156,10 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
-            Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToCommand(navigationManager, null, new object()));
+            var e = Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToCommand(navigationManager, null, new object()));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
@@ -158,7 +167,10 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
-            Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToCommand(navigationManager, "", new object()));
+            var e = Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToCommand(navigationManager, "", new object()));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
 #if WINDOWS_APP || WINDOWS_UAP
@@ -199,7 +211,10 @@ namespace Okra.Tests.Navigation
         [Fact]
         public void GetNavigateToSettingsCommand_Exception_NavigationBaseIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => NavigationCommands.GetNavigateToSettingsCommand(null, "Label", "Page Name", new object()));
+            var e = Assert.Throws<ArgumentNullException>(() => NavigationCommands.GetNavigateToSettingsCommand(null, "Label", "Page Name", new object()));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: navigationBase", e.Message);
+            Assert.Equal("navigationBase", e.ParamName);
         }
 
         [Fact]
@@ -207,7 +222,10 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
-            Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, "Label", null, new object()));
+            var e = Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, "Label", null, new object()));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
@@ -215,7 +233,10 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
-            Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, "Label", "", new object()));
+            var e = Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, "Label", "", new object()));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
@@ -223,7 +244,10 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
-            Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, null, "Page Name", new object()));
+            var e = Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, null, "Page Name", new object()));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: label", e.Message);
+            Assert.Equal("label", e.ParamName);
         }
 
         [Fact]
@@ -231,7 +255,10 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
-            Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, "", "Page Name", new object()));
+            var e = Assert.Throws<ArgumentException>(() => NavigationCommands.GetNavigateToSettingsCommand(navigationManager, "", "Page Name", new object()));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: label", e.Message);
+            Assert.Equal("label", e.ParamName);
         }
 #endif
 

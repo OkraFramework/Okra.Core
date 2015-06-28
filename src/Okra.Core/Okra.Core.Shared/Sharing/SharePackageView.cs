@@ -12,43 +12,29 @@ namespace Okra.Sharing
         // *** Fields ***
 
         private readonly DataPackageView _dataPackageView;
-        private readonly SharePropertySet _properties;
 
         // *** Constructors ***
 
         public SharePackageView(DataPackageView dataPackageView)
         {
             if (dataPackageView == null)
-                throw new ArgumentNullException("dataPackageView");
+                throw new ArgumentNullException(nameof(dataPackageView));
 
             _dataPackageView = dataPackageView;
-            _properties = new SharePropertySet(dataPackageView.Properties);
+            Properties = new SharePropertySet(dataPackageView.Properties);
         }
 
         // *** Properties ***
 
-        public IReadOnlyList<string> AvailableFormats
-        {
-            get
-            {
-                return _dataPackageView.AvailableFormats;
-            }
-        }
-
-        public ISharePropertySet Properties
-        {
-            get
-            {
-                return _properties;
-            }
-        }
+        public IReadOnlyList<string> AvailableFormats => _dataPackageView.AvailableFormats;
+        public ISharePropertySet Properties { get; }
 
         // *** Methods ***
 
         public bool Contains(string formatId)
         {
             if (string.IsNullOrEmpty(formatId))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "formatId");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(formatId));
 
             return _dataPackageView.Contains(formatId);
         }
@@ -56,7 +42,7 @@ namespace Okra.Sharing
         public Task<T> GetDataAsync<T>(string formatId)
         {
             if (string.IsNullOrEmpty(formatId))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "formatId");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(formatId));
 
             return GetDataAsyncInternal<T>(formatId);
         }

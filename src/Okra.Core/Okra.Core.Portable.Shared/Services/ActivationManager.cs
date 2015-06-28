@@ -29,7 +29,7 @@ namespace Okra.Services
             // Validate parameters
 
             if (activatedEventArgs == null)
-                throw new ArgumentNullException("activatedEventArgs");
+                throw new ArgumentNullException(nameof(activatedEventArgs));
 
             // Call internal async implementation
 
@@ -41,7 +41,7 @@ namespace Okra.Services
             // Validate parameters
 
             if (service == null)
-                throw new ArgumentNullException("service");
+                throw new ArgumentNullException(nameof(service));
 
             if (_registeredServices.Contains(service))
                 throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotRegisterServiceMultipleTimes"));
@@ -56,7 +56,7 @@ namespace Okra.Services
             // Validate parameters
 
             if (service == null)
-                throw new ArgumentNullException("service");
+                throw new ArgumentNullException(nameof(service));
 
             if (!_registeredServices.Contains(service))
                 throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotUnregisterUnregisteredService"));
@@ -73,7 +73,7 @@ namespace Okra.Services
             // Validate parameters
 
             if (activatedEventArgs == null)
-                throw new ArgumentNullException("activatedEventArgs");
+                throw new ArgumentNullException(nameof(activatedEventArgs));
 
             // Raise Activating event
 

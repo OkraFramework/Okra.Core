@@ -12,35 +12,28 @@ namespace Okra.Sharing
         // *** Fields ***
 
         private readonly DataPackage _dataPackage;
-        private readonly SharePropertySet _properties;
 
         // *** Constructors ***
 
         public SharePackage(DataPackage dataPackage)
         {
             if (dataPackage == null)
-                throw new ArgumentNullException("dataPackage");
+                throw new ArgumentNullException(nameof(dataPackage));
 
             _dataPackage = dataPackage;
-            _properties = new SharePropertySet(dataPackage.Properties);
+            this.Properties = new SharePropertySet(dataPackage.Properties);
         }
 
         // *** Properties ***
 
-        public ISharePropertySet Properties
-        {
-            get
-            {
-                return _properties;
-            }
-        }
+        public ISharePropertySet Properties { get; }
 
         // *** Methods ***
 
         public void SetData<T>(string formatId, T value)
         {
             if (string.IsNullOrEmpty(formatId))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "formatId");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(formatId));
 
             _dataPackage.SetData(formatId, value);
         }
@@ -48,10 +41,10 @@ namespace Okra.Sharing
         public void SetAsyncData<T>(string formatId, AsyncDataProvider<T> dataProvider)
         {
             if (string.IsNullOrEmpty(formatId))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "formatId");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(formatId));
 
             if (dataProvider == null)
-                throw new ArgumentNullException("dataProvider");
+                throw new ArgumentNullException(nameof(dataProvider));
 
             _dataPackage.SetDataProvider(formatId, (DataProviderRequest request) => DataProviderRequestHandler<T>(request, dataProvider));
         }

@@ -54,16 +54,16 @@ namespace Okra.Navigation
             : base(viewFactory, navigationStack)
         {
             if (lifetimeManager == null)
-                throw new ArgumentNullException("lifetimeManager");
+                throw new ArgumentNullException(nameof(lifetimeManager));
 
             if (storageManager == null)
-                throw new ArgumentNullException("storageManager");
+                throw new ArgumentNullException(nameof(storageManager));
 
             _storageManager = storageManager;
 
 #if !NETFX_CORE
             if (fileSystem == null)
-                throw new ArgumentNullException("fileSystem");
+                throw new ArgumentNullException(nameof(fileSystem));
 
             _fileSystem = fileSystem;
 #endif
@@ -97,7 +97,7 @@ namespace Okra.Navigation
                 // Validate parameters
 
                 if (string.IsNullOrEmpty(value))
-                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "HomePageName");
+                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(HomePageName));
 
                 // Set the property
 
@@ -114,7 +114,7 @@ namespace Okra.Navigation
             set
             {
                 if (!Enum.IsDefined(typeof(NavigationStorageType), value))
-                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"));
+                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), nameof(NavigationStorageType));
 
                 _navigationStorageType = value;
             }

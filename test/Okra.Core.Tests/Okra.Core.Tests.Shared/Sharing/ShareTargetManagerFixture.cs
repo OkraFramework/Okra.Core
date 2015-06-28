@@ -31,13 +31,19 @@ namespace Okra.Tests.Sharing
         [Fact]
         public void Constructor_ThrowsException_IfActivationManagerIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new ShareTargetManager(null, new MockViewFactory()));
+            var e = Assert.Throws<ArgumentNullException>(() => new ShareTargetManager(null, new MockViewFactory()));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: activationManager", e.Message);
+            Assert.Equal("activationManager", e.ParamName);
         }
 
         [Fact]
         public void Constructor_ThrowsException_IfViewFactoryIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new ShareTargetManager(new MockActivationManager(), null));
+            var e = Assert.Throws<ArgumentNullException>(() => new ShareTargetManager(new MockActivationManager(), null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: viewFactory", e.Message);
+            Assert.Equal("viewFactory", e.ParamName);
         }
 
         // *** Property Tests ***
@@ -65,7 +71,10 @@ namespace Okra.Tests.Sharing
         {
             ShareTargetManager shareTargetManager = CreateShareTargetManager();
 
-            Assert.Throws<ArgumentException>(() => shareTargetManager.ShareTargetPageName = null);
+            var e = Assert.Throws<ArgumentException>(() => shareTargetManager.ShareTargetPageName = null);
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: ShareTargetPageName", e.Message);
+            Assert.Equal("ShareTargetPageName", e.ParamName);
         }
 
         [Fact]
@@ -73,7 +82,10 @@ namespace Okra.Tests.Sharing
         {
             ShareTargetManager shareTargetManager = CreateShareTargetManager();
 
-            Assert.Throws<ArgumentException>(() => shareTargetManager.ShareTargetPageName = "");
+            var e = Assert.Throws<ArgumentException>(() => shareTargetManager.ShareTargetPageName = "");
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: ShareTargetPageName", e.Message);
+            Assert.Equal("ShareTargetPageName", e.ParamName);
         }
 
         // *** Method Tests ***
@@ -235,7 +247,10 @@ namespace Okra.Tests.Sharing
         {
             ShareTargetManager shareTargetManager = CreateShareTargetManager();
 
-            await Assert.ThrowsAsync<ArgumentNullException>(() => shareTargetManager.Activate(null));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => shareTargetManager.Activate(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: activatedEventArgs", e.Message);
+            Assert.Equal("activatedEventArgs", e.ParamName);
         }
 
         [Fact]
@@ -243,7 +258,10 @@ namespace Okra.Tests.Sharing
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
 
-            Assert.Throws<ArgumentNullException>(() => shareTargetManager.DisplayPageDirect(null));
+            var e = Assert.Throws<ArgumentNullException>(() => shareTargetManager.DisplayPageDirect(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: viewLifetimeContext", e.Message);
+            Assert.Equal("viewLifetimeContext", e.ParamName);
         }
 
         [Fact]
@@ -251,7 +269,10 @@ namespace Okra.Tests.Sharing
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
 
-            Assert.Throws<ArgumentNullException>(() => shareTargetManager.OnWindowClosing(null));
+            var e = Assert.Throws<ArgumentNullException>(() => shareTargetManager.OnWindowClosing(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: viewLifetimeContext", e.Message);
+            Assert.Equal("viewLifetimeContext", e.ParamName);
         }
 
         [Fact]
@@ -259,7 +280,10 @@ namespace Okra.Tests.Sharing
         {
             TestableShareTargetManager shareTargetManager = CreateShareTargetManager();
 
-            Assert.Throws<ArgumentNullException>(() => shareTargetManager.WrapShareOperationDirect(null));
+            var e = Assert.Throws<ArgumentNullException>(() => shareTargetManager.WrapShareOperationDirect(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: shareTargetEventArgs", e.Message);
+            Assert.Equal("shareTargetEventArgs", e.ParamName);
         }
 
         // *** Behaviour Tests ***

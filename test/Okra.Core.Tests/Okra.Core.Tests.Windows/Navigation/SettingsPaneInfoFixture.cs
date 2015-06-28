@@ -43,7 +43,10 @@ namespace Okra.Tests.Navigation
         [UITestMethod]
         public void HeaderBackground_ThrowsException_IfGetterObjectIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetHeaderBackground(null));
+            var e = Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetHeaderBackground(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: obj", e.Message);
+            Assert.Equal("obj", e.ParamName);
         }
 
         [UITestMethod]
@@ -51,7 +54,10 @@ namespace Okra.Tests.Navigation
         {
             Brush red = new SolidColorBrush(Colors.Red);
 
-            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetHeaderBackground(null, red));
+            var e = Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetHeaderBackground(null, red));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: obj", e.Message);
+            Assert.Equal("obj", e.ParamName);
         }
 
         [UITestMethod]
@@ -79,7 +85,10 @@ namespace Okra.Tests.Navigation
         [UITestMethod]
         public void HeaderForeground_ThrowsException_IfGetterObjectIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetHeaderForeground(null));
+            var e = Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetHeaderForeground(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: obj", e.Message);
+            Assert.Equal("obj", e.ParamName);
         }
 
         [UITestMethod]
@@ -87,7 +96,10 @@ namespace Okra.Tests.Navigation
         {
             Brush red = new SolidColorBrush(Colors.Red);
 
-            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetHeaderForeground(null, red));
+            var e = Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetHeaderForeground(null, red));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: obj", e.Message);
+            Assert.Equal("obj", e.ParamName);
         }
 
         [UITestMethod]
@@ -116,7 +128,10 @@ namespace Okra.Tests.Navigation
         [UITestMethod]
         public void IconSource_ThrowsException_IfGetterObjectIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetIconSource(null));
+            var e = Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetIconSource(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: obj", e.Message);
+            Assert.Equal("obj", e.ParamName);
         }
 
         [UITestMethod]
@@ -124,7 +139,10 @@ namespace Okra.Tests.Navigation
         {
             ImageSource iconSource = new BitmapImage(new Uri("ms-appx:/Test"));
 
-            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetIconSource(null, iconSource));
+            var e = Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetIconSource(null, iconSource));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: obj", e.Message);
+            Assert.Equal("obj", e.ParamName);
         }
 
         [UITestMethod]
@@ -151,13 +169,19 @@ namespace Okra.Tests.Navigation
         [UITestMethod]
         public void Title_ThrowsException_IfGetterObjectIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetTitle(null));
+            var e = Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetTitle(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: obj", e.Message);
+            Assert.Equal("obj", e.ParamName);
         }
 
         [UITestMethod]
         public void Title_ThrowsException_IfSetterObjectIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetTitle(null, "Title"));
+            var e = Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetTitle(null, "Title"));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: obj", e.Message);
+            Assert.Equal("obj", e.ParamName);
         }
 
         [UITestMethod]
@@ -184,13 +208,19 @@ namespace Okra.Tests.Navigation
         [UITestMethod]
         public void Width_ThrowsException_IfGetterObjectIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetWidth(null));
+            var e = Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.GetWidth(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: obj", e.Message);
+            Assert.Equal("obj", e.ParamName);
         }
 
         [UITestMethod]
         public void Width_ThrowsException_IfSetterObjectIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetWidth(null, 500));
+            var e = Assert.Throws<ArgumentNullException>(() => SettingsPaneInfo.SetWidth(null, 500));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: obj", e.Message);
+            Assert.Equal("obj", e.ParamName);
         }
     }
 }

@@ -83,13 +83,19 @@ namespace Okra.Tests.Navigation
         [Fact]
         public void Constructor_ThrowsException_WhenPageNameIsNull()
         {
-            Assert.Throws<ArgumentException>(() => new PageInfo(null, "Arguments"));
+            var e = Assert.Throws<ArgumentException>(() => new PageInfo(null, "Arguments"));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
         public void Constructor_ThrowsException_WhenPageNameIsEmpty()
         {
-            Assert.Throws<ArgumentException>(() => new PageInfo("", "Arguments"));
+            var e = Assert.Throws<ArgumentException>(() => new PageInfo("", "Arguments"));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         // *** Method Tests ***
@@ -247,7 +253,10 @@ namespace Okra.Tests.Navigation
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
-            Assert.Throws<ArgumentException>(() => navigationEntry.GetState<string>(null));
+            var e = Assert.Throws<ArgumentException>(() => navigationEntry.GetState<string>(null));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: key", e.Message);
+            Assert.Equal("key", e.ParamName);
         }
 
         [Fact]
@@ -255,7 +264,10 @@ namespace Okra.Tests.Navigation
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
-            Assert.Throws<ArgumentException>(() => navigationEntry.GetState<string>(""));
+            var e = Assert.Throws<ArgumentException>(() => navigationEntry.GetState<string>(""));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: key", e.Message);
+            Assert.Equal("key", e.ParamName);
         }
 
         [Fact]
@@ -263,7 +275,9 @@ namespace Okra.Tests.Navigation
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
-            Assert.Throws<KeyNotFoundException>(() => navigationEntry.GetState<string>("Undefined"));
+            var e = Assert.Throws<KeyNotFoundException>(() => navigationEntry.GetState<string>("Undefined"));
+
+            Assert.Equal("The given key was not present in the dictionary.", e.Message);
         }
 
         [Fact]
@@ -272,7 +286,9 @@ namespace Okra.Tests.Navigation
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
             navigationEntry.SetState<string>("MyKey", "Test State");
 
-            Assert.Throws<InvalidCastException>(() => navigationEntry.GetState<int>("MyKey"));
+            var e = Assert.Throws<InvalidCastException>(() => navigationEntry.GetState<int>("MyKey"));
+
+            Assert.Equal("Specified cast is not valid.", e.Message);
         }
 
         [Fact]
@@ -293,7 +309,10 @@ namespace Okra.Tests.Navigation
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
             string result;
-            Assert.Throws<ArgumentException>(() => navigationEntry.TryGetState<string>(null, out result));
+            var e = Assert.Throws<ArgumentException>(() => navigationEntry.TryGetState<string>(null, out result));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: key", e.Message);
+            Assert.Equal("key", e.ParamName);
         }
 
         [Fact]
@@ -302,7 +321,10 @@ namespace Okra.Tests.Navigation
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
             string result;
-            Assert.Throws<ArgumentException>(() => navigationEntry.TryGetState<string>("", out result));
+            var e = Assert.Throws<ArgumentException>(() => navigationEntry.TryGetState<string>("", out result));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: key", e.Message);
+            Assert.Equal("key", e.ParamName);
         }
 
         [Fact]
@@ -312,7 +334,9 @@ namespace Okra.Tests.Navigation
             navigationEntry.SetState<string>("MyKey", "Test State");
 
             int result;
-            Assert.Throws<InvalidCastException>(() => navigationEntry.TryGetState<int>("MyKey", out result));
+            var e = Assert.Throws<InvalidCastException>(() => navigationEntry.TryGetState<int>("MyKey", out result));
+
+            Assert.Equal("Specified cast is not valid.", e.Message);
         }
 
         [Fact]
@@ -348,7 +372,10 @@ namespace Okra.Tests.Navigation
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
-            Assert.Throws<ArgumentException>(() => navigationEntry.SetState<string>(null, "Test"));
+            var e = Assert.Throws<ArgumentException>(() => navigationEntry.SetState<string>(null, "Test"));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: key", e.Message);
+            Assert.Equal("key", e.ParamName);
         }
 
         [Fact]
@@ -356,7 +383,10 @@ namespace Okra.Tests.Navigation
         {
             PageInfo navigationEntry = new PageInfo("Page Name", "Arguments");
 
-            Assert.Throws<ArgumentException>(() => navigationEntry.SetState<string>("", "Test"));
+            var e = Assert.Throws<ArgumentException>(() => navigationEntry.SetState<string>("", "Test"));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: key", e.Message);
+            Assert.Equal("key", e.ParamName);
         }
 
         [Fact]

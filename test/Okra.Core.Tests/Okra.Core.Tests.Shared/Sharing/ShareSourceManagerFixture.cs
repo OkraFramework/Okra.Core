@@ -19,7 +19,10 @@ namespace Okra.Tests.Sharing
         [Fact]
         public void Constructor_ThrowsException_IfNavigationManagerIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new ShareSourceManager(null));
+            var e = Assert.Throws<ArgumentNullException>(() => new ShareSourceManager(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: navigationManager", e.Message);
+            Assert.Equal("navigationManager", e.ParamName);
         }
 
         // *** Property Tests ***
@@ -50,7 +53,10 @@ namespace Okra.Tests.Sharing
             MockNavigationManager navigationManager = new MockNavigationManager();
             TestableSharingManager sharingManager = CreateSharingManager(navigationManager);
 
-            Assert.Throws<ArgumentNullException>(() => sharingManager.ShareRequested(null));
+            var e = Assert.Throws<ArgumentNullException>(() => sharingManager.ShareRequested(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: shareRequest", e.Message);
+            Assert.Equal("shareRequest", e.ParamName);
         }
 
         // *** Behaviour Tests ***

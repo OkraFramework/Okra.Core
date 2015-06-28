@@ -8,12 +8,6 @@ namespace Okra.Navigation
     {
         // *** Properties ***
 
-        public override bool CanGoBack
-        {
-            get
-            {
-                return base.Count > 1;
-            }
-        }
+        public override bool CanGoBack => base.Count > 1;
     }
 }

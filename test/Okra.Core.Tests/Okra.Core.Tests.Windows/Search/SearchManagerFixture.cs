@@ -32,7 +32,10 @@ namespace Okra.Tests.Search
         {
             MockActivationManager activationManager = new MockActivationManager();
 
-            Assert.Throws<ArgumentNullException>(() => new SearchManager(null, activationManager));
+            var e = Assert.Throws<ArgumentNullException>(() => new SearchManager(null, activationManager));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: navigationManager", e.Message);
+            Assert.Equal("navigationManager", e.ParamName);
         }
 
         [Fact]
@@ -40,7 +43,10 @@ namespace Okra.Tests.Search
         {
             MockNavigationManager navigationManager = new MockNavigationManager();
 
-            Assert.Throws<ArgumentNullException>(() => new SearchManager(navigationManager, null));
+            var e = Assert.Throws<ArgumentNullException>(() => new SearchManager(navigationManager, null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: activationManager", e.Message);
+            Assert.Equal("activationManager", e.ParamName);
         }
 
         // *** Property Tests ***
@@ -68,7 +74,10 @@ namespace Okra.Tests.Search
         {
             SearchManager searchManager = CreateSearchMananger();
 
-            Assert.Throws<ArgumentException>(() => searchManager.SearchPageName = null);
+            var e = Assert.Throws<ArgumentException>(() => searchManager.SearchPageName = null);
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: SearchPageName", e.Message);
+            Assert.Equal("SearchPageName", e.ParamName);
         }
 
         [Fact]
@@ -76,7 +85,10 @@ namespace Okra.Tests.Search
         {
             SearchManager searchManager = CreateSearchMananger();
 
-            Assert.Throws<ArgumentException>(() => searchManager.SearchPageName = "");
+            var e = Assert.Throws<ArgumentException>(() => searchManager.SearchPageName = "");
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: SearchPageName", e.Message);
+            Assert.Equal("SearchPageName", e.ParamName);
         }
 
         [Fact]
@@ -87,7 +99,9 @@ namespace Okra.Tests.Search
 
             activationManager.RaiseActivatedEvent(new MockActivatedEventArgs());
 
-            Assert.Throws<InvalidOperationException>(() => searchManager.SearchPageName = "MySearchPage");
+            var e = Assert.Throws<InvalidOperationException>(() => searchManager.SearchPageName = "MySearchPage");
+
+            Assert.Equal("The 'SearchPageName' property cannot be set after the application has been activated.", e.Message);
         }
 
         // *** Method Tests ***
@@ -316,7 +330,10 @@ namespace Okra.Tests.Search
         {
             SearchManager searchManager = CreateSearchMananger();
 
-            await Assert.ThrowsAsync<ArgumentNullException>(() => searchManager.Activate(null));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => searchManager.Activate(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: activatedEventArgs", e.Message);
+            Assert.Equal("activatedEventArgs", e.ParamName);
         }
 
         [Fact]
@@ -324,7 +341,10 @@ namespace Okra.Tests.Search
         {
             TestableSearchManager searchManager = CreateSearchMananger();
 
-            Assert.Throws<ArgumentNullException>(() => searchManager.CallOnActivationManagerActivated(null));
+            var e = Assert.Throws<ArgumentNullException>(() => searchManager.CallOnActivationManagerActivated(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: e", e.Message);
+            Assert.Equal("e", e.ParamName);
         }
 
         [Fact]
@@ -332,7 +352,10 @@ namespace Okra.Tests.Search
         {
             TestableSearchManager searchManager = CreateSearchMananger();
 
-            Assert.Throws<ArgumentNullException>(() => searchManager.CallOnQuerySubmitted(null));
+            var e = Assert.Throws<ArgumentNullException>(() => searchManager.CallOnQuerySubmitted(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: args", e.Message);
+            Assert.Equal("args", e.ParamName);
         }
 
         // *** Behaviour Tests ***

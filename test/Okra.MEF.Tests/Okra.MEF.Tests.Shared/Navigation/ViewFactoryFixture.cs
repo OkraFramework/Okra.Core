@@ -24,7 +24,10 @@ namespace Okra.MEF.Tests.Navigation
                                 new Lazy<object, PageMetadata>(() => {throw new InvalidOperationException();}, new PageMetadata() { PageName = "Page 3"})
                             };
 
-            Assert.Throws<ArgumentNullException>(() => new ViewFactory(null, lazyPageExports));
+            var e = Assert.Throws<ArgumentNullException>(() => new ViewFactory(null, lazyPageExports));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: compositionContextFactory", e.Message);
+            Assert.Equal("compositionContextFactory", e.ParamName);
         }
 
         [Fact]
@@ -33,7 +36,10 @@ namespace Okra.MEF.Tests.Navigation
             Dictionary<CompositionContract, Func<object>> exportFactories = new Dictionary<CompositionContract, Func<object>>();
             ExportFactory<CompositionContext> compositionContextFactory = new ExportFactory<CompositionContext>(() => CreateCompositionContext(exportFactories));
 
-            Assert.Throws<ArgumentNullException>(() => new ViewFactory(compositionContextFactory, null));
+            var e = Assert.Throws<ArgumentNullException>(() => new ViewFactory(compositionContextFactory, null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: lazyPageExports", e.Message);
+            Assert.Equal("lazyPageExports", e.ParamName);
         }
 
         // *** Method Tests ***
@@ -43,7 +49,10 @@ namespace Okra.MEF.Tests.Navigation
         {
             TestableViewFactory viewFactory = CreateViewFactory();
 
-            Assert.Throws<ArgumentNullException>(() => viewFactory.CallAttachViewModel(null, new object()));
+            var e = Assert.Throws<ArgumentNullException>(() => viewFactory.CallAttachViewModel(null, new object()));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: page", e.Message);
+            Assert.Equal("page", e.ParamName);
         }
 
         [Fact]
@@ -51,7 +60,10 @@ namespace Okra.MEF.Tests.Navigation
         {
             TestableViewFactory viewFactory = CreateViewFactory();
 
-            Assert.Throws<ArgumentNullException>(() => viewFactory.CallAttachViewModel(new object(), null));
+            var e = Assert.Throws<ArgumentNullException>(() => viewFactory.CallAttachViewModel(new object(), null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: viewModel", e.Message);
+            Assert.Equal("viewModel", e.ParamName);
         }
 
         [Fact]
@@ -152,7 +164,9 @@ namespace Okra.MEF.Tests.Navigation
             IViewFactory viewFactory = CreateViewFactory();
             INavigationContext navigationContext = CreateNavigationContext();
 
-            Assert.Throws<InvalidOperationException>(() => viewFactory.CreateView("Page X", navigationContext));
+            var e = Assert.Throws<InvalidOperationException>(() => viewFactory.CreateView("Page X", navigationContext));
+
+            Assert.Equal("Cannot navigate as a page named 'Page X' does not exist.", e.Message);
         }
 
         [Fact]
@@ -161,7 +175,10 @@ namespace Okra.MEF.Tests.Navigation
             IViewFactory viewFactory = CreateViewFactory();
             INavigationContext navigationContext = CreateNavigationContext();
 
-            Assert.Throws<ArgumentException>(() => viewFactory.CreateView(null, navigationContext));
+            var e = Assert.Throws<ArgumentException>(() => viewFactory.CreateView(null, navigationContext));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: name", e.Message);
+            Assert.Equal("name", e.ParamName);
         }
 
         [Fact]
@@ -170,7 +187,10 @@ namespace Okra.MEF.Tests.Navigation
             IViewFactory viewFactory = CreateViewFactory();
             INavigationContext navigationContext = CreateNavigationContext();
 
-            Assert.Throws<ArgumentException>(() => viewFactory.CreateView("", navigationContext));
+            var e = Assert.Throws<ArgumentException>(() => viewFactory.CreateView("", navigationContext));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: name", e.Message);
+            Assert.Equal("name", e.ParamName);
         }
 
         [Fact]
@@ -178,7 +198,10 @@ namespace Okra.MEF.Tests.Navigation
         {
             IViewFactory viewFactory = CreateViewFactory();
 
-            Assert.Throws<ArgumentNullException>(() => viewFactory.CreateView("Page 2", null));
+            var e = Assert.Throws<ArgumentNullException>(() => viewFactory.CreateView("Page 2", null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: context", e.Message);
+            Assert.Equal("context", e.ParamName);
         }
 
         [Fact]
@@ -207,7 +230,10 @@ namespace Okra.MEF.Tests.Navigation
             IViewFactory viewFactory = CreateViewFactory();
             INavigationContext navigationContext = CreateNavigationContext();
 
-            Assert.Throws<ArgumentException>(() => viewFactory.IsViewDefined(null));
+            var e = Assert.Throws<ArgumentException>(() => viewFactory.IsViewDefined(null));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: name", e.Message);
+            Assert.Equal("name", e.ParamName);
         }
 
         [Fact]
@@ -216,7 +242,10 @@ namespace Okra.MEF.Tests.Navigation
             IViewFactory viewFactory = CreateViewFactory();
             INavigationContext navigationContext = CreateNavigationContext();
 
-            Assert.Throws<ArgumentException>(() => viewFactory.IsViewDefined(""));
+            var e = Assert.Throws<ArgumentException>(() => viewFactory.IsViewDefined(""));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: name", e.Message);
+            Assert.Equal("name", e.ParamName);
         }
 
         // *** Behaviour Tests ***

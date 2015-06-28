@@ -39,17 +39,14 @@ namespace Okra.Navigation
 
         // *** Methods ***
 
-        public void ShowSettingsPane()
-        {
-            SettingsPane.Show();
-        }
+        public void ShowSettingsPane() => SettingsPane.Show();
 
         // *** Protected Methods ***
 
         protected void OnSettingsPaneBackClick(object sender, BackClickEventArgs e)
         {
             if (e == null)
-                throw new ArgumentNullException("e");
+                throw new ArgumentNullException(nameof(e));
 
             e.Handled = true;
             this.GoBack();
@@ -119,26 +116,13 @@ namespace Okra.Navigation
             }
         }
 
-        protected virtual void OnFlyoutClosed()
-        {
-            EventHandler eventHandler = FlyoutClosed;
-
-            if (eventHandler != null)
-                eventHandler(this, EventArgs.Empty);
-        }
-
-        protected virtual void OnFlyoutOpened()
-        {
-            EventHandler eventHandler = FlyoutOpened;
-
-            if (eventHandler != null)
-                eventHandler(this, EventArgs.Empty);
-        }
+        protected virtual void OnFlyoutClosed() => FlyoutClosed?.Invoke(this, EventArgs.Empty);
+        protected virtual void OnFlyoutOpened() => FlyoutOpened?.Invoke(this, EventArgs.Empty);
 
         protected virtual void ShowSettingsFlyout(SettingsFlyout settingsFlyout)
         {
             if (settingsFlyout == null)
-                throw new ArgumentNullException("settingsFlyout");
+                throw new ArgumentNullException(nameof(settingsFlyout));
 
             // Show the settings flyout
             // NB: Call 'ShowIndependent()' rather than 'Show()' as we handle displaying the system settings pane as required

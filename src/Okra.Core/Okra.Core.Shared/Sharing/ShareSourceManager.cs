@@ -20,7 +20,7 @@ namespace Okra.Sharing
         public ShareSourceManager(INavigationManager navigationManager)
         {
             if (navigationManager == null)
-                throw new ArgumentNullException("navigationManager");
+                throw new ArgumentNullException(nameof(navigationManager));
 
             _navigationManager = navigationManager;
             navigationManager.NavigationStack.NavigatedTo += NavigationManager_NavigatedTo;
@@ -36,10 +36,7 @@ namespace Okra.Sharing
 
         // *** Methods ***
 
-        public void ShowShareUI()
-        {
-            DataTransferManager.ShowShareUI();
-        }
+        public void ShowShareUI() => DataTransferManager.ShowShareUI();
 
         // *** Protected Methods ***
 
@@ -54,7 +51,7 @@ namespace Okra.Sharing
         protected Task ShareRequested(IShareRequest shareRequest)
         {
             if (shareRequest == null)
-                throw new ArgumentNullException("shareRequest");
+                throw new ArgumentNullException(nameof(shareRequest));
 
             return ShareRequestedInternal(shareRequest);
         }
@@ -113,32 +110,22 @@ namespace Okra.Sharing
             // *** Fields ***
 
             private readonly DataRequest _dataRequest;
-            private readonly ISharePackage _sharePackage;
 
             // *** Constructors ***
 
             public ShareRequest(DataRequest dataRequest)
             {
                 _dataRequest = dataRequest;
-                _sharePackage = new SharePackage(dataRequest.Data);
+                this.Data = new SharePackage(dataRequest.Data);
             }
 
             // *** Properties ***
 
-            public ISharePackage Data
-            {
-                get
-                {
-                    return _sharePackage;
-                }
-            }
+            public ISharePackage Data { get; }
 
             // *** Methods ***
 
-            public void FailWithDisplayText(string displayText)
-            {
-                _dataRequest.FailWithDisplayText(displayText);
-            }
+            public void FailWithDisplayText(string displayText) => _dataRequest.FailWithDisplayText(displayText);
         }
     }
 }

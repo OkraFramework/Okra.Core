@@ -16,7 +16,7 @@ namespace Okra.Navigation
             : base("OkraViewModel", typeof(object))
         {
             if (type == null)
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
 
             this.PageName = Okra.Navigation.PageName.FromType(type);
         }
@@ -25,7 +25,7 @@ namespace Okra.Navigation
             : base("OkraViewModel", typeof(object))
         {
             if (string.IsNullOrEmpty(pageName))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(pageName));
 
             this.PageName = pageName;
         }

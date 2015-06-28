@@ -14,10 +14,10 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (navigationStack == null)
-                throw new ArgumentNullException("navigationStack");
+                throw new ArgumentNullException(nameof(navigationStack));
 
             if (string.IsNullOrEmpty(pageName))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(pageName));
 
             // Delegate to the INavigationStack
 
@@ -30,10 +30,10 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (navigationStack == null)
-                throw new ArgumentNullException("navigationStack");
+                throw new ArgumentNullException(nameof(navigationStack));
 
             if (string.IsNullOrEmpty(pageName))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(pageName));
 
             // Delegate to the INavigationStack
 
@@ -46,10 +46,10 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (navigationStack == null)
-                throw new ArgumentNullException("navigationStack");
+                throw new ArgumentNullException(nameof(navigationStack));
 
             if (string.IsNullOrEmpty(pageName))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(pageName));
 
             // Delegate to the INavigationStack
 
@@ -62,10 +62,10 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (navigationStack == null)
-                throw new ArgumentNullException("navigationStack");
+                throw new ArgumentNullException(nameof(navigationStack));
 
             if (pageName == null)
-                throw new ArgumentNullException("pageName");
+                throw new ArgumentNullException(nameof(pageName));
 
             // Convert the page type to a string and delegate this
 
@@ -78,10 +78,10 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (navigationStack == null)
-                throw new ArgumentNullException("navigationStack");
+                throw new ArgumentNullException(nameof(navigationStack));
 
             if (pageName == null)
-                throw new ArgumentNullException("pageName");
+                throw new ArgumentNullException(nameof(pageName));
 
             // Convert the page type to a string and delegate this
 

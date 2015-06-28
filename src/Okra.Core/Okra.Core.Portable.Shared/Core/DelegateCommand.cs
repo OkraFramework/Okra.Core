@@ -18,10 +18,10 @@ namespace Okra.Core
             // NB: Have to do it here as well as base class as we wrap the arguments in our own delegates
 
             if (execute == null)
-                throw new ArgumentNullException("execute");
+                throw new ArgumentNullException(nameof(execute));
 
             if (canExecute == null)
-                throw new ArgumentNullException("canExecute");
+                throw new ArgumentNullException(nameof(canExecute));
         }
 
         public DelegateCommand(Action execute)

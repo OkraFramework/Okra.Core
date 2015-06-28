@@ -28,10 +28,10 @@ namespace Okra.Sharing
         public ShareTargetManager(IActivationManager activationManager, IViewFactory viewFactory)
         {
             if (activationManager == null)
-                throw new ArgumentNullException("activationManager");
+                throw new ArgumentNullException(nameof(activationManager));
 
             if (viewFactory == null)
-                throw new ArgumentNullException("viewFactory");
+                throw new ArgumentNullException(nameof(viewFactory));
 
             _viewFactory = viewFactory;
 
@@ -53,7 +53,7 @@ namespace Okra.Sharing
                 // Validate parameters
 
                 if (string.IsNullOrEmpty(value))
-                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "SearchPageName");
+                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(ShareTargetPageName));
 
                 // Set the property
 
@@ -66,7 +66,7 @@ namespace Okra.Sharing
         public Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
         {
             if (activatedEventArgs == null)
-                throw new ArgumentNullException("activatedEventArgs");
+                throw new ArgumentNullException(nameof(activatedEventArgs));
 
             if (activatedEventArgs.Kind == ActivationKind.ShareTarget)
             {
@@ -108,7 +108,7 @@ namespace Okra.Sharing
         protected virtual void DisplayPage(IViewLifetimeContext viewLifetimeContext)
         {
             if (viewLifetimeContext == null)
-                throw new ArgumentNullException("viewLifetimeContext");
+                throw new ArgumentNullException(nameof(viewLifetimeContext));
 
             // Create a new content host for the page
 
@@ -132,7 +132,7 @@ namespace Okra.Sharing
         protected void OnWindowClosing(IViewLifetimeContext viewLifetimeContext)
         {
             if (viewLifetimeContext == null)
-                throw new ArgumentNullException("viewLifetimeContext");
+                throw new ArgumentNullException(nameof(viewLifetimeContext));
 
             // Call NavigatingFrom(...) methods
 
@@ -150,7 +150,7 @@ namespace Okra.Sharing
         protected virtual IShareOperation WrapShareOperation(IShareTargetActivatedEventArgs shareTargetEventArgs)
         {
             if (shareTargetEventArgs == null)
-                throw new ArgumentNullException("shareTargetEventArgs");
+                throw new ArgumentNullException(nameof(shareTargetEventArgs));
 
             return new ShareOperationProxy(shareTargetEventArgs.ShareOperation);
         }
@@ -161,10 +161,7 @@ namespace Okra.Sharing
         {
             // *** Methods ***
 
-            public INavigationBase GetCurrent()
-            {
-                return null;
-            }
+            public INavigationBase GetCurrent() => null;
         }
 
         private class ShareOperationProxy : IShareOperation
@@ -172,52 +169,26 @@ namespace Okra.Sharing
             // *** Fields ***
 
             private readonly ShareOperation _shareOperation;
-            private readonly SharePackageView _data;
 
             // *** Constructors ***
 
             public ShareOperationProxy(ShareOperation shareOperation)
             {
                 _shareOperation = shareOperation;
-                _data = new SharePackageView(shareOperation.Data);
+                this.Data = new SharePackageView(shareOperation.Data);
             }
 
             // *** Properties ***
 
-            public ISharePackageView Data
-            {
-                get
-                {
-                    return _data;
-                }
-            }
+            public ISharePackageView Data { get; }
 
             // *** Methods ***
 
-            public void ReportCompleted()
-            {
-                _shareOperation.ReportCompleted();
-            }
-
-            public void ReportDataRetrieved()
-            {
-                _shareOperation.ReportDataRetrieved();
-            }
-
-            public void ReportError(string value)
-            {
-                _shareOperation.ReportError(value);
-            }
-
-            public void ReportStarted()
-            {
-                _shareOperation.ReportStarted();
-            }
-
-            public void ReportSubmittedBackgroundTask()
-            {
-                _shareOperation.ReportSubmittedBackgroundTask();
-            }
+            public void ReportCompleted() => _shareOperation.ReportCompleted();
+            public void ReportDataRetrieved() => _shareOperation.ReportDataRetrieved();
+            public void ReportError(string value) => _shareOperation.ReportError(value);
+            public void ReportStarted() => _shareOperation.ReportStarted();
+            public void ReportSubmittedBackgroundTask() => _shareOperation.ReportSubmittedBackgroundTask();
         }
     }
 }

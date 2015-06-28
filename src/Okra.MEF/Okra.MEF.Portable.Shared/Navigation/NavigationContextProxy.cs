@@ -31,7 +31,7 @@ namespace Okra.Navigation
         public void SetNavigationContext(INavigationContext navigationContext)
         {
             if (navigationContext == null)
-                throw new ArgumentNullException("navigationContext");
+                throw new ArgumentNullException(nameof(navigationContext));
 
             _navigationContext = navigationContext;
         }

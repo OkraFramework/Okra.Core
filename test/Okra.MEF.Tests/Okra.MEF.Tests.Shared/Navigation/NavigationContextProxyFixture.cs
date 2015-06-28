@@ -25,7 +25,10 @@ namespace Okra.MEF.Tests.Navigation
         public void SetNavigationContext_ThrowsException_IfNavigationContextIsNull()
         {
             NavigationContextProxy proxy = new NavigationContextProxy();
-            Assert.Throws<ArgumentNullException>(() => proxy.SetNavigationContext(null));
+            var e = Assert.Throws<ArgumentNullException>(() => proxy.SetNavigationContext(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: navigationContext", e.Message);
+            Assert.Equal("navigationContext", e.ParamName);
         }
     }
 }

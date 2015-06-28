@@ -33,7 +33,7 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (string.IsNullOrEmpty(pageName))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(pageName));
 
             // Set properties
 
@@ -63,7 +63,7 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (string.IsNullOrEmpty(key))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "key");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(key));
 
             // Get value from dictionary
 
@@ -75,7 +75,7 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (string.IsNullOrEmpty(key))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "key");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(key));
 
             // Get value from dictionary
 
@@ -95,7 +95,7 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (string.IsNullOrEmpty(key))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "key");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(key));
 
             // Set value into dictionary
 
@@ -118,10 +118,7 @@ namespace Okra.Navigation
 
         // *** Overriden Base Methods ***
 
-        public override string ToString()
-        {
-            return _pageName;
-        }
+        public override string ToString() => _pageName;
 
         // *** Private Sub-classes ***
 

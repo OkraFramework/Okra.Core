@@ -22,10 +22,10 @@ namespace Okra.Navigation
         public ViewFactory([Import, SharingBoundary("page")]ExportFactory<CompositionContext> compositionContextFactory, [ImportMany("OkraPage")]Lazy<object, PageMetadata>[] lazyPageExports)
         {
             if (compositionContextFactory == null)
-                throw new ArgumentNullException("compositionContextFactory");
+                throw new ArgumentNullException(nameof(compositionContextFactory));
 
             if (lazyPageExports == null)
-                throw new ArgumentNullException("lazyPageExports");
+                throw new ArgumentNullException(nameof(lazyPageExports));
 
             _compositionContextFactory = compositionContextFactory;
             _lazyPageExports = lazyPageExports;
@@ -36,10 +36,10 @@ namespace Okra.Navigation
         public IViewLifetimeContext CreateView(string name, INavigationContext context)
         {
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "name");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(name));
 
             if (context == null)
-                throw new ArgumentNullException("context");
+                throw new ArgumentNullException(nameof(context));
 
             // Create a new composition context for the page (this allows a sharing boundary to be formed)
 
@@ -83,7 +83,7 @@ namespace Okra.Navigation
         public bool IsViewDefined(string name)
         {
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "name");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(name));
 
             // Check the list of page exports for the specified page name
             // NB: Since these are lazy exports they will never be created.
@@ -97,10 +97,10 @@ namespace Okra.Navigation
         protected virtual void AttachViewModel(object page, object viewModel)
         {
             if (page == null)
-                throw new ArgumentNullException("page");
+                throw new ArgumentNullException(nameof(page));
 
             if (viewModel == null)
-                throw new ArgumentNullException("viewModel");
+                throw new ArgumentNullException(nameof(viewModel));
 #if NETFX_CORE
             if (page is Windows.UI.Xaml.FrameworkElement)
                 ((Windows.UI.Xaml.FrameworkElement)page).DataContext = viewModel;
@@ -117,35 +117,20 @@ namespace Okra.Navigation
             // *** Fields ***
 
             private readonly Export<CompositionContext> _compositionContextExport;
-            private readonly object _page;
-            private readonly object _viewModel;
 
             // *** Constructors ***
 
             public ViewLifetimeContext(Export<CompositionContext> compositionContextExport, object page, object viewModel)
             {
                 _compositionContextExport = compositionContextExport;
-                _page = page;
-                _viewModel = viewModel;
+                View = page;
+                ViewModel = viewModel;
             }
 
             // *** Properties ***
 
-            public object View
-            {
-                get
-                {
-                    return _page;
-                }
-            }
-
-            public object ViewModel
-            {
-                get
-                {
-                    return _viewModel;
-                }
-            }
+            public object View { get; }
+            public object ViewModel { get; }
 
             // *** IDisposable Implementation ***
 

@@ -21,7 +21,7 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (navigationBase == null)
-                throw new ArgumentNullException("navigationBase");
+                throw new ArgumentNullException(nameof(navigationBase));
 
             // Return the command
 
@@ -33,10 +33,10 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (navigationBase == null)
-                throw new ArgumentNullException("navigationBase");
+                throw new ArgumentNullException(nameof(navigationBase));
 
             if (string.IsNullOrEmpty(pageName))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(pageName));
 
             // Return the command
 
@@ -49,13 +49,13 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (navigationBase == null)
-                throw new ArgumentNullException("navigationBase");
+                throw new ArgumentNullException(nameof(navigationBase));
 
             if (string.IsNullOrEmpty(label))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "label");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(label));
 
             if (string.IsNullOrEmpty(pageName))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(pageName));
 
             // Return the command
 
@@ -103,19 +103,13 @@ namespace Okra.Navigation
 
             private void NavigationStack_PropertyChanged(object sender, PropertyChangedEventArgs e)
             {
-                if (e.PropertyName == "CanGoBack")
+                if (e.PropertyName == nameof(INavigationStack.CanGoBack))
                 {
                     OnCanExecuteChanged();
                 }
             }
 
-            private void OnCanExecuteChanged()
-            {
-                EventHandler eventHandler = CanExecuteChanged;
-
-                if (eventHandler != null)
-                    eventHandler(this, new EventArgs());
-            }
+            private void OnCanExecuteChanged() => CanExecuteChanged?.Invoke(this, new EventArgs());
         }
 
         private class NavigateToCommand : ICommand
@@ -141,23 +135,10 @@ namespace Okra.Navigation
 
             // *** Methods ***
 
-            public bool CanExecute(object parameter)
-            {
-                return true;
-            }
+            public bool CanExecute(object parameter) => true;
+            public void Execute(object parameter) => _navigationManager.NavigateTo(_pageName, _arguments);
 
-            public void Execute(object parameter)
-            {
-                _navigationManager.NavigateTo(_pageName, _arguments);
-            }
-
-            protected void OnCanExecuteChanged()
-            {
-                EventHandler eventHandler = CanExecuteChanged;
-
-                if (eventHandler != null)
-                    eventHandler(this, new EventArgs());
-            }
+            protected void OnCanExecuteChanged() => CanExecuteChanged?.Invoke(this, new EventArgs());
         }
 
         // *** IUICommand State Classes ***

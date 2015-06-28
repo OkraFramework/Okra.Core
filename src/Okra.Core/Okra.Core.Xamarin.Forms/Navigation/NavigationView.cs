@@ -15,12 +15,7 @@ namespace Okra.Navigation
         private static readonly Page s_backPage = new Page();
         private static readonly Page s_emptyPage = new Page();
         private Page _homePage;
-
-        /// <summary>
-        /// The current page property name
-        /// </summary>
-        private const string CURRENT_PAGE_PROPERTY_NAME = "CurrentPage";
-
+        
         private readonly INavigationBase _navigationManager;
 
         public NavigationView(INavigationBase navigationManager)
@@ -44,7 +39,7 @@ namespace Okra.Navigation
 
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (propertyName == CURRENT_PAGE_PROPERTY_NAME)
+            if (propertyName == nameof(CurrentPage))
             {
                 if ((CurrentPage == s_backPage) && _navigationManager.NavigationStack.CanGoBack)
                 {

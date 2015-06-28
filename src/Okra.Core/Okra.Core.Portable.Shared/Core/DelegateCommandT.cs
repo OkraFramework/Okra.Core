@@ -25,10 +25,10 @@ namespace Okra.Core
             // Validate arguments
 
             if (execute == null)
-                throw new ArgumentNullException("execute");
+                throw new ArgumentNullException(nameof(execute));
 
             if (canExecute == null)
-                throw new ArgumentNullException("canExecute");
+                throw new ArgumentNullException(nameof(canExecute));
 
             // Store parameters
 
@@ -54,19 +54,10 @@ namespace Okra.Core
             return _canExecute((T)parameter);
         }
 
-        public void Execute(object parameter)
-        {
-            _execute((T)parameter);
-        }
+        public void Execute(object parameter) => _execute((T)parameter);
 
         // *** Methods ***
 
-        public void NotifyCanExecuteChanged()
-        {
-            EventHandler eventHandler = CanExecuteChanged;
-
-            if (eventHandler != null)
-                eventHandler(this, EventArgs.Empty);
-        }
+        public void NotifyCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }
 }

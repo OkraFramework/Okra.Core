@@ -24,7 +24,7 @@ namespace Okra.Services
             // Validate parameters
 
             if (file == null)
-                throw new ArgumentNullException("file");
+                throw new ArgumentNullException(nameof(file));
 
             // Call the async method
 
@@ -67,10 +67,10 @@ namespace Okra.Services
             // Validate parameters
 
             if (folder == null)
-                throw new ArgumentNullException("folder");
+                throw new ArgumentNullException(nameof(folder));
 
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "name");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(name));
 
             // Call the async method
 
@@ -124,7 +124,7 @@ namespace Okra.Services
             // Validate parameters
 
             if (file == null)
-                throw new ArgumentNullException("file");
+                throw new ArgumentNullException(nameof(file));
 
             // Call the async method
 
@@ -172,10 +172,10 @@ namespace Okra.Services
             // Validate parameters
 
             if (folder == null)
-                throw new ArgumentNullException("folder");
+                throw new ArgumentNullException(nameof(folder));
 
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "name");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(name));
 
             // Call the async method
 

@@ -19,7 +19,10 @@ namespace Okra.Tests.Services
         {
             LifetimeManager lifetimeManager = new LifetimeManager();
 
-            Assert.Throws<ArgumentNullException>(() => lifetimeManager.Register(null));
+            var e = Assert.Throws<ArgumentNullException>(() => lifetimeManager.Register(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: service", e.Message);
+            Assert.Equal("service", e.ParamName);
         }
 
         [Fact]
@@ -30,7 +33,9 @@ namespace Okra.Tests.Services
 
             lifetimeManager.Register(service);
 
-            Assert.Throws<InvalidOperationException>(() => lifetimeManager.Register(service));
+            var e = Assert.Throws<InvalidOperationException>(() => lifetimeManager.Register(service));
+
+            Assert.Equal("Cannot register the service as it is already registered.", e.Message);
         }
 
         [Fact]
@@ -38,7 +43,10 @@ namespace Okra.Tests.Services
         {
             LifetimeManager lifetimeManager = new LifetimeManager();
 
-            Assert.Throws<ArgumentNullException>(() => lifetimeManager.Unregister(null));
+            var e = Assert.Throws<ArgumentNullException>(() => lifetimeManager.Unregister(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: service", e.Message);
+            Assert.Equal("service", e.ParamName);
         }
 
         [Fact]
@@ -50,7 +58,9 @@ namespace Okra.Tests.Services
 
             lifetimeManager.Register(service1);
 
-            Assert.Throws<InvalidOperationException>(() => lifetimeManager.Unregister(service2));
+            var e = Assert.Throws<InvalidOperationException>(() => lifetimeManager.Unregister(service2));
+
+            Assert.Equal("Cannot unregister the service as it is not currently registered.", e.Message);
         }
 
         // *** Behavior Tests ***

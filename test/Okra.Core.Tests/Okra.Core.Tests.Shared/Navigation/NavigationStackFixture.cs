@@ -158,7 +158,9 @@ namespace Okra.Tests.Navigation
         {
             NavigationStack navigationStack = new NavigationStack();
 
-            Assert.Throws<InvalidOperationException>(() => navigationStack.GoBack());
+            var e = Assert.Throws<InvalidOperationException>(() => navigationStack.GoBack());
+
+            Assert.Equal("You cannot navigate backwards as the back stack is empty.", e.Message);
         }
 
         [Fact]
@@ -189,7 +191,9 @@ namespace Okra.Tests.Navigation
 
             PageInfo unknownPage = new PageInfo("Page 3", null);
 
-            Assert.Throws<InvalidOperationException>(() => navigationStack.GoBackTo(unknownPage));
+            var e = Assert.Throws<InvalidOperationException>(() => navigationStack.GoBackTo(unknownPage));
+
+            Assert.Equal("The specified page 'Page 3' does not exist in the navigation stack.", e.Message);
         }
 
         [Fact]
@@ -197,10 +201,10 @@ namespace Okra.Tests.Navigation
         {
             NavigationStack navigationStack = new NavigationStack();
 
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                navigationStack.GoBackTo(null);
-            });
+            var e = Assert.Throws<ArgumentNullException>(() => navigationStack.GoBackTo(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: page", e.Message);
+            Assert.Equal("page", e.ParamName);
         }
 
         [Fact]
@@ -272,10 +276,10 @@ namespace Okra.Tests.Navigation
         {
             NavigationStack navigationStack = new NavigationStack();
 
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                navigationStack.NavigateTo(null);
-            });
+            var e = Assert.Throws<ArgumentNullException>(() => navigationStack.NavigateTo(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: page", e.Message);
+            Assert.Equal("page", e.ParamName);
         }
 
         [Fact]
@@ -373,10 +377,13 @@ namespace Okra.Tests.Navigation
         {
             NavigationStack navigationStack = new NavigationStack();
 
-            Assert.Throws<ArgumentNullException>(() =>
+            var e = Assert.Throws<ArgumentNullException>(() =>
             {
                 navigationStack.Push(null);
             });
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: pages", e.Message);
+            Assert.Equal("pages", e.ParamName);
         }
 
         [Fact]
@@ -386,10 +393,13 @@ namespace Okra.Tests.Navigation
             PageInfo page1 = new PageInfo("Page 1", null);
             PageInfo page3 = new PageInfo("Page 1", null);
 
-            Assert.Throws<ArgumentException>(() =>
+            var e = Assert.Throws<ArgumentException>(() =>
             {
                 navigationStack.Push(new PageInfo[] { page1, null, page3 });
             });
+
+            Assert.Equal("The list of pages cannot contain a 'null' page.\r\nParameter name: pages", e.Message);
+            Assert.Equal("pages", e.ParamName);
         }
 
         // *** Behavior Tests ***
@@ -1264,70 +1274,91 @@ namespace Okra.Tests.Navigation
         public void OnCollectionChanged_ThrowsException_NullEventArgs()
         {
             TestableNavigationStack navigationStack = new TestableNavigationStack();
-            Assert.Throws<ArgumentNullException>(() =>
+            var e = Assert.Throws<ArgumentNullException>(() =>
             {
                 navigationStack.OnCollectionChanged(null);
             });
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: args", e.Message);
+            Assert.Equal("args", e.ParamName);
         }
 
         [Fact]
         public void OnNavigatingFrom_ThrowsException_NullPageInfo()
         {
             TestableNavigationStack navigationStack = new TestableNavigationStack();
-            Assert.Throws<ArgumentNullException>(() =>
+            var e = Assert.Throws<ArgumentNullException>(() =>
             {
                 navigationStack.OnNavigatingFrom(null, PageNavigationMode.New);
             });
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: page", e.Message);
+            Assert.Equal("page", e.ParamName);
         }
 
         [Fact]
         public void OnNavigatingFrom_ThrowsException_InvalidNavigationMode()
         {
             TestableNavigationStack navigationStack = new TestableNavigationStack();
-            Assert.Throws<ArgumentException>(() =>
+            var e = Assert.Throws<ArgumentException>(() =>
             {
                 navigationStack.OnNavigatingFrom(new PageInfo("Page 1", null), (PageNavigationMode)100);
             });
+
+            Assert.Equal("The argument contains an undefined enumeration value.\r\nParameter name: navigationMode", e.Message);
+            Assert.Equal("navigationMode", e.ParamName);
         }
 
         [Fact]
         public void OnNavigatedTo_ThrowsException_NullPageInfo()
         {
             TestableNavigationStack navigationStack = new TestableNavigationStack();
-            Assert.Throws<ArgumentNullException>(() =>
+            var e = Assert.Throws<ArgumentNullException>(() =>
             {
                 navigationStack.OnNavigatedTo(null, PageNavigationMode.New);
             });
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: page", e.Message);
+            Assert.Equal("page", e.ParamName);
         }
 
         [Fact]
         public void OnNavigatedTo_ThrowsException_InvalidNavigationMode()
         {
             TestableNavigationStack navigationStack = new TestableNavigationStack();
-            Assert.Throws<ArgumentException>(() =>
+            var e = Assert.Throws<ArgumentException>(() =>
             {
                 navigationStack.OnNavigatedTo(new PageInfo("Page 1", null), (PageNavigationMode)100);
             });
+
+            Assert.Equal("The argument contains an undefined enumeration value.\r\nParameter name: navigationMode", e.Message);
+            Assert.Equal("navigationMode", e.ParamName);
         }
 
         [Fact]
         public void OnPageDisposed_ThrowsException_NullPageInfo()
         {
             TestableNavigationStack navigationStack = new TestableNavigationStack();
-            Assert.Throws<ArgumentNullException>(() =>
+            var e = Assert.Throws<ArgumentNullException>(() =>
             {
                 navigationStack.OnPageDisposed(null, PageNavigationMode.New);
             });
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: page", e.Message);
+            Assert.Equal("page", e.ParamName);
         }
 
         [Fact]
         public void OnPageDisposed_ThrowsException_InvalidNavigationMode()
         {
             TestableNavigationStack navigationStack = new TestableNavigationStack();
-            Assert.Throws<ArgumentException>(() =>
+            var e = Assert.Throws<ArgumentException>(() =>
             {
                 navigationStack.OnPageDisposed(new PageInfo("Page 1", null), (PageNavigationMode)100);
             });
+
+            Assert.Equal("The argument contains an undefined enumeration value.\r\nParameter name: navigationMode", e.Message);
+            Assert.Equal("navigationMode", e.ParamName);
         }
 
         // *** Private sub-classes ***

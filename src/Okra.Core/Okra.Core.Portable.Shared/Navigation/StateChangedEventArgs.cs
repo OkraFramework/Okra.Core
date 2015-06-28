@@ -12,7 +12,7 @@ namespace Okra.Navigation
         public StateChangedEventArgs(string stateKey)
         {
             if (string.IsNullOrEmpty(stateKey))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "stateKey");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(stateKey));
 
             this.StateKey = stateKey;
         }
@@ -20,7 +20,6 @@ namespace Okra.Navigation
         public string StateKey
         {
             get;
-            private set;
         }
     }
 }

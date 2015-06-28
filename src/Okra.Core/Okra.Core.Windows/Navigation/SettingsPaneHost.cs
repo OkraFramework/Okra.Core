@@ -85,19 +85,10 @@ namespace Okra.Navigation
             }
         }
 
-        private void SettingsPaneHost_BackClick(object sender, BackClickEventArgs e)
-        {
-            OnBackClick(e);
-        }
+        private void SettingsPaneHost_BackClick(object sender, BackClickEventArgs e) => OnBackClick(e);
 
         // *** Protected Methods ***
 
-        protected virtual void OnBackClick(BackClickEventArgs e)
-        {
-            BackClickEventHandler eventHandler = BackClick;
-
-            if (eventHandler != null)
-                eventHandler(this, e);
-        }
+        protected virtual void OnBackClick(BackClickEventArgs e) => BackClick?.Invoke(this, e);
     }
 }

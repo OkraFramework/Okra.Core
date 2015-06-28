@@ -46,7 +46,10 @@ namespace Okra.Tests.Navigation
         [Fact]
         public void GoBackTo_Exception_NavigationStackIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => NavigationStackEx.GoBackTo(null, "Page 1"));
+            var e = Assert.Throws<ArgumentNullException>(() => NavigationStackEx.GoBackTo(null, "Page 1"));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: navigationStack", e.Message);
+            Assert.Equal("navigationStack", e.ParamName);
         }
 
         [Fact]
@@ -54,7 +57,10 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
 
-            Assert.Throws<ArgumentException>(() => navigationStack.GoBackTo((string)null));
+            var e = Assert.Throws<ArgumentException>(() => navigationStack.GoBackTo((string)null));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
@@ -62,7 +68,10 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
 
-            Assert.Throws<ArgumentException>(() => navigationStack.GoBackTo(""));
+            var e = Assert.Throws<ArgumentException>(() => navigationStack.GoBackTo(""));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
@@ -79,7 +88,10 @@ namespace Okra.Tests.Navigation
         [Fact]
         public void NavigateTo_WithPageName_Exception_NavigationStackIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => NavigationStackEx.NavigateTo(null, "Page 1"));
+            var e = Assert.Throws<ArgumentNullException>(() => NavigationStackEx.NavigateTo(null, "Page 1"));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: navigationStack", e.Message);
+            Assert.Equal("navigationStack", e.ParamName);
         }
 
         [Fact]
@@ -87,7 +99,10 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
 
-            Assert.Throws<ArgumentException>(() => navigationStack.NavigateTo((string)null));
+            var e = Assert.Throws<ArgumentException>(() => navigationStack.NavigateTo((string)null));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
@@ -95,7 +110,10 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
 
-            Assert.Throws<ArgumentException>(() => navigationStack.NavigateTo(""));
+            var e = Assert.Throws<ArgumentException>(() => navigationStack.NavigateTo(""));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
@@ -112,7 +130,10 @@ namespace Okra.Tests.Navigation
         [Fact]
         public void NavigateTo_WithPageNameAndParameter_Exception_NavigationStackIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => NavigationStackEx.NavigateTo(null, "Page 1", new object()));
+            var e = Assert.Throws<ArgumentNullException>(() => NavigationStackEx.NavigateTo(null, "Page 1", new object()));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: navigationStack", e.Message);
+            Assert.Equal("navigationStack", e.ParamName);
         }
 
         [Fact]
@@ -120,7 +141,10 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
 
-            Assert.Throws<ArgumentException>(() => navigationStack.NavigateTo((string)null, "Parameter 1"));
+            var e = Assert.Throws<ArgumentException>(() => navigationStack.NavigateTo((string)null, "Parameter 1"));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
@@ -128,7 +152,10 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
 
-            Assert.Throws<ArgumentException>(() => navigationStack.NavigateTo("", "Parameter 1"));
+            var e = Assert.Throws<ArgumentException>(() => navigationStack.NavigateTo("", "Parameter 1"));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
@@ -145,7 +172,10 @@ namespace Okra.Tests.Navigation
         [Fact]
         public void NavigateTo_WithType_Exception_NavigationStackIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => NavigationStackEx.NavigateTo(null, typeof(MockPage)));
+            var e = Assert.Throws<ArgumentNullException>(() => NavigationStackEx.NavigateTo(null, typeof(MockPage)));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: navigationStack", e.Message);
+            Assert.Equal("navigationStack", e.ParamName);
         }
 
         [Fact]
@@ -153,7 +183,10 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
 
-            Assert.Throws<ArgumentNullException>(() => navigationStack.NavigateTo((Type)null));
+            var e = Assert.Throws<ArgumentNullException>(() => navigationStack.NavigateTo((Type)null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
@@ -170,7 +203,10 @@ namespace Okra.Tests.Navigation
         [Fact]
         public void NavigateTo_WithTypeAndParameter_Exception_NavigationStackIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => NavigationStackEx.NavigateTo(null, typeof(MockPage), new object()));
+            var e = Assert.Throws<ArgumentNullException>(() => NavigationStackEx.NavigateTo(null, typeof(MockPage), new object()));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: navigationStack", e.Message);
+            Assert.Equal("navigationStack", e.ParamName);
         }
 
         [Fact]
@@ -178,7 +214,10 @@ namespace Okra.Tests.Navigation
         {
             MockNavigationStack navigationStack = new MockNavigationStack();
 
-            Assert.Throws<ArgumentNullException>(() => navigationStack.NavigateTo((Type)null, "Parameter"));
+            var e = Assert.Throws<ArgumentNullException>(() => navigationStack.NavigateTo((Type)null, "Parameter"));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         // *** Sub-classes ***

@@ -31,19 +31,28 @@ namespace Okra.MEF.Tests.Navigation
         [Fact]
         public void Constructor_ThrowsException_IfPageNameIsNull()
         {
-            Assert.Throws<ArgumentException>(() => new PageExportAttribute((string)null));
+            var e = Assert.Throws<ArgumentException>(() => new PageExportAttribute((string)null));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
         public void Constructor_ThrowsException_IfPageNameIsEmpty()
         {
-            Assert.Throws<ArgumentException>(() => new PageExportAttribute(""));
+            var e = Assert.Throws<ArgumentException>(() => new PageExportAttribute(""));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
         public void Constructor_ThrowsException_IfPageTypeIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new PageExportAttribute((Type)null));
+            var e = Assert.Throws<ArgumentNullException>(() => new PageExportAttribute((Type)null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: type", e.Message);
+            Assert.Equal("type", e.ParamName);
         }
 
         // *** Property Tests ***

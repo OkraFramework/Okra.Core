@@ -22,7 +22,10 @@ namespace Okra.Tests.Navigation
         {
             INavigationStack navigationStack = new MockNavigationStack();
 
-            Assert.Throws<ArgumentNullException>(() => new TestableNavigationBase(null, navigationStack));
+            var e = Assert.Throws<ArgumentNullException>(() => new TestableNavigationBase(null, navigationStack));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: viewFactory", e.Message);
+            Assert.Equal("viewFactory", e.ParamName);
         }
 
         [Fact]
@@ -30,7 +33,10 @@ namespace Okra.Tests.Navigation
         {
             IViewFactory viewFactory = MockViewFactory.WithPageAndViewModel;
 
-            Assert.Throws<ArgumentNullException>(() => new TestableNavigationBase(viewFactory, null));
+            var e = Assert.Throws<ArgumentNullException>(() => new TestableNavigationBase(viewFactory, null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: navigationStack", e.Message);
+            Assert.Equal("navigationStack", e.ParamName);
         }
 
         // *** Property Test ***
@@ -250,7 +256,10 @@ namespace Okra.Tests.Navigation
         {
             INavigationBase navigationBase = CreateNavigationBase();
 
-            Assert.Throws<ArgumentException>(() => navigationBase.CanNavigateTo(null));
+            var e = Assert.Throws<ArgumentException>(() => navigationBase.CanNavigateTo(null));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
@@ -258,7 +267,10 @@ namespace Okra.Tests.Navigation
         {
             INavigationBase navigationBase = CreateNavigationBase();
 
-            Assert.Throws<ArgumentException>(() => navigationBase.CanNavigateTo(""));
+            var e = Assert.Throws<ArgumentException>(() => navigationBase.CanNavigateTo(""));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: pageName", e.Message);
+            Assert.Equal("pageName", e.ParamName);
         }
 
         [Fact]
@@ -307,7 +319,10 @@ namespace Okra.Tests.Navigation
         {
             INavigationBase navigationBase = CreateNavigationBase();
 
-            Assert.Throws<ArgumentNullException>(() => navigationBase.GetPageElements(null));
+            var e = Assert.Throws<ArgumentNullException>(() => navigationBase.GetPageElements(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: page", e.Message);
+            Assert.Equal("page", e.ParamName);
         }
 
         [Fact]
@@ -421,7 +436,10 @@ namespace Okra.Tests.Navigation
         {
             TestableNavigationBase navigationBase = CreateNavigationBase();
 
-            Assert.Throws<ArgumentNullException>(() => navigationBase.RestoreState(null));
+            var e = Assert.Throws<ArgumentNullException>(() => navigationBase.RestoreState(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: state", e.Message);
+            Assert.Equal("state", e.ParamName);
         }
 
         // *** Private Methods ***

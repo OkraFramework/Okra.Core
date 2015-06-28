@@ -11,7 +11,7 @@ namespace Okra.Sharing
         public static void SetApplicationLink(this ISharePackage sharePackage, Uri value)
         {
             if (sharePackage == null)
-                throw new ArgumentNullException("sharePackage");
+                throw new ArgumentNullException(nameof(sharePackage));
 
             sharePackage.SetData(StandardShareFormats.ApplicationLink, value);
         }
@@ -19,7 +19,7 @@ namespace Okra.Sharing
         public static void SetHtmlFormat(this ISharePackage sharePackage, string value)
         {
             if (sharePackage == null)
-                throw new ArgumentNullException("sharePackage");
+                throw new ArgumentNullException(nameof(sharePackage));
 
             sharePackage.SetData(StandardShareFormats.Html, value);
         }
@@ -27,7 +27,7 @@ namespace Okra.Sharing
         public static void SetRtf(this ISharePackage sharePackage, string value)
         {
             if (sharePackage == null)
-                throw new ArgumentNullException("sharePackage");
+                throw new ArgumentNullException(nameof(sharePackage));
 
             sharePackage.SetData(StandardShareFormats.Rtf, value);
         }
@@ -35,7 +35,7 @@ namespace Okra.Sharing
         public static void SetText(this ISharePackage sharePackage, string value)
         {
             if (sharePackage == null)
-                throw new ArgumentNullException("sharePackage");
+                throw new ArgumentNullException(nameof(sharePackage));
 
             sharePackage.SetData(StandardShareFormats.Text, value);
         }
@@ -43,7 +43,7 @@ namespace Okra.Sharing
         public static void SetWebLink(this ISharePackage sharePackage, Uri value)
         {
             if (sharePackage == null)
-                throw new ArgumentNullException("sharePackage");
+                throw new ArgumentNullException(nameof(sharePackage));
 
             sharePackage.SetData(StandardShareFormats.WebLink, value);
         }
@@ -53,7 +53,7 @@ namespace Okra.Sharing
         public static void SetAsyncApplicationLink(this ISharePackage sharePackage, AsyncDataProvider<Uri> dataProvider)
         {
             if (sharePackage == null)
-                throw new ArgumentNullException("sharePackage");
+                throw new ArgumentNullException(nameof(sharePackage));
 
             sharePackage.SetAsyncData(StandardShareFormats.ApplicationLink, dataProvider);
         }
@@ -61,7 +61,7 @@ namespace Okra.Sharing
         public static void SetAsyncHtmlFormat(this ISharePackage sharePackage, AsyncDataProvider<string> dataProvider)
         {
             if (sharePackage == null)
-                throw new ArgumentNullException("sharePackage");
+                throw new ArgumentNullException(nameof(sharePackage));
 
             sharePackage.SetAsyncData(StandardShareFormats.Html, dataProvider);
         }
@@ -69,7 +69,7 @@ namespace Okra.Sharing
         public static void SetAsyncRtf(this ISharePackage sharePackage, AsyncDataProvider<string> dataProvider)
         {
             if (sharePackage == null)
-                throw new ArgumentNullException("sharePackage");
+                throw new ArgumentNullException(nameof(sharePackage));
 
             sharePackage.SetAsyncData(StandardShareFormats.Rtf, dataProvider);
         }
@@ -77,7 +77,7 @@ namespace Okra.Sharing
         public static void SetAsyncText(this ISharePackage sharePackage, AsyncDataProvider<string> dataProvider)
         {
             if (sharePackage == null)
-                throw new ArgumentNullException("sharePackage");
+                throw new ArgumentNullException(nameof(sharePackage));
 
             sharePackage.SetAsyncData(StandardShareFormats.Text, dataProvider);
         }
@@ -85,7 +85,7 @@ namespace Okra.Sharing
         public static void SetAsyncWebLink(this ISharePackage sharePackage, AsyncDataProvider<Uri> dataProvider)
         {
             if (sharePackage == null)
-                throw new ArgumentNullException("sharePackage");
+                throw new ArgumentNullException(nameof(sharePackage));
 
             sharePackage.SetAsyncData(StandardShareFormats.WebLink, dataProvider);
         }

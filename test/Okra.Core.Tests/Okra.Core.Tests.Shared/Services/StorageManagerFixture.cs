@@ -22,7 +22,10 @@ namespace Okra.Tests.Services
             StorageManager storageManager = new StorageManager();
 
             TestData data = new TestData() { Text = "Test Text", Number = 42 };
-            await AssertEx.ThrowsExceptionAsync<ArgumentNullException>(() => storageManager.StoreAsync(null, data));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => storageManager.StoreAsync(null, data));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: file", e.Message);
+            Assert.Equal("file", e.ParamName);
         }
 
         [Fact]
@@ -33,7 +36,10 @@ namespace Okra.Tests.Services
             StorageFolder folder = null;
             string name = GetTestFilename();
             TestData data = new TestData() { Text = "Test Text", Number = 42 };
-            await AssertEx.ThrowsExceptionAsync<ArgumentNullException>(() => storageManager.StoreAsync(folder, name, data));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => storageManager.StoreAsync(folder, name, data));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: folder", e.Message);
+            Assert.Equal("folder", e.ParamName);
         }
 
         [Fact]
@@ -43,7 +49,10 @@ namespace Okra.Tests.Services
 
             StorageFolder folder = ApplicationData.Current.TemporaryFolder;
             TestData data = new TestData() { Text = "Test Text", Number = 42 };
-            await AssertEx.ThrowsExceptionAsync<ArgumentException>(() => storageManager.StoreAsync(folder, null, data));
+            var e = await Assert.ThrowsAsync<ArgumentException>(() => storageManager.StoreAsync(folder, null, data));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: name", e.Message);
+            Assert.Equal("name", e.ParamName);
         }
 
         [Fact]
@@ -53,7 +62,10 @@ namespace Okra.Tests.Services
 
             StorageFolder folder = ApplicationData.Current.TemporaryFolder;
             TestData data = new TestData() { Text = "Test Text", Number = 42 };
-            await AssertEx.ThrowsExceptionAsync<ArgumentException>(() => storageManager.StoreAsync(folder, "", data));
+            var e = await Assert.ThrowsAsync<ArgumentException>(() => storageManager.StoreAsync(folder, "", data));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: name", e.Message);
+            Assert.Equal("name", e.ParamName);
         }
 
         [Fact]
@@ -74,7 +86,10 @@ namespace Okra.Tests.Services
         {
             StorageManager storageManager = new StorageManager();
 
-            await AssertEx.ThrowsExceptionAsync<ArgumentNullException>(() => storageManager.RetrieveAsync<TestData>(null));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => storageManager.RetrieveAsync<TestData>(null));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: file", e.Message);
+            Assert.Equal("file", e.ParamName);
         }
 
         [Fact]
@@ -84,7 +99,10 @@ namespace Okra.Tests.Services
 
             StorageFolder folder = null;
             string name = GetTestFilename();
-            await AssertEx.ThrowsExceptionAsync<ArgumentNullException>(() => storageManager.RetrieveAsync<TestData>(folder, name));
+            var e = await Assert.ThrowsAsync<ArgumentNullException>(() => storageManager.RetrieveAsync<TestData>(folder, name));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: folder", e.Message);
+            Assert.Equal("folder", e.ParamName);
         }
 
         [Fact]
@@ -93,7 +111,10 @@ namespace Okra.Tests.Services
             StorageManager storageManager = new StorageManager();
 
             StorageFolder folder = ApplicationData.Current.TemporaryFolder;
-            await AssertEx.ThrowsExceptionAsync<ArgumentException>(() => storageManager.RetrieveAsync<TestData>(folder, null));
+            var e = await Assert.ThrowsAsync<ArgumentException>(() => storageManager.RetrieveAsync<TestData>(folder, null));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: name", e.Message);
+            Assert.Equal("name", e.ParamName);
         }
 
         [Fact]
@@ -102,7 +123,10 @@ namespace Okra.Tests.Services
             StorageManager storageManager = new StorageManager();
 
             StorageFolder folder = ApplicationData.Current.TemporaryFolder;
-            await AssertEx.ThrowsExceptionAsync<ArgumentException>(() => storageManager.RetrieveAsync<TestData>(folder, ""));
+            var e = await Assert.ThrowsAsync<ArgumentException>(() => storageManager.RetrieveAsync<TestData>(folder, ""));
+
+            Assert.Equal("The argument cannot be null or an empty string.\r\nParameter name: name", e.Message);
+            Assert.Equal("name", e.ParamName);
         }
 
         [Fact]
