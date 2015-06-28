@@ -53,7 +53,7 @@ namespace Okra.Sharing
                 // Validate parameters
 
                 if (string.IsNullOrEmpty(value))
-                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "SearchPageName");
+                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "ShareTargetPageName");
 
                 // Set the property
 

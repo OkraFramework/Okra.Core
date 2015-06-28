@@ -114,7 +114,7 @@ namespace Okra.Navigation
             set
             {
                 if (!Enum.IsDefined(typeof(NavigationStorageType), value))
-                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"));
+                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), "NavigationStorageType");
 
                 _navigationStorageType = value;
             }

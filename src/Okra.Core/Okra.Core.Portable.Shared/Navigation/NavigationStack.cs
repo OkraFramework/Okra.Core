@@ -144,7 +144,7 @@ namespace Okra.Navigation
                 throw new ArgumentNullException("pages");
 
             if (pages.Contains(null))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_EnumerableContainsNullPage"));
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_EnumerableContainsNullPage"), "pages");
 
             // If there are no pages to push then just return (and don't raise any events)
 
