@@ -49,7 +49,7 @@ namespace Okra
         public OkraBootstrapper(IFileSystem fileSystem)
         {
             if (fileSystem == null)
-                throw new ArgumentNullException("fileSystem", "A platform specific file system wrapper must be supplied.");
+                throw new ArgumentNullException(nameof(fileSystem), "A platform specific file system wrapper must be supplied.");
         }
 #endif
 
@@ -78,7 +78,7 @@ namespace Okra
 #endif
         {
             if (args == null)
-                throw new ArgumentNullException("args");
+                throw new ArgumentNullException(nameof(args));
 
             // Setup services if this is the first activation
 

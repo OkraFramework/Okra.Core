@@ -25,10 +25,10 @@ namespace Okra.Search
         public SearchManager(INavigationManager navigationManager, IActivationManager activationManager)
         {
             if (navigationManager == null)
-                throw new ArgumentNullException("navigationManager");
+                throw new ArgumentNullException(nameof(navigationManager));
 
             if (activationManager == null)
-                throw new ArgumentNullException("activationManager");
+                throw new ArgumentNullException(nameof(activationManager));
 
             _navigationManager = navigationManager;
 
@@ -51,12 +51,12 @@ namespace Okra.Search
                 // Validate parameters
 
                 if (string.IsNullOrEmpty(value))
-                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "SearchPageName");
+                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(SearchPageName));
 
                 // If we have been activated then do not allow setting of this property
 
                 if (_isActivated)
-                    throw new InvalidOperationException(string.Format(ResourceHelper.GetErrorResource("Exception_InvalidOperation_PropertyCannotBeSetAfterActivation"), "SearchPageName"));
+                    throw new InvalidOperationException(string.Format(ResourceHelper.GetErrorResource("Exception_InvalidOperation_PropertyCannotBeSetAfterActivation"), nameof(SearchPageName)));
 
                 // Set the property
 
@@ -69,7 +69,7 @@ namespace Okra.Search
         public Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
         {
             if (activatedEventArgs == null)
-                throw new ArgumentNullException("activatedEventArgs");
+                throw new ArgumentNullException(nameof(activatedEventArgs));
 
             return ActivateInternal(activatedEventArgs);
         }
@@ -106,7 +106,7 @@ namespace Okra.Search
         protected void OnActivationManagerActivated(object sender, IActivatedEventArgs e)
         {
             if (e == null)
-                throw new ArgumentNullException("e");
+                throw new ArgumentNullException(nameof(e));
 
             // Once the application is activated we register for the SearchPage.QuerySubmitted event
             // NB: This is a slightly more performant method of receiving search queries for running applications than via activation
@@ -124,7 +124,7 @@ namespace Okra.Search
         protected void OnQuerySubmitted(SearchPane sender, SearchPaneQuerySubmittedEventArgs args)
         {
             if (args == null)
-                throw new ArgumentNullException("args");
+                throw new ArgumentNullException(nameof(args));
 
             DisplaySearchResults(args.QueryText, args.Language);
         }

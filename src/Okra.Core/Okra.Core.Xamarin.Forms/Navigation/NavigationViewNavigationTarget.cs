@@ -24,7 +24,7 @@ namespace Okra.Navigation
         {
             var nextPage = page as Page;
             if (nextPage == null)
-                throw new ArgumentException("Only objects of type 'Page' can be presented.", "page");
+                throw new ArgumentException("Only objects of type 'Page' can be presented.", nameof(page));
 
             var navigationView = Application.Current.MainPage as NavigationView;
             if (navigationView == null)

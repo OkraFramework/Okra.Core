@@ -84,9 +84,9 @@ namespace Okra.Navigation
 
             // Raise property changed events
 
-            OnPropertyChanged("Count");
-            OnPropertyChanged("CurrentPage");
-            OnPropertyChanged("CanGoBack");
+            OnPropertyChanged(nameof(Count));
+            OnPropertyChanged(nameof(CurrentPage));
+            OnPropertyChanged(nameof(CanGoBack));
 
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
@@ -116,7 +116,7 @@ namespace Okra.Navigation
         public void GoBackTo(PageInfo page)
         {
             if (page == null)
-                throw new ArgumentNullException("page");
+                throw new ArgumentNullException(nameof(page));
 
             // Check that the specified page exists in the navigation stack
 
@@ -133,7 +133,7 @@ namespace Okra.Navigation
         public void NavigateTo(PageInfo page)
         {
             if (page == null)
-                throw new ArgumentNullException("page");
+                throw new ArgumentNullException(nameof(page));
 
             Push(new PageInfo[] { page });
         }
@@ -141,10 +141,10 @@ namespace Okra.Navigation
         public void Push(IEnumerable<PageInfo> pages)
         {
             if (pages == null)
-                throw new ArgumentNullException("pages");
+                throw new ArgumentNullException(nameof(pages));
 
             if (pages.Contains(null))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_EnumerableContainsNullPage"), "pages");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_EnumerableContainsNullPage"), nameof(pages));
 
             // If there are no pages to push then just return (and don't raise any events)
 
@@ -167,10 +167,10 @@ namespace Okra.Navigation
 
             // Raise events
 
-            OnPropertyChanged("Count");
-            OnPropertyChanged("CurrentPage");
+            OnPropertyChanged(nameof(Count));
+            OnPropertyChanged(nameof(CurrentPage));
             if (CanGoBack != oldCanGoBack)
-                OnPropertyChanged("CanGoBack");
+                OnPropertyChanged(nameof(CanGoBack));
 
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, pages.ToList(), insertionPosition));
 
@@ -182,7 +182,7 @@ namespace Okra.Navigation
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
         {
             if (args == null)
-                throw new ArgumentNullException("args");
+                throw new ArgumentNullException(nameof(args));
 
             NotifyCollectionChangedEventHandler eventHandler = CollectionChanged;
 
@@ -193,10 +193,10 @@ namespace Okra.Navigation
         protected virtual void OnNavigatingFrom(PageInfo page, PageNavigationMode navigationMode)
         {
             if (page == null)
-                throw new ArgumentNullException("page");
+                throw new ArgumentNullException(nameof(page));
 
             if (!Enum.IsDefined(typeof(PageNavigationMode), navigationMode))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), "navigationMode");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), nameof(navigationMode));
 
             EventHandler<PageNavigationEventArgs> eventHandler = NavigatingFrom;
 
@@ -207,10 +207,10 @@ namespace Okra.Navigation
         protected virtual void OnNavigatedTo(PageInfo page, PageNavigationMode navigationMode)
         {
             if (page == null)
-                throw new ArgumentNullException("page");
+                throw new ArgumentNullException(nameof(page));
 
             if (!Enum.IsDefined(typeof(PageNavigationMode), navigationMode))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), "navigationMode");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), nameof(navigationMode));
 
             EventHandler<PageNavigationEventArgs> eventHandler = NavigatedTo;
 
@@ -221,10 +221,10 @@ namespace Okra.Navigation
         protected virtual void OnPageDisposed(PageInfo page, PageNavigationMode navigationMode)
         {
             if (page == null)
-                throw new ArgumentNullException("page");
+                throw new ArgumentNullException(nameof(page));
 
             if (!Enum.IsDefined(typeof(PageNavigationMode), navigationMode))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), "navigationMode");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), nameof(navigationMode));
 
             EventHandler<PageNavigationEventArgs> eventHandler = PageDisposed;
 
@@ -257,10 +257,10 @@ namespace Okra.Navigation
 
             // Raise property changed events
 
-            OnPropertyChanged("Count");
-            OnPropertyChanged("CurrentPage");
+            OnPropertyChanged(nameof(Count));
+            OnPropertyChanged(nameof(CurrentPage));
             if (!CanGoBack)
-                OnPropertyChanged("CanGoBack");
+                OnPropertyChanged(nameof(CanGoBack));
 
             if (removedPageCount == 1)
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedPages[0], _internalStack.Count));

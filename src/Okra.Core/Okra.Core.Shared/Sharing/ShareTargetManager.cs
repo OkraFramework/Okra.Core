@@ -28,10 +28,10 @@ namespace Okra.Sharing
         public ShareTargetManager(IActivationManager activationManager, IViewFactory viewFactory)
         {
             if (activationManager == null)
-                throw new ArgumentNullException("activationManager");
+                throw new ArgumentNullException(nameof(activationManager));
 
             if (viewFactory == null)
-                throw new ArgumentNullException("viewFactory");
+                throw new ArgumentNullException(nameof(viewFactory));
 
             _viewFactory = viewFactory;
 
@@ -53,7 +53,7 @@ namespace Okra.Sharing
                 // Validate parameters
 
                 if (string.IsNullOrEmpty(value))
-                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "ShareTargetPageName");
+                    throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(ShareTargetPageName));
 
                 // Set the property
 
@@ -66,7 +66,7 @@ namespace Okra.Sharing
         public Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
         {
             if (activatedEventArgs == null)
-                throw new ArgumentNullException("activatedEventArgs");
+                throw new ArgumentNullException(nameof(activatedEventArgs));
 
             if (activatedEventArgs.Kind == ActivationKind.ShareTarget)
             {
@@ -108,7 +108,7 @@ namespace Okra.Sharing
         protected virtual void DisplayPage(IViewLifetimeContext viewLifetimeContext)
         {
             if (viewLifetimeContext == null)
-                throw new ArgumentNullException("viewLifetimeContext");
+                throw new ArgumentNullException(nameof(viewLifetimeContext));
 
             // Create a new content host for the page
 
@@ -132,7 +132,7 @@ namespace Okra.Sharing
         protected void OnWindowClosing(IViewLifetimeContext viewLifetimeContext)
         {
             if (viewLifetimeContext == null)
-                throw new ArgumentNullException("viewLifetimeContext");
+                throw new ArgumentNullException(nameof(viewLifetimeContext));
 
             // Call NavigatingFrom(...) methods
 
@@ -150,7 +150,7 @@ namespace Okra.Sharing
         protected virtual IShareOperation WrapShareOperation(IShareTargetActivatedEventArgs shareTargetEventArgs)
         {
             if (shareTargetEventArgs == null)
-                throw new ArgumentNullException("shareTargetEventArgs");
+                throw new ArgumentNullException(nameof(shareTargetEventArgs));
 
             return new ShareOperationProxy(shareTargetEventArgs.ShareOperation);
         }

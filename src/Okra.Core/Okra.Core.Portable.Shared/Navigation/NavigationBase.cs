@@ -28,10 +28,10 @@ namespace Okra.Navigation
         public NavigationBase(IViewFactory viewFactory, INavigationStack navigationStack)
         {
             if (viewFactory == null)
-                throw new ArgumentNullException("viewFactory");
+                throw new ArgumentNullException(nameof(viewFactory));
 
             if (navigationStack == null)
-                throw new ArgumentNullException("navigationStack");
+                throw new ArgumentNullException(nameof(navigationStack));
 
             _viewFactory = viewFactory;
             _navigationStack = navigationStack;
@@ -59,7 +59,7 @@ namespace Okra.Navigation
         public bool CanNavigateTo(string pageName)
         {
             if (string.IsNullOrEmpty(pageName))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(pageName));
 
             // Query the underlying view factory to see if the page exists
 
@@ -69,7 +69,7 @@ namespace Okra.Navigation
         public IEnumerable<object> GetPageElements(PageInfo page)
         {
             if (page == null)
-                throw new ArgumentNullException("page");
+                throw new ArgumentNullException(nameof(page));
 
             // Get the cached page if present, otherwise return an empty array
 
@@ -97,7 +97,7 @@ namespace Okra.Navigation
         protected void RestoreState(NavigationState state)
         {
             if (state == null)
-                throw new ArgumentNullException("state");
+                throw new ArgumentNullException(nameof(state));
 
             // Restore the navigation stack
             // NB: Flag that we are restoring state so we can pass a NavigationMode.Refresh to restored pages
@@ -257,7 +257,7 @@ namespace Okra.Navigation
         {
             switch (e.PropertyName)
             {
-                case "CurrentPage":
+                case nameof(INavigationStack.CurrentPage):
                     DisplayNavigationEntry((PageInfo)_navigationStack.CurrentPage);
                     break;
             }

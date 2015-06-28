@@ -14,7 +14,7 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (navigationBase == null)
-                throw new ArgumentNullException("navigationBase");
+                throw new ArgumentNullException(nameof(navigationBase));
 
             if (!navigationBase.NavigationStack.CanGoBack)
                 throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotGoBackWithEmptyBackStack"));
@@ -29,10 +29,10 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (navigationBase == null)
-                throw new ArgumentNullException("navigationBase");
+                throw new ArgumentNullException(nameof(navigationBase));
 
             if (string.IsNullOrEmpty(pageName))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(pageName));
 
             if (!navigationBase.CanNavigateTo(pageName))
                 throw new InvalidOperationException(string.Format(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotNavigateAsPageIsNotFound"), pageName));
@@ -47,10 +47,10 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (navigationBase == null)
-                throw new ArgumentNullException("navigationBase");
+                throw new ArgumentNullException(nameof(navigationBase));
 
             if (string.IsNullOrEmpty(pageName))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "pageName");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(pageName));
 
             if (!navigationBase.CanNavigateTo(pageName))
                 throw new InvalidOperationException(string.Format(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotNavigateAsPageIsNotFound"), pageName));
@@ -65,10 +65,10 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (navigationBase == null)
-                throw new ArgumentNullException("navigationBase");
+                throw new ArgumentNullException(nameof(navigationBase));
 
             if (pageName == null)
-                throw new ArgumentNullException("pageName");
+                throw new ArgumentNullException(nameof(pageName));
 
             string pageNameString = PageName.FromType(pageName);
 
@@ -85,10 +85,10 @@ namespace Okra.Navigation
             // Validate Parameters
 
             if (navigationBase == null)
-                throw new ArgumentNullException("navigationBase");
+                throw new ArgumentNullException(nameof(navigationBase));
 
             if (pageName == null)
-                throw new ArgumentNullException("pageName");
+                throw new ArgumentNullException(nameof(pageName));
 
             string pageNameString = PageName.FromType(pageName);
 

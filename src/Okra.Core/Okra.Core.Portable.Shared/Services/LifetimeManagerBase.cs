@@ -25,7 +25,7 @@ namespace Okra.Services
             // Validate parameters
 
             if (service == null)
-                throw new ArgumentNullException("service");
+                throw new ArgumentNullException(nameof(service));
 
             if (_registeredServices.Contains(service))
                 throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotRegisterServiceMultipleTimes"));
@@ -40,7 +40,7 @@ namespace Okra.Services
             // Validate parameters
 
             if (service == null)
-                throw new ArgumentNullException("service");
+                throw new ArgumentNullException(nameof(service));
 
             if (!_registeredServices.Contains(service))
                 throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotUnregisterUnregisteredService"));

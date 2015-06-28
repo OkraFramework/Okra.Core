@@ -19,7 +19,7 @@ namespace Okra.Sharing
         public SharePackageView(DataPackageView dataPackageView)
         {
             if (dataPackageView == null)
-                throw new ArgumentNullException("dataPackageView");
+                throw new ArgumentNullException(nameof(dataPackageView));
 
             _dataPackageView = dataPackageView;
             _properties = new SharePropertySet(dataPackageView.Properties);
@@ -48,7 +48,7 @@ namespace Okra.Sharing
         public bool Contains(string formatId)
         {
             if (string.IsNullOrEmpty(formatId))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "formatId");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(formatId));
 
             return _dataPackageView.Contains(formatId);
         }
@@ -56,7 +56,7 @@ namespace Okra.Sharing
         public Task<T> GetDataAsync<T>(string formatId)
         {
             if (string.IsNullOrEmpty(formatId))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), "formatId");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_StringIsNullOrEmpty"), nameof(formatId));
 
             return GetDataAsyncInternal<T>(formatId);
         }

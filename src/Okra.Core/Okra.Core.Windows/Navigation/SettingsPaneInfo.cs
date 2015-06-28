@@ -23,7 +23,7 @@ namespace Okra.Navigation
         public static Brush GetHeaderBackground(DependencyObject obj)
         {
             if (obj == null)
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
 
             return (Brush)obj.GetValue(HeaderBackgroundProperty);
         }
@@ -31,7 +31,7 @@ namespace Okra.Navigation
         public static void SetHeaderBackground(DependencyObject obj, Brush value)
         {
             if (obj == null)
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
 
             obj.SetValue(HeaderBackgroundProperty, value);
         }
@@ -39,7 +39,7 @@ namespace Okra.Navigation
         public static Brush GetHeaderForeground(DependencyObject obj)
         {
             if (obj == null)
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
 
             return (Brush)obj.GetValue(HeaderForegroundProperty);
         }
@@ -47,7 +47,7 @@ namespace Okra.Navigation
         public static void SetHeaderForeground(DependencyObject obj, Brush value)
         {
             if (obj == null)
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
 
             obj.SetValue(HeaderForegroundProperty, value);
         }
@@ -55,7 +55,7 @@ namespace Okra.Navigation
         public static ImageSource GetIconSource(DependencyObject obj)
         {
             if (obj == null)
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
 
             return (ImageSource)obj.GetValue(IconSourceProperty);
         }
@@ -63,7 +63,7 @@ namespace Okra.Navigation
         public static void SetIconSource(DependencyObject obj, ImageSource value)
         {
             if (obj == null)
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
 
             obj.SetValue(IconSourceProperty, value);
         }
@@ -71,7 +71,7 @@ namespace Okra.Navigation
         public static string GetTitle(DependencyObject obj)
         {
             if (obj == null)
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
 
             return (string)obj.GetValue(TitleProperty);
         }
@@ -79,7 +79,7 @@ namespace Okra.Navigation
         public static void SetTitle(DependencyObject obj, string value)
         {
             if (obj == null)
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
 
             obj.SetValue(TitleProperty, value);
         }
@@ -87,7 +87,7 @@ namespace Okra.Navigation
         public static double GetWidth(DependencyObject obj)
         {
             if (obj == null)
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
 
             return (double)obj.GetValue(WidthProperty);
         }
@@ -95,7 +95,7 @@ namespace Okra.Navigation
         public static void SetWidth(DependencyObject obj, double value)
         {
             if (obj == null)
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
 
             obj.SetValue(WidthProperty, value);
         }

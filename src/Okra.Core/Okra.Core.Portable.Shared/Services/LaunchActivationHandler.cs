@@ -23,10 +23,10 @@ namespace Okra.Services
             // Validate parameters
 
             if (activationManager == null)
-                throw new ArgumentNullException("activationManager");
+                throw new ArgumentNullException(nameof(activationManager));
 
             if (navigationManager == null)
-                throw new ArgumentNullException("navigationManager");
+                throw new ArgumentNullException(nameof(navigationManager));
 
             // Store state
 
@@ -44,7 +44,7 @@ namespace Okra.Services
             // Validate parameters
 
             if (activatedEventArgs == null)
-                throw new ArgumentNullException("activatedEventArgs");
+                throw new ArgumentNullException(nameof(activatedEventArgs));
 
             // Call private internal method
 

@@ -19,10 +19,10 @@ namespace Okra.Navigation
             // Validate arguments
 
             if (page == null)
-                throw new ArgumentNullException("page");
+                throw new ArgumentNullException(nameof(page));
 
             if (!Enum.IsDefined(typeof(PageNavigationMode), navigationMode))
-                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), "navigationMode");
+                throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), nameof(navigationMode));
 
             // Set properties
 

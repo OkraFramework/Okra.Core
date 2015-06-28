@@ -20,7 +20,7 @@ namespace Okra.Sharing
         public ShareSourceManager(INavigationManager navigationManager)
         {
             if (navigationManager == null)
-                throw new ArgumentNullException("navigationManager");
+                throw new ArgumentNullException(nameof(navigationManager));
 
             _navigationManager = navigationManager;
             navigationManager.NavigationStack.NavigatedTo += NavigationManager_NavigatedTo;
@@ -54,7 +54,7 @@ namespace Okra.Sharing
         protected Task ShareRequested(IShareRequest shareRequest)
         {
             if (shareRequest == null)
-                throw new ArgumentNullException("shareRequest");
+                throw new ArgumentNullException(nameof(shareRequest));
 
             return ShareRequestedInternal(shareRequest);
         }
