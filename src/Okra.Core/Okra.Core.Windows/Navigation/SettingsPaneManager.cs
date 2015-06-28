@@ -116,21 +116,8 @@ namespace Okra.Navigation
             }
         }
 
-        protected virtual void OnFlyoutClosed()
-        {
-            EventHandler eventHandler = FlyoutClosed;
-
-            if (eventHandler != null)
-                eventHandler(this, EventArgs.Empty);
-        }
-
-        protected virtual void OnFlyoutOpened()
-        {
-            EventHandler eventHandler = FlyoutOpened;
-
-            if (eventHandler != null)
-                eventHandler(this, EventArgs.Empty);
-        }
+        protected virtual void OnFlyoutClosed() => FlyoutClosed?.Invoke(this, EventArgs.Empty);
+        protected virtual void OnFlyoutOpened() => FlyoutOpened?.Invoke(this, EventArgs.Empty);
 
         protected virtual void ShowSettingsFlyout(SettingsFlyout settingsFlyout)
         {

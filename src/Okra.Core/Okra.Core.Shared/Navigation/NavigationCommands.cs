@@ -109,13 +109,7 @@ namespace Okra.Navigation
                 }
             }
 
-            private void OnCanExecuteChanged()
-            {
-                EventHandler eventHandler = CanExecuteChanged;
-
-                if (eventHandler != null)
-                    eventHandler(this, new EventArgs());
-            }
+            private void OnCanExecuteChanged() => CanExecuteChanged?.Invoke(this, new EventArgs());
         }
 
         private class NavigateToCommand : ICommand
@@ -141,23 +135,10 @@ namespace Okra.Navigation
 
             // *** Methods ***
 
-            public bool CanExecute(object parameter)
-            {
-                return true;
-            }
+            public bool CanExecute(object parameter) => true;
+            public void Execute(object parameter) => _navigationManager.NavigateTo(_pageName, _arguments);
 
-            public void Execute(object parameter)
-            {
-                _navigationManager.NavigateTo(_pageName, _arguments);
-            }
-
-            protected void OnCanExecuteChanged()
-            {
-                EventHandler eventHandler = CanExecuteChanged;
-
-                if (eventHandler != null)
-                    eventHandler(this, new EventArgs());
-            }
+            protected void OnCanExecuteChanged() => CanExecuteChanged?.Invoke(this, new EventArgs());
         }
 
         // *** IUICommand State Classes ***

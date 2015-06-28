@@ -58,12 +58,6 @@ namespace Okra.Core
 
         // *** Methods ***
 
-        public void NotifyCanExecuteChanged()
-        {
-            EventHandler eventHandler = CanExecuteChanged;
-
-            if (eventHandler != null)
-                eventHandler(this, EventArgs.Empty);
-        }
+        public void NotifyCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }
 }

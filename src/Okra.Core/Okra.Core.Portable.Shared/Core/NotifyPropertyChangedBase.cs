@@ -29,13 +29,7 @@ namespace Okra.Core
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
 
-        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            PropertyChangedEventHandler eventHandler = PropertyChanged;
-
-            if (eventHandler != null)
-                eventHandler(this, e);
-        }
+        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e) => PropertyChanged?.Invoke(this, e);
 
         protected bool SetProperty<T>(ref T storage, T value, Expression<Func<T>> propertyExpression)
         {

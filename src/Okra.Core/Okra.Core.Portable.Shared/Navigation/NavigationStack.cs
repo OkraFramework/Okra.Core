@@ -147,10 +147,7 @@ namespace Okra.Navigation
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
 
-            NotifyCollectionChangedEventHandler eventHandler = CollectionChanged;
-
-            if (eventHandler != null)
-                eventHandler(this, args);
+            CollectionChanged?.Invoke(this, args);
         }
 
         protected virtual void OnNavigatingFrom(PageInfo page, PageNavigationMode navigationMode)
@@ -161,10 +158,7 @@ namespace Okra.Navigation
             if (!Enum.IsDefined(typeof(PageNavigationMode), navigationMode))
                 throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), nameof(navigationMode));
 
-            EventHandler<PageNavigationEventArgs> eventHandler = NavigatingFrom;
-
-            if (eventHandler != null)
-                eventHandler(this, new PageNavigationEventArgs(page, navigationMode));
+            NavigatingFrom?.Invoke(this, new PageNavigationEventArgs(page, navigationMode));
         }
 
         protected virtual void OnNavigatedTo(PageInfo page, PageNavigationMode navigationMode)
@@ -175,10 +169,7 @@ namespace Okra.Navigation
             if (!Enum.IsDefined(typeof(PageNavigationMode), navigationMode))
                 throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), nameof(navigationMode));
 
-            EventHandler<PageNavigationEventArgs> eventHandler = NavigatedTo;
-
-            if (eventHandler != null)
-                eventHandler(this, new PageNavigationEventArgs(page, navigationMode));
+            NavigatedTo?.Invoke(this, new PageNavigationEventArgs(page, navigationMode));
         }
 
         protected virtual void OnPageDisposed(PageInfo page, PageNavigationMode navigationMode)
@@ -189,19 +180,10 @@ namespace Okra.Navigation
             if (!Enum.IsDefined(typeof(PageNavigationMode), navigationMode))
                 throw new ArgumentException(ResourceHelper.GetErrorResource("Exception_ArgumentException_SpecifiedEnumIsNotDefined"), nameof(navigationMode));
 
-            EventHandler<PageNavigationEventArgs> eventHandler = PageDisposed;
-
-            if (eventHandler != null)
-                eventHandler(this, new PageNavigationEventArgs(page, navigationMode));
+            PageDisposed?.Invoke(this, new PageNavigationEventArgs(page, navigationMode));
         }
 
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler eventHandler = PropertyChanged;
-
-            if (eventHandler != null)
-                eventHandler(this, new PropertyChangedEventArgs(propertyName));
-        }
+        protected virtual void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         // *** Private Methods ***
 

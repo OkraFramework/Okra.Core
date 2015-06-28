@@ -89,12 +89,6 @@ namespace Okra.Navigation
 
         // *** Protected Methods ***
 
-        protected virtual void OnBackClick(BackClickEventArgs e)
-        {
-            BackClickEventHandler eventHandler = BackClick;
-
-            if (eventHandler != null)
-                eventHandler(this, e);
-        }
+        protected virtual void OnBackClick(BackClickEventArgs e) => BackClick?.Invoke(this, e);
     }
 }
