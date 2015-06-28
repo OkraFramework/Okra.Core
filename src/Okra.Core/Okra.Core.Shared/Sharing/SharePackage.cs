@@ -12,7 +12,6 @@ namespace Okra.Sharing
         // *** Fields ***
 
         private readonly DataPackage _dataPackage;
-        private readonly SharePropertySet _properties;
 
         // *** Constructors ***
 
@@ -22,18 +21,12 @@ namespace Okra.Sharing
                 throw new ArgumentNullException(nameof(dataPackage));
 
             _dataPackage = dataPackage;
-            _properties = new SharePropertySet(dataPackage.Properties);
+            this.Properties = new SharePropertySet(dataPackage.Properties);
         }
 
         // *** Properties ***
 
-        public ISharePropertySet Properties
-        {
-            get
-            {
-                return _properties;
-            }
-        }
+        public ISharePropertySet Properties { get; }
 
         // *** Methods ***
 

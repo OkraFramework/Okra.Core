@@ -11,7 +11,6 @@ namespace Okra.Navigation
         // *** Fields ***
 
         private readonly IViewFactory _viewFactory;
-        private readonly INavigationStack _navigationStack;
         private readonly NavigationContext _navigationContext;
 
         private readonly Dictionary<PageInfo, PageDetails> _pageCache = new Dictionary<PageInfo, PageDetails>();
@@ -34,7 +33,7 @@ namespace Okra.Navigation
                 throw new ArgumentNullException(nameof(navigationStack));
 
             _viewFactory = viewFactory;
-            _navigationStack = navigationStack;
+            this.NavigationStack = navigationStack;
 
             _navigationContext = new NavigationContext(this);
 
@@ -46,13 +45,7 @@ namespace Okra.Navigation
 
         // *** Properties ***
 
-        public INavigationStack NavigationStack
-        {
-            get
-            {
-                return _navigationStack;
-            }
-        }
+        public INavigationStack NavigationStack { get; }
 
         // *** Methods ***
 
@@ -258,7 +251,7 @@ namespace Okra.Navigation
             switch (e.PropertyName)
             {
                 case nameof(INavigationStack.CurrentPage):
-                    DisplayNavigationEntry((PageInfo)_navigationStack.CurrentPage);
+                    DisplayNavigationEntry((PageInfo)NavigationStack.CurrentPage);
                     break;
             }
         }
@@ -267,26 +260,16 @@ namespace Okra.Navigation
 
         private class PageDetails
         {
-            // *** Fields ***
-
-            private readonly IViewLifetimeContext _viewLifetimeContext;
-
             // *** Constructors ***
 
             public PageDetails(IViewLifetimeContext viewLifetimeContext)
             {
-                _viewLifetimeContext = viewLifetimeContext;
+                this.ViewLifetimeContext = viewLifetimeContext;
             }
 
             // *** Properties ***
 
-            public IViewLifetimeContext ViewLifetimeContext
-            {
-                get
-                {
-                    return _viewLifetimeContext;
-                }
-            }
+            public IViewLifetimeContext ViewLifetimeContext { get; }
         }
     }
 }

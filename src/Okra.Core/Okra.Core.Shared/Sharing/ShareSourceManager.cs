@@ -113,25 +113,18 @@ namespace Okra.Sharing
             // *** Fields ***
 
             private readonly DataRequest _dataRequest;
-            private readonly ISharePackage _sharePackage;
 
             // *** Constructors ***
 
             public ShareRequest(DataRequest dataRequest)
             {
                 _dataRequest = dataRequest;
-                _sharePackage = new SharePackage(dataRequest.Data);
+                this.Data = new SharePackage(dataRequest.Data);
             }
 
             // *** Properties ***
 
-            public ISharePackage Data
-            {
-                get
-                {
-                    return _sharePackage;
-                }
-            }
+            public ISharePackage Data { get; }
 
             // *** Methods ***
 

@@ -117,35 +117,20 @@ namespace Okra.Navigation
             // *** Fields ***
 
             private readonly Export<CompositionContext> _compositionContextExport;
-            private readonly object _page;
-            private readonly object _viewModel;
 
             // *** Constructors ***
 
             public ViewLifetimeContext(Export<CompositionContext> compositionContextExport, object page, object viewModel)
             {
                 _compositionContextExport = compositionContextExport;
-                _page = page;
-                _viewModel = viewModel;
+                View = page;
+                ViewModel = viewModel;
             }
 
             // *** Properties ***
 
-            public object View
-            {
-                get
-                {
-                    return _page;
-                }
-            }
-
-            public object ViewModel
-            {
-                get
-                {
-                    return _viewModel;
-                }
-            }
+            public object View { get; }
+            public object ViewModel { get; }
 
             // *** IDisposable Implementation ***
 

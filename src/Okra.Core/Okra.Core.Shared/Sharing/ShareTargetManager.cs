@@ -172,25 +172,18 @@ namespace Okra.Sharing
             // *** Fields ***
 
             private readonly ShareOperation _shareOperation;
-            private readonly SharePackageView _data;
 
             // *** Constructors ***
 
             public ShareOperationProxy(ShareOperation shareOperation)
             {
                 _shareOperation = shareOperation;
-                _data = new SharePackageView(shareOperation.Data);
+                this.Data = new SharePackageView(shareOperation.Data);
             }
 
             // *** Properties ***
 
-            public ISharePackageView Data
-            {
-                get
-                {
-                    return _data;
-                }
-            }
+            public ISharePackageView Data { get; }
 
             // *** Methods ***
 
