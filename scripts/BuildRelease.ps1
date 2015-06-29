@@ -49,6 +49,7 @@ Invoke-MsBuildAndThrow ".\src\Okra.Core\Okra.Core.WindowsPhone\Okra.Core.Windows
 # Invoke-MsBuildAndThrow ".\src\Okra.Core\Okra.Core.Universal\Okra.Core.Universal.csproj"
 Invoke-MsBuildAndThrow ".\src\Okra.Core\Okra.Core.Xamarin.Forms\Okra.Core.Xamarin.Forms.csproj"
 Invoke-MsBuildAndThrow ".\src\Okra.Core\Okra.Core.Portable\Okra.Core.Portable.csproj"
+Invoke-MsBuildAndThrow ".\src\Okra.Core\Okra.PortableCore\Okra.PortableCore.csproj"
 
 Invoke-MsBuildAndThrow ".\src\Okra.MEF\Okra.MEF.Windows\Okra.MEF.Windows.csproj"
 Invoke-MsBuildAndThrow ".\src\Okra.MEF\Okra.MEF.WindowsPhone\Okra.MEF.WindowsPhone.csproj"

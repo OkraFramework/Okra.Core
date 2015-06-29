@@ -36,6 +36,7 @@ Update-AssemblyInfo ".\src\Okra.Core\Okra.Core.WindowsPhone\Properties\AssemblyI
 Update-AssemblyInfo ".\src\Okra.Core\Okra.Core.Universal\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\src\Okra.Core\Okra.Core.Xamarin.Forms\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\src\Okra.Core\Okra.Core.Portable\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
+Update-AssemblyInfo ".\src\Okra.Core\Okra.PortableCore\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\src\Okra.MEF\Okra.MEF.Windows\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\src\Okra.MEF\Okra.MEF.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\src\Okra.MEF\Okra.MEF.Universal\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType

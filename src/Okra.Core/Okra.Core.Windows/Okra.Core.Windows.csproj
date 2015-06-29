@@ -117,6 +117,7 @@
   </PropertyGroup>
   <Import Project="..\Okra.Core.Shared\Okra.Core.Shared.projitems" Label="Shared" />
   <Import Project="..\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems" Label="Shared" />
+  <Import Project="..\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

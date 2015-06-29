@@ -27,20 +27,30 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Okra.Core.Portable.Shared",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.Core.Xamarin.Forms", "src\Okra.Core\Okra.Core.Xamarin.Forms\Okra.Core.Xamarin.Forms.csproj", "{67F9D3A8-F71E-4428-913F-C37AE82CDB24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.PortableCore", "src\Okra.Core\Okra.PortableCore\Okra.PortableCore.csproj", "{7B05B679-6649-430C-9575-A19E2120169B}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Okra.PortableCore.Shared", "src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.shproj", "{1F00BF14-6722-4758-84D0-0CC6581ACDA9}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{48114caf-c43a-4e92-a385-1a99705ece76}*SharedItemsImports = 13
-		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{80cb552f-a744-43ea-8906-8fd88f039040}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{80cb552f-a744-43ea-8906-8fd88f039040}*SharedItemsImports = 4
+		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{80cb552f-a744-43ea-8906-8fd88f039040}*SharedItemsImports = 4
+		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{80cb552f-a744-43ea-8906-8fd88f039040}*SharedItemsImports = 4
+		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{7b05b679-6649-430c-9575-a19e2120169b}*SharedItemsImports = 4
 		test\Okra.Core.Tests\Okra.Core.Tests.Shared\Okra.Core.Tests.Shared.projitems*{7a919bf1-209a-44d0-9931-bb5d143dc9db}*SharedItemsImports = 4
 		test\Okra.Core.Tests\Okra.Core.Tests.Shared\Okra.Core.Tests.Shared.projitems*{b304d10f-aa6c-417c-bb59-e68de3fc72ce}*SharedItemsImports = 4
 		test\Okra.Core.Tests\Okra.Core.Tests.Shared\Okra.Core.Tests.Shared.projitems*{300bcd54-740f-45d0-a0a6-64fc4af23c95}*SharedItemsImports = 13
 		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{fb719afe-8f13-4f65-a713-56c004fd2d5a}*SharedItemsImports = 13
-		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{d00dc503-cef6-4565-abea-3024d6b02851}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{d00dc503-cef6-4565-abea-3024d6b02851}*SharedItemsImports = 4
-		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{d6b10840-7b41-4251-a081-ebc1e86fcd2d}*SharedItemsImports = 4
+		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{d00dc503-cef6-4565-abea-3024d6b02851}*SharedItemsImports = 4
+		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{d00dc503-cef6-4565-abea-3024d6b02851}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{d6b10840-7b41-4251-a081-ebc1e86fcd2d}*SharedItemsImports = 4
+		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{d6b10840-7b41-4251-a081-ebc1e86fcd2d}*SharedItemsImports = 4
+		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{d6b10840-7b41-4251-a081-ebc1e86fcd2d}*SharedItemsImports = 4
+		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{67f9d3a8-f71e-4428-913f-c37ae82cdb24}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{67f9d3a8-f71e-4428-913f-c37ae82cdb24}*SharedItemsImports = 4
+		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{1f00bf14-6722-4758-84d0-0cc6581acda9}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -205,6 +215,26 @@ Global
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|x64.Build.0 = Release|Any CPU
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|x86.ActiveCfg = Release|Any CPU
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|x86.Build.0 = Release|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Debug|x64.Build.0 = Debug|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Debug|x86.Build.0 = Debug|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Release|ARM.Build.0 = Release|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Release|x64.ActiveCfg = Release|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Release|x64.Build.0 = Release|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Release|x86.ActiveCfg = Release|Any CPU
+		{7B05B679-6649-430C-9575-A19E2120169B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -220,5 +250,7 @@ Global
 		{80CB552F-A744-43EA-8906-8FD88F039040} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
 		{48114CAF-C43A-4E92-A385-1A99705ECE76} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
+		{7B05B679-6649-430C-9575-A19E2120169B} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
+		{1F00BF14-6722-4758-84D0-0CC6581ACDA9} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
 	EndGlobalSection
 EndGlobal

@@ -94,6 +94,7 @@
   </PropertyGroup>
   <Import Project="..\Okra.Core.Shared\Okra.Core.Shared.projitems" Label="Shared" />
   <Import Project="..\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems" Label="Shared" />
+  <Import Project="..\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
