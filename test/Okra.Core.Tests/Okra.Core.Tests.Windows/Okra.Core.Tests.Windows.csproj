@@ -169,6 +169,7 @@
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="..\Okra.Core.Tests.Shared\Okra.Core.Tests.Shared.projitems" Label="Shared" />
+  <Import Project="..\Okra.PortableCore.Tests.Shared\Okra.PortableCore.Tests.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

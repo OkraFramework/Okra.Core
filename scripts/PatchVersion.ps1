@@ -46,6 +46,7 @@ Update-AssemblyInfo ".\src\Okra.MEF\Okra.MEF.Portable\Properties\AssemblyInfo.cs
 Update-AssemblyInfo ".\test\Okra.Core.Tests\Okra.Core.Tests.Windows\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\test\Okra.Core.Tests\Okra.Core.Tests.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\test\Okra.Core.Tests\Okra.Core.Tests.Universal\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
+Update-AssemblyInfo ".\test\Okra.Core.Tests\Okra.PortableCore.Tests\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\test\Okra.MEF.Tests\Okra.MEF.Tests.WindowsPhone\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType
 Update-AssemblyInfo ".\test\Okra.MEF.Tests\Okra.MEF.Tests.Universal\Properties\AssemblyInfo.cs" $versionNumber $prereleaseType

@@ -60,6 +60,8 @@ Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.WindowsPhone\AppPackages
 Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Universal\bin
 Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Universal\obj
 Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Universal\AppPackages
+Remove-IfExists .\test\Okra.Core.Tests\Okra.PortableCore.Tests\bin
+Remove-IfExists .\test\Okra.Core.Tests\Okra.PortableCore.Tests\obj
 
 Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\bin
 Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\obj
