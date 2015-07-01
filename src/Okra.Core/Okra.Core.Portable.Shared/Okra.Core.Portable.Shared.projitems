@@ -9,9 +9,6 @@
     <Import_RootNamespace>Okra</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Core\DelegateCommand.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Core\DelegateCommandT.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Core\NotifyPropertyChangedBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\SerializationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\IActivatable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigationAware.cs" />

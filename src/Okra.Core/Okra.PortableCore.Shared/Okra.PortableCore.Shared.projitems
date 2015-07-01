@@ -9,5 +9,8 @@
     <Import_RootNamespace>Okra</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Core\DelegateCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\DelegateCommandT.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\NotifyPropertyChangedBase.cs" />
   </ItemGroup>
 </Project>

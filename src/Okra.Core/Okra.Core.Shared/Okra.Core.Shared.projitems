@@ -9,6 +9,7 @@
     <Import_RootNamespace>Okra</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ResourceHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\IShareable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\IShareOperation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\ISharePackage.cs" />
@@ -25,7 +26,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\ShareSourceManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\ShareTargetManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\StandardShareFormats.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ResourceHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationCommands.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\WindowNavigationTarget.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IStorageManager.cs" />

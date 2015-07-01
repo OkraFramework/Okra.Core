@@ -9,8 +9,6 @@
     <Import_RootNamespace>Okra.Tests</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Core\DelegateCommandFixture.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Core\NotifyPropertyChangedFixture.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\UITestMethodAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\WindowNavigationTargetFixture.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sharing\SharePackageExFixture.cs" />
