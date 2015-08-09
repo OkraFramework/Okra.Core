@@ -12,5 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\DelegateCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\DelegateCommandT.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotifyPropertyChangedBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationStackOfT.cs" />
   </ItemGroup>
 </Project>
