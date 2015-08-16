@@ -10,7 +10,7 @@ using System.Windows.Input;
 using Xunit;
 using Okra.Tests.Helpers;
 
-#if WINDOWS_APP || WINDOWS_UAP
+#if WINDOWS_APP || WINDOWS_UWP
 using Windows.UI.ApplicationSettings;
 #endif
 
@@ -173,7 +173,7 @@ namespace Okra.Tests.Navigation
             Assert.Equal("pageName", e.ParamName);
         }
 
-#if WINDOWS_APP || WINDOWS_UAP
+#if WINDOWS_APP || WINDOWS_UWP
         [UITestMethod]
         public void GetNavigateToSettingsCommand_ReturnsNewSettingsCommand()
         {

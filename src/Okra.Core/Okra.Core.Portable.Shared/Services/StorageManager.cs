@@ -86,7 +86,7 @@ namespace Okra.Services
             // Open the file, if it doesn't exist then return default, otherwise pass on
             // NB : As of Windows 8.1 we can ask for a 'null' when a file is not present, however this is not available in WinPRT
 
-#if WINDOWS_APP || WINDOWS_UAP
+#if WINDOWS_APP || WINDOWS_UWP
             StorageFile file = await folder.TryGetItemAsync(name).AsTask().ConfigureAwait(false) as StorageFile;
 
             if (file != null)

@@ -42,14 +42,14 @@ namespace Okra.Navigation
             Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 #endif
 
-#if WINDOWS_UAP
+#if WINDOWS_UWP
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
             {
                 Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             }
 #endif
 
-#if WINDOWS_APP || WINDOWS_UAP
+#if WINDOWS_APP || WINDOWS_UWP
             Window.Current.CoreWindow.Dispatcher.AcceleratorKeyActivated += Window_AcceleratorKeyActivated;
             Window.Current.CoreWindow.PointerPressed += Window_PointerPressed;
 #endif
@@ -80,7 +80,7 @@ namespace Okra.Navigation
 
         // *** Event Handlers ***
 
-#if WINDOWS_PHONE_APP || WINDOWS_UAP
+#if WINDOWS_PHONE_APP || WINDOWS_UWP
         private void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
         {
             if (_navigationManager != null && _navigationManager.NavigationStack.CanGoBack)
@@ -91,7 +91,7 @@ namespace Okra.Navigation
         }
 #endif
 
-#if WINDOWS_APP || WINDOWS_UAP
+#if WINDOWS_APP || WINDOWS_UWP
 
         protected void Window_AcceleratorKeyActivated(CoreDispatcher sender, AcceleratorKeyEventArgs args)
         {
