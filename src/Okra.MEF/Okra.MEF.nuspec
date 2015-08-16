@@ -19,12 +19,16 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Okra.MEF.Portable\bin\Release\Okra.MEF.dll" target="lib\portable-netcore451+wpa81\Okra.MEF.dll" />
+    <file src="Okra.MEF.Portable\bin\Release\Okra.MEF.dll" target="lib\portable-netcore451+wpa81+uap10.0\Okra.MEF.dll" />
 
     <file src="Okra.MEF.Windows\bin\Release\Okra.MEF.dll" target="lib\netcore451\Okra.MEF.dll" />
     <file src="Okra.MEF.Windows\bin\Release\Okra.MEF.pri" target="lib\netcore451\Okra.MEF.pri" />
 
     <file src="Okra.MEF.WindowsPhone\bin\Release\Okra.MEF.dll" target="lib\wpa81\Okra.MEF.dll" />
     <file src="Okra.MEF.WindowsPhone\bin\Release\Okra.MEF.pri" target="lib\wpa81\Okra.MEF.pri" />
+
+    <file src="Okra.MEF.Universal\bin\Release\Okra.MEF.dll" target="lib\uap10.0\Okra.MEF.dll" />
+    <file src="Okra.MEF.Universal\bin\Release\Okra.MEF.pri" target="lib\uap10.0\Okra.MEF.pri" />
+    <file src="Okra.MEF.Universal\Properties\Okra.MEF.Universal.rd.xml" target="lib\uap10.0\Okra.MEF.Universal\Properties\Okra.MEF.Universal.rd.xml" />
   </files>
 </package>
