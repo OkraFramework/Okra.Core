@@ -34,4 +34,4 @@ write-host "--- Creating NuGet packages ---"
 .\scripts\CreatePackages.ps1
 
 write-host "--- Creating Visual Studio extensions ---"
-.\scripts\CreateVsix.ps1
+.\scripts\CreateVsix2013.ps1
