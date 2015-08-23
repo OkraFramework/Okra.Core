@@ -51,6 +51,8 @@ Write-Zip @(".\templates-vs2015\ItemTemplates\CSharp\Windows8\OkraSettingsFlyout
 Write-Zip @(".\templates-vs2015\ItemTemplates\CSharp\Windows8\OkraShareTargetContract\*", ".\templates-vs2015\ItemTemplates\CSharp\Windows8\shared\*") ".\artifacts\OkraAppFrameworkVsix2015\ItemTemplates\CSharp\OkraAppFramework\OkraShareTargetContract.zip"
 Write-Zip @(".\templates-vs2015\ItemTemplates\CSharp\Windows8\OkraSplitPage\*", ".\templates-vs2015\ItemTemplates\CSharp\Windows8\shared\*") ".\artifacts\OkraAppFrameworkVsix2015\ItemTemplates\CSharp\OkraAppFramework\OkraSplitPage.zip"
 
+Write-Zip @(".\templates-vs2015\ItemTemplates\CSharp\Universal\OkraUAPBlankPage\*", ".\templates-vs2015\ItemTemplates\CSharp\Universal\shared\*") ".\artifacts\OkraAppFrameworkVsix2015\ItemTemplates\CSharp\OkraAppFramework\OkraUAPBlankPage.zip"
+
 # Create the VSIX file
 
 Write-Zip .\artifacts\OkraAppFrameworkVsix2015\* .\artifacts\OkraAppFramework-vs2015.vsix
