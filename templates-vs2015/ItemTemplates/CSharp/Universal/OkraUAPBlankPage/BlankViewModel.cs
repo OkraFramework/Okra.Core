@@ -1,5 +1,8 @@
-﻿using System;
+using $safeprojectname$.Common;
+using Okra.Navigation;
+using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -12,21 +15,21 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Okra.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
 namespace $rootnamespace$
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// A basic view model that provides characteristics common to most applications.
     /// </summary>
-    [PageExport("$fileinputname$")]
-    public sealed partial class $safeitemname$ : Page
+    [ViewModelExport("$fileinputname$")]
+    public class $safeitemname$ : ViewModelBase
     {
-        public $safeitemname$()
+        [ImportingConstructor]
+        public $safeitemname$(INavigationContext navigationContext)
+            : base(navigationContext)
         {
-            this.InitializeComponent();
         }
     }
 }
