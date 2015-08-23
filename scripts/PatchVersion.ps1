@@ -73,6 +73,7 @@ Update-CsprojReferences ".\templates-vs2015\ProjectTemplates\CSharp\Windows8\Okr
 Update-CsprojReferences ".\templates-vs2015\ProjectTemplates\CSharp\Windows8\OkraGridApp\Application.csproj" $versionNumber $prereleaseType
 Update-CsprojReferences ".\templates-vs2015\ProjectTemplates\CSharp\Windows8\OkraHubApp\Application.csproj" $versionNumber $prereleaseType
 Update-CsprojReferences ".\templates-vs2015\ProjectTemplates\CSharp\Windows8\OkraSplitApp\Application.csproj" $versionNumber $prereleaseType
+Update-CsprojReferences ".\templates-vs2015\ProjectTemplates\CSharp\Universal\OkraBlankApplication\Application.csproj" $versionNumber $prereleaseType
 
 write-host "Patching *.packageconfig files to" $versionNumber
 
@@ -81,3 +82,7 @@ Update-PackagesConfig ".\templates-vs2013\ProjectTemplates\CSharp\WindowsApps\Ok
 
 Update-PackagesConfig ".\templates-vs2015\ProjectTemplates\CSharp\Windows8\shared\packages.config" $versionNumber $prereleaseType
 Update-PackagesConfig ".\templates-vs2015\ProjectTemplates\CSharp\Windows8\OkraBlankApp\packages.config" $versionNumber $prereleaseType
+
+write-host "Patching project.json files to" $versionNumber
+
+Update-ProjectJson ".\templates-vs2015\ProjectTemplates\CSharp\Universal\OkraBlankApplication\project.json" $versionNumber $prereleaseType

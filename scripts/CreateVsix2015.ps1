@@ -35,6 +35,8 @@ Write-Zip @(".\templates-vs2015\ProjectTemplates\CSharp\Windows8\OkraGridApp\*",
 Write-Zip @(".\templates-vs2015\ProjectTemplates\CSharp\Windows8\OkraHubApp\*", ".\templates-vs2015\ProjectTemplates\CSharp\Windows8\shared\*") ".\artifacts\OkraAppFrameworkVsix2015\ProjectTemplates\CSharp\OkraAppFramework\Windows8\OkraHubApp.zip"
 Write-Zip @(".\templates-vs2015\ProjectTemplates\CSharp\Windows8\OkraSplitApp\*", ".\templates-vs2015\ProjectTemplates\CSharp\Windows8\shared\*") ".\artifacts\OkraAppFrameworkVsix2015\ProjectTemplates\CSharp\OkraAppFramework\Windows8\OkraSplitApp.zip"
 
+Write-Zip @(".\templates-vs2015\ProjectTemplates\CSharp\Universal\OkraBlankApplication\*") ".\artifacts\OkraAppFrameworkVsix2015\ProjectTemplates\CSharp\OkraAppFramework\Universal\OkraBlankApplication.zip"
+
 # Create the individual item templates
 
 Write-Zip @(".\templates-vs2015\ItemTemplates\CSharp\Windows8\OkraBasicPage\*", ".\templates-vs2015\ItemTemplates\CSharp\Windows8\shared\*") ".\artifacts\OkraAppFrameworkVsix2015\ItemTemplates\CSharp\OkraAppFramework\OkraBasicPage.zip"

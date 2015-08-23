@@ -103,6 +103,30 @@ function Update-PackagesConfig
         Set-Content $FileName
 }
 
+function Update-ProjectJson
+{
+    [CmdletBinding()]
+    Param
+    (
+        [Parameter(Mandatory=$True, Position = 1)][string]$FileName,
+        [Parameter(Mandatory=$True, Position = 2)][Version]$VersionNumber,
+        [Parameter(Mandatory=$False, Position = 3)][string]$PrereleaseType
+    )
+
+    $semver = Get-SemanticVersion $VersionNumber $PrereleaseType
+
+    $okraCoreRegex = '"Okra.Core": "[^"]+"'
+    $okraCore = '"Okra.Core": "' + $semver + '"'
+
+    $okraMefRegex = '"Okra.MEF": "[^"]+"'
+    $okraMef = '"Okra.MEF": "' + $semver + '"'
+
+    (Get-Content $FileName) |
+        ForEach-Object {$_ -replace $okraCoreRegex, $okraCore} |
+        ForEach-Object {$_ -replace $okraMefRegex, $okraMef} |
+        Set-Content $FileName
+}
+
 function Update-CsprojReferences
 {
     [CmdletBinding()]
