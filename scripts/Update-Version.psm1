@@ -182,4 +182,5 @@ Export-ModuleMember -Function Update-AssemblyInfo
 Export-ModuleMember -Function Update-Nuspec
 Export-ModuleMember -Function Update-VsixManifest
 Export-ModuleMember -Function Update-PackagesConfig
+Export-ModuleMember -Function Update-ProjectJson
 Export-ModuleMember -Function Update-CsprojReferences

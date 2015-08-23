@@ -60,7 +60,8 @@ Update-Nuspec ".\src\Okra.MEF\Okra.MEF.Xamarin.Forms.nuspec" $versionNumber $pre
 
 write-host "Patching *.vsixmanifest files to" $versionNumber
 
-Update-VsixManifest ".\templates\base\extension.vsixmanifest" $versionNumber.ToString()
+Update-VsixManifest ".\templates-vs2013\base\extension.vsixmanifest" $versionNumber.ToString()
+Update-VsixManifest ".\templates-vs2015\base\extension.vsixmanifest" $versionNumber.ToString()
 
 write-host "Patching *.csproj files to" $versionNumber
 
