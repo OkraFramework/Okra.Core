@@ -64,12 +64,20 @@ Update-VsixManifest ".\templates\base\extension.vsixmanifest" $versionNumber.ToS
 
 write-host "Patching *.csproj files to" $versionNumber
 
-Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraBlankApp\Application.csproj" $versionNumber $prereleaseType
-Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraGridApp\Application.csproj" $versionNumber $prereleaseType
-Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraHubApp\Application.csproj" $versionNumber $prereleaseType
-Update-CsprojReferences ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraSplitApp\Application.csproj" $versionNumber $prereleaseType
+Update-CsprojReferences ".\templates-vs2013\ProjectTemplates\CSharp\WindowsApps\OkraBlankApp\Application.csproj" $versionNumber $prereleaseType
+Update-CsprojReferences ".\templates-vs2013\ProjectTemplates\CSharp\WindowsApps\OkraGridApp\Application.csproj" $versionNumber $prereleaseType
+Update-CsprojReferences ".\templates-vs2013\ProjectTemplates\CSharp\WindowsApps\OkraHubApp\Application.csproj" $versionNumber $prereleaseType
+Update-CsprojReferences ".\templates-vs2013\ProjectTemplates\CSharp\WindowsApps\OkraSplitApp\Application.csproj" $versionNumber $prereleaseType
+
+Update-CsprojReferences ".\templates-vs2015\ProjectTemplates\CSharp\Windows8\OkraBlankApp\Application.csproj" $versionNumber $prereleaseType
+Update-CsprojReferences ".\templates-vs2015\ProjectTemplates\CSharp\Windows8\OkraGridApp\Application.csproj" $versionNumber $prereleaseType
+Update-CsprojReferences ".\templates-vs2015\ProjectTemplates\CSharp\Windows8\OkraHubApp\Application.csproj" $versionNumber $prereleaseType
+Update-CsprojReferences ".\templates-vs2015\ProjectTemplates\CSharp\Windows8\OkraSplitApp\Application.csproj" $versionNumber $prereleaseType
 
 write-host "Patching *.packageconfig files to" $versionNumber
 
-Update-PackagesConfig ".\templates\ProjectTemplates\CSharp\WindowsApps\shared\packages.config" $versionNumber $prereleaseType
-Update-PackagesConfig ".\templates\ProjectTemplates\CSharp\WindowsApps\OkraBlankApp\packages.config" $versionNumber $prereleaseType
+Update-PackagesConfig ".\templates-vs2013\ProjectTemplates\CSharp\WindowsApps\shared\packages.config" $versionNumber $prereleaseType
+Update-PackagesConfig ".\templates-vs2013\ProjectTemplates\CSharp\WindowsApps\OkraBlankApp\packages.config" $versionNumber $prereleaseType
+
+Update-PackagesConfig ".\templates-vs2015\ProjectTemplates\CSharp\Windows8\shared\packages.config" $versionNumber $prereleaseType
+Update-PackagesConfig ".\templates-vs2015\ProjectTemplates\CSharp\Windows8\OkraBlankApp\packages.config" $versionNumber $prereleaseType
