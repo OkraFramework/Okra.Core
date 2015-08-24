@@ -9,6 +9,7 @@
     <Import_RootNamespace>Okra</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\IViewModelBindable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationContextProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageExportAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageMetadata.cs" />

@@ -108,6 +108,9 @@ namespace Okra.Navigation
             if (page is Xamarin.Forms.BindableObject)
                 ((Xamarin.Forms.BindableObject)page).BindingContext = viewModel;
 #endif
+
+            if (page is IViewModelBindable)
+                ((IViewModelBindable)page).SetViewModel(viewModel);
         }
 
         // *** Private Sub-Classes ***

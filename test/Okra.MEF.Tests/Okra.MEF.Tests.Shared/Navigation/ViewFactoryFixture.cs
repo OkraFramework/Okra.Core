@@ -121,7 +121,7 @@ namespace Okra.MEF.Tests.Navigation
         }
 
         [Fact]
-        public void CreateView_SetsViewModel_WithViewModel()
+        public void CreateView_SetsViewModel_AsDataContext_WithViewModel()
         {
             IViewFactory viewFactory = CreateViewFactory();
             INavigationContext navigationContext = CreateNavigationContext();
@@ -134,7 +134,7 @@ namespace Okra.MEF.Tests.Navigation
         }
 
         [Fact]
-        public void CreateView_SetsViewModel_ToNullWithoutViewModel()
+        public void CreateView_SetsViewModel_AsDataContext_ToNullWithoutViewModel()
         {
             IViewFactory viewFactory = CreateViewFactory();
             INavigationContext navigationContext = CreateNavigationContext();
@@ -142,6 +142,32 @@ namespace Okra.MEF.Tests.Navigation
             IViewLifetimeContext lifetimeContext = viewFactory.CreateView("Page 3", navigationContext);
             MockPage page = lifetimeContext.View as MockPage;
             object viewModel = page.DataContext;
+
+            Assert.Null(viewModel);
+        }
+
+        [Fact]
+        public void CreateView_SetsViewModel_ViaInterface_WithViewModel()
+        {
+            IViewFactory viewFactory = CreateViewFactory();
+            INavigationContext navigationContext = CreateNavigationContext();
+
+            IViewLifetimeContext lifetimeContext = viewFactory.CreateView("Bindable Page 1", navigationContext);
+            MockBindablePage page = lifetimeContext.View as MockBindablePage;
+            object viewModel = lifetimeContext.ViewModel;
+
+            Assert.Equal(viewModel, page.ViewModel);
+        }
+
+        [Fact]
+        public void CreateView_SetsViewModel_ViaInterface_ToNullWithoutViewModel()
+        {
+            IViewFactory viewFactory = CreateViewFactory();
+            INavigationContext navigationContext = CreateNavigationContext();
+
+            IViewLifetimeContext lifetimeContext = viewFactory.CreateView("Bindable Page 2", navigationContext);
+            MockBindablePage page = lifetimeContext.View as MockBindablePage;
+            object viewModel = page.ViewModel;
 
             Assert.Null(viewModel);
         }
@@ -307,9 +333,12 @@ namespace Okra.MEF.Tests.Navigation
             exportFactories[CreatePageContract("Page 1")] = () => new MockPage() { PageName = "Page 1" };
             exportFactories[CreatePageContract("Page 2")] = () => new MockPage() { PageName = "Page 2" };
             exportFactories[CreatePageContract("Page 3")] = () => new MockPage() { PageName = "Page 3" };
+            exportFactories[CreatePageContract("Bindable Page 1")] = () => new MockBindablePage() { PageName = "Bindable Page 1" };
+            exportFactories[CreatePageContract("Bindable Page 2")] = () => new MockBindablePage() { PageName = "Bindable Page 2" };
 
             exportFactories[CreateViewModelContract("Page 1")] = () => new MockViewModel<string, string>() { Name = "ViewModel 1" };
             exportFactories[CreateViewModelContract("Page 2")] = () => new MockViewModel<string, string>() { Name = "ViewModel 2" };
+            exportFactories[CreateViewModelContract("Bindable Page 1")] = () => new MockViewModel<string, string>() { Name = "ViewModel 3" };
 
             exportFactories[new CompositionContract(typeof(INavigationContext))] = () => navigationContextProxy;
 
@@ -383,6 +412,8 @@ namespace Okra.MEF.Tests.Navigation
             {
                 if (page is MockPage)
                     ((MockPage)page).DataContext = viewModel;
+                else
+                    base.AttachViewModel(page, viewModel);
             }
         }
 
@@ -440,6 +471,21 @@ namespace Okra.MEF.Tests.Navigation
             public void Dispose()
             {
                 IsDisposed = true;
+            }
+        }
+
+        private class MockBindablePage : IViewModelBindable
+        {
+            // *** Properties ***
+            
+            public string PageName { get; set; }
+            public object ViewModel { get; set; }
+
+            // *** Methods ***
+
+            public void SetViewModel(object viewModel)
+            {
+                this.ViewModel = viewModel;
             }
         }
 

@@ -41,6 +41,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Okra.MEF.Portable.Shared\Navigation\IViewModelBindable.cs">
+      <Link>Navigation\IViewModelBindable.cs</Link>
+    </Compile>
     <Compile Include="Navigation\Stub_PageExportAttribute.cs" />
     <Compile Include="Navigation\Stub_ViewModelExportAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
