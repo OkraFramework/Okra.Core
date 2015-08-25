@@ -25,6 +25,6 @@
   
     <file src="Okra.Core.Universal\bin\Release\Okra.Core.dll" target="lib\uap10.0\Okra.Core.dll" />
     <file src="Okra.Core.Universal\bin\Release\Okra.Core.pri" target="lib\uap10.0\Okra.Core.pri" />
-    <file src="Okra.Core.Universal\Properties\Okra.Core.Universal.rd.xml" target="lib\uap10.0\Okra.Core.Universal\Properties\Okra.Core.Universal.rd.xml" />
+    <file src="Okra.Core.Universal\Properties\Okra.Core.rd.xml" target="lib\uap10.0\Okra.Core\Properties\Okra.Core.rd.xml" />
   </files>
 </package>

@@ -114,7 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Properties\Okra.MEF.Universal.rd.xml" />
+    <Content Include="Properties\Okra.MEF.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Okra.Core\Okra.Core.Universal\Okra.Core.Universal.csproj">
