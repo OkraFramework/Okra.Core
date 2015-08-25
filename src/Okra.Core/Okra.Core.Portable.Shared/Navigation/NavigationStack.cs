@@ -30,10 +30,10 @@ namespace Okra.Navigation
 
         // *** Properties ***
 
-        public PageInfo this[int index] =>_internalStack[index];
-        public virtual bool CanGoBack =>_internalStack.Count > 0;
+        public PageInfo this[int index] => _internalStack[index];
+        public virtual bool CanGoBack => _internalStack.Count > 0;
         public int Count => _internalStack.Count;
-        public PageInfo CurrentPage => _internalStack.Count ==0 ? null : _internalStack[_internalStack.Count - 1];
+        public PageInfo CurrentPage => _internalStack.Count == 0 ? null : _internalStack[_internalStack.Count - 1];
 
         // *** Methods ***
 

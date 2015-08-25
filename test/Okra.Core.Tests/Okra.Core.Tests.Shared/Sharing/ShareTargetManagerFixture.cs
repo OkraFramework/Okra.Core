@@ -222,7 +222,7 @@ namespace Okra.Tests.Sharing
 
             MockViewLifetimeContext viewLifetimeContext = shareTargetManager.DisplayedViews.First();
             MockShareTargetPageElement pageView = viewLifetimeContext.View as MockShareTargetPageElement;
-            Assert.IsAssignableFrom(typeof(MockShareOperation),pageView.ActivateEvents[0]);
+            Assert.IsAssignableFrom(typeof(MockShareOperation), pageView.ActivateEvents[0]);
             Assert.Equal(activatedEventArgs, ((MockShareOperation)pageView.ActivateEvents[0]).ActivatedEventArgs);
         }
 
@@ -238,7 +238,7 @@ namespace Okra.Tests.Sharing
 
             MockViewLifetimeContext viewLifetimeContext = shareTargetManager.DisplayedViews.First();
             MockShareTargetPageElement pageViewModel = viewLifetimeContext.ViewModel as MockShareTargetPageElement;
-            Assert.IsAssignableFrom(typeof(MockShareOperation),pageViewModel.ActivateEvents[0]);
+            Assert.IsAssignableFrom(typeof(MockShareOperation), pageViewModel.ActivateEvents[0]);
             Assert.Equal(activatedEventArgs, ((MockShareOperation)pageViewModel.ActivateEvents[0]).ActivatedEventArgs);
         }
 

@@ -41,7 +41,7 @@ namespace Okra.MEF.Tests
 
             bootstrapper.Initialize();
 
-            Assert.IsAssignableFrom(typeof(MockActivationManager),bootstrapper.ActivationManager);
+            Assert.IsAssignableFrom(typeof(MockActivationManager), bootstrapper.ActivationManager);
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace Okra.MEF.Tests
 
             MockActivationManager activationManager = (MockActivationManager)bootstrapper.ActivationManager;
             Assert.Equal(1, activationManager.ActivationEventArgs.Count);
-            Assert.IsAssignableFrom(typeof(MockActivatedEventArgs),activationManager.ActivationEventArgs[0]);
+            Assert.IsAssignableFrom(typeof(MockActivatedEventArgs), activationManager.ActivationEventArgs[0]);
             Assert.Equal(ActivationKind.Launch, activationManager.ActivationEventArgs[0].Kind);
         }
 

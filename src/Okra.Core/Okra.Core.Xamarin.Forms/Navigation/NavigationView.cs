@@ -15,7 +15,7 @@ namespace Okra.Navigation
         private static readonly Page s_backPage = new Page();
         private static readonly Page s_emptyPage = new Page();
         private Page _homePage;
-        
+
         private readonly INavigationBase _navigationManager;
 
         public NavigationView(INavigationBase navigationManager)

@@ -109,7 +109,7 @@ namespace Okra.Tests.Navigation
 
             ImageSource icon = SettingsPaneInfo.GetIconSource(obj);
 
-            Assert.IsAssignableFrom(typeof(BitmapImage),icon);
+            Assert.IsAssignableFrom(typeof(BitmapImage), icon);
             Assert.Equal("ms-appx:/Assets/SmallLogo.png", ((BitmapImage)icon).UriSource.AbsoluteUri);
         }
 
@@ -121,7 +121,7 @@ namespace Okra.Tests.Navigation
             SettingsPaneInfo.SetIconSource(obj, new BitmapImage(new Uri("ms-appx:/Test")));
             ImageSource icon = SettingsPaneInfo.GetIconSource(obj);
 
-            Assert.IsAssignableFrom(typeof(BitmapImage),icon);
+            Assert.IsAssignableFrom(typeof(BitmapImage), icon);
             Assert.Equal("ms-appx:/Test", ((BitmapImage)icon).UriSource.AbsoluteUri);
         }
 

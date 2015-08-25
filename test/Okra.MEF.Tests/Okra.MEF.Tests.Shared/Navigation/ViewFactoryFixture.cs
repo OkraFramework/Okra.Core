@@ -76,7 +76,7 @@ namespace Okra.MEF.Tests.Navigation
             object view = lifetimeContext.View;
 
             Assert.NotNull(view);
-            Assert.IsAssignableFrom(typeof(MockPage),view);
+            Assert.IsAssignableFrom(typeof(MockPage), view);
             Assert.Equal("Page 2", ((MockPage)view).PageName);
         }
 
@@ -90,7 +90,7 @@ namespace Okra.MEF.Tests.Navigation
             object view = lifetimeContext.View;
 
             Assert.NotNull(view);
-            Assert.IsAssignableFrom(typeof(MockPage),view);
+            Assert.IsAssignableFrom(typeof(MockPage), view);
             Assert.Equal("Page 3", ((MockPage)view).PageName);
         }
 
@@ -104,7 +104,7 @@ namespace Okra.MEF.Tests.Navigation
             object viewModel = lifetimeContext.ViewModel;
 
             Assert.NotNull(viewModel);
-            Assert.IsAssignableFrom(typeof(MockViewModel<string, string>),viewModel);
+            Assert.IsAssignableFrom(typeof(MockViewModel<string, string>), viewModel);
             Assert.Equal("ViewModel 2", ((MockViewModel<string, string>)viewModel).Name);
         }
 
@@ -477,7 +477,7 @@ namespace Okra.MEF.Tests.Navigation
         private class MockBindablePage : IViewModelBindable
         {
             // *** Properties ***
-            
+
             public string PageName { get; set; }
             public object ViewModel { get; set; }
 

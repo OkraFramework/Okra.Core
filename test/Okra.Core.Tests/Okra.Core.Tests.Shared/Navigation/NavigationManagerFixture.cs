@@ -156,7 +156,7 @@ namespace Okra.Tests.Navigation
         {
             TestableNavigationManager navigationManager = CreateNavigationManager(navigationTargetIsNull: true);
 
-            Assert.IsAssignableFrom(typeof(WindowNavigationTarget),navigationManager.NavigationTarget);
+            Assert.IsAssignableFrom(typeof(WindowNavigationTarget), navigationManager.NavigationTarget);
         }
 
         // *** Method Tests ***
