@@ -43,10 +43,7 @@ namespace Okra.Navigation
 #endif
 
 #if WINDOWS_UWP
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-            {
-                Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            }
+            SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManager_BackRequested;
 #endif
 
 #if WINDOWS_APP || WINDOWS_UWP
@@ -80,7 +77,18 @@ namespace Okra.Navigation
 
         // *** Event Handlers ***
 
-#if WINDOWS_PHONE_APP || WINDOWS_UWP
+#if WINDOWS_UWP
+        private void SystemNavigationManager_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (_navigationManager != null && _navigationManager.NavigationStack.CanGoBack)
+            {
+                e.Handled = true;
+                _navigationManager.NavigationStack.GoBack();
+            }
+        }
+#endif
+
+#if WINDOWS_PHONE_APP
         private void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
         {
             if (_navigationManager != null && _navigationManager.NavigationStack.CanGoBack)
