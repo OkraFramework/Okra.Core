@@ -1,6 +1,6 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011">
   <Metadata>
-    <Identity Id="OkraAppFramework" Version="1.1.0.0" Language="en-US" Publisher="Andrew Wilkinson" />
+    <Identity Id="OkraAppFramework" Version="1.2.0.0" Language="en-US" Publisher="Andrew Wilkinson" />
     <DisplayName>Windows Store MVVM Templates for the Okra App Framework (Visual Studio 2013)</DisplayName>
     <Description xml:space="preserve">Project and Item Templates for creating MVVM based Windows Store applications using the Okra App Framework (http://okraframework.github.io)</Description>
     <MoreInfo>http://okraframework.github.io</MoreInfo>
