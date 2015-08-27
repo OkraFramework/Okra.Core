@@ -71,11 +71,14 @@ function Update-VsixManifest
         [Parameter(Mandatory=$False, Position = 3)][string]$PrereleaseType
     )
 
-    $versionRegex = '<Identity Id="OkraAppFramework" Version="[^"]+"'
-    $version = '<Identity Id="OkraAppFramework" Version="' + $VersionNumber + '"'
+    $versionRegex2013 = '<Identity Id="OkraAppFramework" Version="[^"]+"'
+    $version2013 = '<Identity Id="OkraAppFramework" Version="' + $VersionNumber + '"'
+    $versionRegex2015 = '<Identity Id="OkraAppFramework-VS2015" Version="[^"]+"'
+    $version2015 = '<Identity Id="OkraAppFramework-VS2015" Version="' + $VersionNumber + '"'
 
     (Get-Content $FileName) |
-        ForEach-Object {$_ -replace $versionRegex, $version} |
+        ForEach-Object {$_ -replace $versionRegex2013, $version2013} |
+        ForEach-Object {$_ -replace $versionRegex2015, $version2015} |
         Set-Content $FileName
 }
 
