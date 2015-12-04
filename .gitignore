@@ -159,6 +159,7 @@ $RECYCLE.BIN/
 # =========================
 
 .nuget/
+.vs/
 artifacts/
 *.userprefs
 
