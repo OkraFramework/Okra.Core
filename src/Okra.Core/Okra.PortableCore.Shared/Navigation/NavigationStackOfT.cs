@@ -56,11 +56,30 @@ namespace Okra.Navigation
         {
             if (!CanGoBack)
                 throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotGoBackWithEmptyBackStack"));
-            
+
             bool couldGoForward = CanGoForward;
 
             T item = Pop(_internalStack);
             _forwardStack.Add(item);
+
+            OnPropertyChanged(nameof(Count));
+            OnPropertyChanged(nameof(CurrentItem));
+            if (!CanGoBack) OnPropertyChanged(nameof(CanGoBack));
+            if (!couldGoForward) OnPropertyChanged(nameof(CanGoForward));
+        }
+
+        public void GoBackTo(T item)
+        {
+            if (!_internalStack.Contains(item))
+                throw new InvalidOperationException(string.Format(ResourceHelper.GetErrorResource("Exception_InvalidOperation_SpecifiedPageDoesNotExistInNavigationStack"), item));
+
+            bool couldGoForward = CanGoForward;
+
+            while (!object.Equals(item, CurrentItem))
+            {
+                T poppedItem = Pop(_internalStack);
+                _forwardStack.Add(poppedItem);
+            }
 
             OnPropertyChanged(nameof(Count));
             OnPropertyChanged(nameof(CurrentItem));
@@ -77,6 +96,25 @@ namespace Okra.Navigation
 
             T item = Pop(_forwardStack);
             _internalStack.Add(item);
+
+            OnPropertyChanged(nameof(Count));
+            OnPropertyChanged(nameof(CurrentItem));
+            if (!couldGoBack) OnPropertyChanged(nameof(CanGoBack));
+            if (!CanGoForward) OnPropertyChanged(nameof(CanGoForward));
+        }
+
+        public void GoForwardTo(T item)
+        {
+            if (!_forwardStack.Contains(item))
+                throw new InvalidOperationException(string.Format(ResourceHelper.GetErrorResource("Exception_InvalidOperation_SpecifiedPageDoesNotExistInNavigationStack"), item));
+
+            bool couldGoBack = CanGoBack;
+
+            while (!object.Equals(item, CurrentItem))
+            {
+                T poppedItem = Pop(_forwardStack);
+                _internalStack.Add(poppedItem);
+            }
 
             OnPropertyChanged(nameof(Count));
             OnPropertyChanged(nameof(CurrentItem));
@@ -109,7 +147,7 @@ namespace Okra.Navigation
 
         // *** Private Methods ***
 
-        public T Pop(List<T> list)
+        private T Pop(List<T> list)
         {
             int index = list.Count - 1;
             T item = list[index];

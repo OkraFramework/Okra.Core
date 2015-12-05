@@ -19,8 +19,12 @@ namespace Okra.Tests.Navigation
                                                       new object[] { new TestClass("string") } };
 
         public static object[][] DoubleTestValues = { new object[] { 42, 68 },
-                                                      new object[] { new TestClass("alpha"), new TestClass("beta") },
+                                                      new object[] { "alpha", "beta" },
                                                       new object[] { new TestClass("alpha"), new TestClass("beta") } };
+
+        public static object[][] TripleTestValues = { new object[] { 42, 68, 36 },
+                                                      new object[] { "alpha", "beta", "gamma" },
+                                                      new object[] { new TestClass("alpha"), new TestClass("beta"), new TestClass("gamma") } };
 
         // *** Tests ***
 
@@ -112,6 +116,34 @@ namespace Okra.Tests.Navigation
 
             var e = Assert.Throws<InvalidOperationException>(() => stack.GoForward());
             Assert.Equal("You cannot navigate forwards as the forward stack is empty.", e.Message);
+        }
+
+        [Theory]
+        [MemberData(nameof(TripleTestValues))]
+        public void GoBackTo_ThrowsException_IfPageNotInBackStack<T>(T item1, T item2, T item3)
+        {
+            var stack = new NavigationStack<T>();
+
+            stack.NavigateTo(item1);
+            stack.NavigateTo(item2);
+
+            var e = Assert.Throws<InvalidOperationException>(() => stack.GoBackTo(item3));
+            Assert.Equal($"The specified page '{item3}' does not exist in the navigation stack.", e.Message);
+        }
+
+        [Theory]
+        [MemberData(nameof(TripleTestValues))]
+        public void GoForwardTo_ThrowsException_IfPageNotInForwardStack<T>(T item1, T item2, T item3)
+        {
+            var stack = new NavigationStack<T>();
+
+            stack.NavigateTo(item1);
+            stack.NavigateTo(item2);
+            stack.GoBack();
+            stack.GoBack();
+
+            var e = Assert.Throws<InvalidOperationException>(() => stack.GoForwardTo(item3));
+            Assert.Equal($"The specified page '{item3}' does not exist in the navigation stack.", e.Message);
         }
 
         [Theory]
@@ -304,6 +336,183 @@ namespace Okra.Tests.Navigation
             Assert.Equal(1, stack.Count);
             Assert.Equal(item2, stack[0]);
             Assert.Equal(item2, stack.CurrentItem);
+
+            Assert.True(stack.CanGoBack);
+            Assert.False(stack.CanGoForward);
+        }
+
+        [Theory]
+        [MemberData(nameof(TripleTestValues))]
+        public void Navigate_ToPage_ToPage_ToPage_GoBackTo_GoesBackOnePage<T>(T item1, T item2, T item3)
+        {
+            var stack = new NavigationStack<T>();
+
+            stack.NavigateTo(item1);
+            stack.NavigateTo(item2);
+            stack.NavigateTo(item3);
+
+            AssertPropertyChangedEvents(stack, () => stack.GoBackTo(item2));
+
+            Assert.Equal(2, stack.Count);
+            Assert.Equal(item1, stack[0]);
+            Assert.Equal(item2, stack[1]);
+            Assert.Equal(item2, stack.CurrentItem);
+
+            Assert.True(stack.CanGoBack);
+            Assert.True(stack.CanGoForward);
+        }
+
+        [Theory]
+        [MemberData(nameof(TripleTestValues))]
+        public void Navigate_ToPage_ToPage_ToPage_GoBackTo_GoesBackTwoPages<T>(T item1, T item2, T item3)
+        {
+            var stack = new NavigationStack<T>();
+
+            stack.NavigateTo(item1);
+            stack.NavigateTo(item2);
+            stack.NavigateTo(item3);
+
+            AssertPropertyChangedEvents(stack, () => stack.GoBackTo(item1));
+
+            Assert.Equal(1, stack.Count);
+            Assert.Equal(item1, stack[0]);
+            Assert.Equal(item1, stack.CurrentItem);
+
+            Assert.True(stack.CanGoBack);
+            Assert.True(stack.CanGoForward);
+        }
+
+        [Theory]
+        [MemberData(nameof(TripleTestValues))]
+        public void Navigate_ToPage_ToPage_ToPage_GoBackTo_GoBack_GoesBackToExpectedPage<T>(T item1, T item2, T item3)
+        {
+            var stack = new NavigationStack<T>();
+
+            stack.NavigateTo(item1);
+            stack.NavigateTo(item2);
+            stack.NavigateTo(item3);
+            stack.GoBackTo(item2);
+
+            AssertPropertyChangedEvents(stack, () => stack.GoBack());
+
+            Assert.Equal(1, stack.Count);
+            Assert.Equal(item1, stack[0]);
+            Assert.Equal(item1, stack.CurrentItem);
+
+            Assert.True(stack.CanGoBack);
+            Assert.True(stack.CanGoForward);
+        }
+
+        [Theory]
+        [MemberData(nameof(TripleTestValues))]
+        public void Navigate_ToPage_ToPage_ToPage_GoBackTo_GoForward_GoesForwardToExpectedPage<T>(T item1, T item2, T item3)
+        {
+            var stack = new NavigationStack<T>();
+
+            stack.NavigateTo(item1);
+            stack.NavigateTo(item2);
+            stack.NavigateTo(item3);
+            stack.GoBackTo(item2);
+
+            AssertPropertyChangedEvents(stack, () => stack.GoForward());
+
+            Assert.Equal(3, stack.Count);
+            Assert.Equal(item1, stack[0]);
+            Assert.Equal(item2, stack[1]);
+            Assert.Equal(item3, stack[2]);
+            Assert.Equal(item3, stack.CurrentItem);
+
+            Assert.True(stack.CanGoBack);
+            Assert.False(stack.CanGoForward);
+        }
+
+        [Theory]
+        [MemberData(nameof(DoubleTestValues))]
+        public void Navigate_ToPage_ToPage_GoBack_GoBack_GoForwardTo_GoesForwardOnePage<T>(T item1, T item2)
+        {
+            var stack = new NavigationStack<T>();
+
+            stack.NavigateTo(item1);
+            stack.NavigateTo(item2);
+            stack.GoBack();
+            stack.GoBack();
+
+            AssertPropertyChangedEvents(stack, () => stack.GoForwardTo(item1));
+
+            Assert.Equal(1, stack.Count);
+            Assert.Equal(item1, stack[0]);
+            Assert.Equal(item1, stack.CurrentItem);
+
+            Assert.True(stack.CanGoBack);
+            Assert.True(stack.CanGoForward);
+        }
+
+        [Theory]
+        [MemberData(nameof(DoubleTestValues))]
+        public void Navigate_ToPage_ToPage_GoBack_GoBack_GoForwardTo_GoesForwardTwoPages<T>(T item1, T item2)
+        {
+            var stack = new NavigationStack<T>();
+
+            stack.NavigateTo(item1);
+            stack.NavigateTo(item2);
+            stack.GoBack();
+            stack.GoBack();
+
+            AssertPropertyChangedEvents(stack, () => stack.GoForwardTo(item2));
+
+            Assert.Equal(2, stack.Count);
+            Assert.Equal(item1, stack[0]);
+            Assert.Equal(item2, stack[1]);
+            Assert.Equal(item2, stack.CurrentItem);
+
+            Assert.True(stack.CanGoBack);
+            Assert.False(stack.CanGoForward);
+        }
+
+        [Theory]
+        [MemberData(nameof(DoubleTestValues))]
+        public void Navigate_ToPage_ToPage_GoBack_GoBack_GoForwardTo_GoForward_GoesForwardToExpectedPage<T>(T item1, T item2)
+        {
+            var stack = new NavigationStack<T>();
+
+            stack.NavigateTo(item1);
+            stack.NavigateTo(item2);
+            stack.GoBack();
+            stack.GoBack();
+            stack.GoForwardTo(item1);
+
+            AssertPropertyChangedEvents(stack, () => stack.GoForward());
+
+            Assert.Equal(2, stack.Count);
+            Assert.Equal(item1, stack[0]);
+            Assert.Equal(item2, stack[1]);
+            Assert.Equal(item2, stack.CurrentItem);
+
+            Assert.True(stack.CanGoBack);
+            Assert.False(stack.CanGoForward);
+        }
+
+        [Theory]
+        [MemberData(nameof(TripleTestValues))]
+        public void Navigate_ToPage_ToPage_ToPage_GoBack_GoBack_GoBack_GoForwardTo_GoBack_GoesBackToExpectedPage<T>(T item1, T item2, T item3)
+        {
+            var stack = new NavigationStack<T>();
+
+            stack.NavigateTo(item1);
+            stack.NavigateTo(item2);
+            stack.NavigateTo(item3);
+            stack.GoBack();
+            stack.GoBack();
+            stack.GoBack();
+            stack.GoForwardTo(item2);
+
+            AssertPropertyChangedEvents(stack, () => stack.GoForward());
+
+            Assert.Equal(3, stack.Count);
+            Assert.Equal(item1, stack[0]);
+            Assert.Equal(item2, stack[1]);
+            Assert.Equal(item3, stack[2]);
+            Assert.Equal(item3, stack.CurrentItem);
 
             Assert.True(stack.CanGoBack);
             Assert.False(stack.CanGoForward);
