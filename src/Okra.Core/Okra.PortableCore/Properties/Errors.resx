@@ -144,6 +144,9 @@
   <data name="Exception_InvalidOperation_CannotGoBackWithEmptyBackStack" xml:space="preserve">
     <value>You cannot navigate backwards as the back stack is empty.</value>
   </data>
+  <data name="Exception_InvalidOperation_CannotGoForwardWithEmptyForwardStack" xml:space="preserve">
+    <value>You cannot navigate forwards as the forward stack is empty.</value>
+  </data>
   <data name="Exception_InvalidOperation_CannotModifyReadOnlyCollection" xml:space="preserve">
     <value>Cannot modify a read-only collection.</value>
   </data>

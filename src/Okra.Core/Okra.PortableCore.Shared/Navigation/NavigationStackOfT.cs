@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Okra.Helpers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,26 +40,62 @@ namespace Okra.Navigation
 
         public void Clear()
         {
+            bool couldGoBack = CanGoBack;
+            bool couldGoForward = CanGoForward;
+
             _internalStack.Clear();
             _forwardStack.Clear();
+
+            if (couldGoBack) OnPropertyChanged(nameof(Count));
+            if (couldGoBack) OnPropertyChanged(nameof(CurrentItem));
+            if (couldGoBack) OnPropertyChanged(nameof(CanGoBack));
+            if (couldGoForward) OnPropertyChanged(nameof(CanGoForward));
         }
 
         public void GoBack()
         {
+            if (!CanGoBack)
+                throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotGoBackWithEmptyBackStack"));
+            
+            bool couldGoForward = CanGoForward;
+
             T item = Pop(_internalStack);
             _forwardStack.Add(item);
+
+            OnPropertyChanged(nameof(Count));
+            OnPropertyChanged(nameof(CurrentItem));
+            if (!CanGoBack) OnPropertyChanged(nameof(CanGoBack));
+            if (!couldGoForward) OnPropertyChanged(nameof(CanGoForward));
         }
 
         public void GoForward()
         {
+            if (!CanGoForward)
+                throw new InvalidOperationException(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotGoForwardWithEmptyForwardStack"));
+
+            bool couldGoBack = CanGoBack;
+
             T item = Pop(_forwardStack);
             _internalStack.Add(item);
+
+            OnPropertyChanged(nameof(Count));
+            OnPropertyChanged(nameof(CurrentItem));
+            if (!couldGoBack) OnPropertyChanged(nameof(CanGoBack));
+            if (!CanGoForward) OnPropertyChanged(nameof(CanGoForward));
         }
 
         public void NavigateTo(T item)
         {
+            bool couldGoBack = CanGoBack;
+            bool couldGoForward = CanGoForward;
+
             _internalStack.Add(item);
             _forwardStack.Clear();
+
+            OnPropertyChanged(nameof(Count));
+            OnPropertyChanged(nameof(CurrentItem));
+            if (!couldGoBack) OnPropertyChanged(nameof(CanGoBack));
+            if (couldGoForward) OnPropertyChanged(nameof(CanGoForward));
         }
 
         // *** Enumerators ***

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Okra.Properties {
+namespace Okra.Strings {
     using System;
     using System.Reflection;
     
@@ -139,6 +139,15 @@ namespace Okra.Properties {
         internal static string Exception_InvalidOperation_CannotGoBackWithEmptyBackStack {
             get {
                 return ResourceManager.GetString("Exception_InvalidOperation_CannotGoBackWithEmptyBackStack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot navigate forwards as the forward stack is empty..
+        /// </summary>
+        internal static string Exception_InvalidOperation_CannotGoForwardWithEmptyForwardStack {
+            get {
+                return ResourceManager.GetString("Exception_InvalidOperation_CannotGoForwardWithEmptyForwardStack", resourceCulture);
             }
         }
         

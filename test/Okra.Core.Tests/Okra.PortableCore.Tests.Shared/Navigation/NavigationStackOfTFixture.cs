@@ -48,7 +48,8 @@ namespace Okra.Tests.Navigation
             stack.NavigateTo(item1);
             stack.NavigateTo(item2);
             stack.GoBack();
-            stack.Clear();
+
+            AssertPropertyChangedEvents(stack, () => stack.Clear());
 
             Assert.Equal(0, stack.Count);
             Assert.Equal(default(T), stack.CurrentItem);
@@ -103,11 +104,23 @@ namespace Okra.Tests.Navigation
 
         [Theory]
         [MemberData(nameof(SingleTestValues))]
-        public void Navigate_ToPage_AddsOneItemToStack<T>(T item)
+        public void GoForward_ThrowsException_IfNoPagesInForwardStack<T>(T item)
         {
             var stack = new NavigationStack<T>();
 
             stack.NavigateTo(item);
+
+            var e = Assert.Throws<InvalidOperationException>(() => stack.GoForward());
+            Assert.Equal("You cannot navigate forwards as the forward stack is empty.", e.Message);
+        }
+
+        [Theory]
+        [MemberData(nameof(SingleTestValues))]
+        public void Navigate_ToPage_AddsOneItemToStack<T>(T item)
+        {
+            var stack = new NavigationStack<T>();
+
+            AssertPropertyChangedEvents(stack, () => stack.NavigateTo(item));
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item, stack[0]);
@@ -124,7 +137,8 @@ namespace Okra.Tests.Navigation
             var stack = new NavigationStack<T>();
 
             stack.NavigateTo(item1);
-            stack.NavigateTo(item2);
+
+            AssertPropertyChangedEvents(stack, () => stack.NavigateTo(item2));
 
             Assert.Equal(2, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -142,7 +156,8 @@ namespace Okra.Tests.Navigation
             var stack = new NavigationStack<T>();
 
             stack.NavigateTo(item);
-            stack.GoBack();
+
+            AssertPropertyChangedEvents(stack, () => stack.GoBack());
 
             Assert.Equal(0, stack.Count);
             Assert.Equal(default(T), stack.CurrentItem);
@@ -159,7 +174,8 @@ namespace Okra.Tests.Navigation
 
             stack.NavigateTo(item1);
             stack.NavigateTo(item2);
-            stack.GoBack();
+
+            AssertPropertyChangedEvents(stack, () => stack.GoBack());
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -177,7 +193,8 @@ namespace Okra.Tests.Navigation
 
             stack.NavigateTo(item);
             stack.GoBack();
-            stack.GoForward();
+
+            AssertPropertyChangedEvents(stack, () => stack.GoForward());
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item, stack[0]);
@@ -196,7 +213,8 @@ namespace Okra.Tests.Navigation
             stack.NavigateTo(item1);
             stack.NavigateTo(item2);
             stack.GoBack();
-            stack.GoForward();
+
+            AssertPropertyChangedEvents(stack, () => stack.GoForward());
 
             Assert.Equal(2, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -217,7 +235,8 @@ namespace Okra.Tests.Navigation
             stack.NavigateTo(item2);
             stack.GoBack();
             stack.GoBack();
-            stack.GoForward();
+
+            AssertPropertyChangedEvents(stack, () => stack.GoForward());
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -238,7 +257,8 @@ namespace Okra.Tests.Navigation
             stack.GoBack();
             stack.GoBack();
             stack.GoForward();
-            stack.GoForward();
+
+            AssertPropertyChangedEvents(stack, () => stack.GoForward());
 
             Assert.Equal(2, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -257,7 +277,8 @@ namespace Okra.Tests.Navigation
 
             stack.NavigateTo(item1);
             stack.GoBack();
-            stack.NavigateTo(item2);
+
+            AssertPropertyChangedEvents(stack, () => stack.NavigateTo(item2));
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item2, stack[0]);
@@ -277,7 +298,8 @@ namespace Okra.Tests.Navigation
             stack.GoBack();
             stack.NavigateTo(item2);
             stack.GoBack();
-            stack.GoForward();
+
+            AssertPropertyChangedEvents(stack, () => stack.GoForward());
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item2, stack[0]);
@@ -285,15 +307,6 @@ namespace Okra.Tests.Navigation
 
             Assert.True(stack.CanGoBack);
             Assert.False(stack.CanGoForward);
-        }
-
-        [Theory]
-        [MemberData(nameof(SingleTestValues))]
-        public void PropertyChanged_IsRaised_WithNavigation_ToPage<T>(T item)
-        {
-            var stack = new NavigationStack<T>();
-
-            AssertPropertyChangedEvents(stack, () => stack.NavigateTo(item));
         }
 
         // *** Test Classes ***
@@ -342,7 +355,7 @@ namespace Okra.Tests.Navigation
 
             foreach (KeyValuePair<PropertyInfo, object> initialProperty in initialProperties)
             {
-                if (initialProperty.Key.GetValue(obj) != initialProperty.Value)
+                if (!object.Equals(initialProperty.Key.GetValue(obj), initialProperty.Value))
                 {
                     string propertyName = initialProperty.Key.Name;
                     Assert.True(changedPropertyNames.Contains(propertyName), $"Property '{propertyName}' did not raise a PropertyChanged event");
@@ -352,7 +365,8 @@ namespace Okra.Tests.Navigation
 
             // Check that no unchanged properties raised PropertyChanged events
 
-            Assert.True(changedPropertyNames.Count == 0, $"Unchanged Property '{changedPropertyNames[0]}' raised PropertyChanged event");
+            if (changedPropertyNames.Count > 0)
+                Assert.True(false, $"Unchanged Property '{changedPropertyNames[0]}' raised PropertyChanged event");
         }
     }
 }
