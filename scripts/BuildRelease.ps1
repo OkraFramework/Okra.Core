@@ -60,10 +60,6 @@ Invoke-MsBuildAndThrow ".\test\Okra.Core.Tests\Okra.PortableCore.Tests\Okra.Port
 if (!$noTests)
 {
 	Invoke-MsBuildAndThrow ".\test\Okra.Core.Tests\Okra.Core.Tests.Windows\Okra.Core.Tests.Windows.csproj"
-	Invoke-MsBuildAndThrow ".\test\Okra.Core.Tests\Okra.Core.Tests.WindowsPhone\Okra.Core.Tests.WindowsPhone.csproj"
-	Invoke-MsBuildAndThrow ".\test\Okra.Core.Tests\Okra.Core.Tests.Universal\Okra.Core.Tests.Universal.csproj"
 
 	Invoke-MsBuildAndThrow ".\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\Okra.MEF.Tests.Windows.csproj"
-	Invoke-MsBuildAndThrow ".\test\Okra.MEF.Tests\Okra.MEF.Tests.WindowsPhone\Okra.MEF.Tests.WindowsPhone.csproj"
-	Invoke-MsBuildAndThrow ".\test\Okra.MEF.Tests\Okra.MEF.Tests.Universal\Okra.MEF.Tests.Universal.csproj"
 }
