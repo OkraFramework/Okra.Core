@@ -7,21 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.PortableCore", "src\Ok
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Okra.Core", "Okra.Core", "{0E200AFC-42A0-4C92-99B1-7EDBBDDD42C3}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Okra.PortableCore.Shared", "src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.shproj", "{1F00BF14-6722-4758-84D0-0CC6581ACDA9}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Okra.Core.Tests", "Okra.Core.Tests", "{3D3392CD-16DF-48A8-9D79-50D71F27AC86}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.PortableCore.Tests", "test\Okra.Core.Tests\Okra.PortableCore.Tests\Okra.PortableCore.Tests.csproj", "{BDA04465-5CAE-46A6-B697-7E83809291D4}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Okra.PortableCore.Tests.Shared", "test\Okra.Core.Tests\Okra.PortableCore.Tests.Shared\Okra.PortableCore.Tests.Shared.shproj", "{3C504004-F58C-43D3-9B49-C2ACBE35C96F}"
-EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		test\Okra.Core.Tests\Okra.PortableCore.Tests.Shared\Okra.PortableCore.Tests.Shared.projitems*{bda04465-5cae-46a6-b697-7e83809291d4}*SharedItemsImports = 4
-		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{7b05b679-6649-430c-9575-a19e2120169b}*SharedItemsImports = 4
-		test\Okra.Core.Tests\Okra.PortableCore.Tests.Shared\Okra.PortableCore.Tests.Shared.projitems*{3c504004-f58c-43d3-9b49-c2acbe35c96f}*SharedItemsImports = 13
-		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{1f00bf14-6722-4758-84d0-0cc6581acda9}*SharedItemsImports = 13
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -41,8 +31,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7B05B679-6649-430C-9575-A19E2120169B} = {0E200AFC-42A0-4C92-99B1-7EDBBDDD42C3}
-		{1F00BF14-6722-4758-84D0-0CC6581ACDA9} = {0E200AFC-42A0-4C92-99B1-7EDBBDDD42C3}
 		{BDA04465-5CAE-46A6-B697-7E83809291D4} = {3D3392CD-16DF-48A8-9D79-50D71F27AC86}
-		{3C504004-F58C-43D3-9B49-C2ACBE35C96F} = {3D3392CD-16DF-48A8-9D79-50D71F27AC86}
 	EndGlobalSection
 EndGlobal

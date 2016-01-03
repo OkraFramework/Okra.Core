@@ -125,9 +125,14 @@
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Okra.PortableCore\Okra.PortableCore.csproj">
+      <Project>{7b05b679-6649-430c-9575-a19e2120169b}</Project>
+      <Name>Okra.PortableCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Okra.Core.Shared\Okra.Core.Shared.projitems" Label="Shared" />
   <Import Project="..\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems" Label="Shared" />
-  <Import Project="..\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

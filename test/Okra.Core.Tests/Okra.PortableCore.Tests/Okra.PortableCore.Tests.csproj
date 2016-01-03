@@ -56,6 +56,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\DelegateCommandFixture.cs" />
+    <Compile Include="Core\NotifyPropertyChangedFixture.cs" />
+    <Compile Include="Navigation\NavigationStackOfTFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,7 +73,6 @@
       <Name>Okra.PortableCore</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\Okra.PortableCore.Tests.Shared\Okra.PortableCore.Tests.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

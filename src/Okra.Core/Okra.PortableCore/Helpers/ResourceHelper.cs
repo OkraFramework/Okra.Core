@@ -2,7 +2,7 @@
 
 namespace Okra.Helpers
 {
-    public static class ResourceHelper
+    internal static class ResourceHelper
     {
         // *** Methods ***
 

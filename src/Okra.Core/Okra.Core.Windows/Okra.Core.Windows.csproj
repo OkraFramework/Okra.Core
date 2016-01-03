@@ -112,12 +112,17 @@
     <Compile Include="Search\ISearchPage.cs" />
     <Compile Include="Search\SearchManager.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Okra.PortableCore\Okra.PortableCore.csproj">
+      <Project>{7b05b679-6649-430c-9575-a19e2120169b}</Project>
+      <Name>Okra.PortableCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="..\Okra.Core.Shared\Okra.Core.Shared.projitems" Label="Shared" />
   <Import Project="..\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems" Label="Shared" />
-  <Import Project="..\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

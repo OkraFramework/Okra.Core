@@ -25,10 +25,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.Core.Xamarin.Forms", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.PortableCore", "src\Okra.Core\Okra.PortableCore\Okra.PortableCore.csproj", "{7B05B679-6649-430C-9575-A19E2120169B}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Okra.PortableCore.Shared", "src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.shproj", "{1F00BF14-6722-4758-84D0-0CC6581ACDA9}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Okra.PortableCore.Tests.Shared", "test\Okra.Core.Tests\Okra.PortableCore.Tests.Shared\Okra.PortableCore.Tests.Shared.shproj", "{3C504004-F58C-43D3-9B49-C2ACBE35C96F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.PortableCore.Tests", "test\Okra.Core.Tests\Okra.PortableCore.Tests\Okra.PortableCore.Tests.csproj", "{BDA04465-5CAE-46A6-B697-7E83809291D4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.Core.Universal", "src\Okra.Core\Okra.Core.Universal\Okra.Core.Universal.csproj", "{29FF1019-D545-4E72-9CCD-ADF376A71716}"
@@ -36,27 +32,17 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{48114caf-c43a-4e92-a385-1a99705ece76}*SharedItemsImports = 13
-		test\Okra.Core.Tests\Okra.PortableCore.Tests.Shared\Okra.PortableCore.Tests.Shared.projitems*{bda04465-5cae-46a6-b697-7e83809291d4}*SharedItemsImports = 4
-		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{7b05b679-6649-430c-9575-a19e2120169b}*SharedItemsImports = 4
-		test\Okra.Core.Tests\Okra.PortableCore.Tests.Shared\Okra.PortableCore.Tests.Shared.projitems*{7a919bf1-209a-44d0-9931-bb5d143dc9db}*SharedItemsImports = 4
 		test\Okra.Core.Tests\Okra.Core.Tests.Shared\Okra.Core.Tests.Shared.projitems*{7a919bf1-209a-44d0-9931-bb5d143dc9db}*SharedItemsImports = 4
-		test\Okra.Core.Tests\Okra.PortableCore.Tests.Shared\Okra.PortableCore.Tests.Shared.projitems*{b304d10f-aa6c-417c-bb59-e68de3fc72ce}*SharedItemsImports = 4
 		test\Okra.Core.Tests\Okra.Core.Tests.Shared\Okra.Core.Tests.Shared.projitems*{b304d10f-aa6c-417c-bb59-e68de3fc72ce}*SharedItemsImports = 4
-		test\Okra.Core.Tests\Okra.PortableCore.Tests.Shared\Okra.PortableCore.Tests.Shared.projitems*{3c504004-f58c-43d3-9b49-c2acbe35c96f}*SharedItemsImports = 13
 		test\Okra.Core.Tests\Okra.Core.Tests.Shared\Okra.Core.Tests.Shared.projitems*{300bcd54-740f-45d0-a0a6-64fc4af23c95}*SharedItemsImports = 13
 		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{fb719afe-8f13-4f65-a713-56c004fd2d5a}*SharedItemsImports = 13
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{d00dc503-cef6-4565-abea-3024d6b02851}*SharedItemsImports = 4
-		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{d00dc503-cef6-4565-abea-3024d6b02851}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{d00dc503-cef6-4565-abea-3024d6b02851}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{d6b10840-7b41-4251-a081-ebc1e86fcd2d}*SharedItemsImports = 4
-		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{d6b10840-7b41-4251-a081-ebc1e86fcd2d}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{d6b10840-7b41-4251-a081-ebc1e86fcd2d}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{29ff1019-d545-4e72-9ccd-adf376a71716}*SharedItemsImports = 4
-		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{29ff1019-d545-4e72-9ccd-adf376a71716}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{29ff1019-d545-4e72-9ccd-adf376a71716}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{67f9d3a8-f71e-4428-913f-c37ae82cdb24}*SharedItemsImports = 4
-		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{67f9d3a8-f71e-4428-913f-c37ae82cdb24}*SharedItemsImports = 4
-		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{1f00bf14-6722-4758-84d0-0cc6581acda9}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -263,8 +249,6 @@ Global
 		{48114CAF-C43A-4E92-A385-1A99705ECE76} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
 		{7B05B679-6649-430C-9575-A19E2120169B} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
-		{1F00BF14-6722-4758-84D0-0CC6581ACDA9} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
-		{3C504004-F58C-43D3-9B49-C2ACBE35C96F} = {A1B634F7-9248-4DC0-AC8A-DADB973B5962}
 		{BDA04465-5CAE-46A6-B697-7E83809291D4} = {A1B634F7-9248-4DC0-AC8A-DADB973B5962}
 		{29FF1019-D545-4E72-9CCD-ADF376A71716} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
 	EndGlobalSection
