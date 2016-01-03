@@ -1,4 +1,4 @@
-﻿using Okra.Properties;
+﻿using Okra.Strings;
 
 namespace Okra.Helpers
 {
