@@ -15,8 +15,6 @@
     <tags>Okra MVVM WinRT Metro Windows8 Win8</tags>
   </metadata>
   <files>
-    <file src="Okra.Core.Portable\bin\Release\Okra.Core.dll" target="lib\portable-netcore451+wpa81+uap10.0\Okra.Core.dll" />
-
     <file src="Okra.Core.Windows\bin\Release\Okra.Core.dll" target="lib\netcore451\Okra.Core.dll" />
     <file src="Okra.Core.Windows\bin\Release\Okra.Core.pri" target="lib\netcore451\Okra.Core.pri" />
 

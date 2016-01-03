@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Okra.Core", "Okra.Core", "{B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}"
 EndProject
@@ -18,8 +18,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.Core.Tests.Windows", "test\Okra.Core.Tests\Okra.Core.Tests.Windows\Okra.Core.Tests.Windows.csproj", "{7A919BF1-209A-44D0-9931-BB5D143DC9DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.Core.Tests.WindowsPhone", "test\Okra.Core.Tests\Okra.Core.Tests.WindowsPhone\Okra.Core.Tests.WindowsPhone.csproj", "{B304D10F-AA6C-417C-BB59-E68DE3FC72CE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.Core.Portable", "src\Okra.Core\Okra.Core.Portable\Okra.Core.Portable.csproj", "{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Okra.Core.Portable.Shared", "src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.shproj", "{48114CAF-C43A-4E92-A385-1A99705ECE76}"
 EndProject
@@ -40,22 +38,22 @@ Global
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{48114caf-c43a-4e92-a385-1a99705ece76}*SharedItemsImports = 13
 		test\Okra.Core.Tests\Okra.PortableCore.Tests.Shared\Okra.PortableCore.Tests.Shared.projitems*{bda04465-5cae-46a6-b697-7e83809291d4}*SharedItemsImports = 4
 		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{7b05b679-6649-430c-9575-a19e2120169b}*SharedItemsImports = 4
-		test\Okra.Core.Tests\Okra.Core.Tests.Shared\Okra.Core.Tests.Shared.projitems*{7a919bf1-209a-44d0-9931-bb5d143dc9db}*SharedItemsImports = 4
 		test\Okra.Core.Tests\Okra.PortableCore.Tests.Shared\Okra.PortableCore.Tests.Shared.projitems*{7a919bf1-209a-44d0-9931-bb5d143dc9db}*SharedItemsImports = 4
-		test\Okra.Core.Tests\Okra.Core.Tests.Shared\Okra.Core.Tests.Shared.projitems*{b304d10f-aa6c-417c-bb59-e68de3fc72ce}*SharedItemsImports = 4
+		test\Okra.Core.Tests\Okra.Core.Tests.Shared\Okra.Core.Tests.Shared.projitems*{7a919bf1-209a-44d0-9931-bb5d143dc9db}*SharedItemsImports = 4
 		test\Okra.Core.Tests\Okra.PortableCore.Tests.Shared\Okra.PortableCore.Tests.Shared.projitems*{b304d10f-aa6c-417c-bb59-e68de3fc72ce}*SharedItemsImports = 4
+		test\Okra.Core.Tests\Okra.Core.Tests.Shared\Okra.Core.Tests.Shared.projitems*{b304d10f-aa6c-417c-bb59-e68de3fc72ce}*SharedItemsImports = 4
 		test\Okra.Core.Tests\Okra.PortableCore.Tests.Shared\Okra.PortableCore.Tests.Shared.projitems*{3c504004-f58c-43d3-9b49-c2acbe35c96f}*SharedItemsImports = 13
 		test\Okra.Core.Tests\Okra.Core.Tests.Shared\Okra.Core.Tests.Shared.projitems*{300bcd54-740f-45d0-a0a6-64fc4af23c95}*SharedItemsImports = 13
 		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{fb719afe-8f13-4f65-a713-56c004fd2d5a}*SharedItemsImports = 13
-		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{d00dc503-cef6-4565-abea-3024d6b02851}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{d00dc503-cef6-4565-abea-3024d6b02851}*SharedItemsImports = 4
 		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{d00dc503-cef6-4565-abea-3024d6b02851}*SharedItemsImports = 4
-		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{d6b10840-7b41-4251-a081-ebc1e86fcd2d}*SharedItemsImports = 4
+		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{d00dc503-cef6-4565-abea-3024d6b02851}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{d6b10840-7b41-4251-a081-ebc1e86fcd2d}*SharedItemsImports = 4
 		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{d6b10840-7b41-4251-a081-ebc1e86fcd2d}*SharedItemsImports = 4
-		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{29ff1019-d545-4e72-9ccd-adf376a71716}*SharedItemsImports = 4
+		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{d6b10840-7b41-4251-a081-ebc1e86fcd2d}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{29ff1019-d545-4e72-9ccd-adf376a71716}*SharedItemsImports = 4
 		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{29ff1019-d545-4e72-9ccd-adf376a71716}*SharedItemsImports = 4
+		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{29ff1019-d545-4e72-9ccd-adf376a71716}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{67f9d3a8-f71e-4428-913f-c37ae82cdb24}*SharedItemsImports = 4
 		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{67f9d3a8-f71e-4428-913f-c37ae82cdb24}*SharedItemsImports = 4
 		src\Okra.Core\Okra.PortableCore.Shared\Okra.PortableCore.Shared.projitems*{1f00bf14-6722-4758-84d0-0cc6581acda9}*SharedItemsImports = 13
@@ -171,20 +169,6 @@ Global
 		{B304D10F-AA6C-417C-BB59-E68DE3FC72CE}.Release|x86.ActiveCfg = Release|x86
 		{B304D10F-AA6C-417C-BB59-E68DE3FC72CE}.Release|x86.Build.0 = Release|x86
 		{B304D10F-AA6C-417C-BB59-E68DE3FC72CE}.Release|x86.Deploy.0 = Release|x86
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|ARM.ActiveCfg = Release|Any CPU
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|x64.ActiveCfg = Release|Any CPU
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9}.Release|x86.ActiveCfg = Release|Any CPU
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -276,7 +260,6 @@ Global
 		{300BCD54-740F-45D0-A0A6-64FC4AF23C95} = {A1B634F7-9248-4DC0-AC8A-DADB973B5962}
 		{7A919BF1-209A-44D0-9931-BB5D143DC9DB} = {A1B634F7-9248-4DC0-AC8A-DADB973B5962}
 		{B304D10F-AA6C-417C-BB59-E68DE3FC72CE} = {A1B634F7-9248-4DC0-AC8A-DADB973B5962}
-		{7AA64153-F64C-4DAE-8AE3-AD96E4A636E9} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
 		{48114CAF-C43A-4E92-A385-1A99705ECE76} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}
 		{7B05B679-6649-430C-9575-A19E2120169B} = {B9A4A8CF-DC5B-4F92-B7D2-D7BF84386587}

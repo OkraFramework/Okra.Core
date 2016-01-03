@@ -19,8 +19,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Okra.MEF.Portable\bin\Release\Okra.MEF.dll" target="lib\portable-netcore451+wpa81+uap10.0\Okra.MEF.dll" />
-
     <file src="Okra.MEF.Windows\bin\Release\Okra.MEF.dll" target="lib\netcore451\Okra.MEF.dll" />
     <file src="Okra.MEF.Windows\bin\Release\Okra.MEF.pri" target="lib\netcore451\Okra.MEF.pri" />
 

@@ -35,8 +35,6 @@ Remove-IfExists .\src\Okra.Core\Okra.Core.Universal\bin
 Remove-IfExists .\src\Okra.Core\Okra.Core.Universal\obj
 Remove-IfExists .\src\Okra.Core\Okra.Core.Xamarin.Forms\bin
 Remove-IfExists .\src\Okra.Core\Okra.Core.Xamarin.Forms\obj
-Remove-IfExists .\src\Okra.Core\Okra.Core.Portable\bin
-Remove-IfExists .\src\Okra.Core\Okra.Core.Portable\obj
 Remove-IfExists .\src\Okra.Core\Okra.PortableCore\bin
 Remove-IfExists .\src\Okra.Core\Okra.PortableCore\obj
 
@@ -48,8 +46,6 @@ Remove-IfExists .\src\Okra.MEF\Okra.MEF.Universal\bin
 Remove-IfExists .\src\Okra.MEF\Okra.MEF.Universal\obj
 Remove-IfExists .\src\Okra.MEF\Okra.Core.Xamarin.Forms\bin
 Remove-IfExists .\src\Okra.MEF\Okra.Core.Xamarin.Forms\obj
-Remove-IfExists .\src\Okra.MEF\Okra.MEF.Portable\bin
-Remove-IfExists .\src\Okra.MEF\Okra.MEF.Portable\obj
 
 Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Windows\bin
 Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Windows\obj
