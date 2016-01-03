@@ -162,6 +162,7 @@ $RECYCLE.BIN/
 .vs/
 artifacts/
 *.userprefs
+project.lock.json
 
 # Allow temporary keys created for unit test projects to be included
 !*_TemporaryKey.pfx
