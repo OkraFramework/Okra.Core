@@ -11,6 +11,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Okra.Core.Tests", "Okra.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.PortableCore.Tests", "test\Okra.Core.Tests\Okra.PortableCore.Tests\Okra.PortableCore.Tests.csproj", "{BDA04465-5CAE-46A6-B697-7E83809291D4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Okra.MEF", "Okra.MEF", "{59D6DAE7-34A3-4D47-8A46-F8EE71FFD9ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.MEF.PortableCore", "src\Okra.MEF\Okra.MEF.PortableCore\Okra.MEF.PortableCore.csproj", "{FB46A822-C786-40DA-82F8-34EFA9C69B55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Okra.MEF.Tests", "Okra.MEF.Tests", "{2862E2E6-FFCB-4DC9-B13C-F1744DB3DC21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okra.MEF.Tests.PortableCore", "test\Okra.MEF.Tests\Okra.MEF.Tests.PortableCore\Okra.MEF.Tests.PortableCore.csproj", "{6A432A38-A7E4-4FA7-8169-D7C6F30524D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +33,14 @@ Global
 		{BDA04465-5CAE-46A6-B697-7E83809291D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDA04465-5CAE-46A6-B697-7E83809291D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDA04465-5CAE-46A6-B697-7E83809291D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB46A822-C786-40DA-82F8-34EFA9C69B55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB46A822-C786-40DA-82F8-34EFA9C69B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB46A822-C786-40DA-82F8-34EFA9C69B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB46A822-C786-40DA-82F8-34EFA9C69B55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A432A38-A7E4-4FA7-8169-D7C6F30524D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A432A38-A7E4-4FA7-8169-D7C6F30524D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A432A38-A7E4-4FA7-8169-D7C6F30524D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A432A38-A7E4-4FA7-8169-D7C6F30524D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,5 +48,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7B05B679-6649-430C-9575-A19E2120169B} = {0E200AFC-42A0-4C92-99B1-7EDBBDDD42C3}
 		{BDA04465-5CAE-46A6-B697-7E83809291D4} = {3D3392CD-16DF-48A8-9D79-50D71F27AC86}
+		{FB46A822-C786-40DA-82F8-34EFA9C69B55} = {59D6DAE7-34A3-4D47-8A46-F8EE71FFD9ED}
+		{6A432A38-A7E4-4FA7-8169-D7C6F30524D5} = {2862E2E6-FFCB-4DC9-B13C-F1744DB3DC21}
 	EndGlobalSection
 EndGlobal

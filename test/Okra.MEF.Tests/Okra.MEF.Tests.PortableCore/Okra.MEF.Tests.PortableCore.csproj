@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BDA04465-5CAE-46A6-B697-7E83809291D4}</ProjectGuid>
+    <ProjectGuid>{6A432A38-A7E4-4FA7-8169-D7C6F30524D5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Okra.Tests</RootNamespace>
-    <AssemblyName>Okra.PortableCore.Tests</AssemblyName>
+    <RootNamespace>Okra.MEF.Tests</RootNamespace>
+    <AssemblyName>Okra.MEF.PortableCore.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -60,22 +60,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\DelegateCommandFixture.cs" />
-    <Compile Include="Core\NotifyPropertyChangedFixture.cs" />
-    <Compile Include="Navigation\NavigationStackOfTFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\Okra.Core\Okra.PortableCore\Okra.PortableCore.csproj">
       <Project>{7b05b679-6649-430c-9575-a19e2120169b}</Project>
       <Name>Okra.PortableCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\src\Okra.MEF\Okra.MEF.PortableCore\Okra.MEF.PortableCore.csproj">
+      <Project>{fb46a822-c786-40da-82f8-34efa9c69b55}</Project>
+      <Name>Okra.MEF.PortableCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
