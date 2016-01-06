@@ -131,8 +131,6 @@
       <Name>Okra.PortableCore</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\Okra.Core.Shared\Okra.Core.Shared.projitems" Label="Shared" />
-  <Import Project="..\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
