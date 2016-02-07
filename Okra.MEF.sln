@@ -57,8 +57,6 @@ Global
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{d00dc503-cef6-4565-abea-3024d6b02851}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{d6b10840-7b41-4251-a081-ebc1e86fcd2d}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{d6b10840-7b41-4251-a081-ebc1e86fcd2d}*SharedItemsImports = 4
-		src\Okra.Core\Okra.Core.Shared\Okra.Core.Shared.projitems*{29ff1019-d545-4e72-9ccd-adf376a71716}*SharedItemsImports = 4
-		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{29ff1019-d545-4e72-9ccd-adf376a71716}*SharedItemsImports = 4
 		src\Okra.Core\Okra.Core.Portable.Shared\Okra.Core.Portable.Shared.projitems*{67f9d3a8-f71e-4428-913f-c37ae82cdb24}*SharedItemsImports = 4
 		test\Okra.MEF.Tests\Okra.MEF.Tests.Shared\Okra.MEF.Tests.Shared.projitems*{fe86eb90-083e-4411-884b-aa5ef63c306d}*SharedItemsImports = 13
 	EndGlobalSection

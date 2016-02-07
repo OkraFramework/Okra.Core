@@ -10,17 +10,17 @@ namespace Okra
     {
         // *** Fields ***
 
-        private OkraBootstrapper _bootstrapper;
+        private IOkraBootstrapper _bootstrapper;
 
         // *** Constructors ***
 
-        public OkraApplication(OkraBootstrapper bootstrapper)
+        public OkraApplication(IOkraBootstrapper bootstrapper)
         {
             if (bootstrapper == null)
                 throw new ArgumentNullException(nameof(bootstrapper));
 
             _bootstrapper = bootstrapper;
-            bootstrapper.Initialize(false);
+            _bootstrapper.Initialize();
         }
 
         // *** Overriden Base Methods ***
@@ -75,7 +75,7 @@ namespace Okra
 
         // *** Private Methods ***
 
-        private void Activate(IActivatedEventArgs args)
+        private void Activate(object args)
         {
             _bootstrapper.Activate(args);
         }
