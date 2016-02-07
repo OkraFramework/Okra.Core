@@ -60,8 +60,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\OkraAppBuilderFixture.cs" />
     <Compile Include="Core\DelegateCommandFixture.cs" />
     <Compile Include="Core\NotifyPropertyChangedFixture.cs" />
+    <Compile Include="Mocks\MockServiceProvider.cs" />
     <Compile Include="Navigation\NavigationStackOfTFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

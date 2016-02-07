@@ -42,6 +42,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activation\ActivationContext.cs" />
+    <Compile Include="Builder\ActivationDelegate.cs" />
+    <Compile Include="Builder\OkraAppBuilder.cs" />
     <Compile Include="Core\DelegateCommand.cs" />
     <Compile Include="Core\DelegateCommandT.cs" />
     <Compile Include="Core\NotifyPropertyChangedBase.cs" />
@@ -49,6 +52,7 @@
     <Compile Include="DependencyInjection\ServiceDescriptor.cs" />
     <Compile Include="DependencyInjection\ServiceLifetime.cs" />
     <Compile Include="Helpers\ResourceHelper.cs" />
+    <Compile Include="Builder\IOkraAppBuilder.cs" />
     <Compile Include="IOkraBootstrapper.cs" />
     <Compile Include="Navigation\NavigationStackOfT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,5 @@
-﻿using Okra.DependencyInjection;
+﻿using Okra.Builder;
+using Okra.DependencyInjection;
 using Okra.MEF.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -23,14 +24,17 @@ namespace Okra.MEF
 
             IServiceCollection serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
-            // TODO : MefServiceProvider serviceProvider = new MefServiceProvider(serviceCollection);
+            MefServiceProvider serviceProvider = new MefServiceProvider();
 
-            Configure();
+            // Create the OkraAppBuilder and configure the application
+
+            OkraAppBuilder appBuilder = new OkraAppBuilder(serviceProvider);
+            Configure(appBuilder);
         }
 
         // *** Protected Methods ***
 
-        protected virtual void Configure()
+        protected virtual void Configure(IOkraAppBuilder app)
         {
         }
 

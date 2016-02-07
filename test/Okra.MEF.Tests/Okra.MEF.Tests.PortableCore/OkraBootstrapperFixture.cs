@@ -1,4 +1,6 @@
-﻿using Okra.DependencyInjection;
+﻿using Okra.Builder;
+using Okra.DependencyInjection;
+using Okra.MEF.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,15 +39,42 @@ namespace Okra.MEF.Tests
             Assert.NotNull(serviceCollection);
         }
 
+        [Fact]
+        public void Initialize_CallsConfigure_WithOkraAppBuilder()
+        {
+            TestableBootstrapper bootstrapper = new TestableBootstrapper();
+
+            bootstrapper.Initialize();
+
+            object[] args = bootstrapper.MethodCalls.Where(m => m.Item1 == "Configure").FirstOrDefault().Item2;
+            IOkraAppBuilder appBuilder = args[0] as IOkraAppBuilder;
+
+            Assert.NotNull(appBuilder);
+        }
+
+        [Fact]
+        public void Initialize_CallsConfigure_OkraAppBuilderHasCorrectApplicationServices()
+        {
+            TestableBootstrapper bootstrapper = new TestableBootstrapper();
+
+            bootstrapper.Initialize();
+
+            object[] args = bootstrapper.MethodCalls.Where(m => m.Item1 == "Configure").FirstOrDefault().Item2;
+            IOkraAppBuilder appBuilder = args[0] as IOkraAppBuilder;
+            
+            Assert.NotNull(appBuilder.ApplicationServices);
+            Assert.IsType<MefServiceProvider>(appBuilder.ApplicationServices);
+        }
+
         // *** Test Classes ***
 
         private class TestableBootstrapper : OkraBootstrapper
         {
             public List<Tuple<string, object[]>> MethodCalls = new List<Tuple<string, object[]>>();
 
-            protected override void Configure()
+            protected override void Configure(IOkraAppBuilder app)
             {
-                MethodCalls.Add(Tuple.Create("Configure", new object[] { }));
+                MethodCalls.Add(Tuple.Create("Configure", new object[] { app }));
             }
 
             protected override void ConfigureServices(IServiceCollection services)
