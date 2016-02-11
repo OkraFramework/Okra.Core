@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Okra.Activation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Okra
 {
     public interface IOkraBootstrapper
     {
-        void Activate(object args);
+        Task Activate(IAppActivationRequest activationRequest);
         void Initialize();
     }
 }

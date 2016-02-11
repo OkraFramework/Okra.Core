@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Okra.Activation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.Activation;
@@ -75,9 +76,10 @@ namespace Okra
 
         // *** Private Methods ***
 
-        private void Activate(object args)
+        private async void Activate(IActivatedEventArgs args)
         {
-            _bootstrapper.Activate(args);
+            var appActivation = new UniversalAppActivationRequest(args);
+            await _bootstrapper.Activate(appActivation);
         }
     }
 }

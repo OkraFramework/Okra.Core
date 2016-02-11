@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Okra.Activation
 {
-    public abstract class ActivationContext
+    public interface IAppActivationRequest
     {
     }
 }

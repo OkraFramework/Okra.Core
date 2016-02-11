@@ -42,7 +42,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activation\ActivationContext.cs" />
+    <Compile Include="Activation\AppActivationContext.cs" />
+    <Compile Include="Activation\IAppActivation.cs" />
     <Compile Include="Builder\ActivationDelegate.cs" />
     <Compile Include="Builder\OkraAppBuilder.cs" />
     <Compile Include="Core\DelegateCommand.cs" />

@@ -1,5 +1,7 @@
-﻿using Okra.Builder;
+﻿using Okra.Activation;
+using Okra.Builder;
 using Okra.MEF.Mocks;
+using Okra.Tests.Mocks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,99 @@ namespace Okra.Tests.Builder
         public void Constructor_ThrowsException_IfServiceProviderIsNull()
         {
             Assert.Throws<ArgumentNullException>("serviceProvider", () => new OkraAppBuilder(null));
+        }
+
+        [Fact]
+        public async Task Build_BuildsTheOverallPipeline()
+        {
+            var serviceProvider = new MockServiceProvider();
+            var appBuilder = new OkraAppBuilder(serviceProvider);
+
+            var middlewareCallList = new List<string>();
+            var middlewareCallContextList = new List<AppActivationContext>();
+
+            appBuilder.Use(next =>
+                            {
+                                return context =>
+                                {
+                                    middlewareCallList.Add("First");
+                                    middlewareCallContextList.Add(context);
+                                    return next(context);
+                                };
+                            });
+
+            appBuilder.Use(next =>
+                            {
+                                return context =>
+                                {
+                                    middlewareCallList.Add("Second");
+                                    middlewareCallContextList.Add(context);
+                                    return Task.FromResult<bool>(true);
+                                };
+                            });
+
+            appBuilder.Use(next =>
+                            {
+                                return context =>
+                                {
+                                    middlewareCallList.Add("Third");
+                                    middlewareCallContextList.Add(context);
+                                    return next(context);
+                                };
+                            });
+
+            var appContext = new MockAppActivationContext();
+            var pipeline = appBuilder.Build();
+            await pipeline(appContext);
+
+            Assert.Equal(new string[] { "First", "Second" }, middlewareCallList);
+            Assert.Equal(new AppActivationContext[] { appContext, appContext }, middlewareCallContextList);
+        }
+
+        [Fact]
+        public async Task Build_BuildsAPipelineThatHasNoFinalStep()
+        {
+            var serviceProvider = new MockServiceProvider();
+            var appBuilder = new OkraAppBuilder(serviceProvider);
+
+            var middlewareCallList = new List<string>();
+            var middlewareCallContextList = new List<AppActivationContext>();
+
+            appBuilder.Use(next =>
+            {
+                return context =>
+                {
+                    middlewareCallList.Add("First");
+                    middlewareCallContextList.Add(context);
+                    return next(context);
+                };
+            });
+
+            appBuilder.Use(next =>
+            {
+                return context =>
+                {
+                    middlewareCallList.Add("Second");
+                    middlewareCallContextList.Add(context);
+                    return next(context);
+                };
+            });
+
+            var appContext = new MockAppActivationContext();
+            var pipeline = appBuilder.Build();
+            await pipeline(appContext);
+
+            Assert.Equal(new string[] { "First", "Second" }, middlewareCallList);
+            Assert.Equal(new AppActivationContext[] { appContext, appContext }, middlewareCallContextList);
+        }
+
+        [Fact]
+        public void Use_ThrowsException_IfFunctionIsNull()
+        {
+            IServiceProvider serviceProvider = new MockServiceProvider();
+            OkraAppBuilder appBuilder = new OkraAppBuilder(serviceProvider);
+
+            Assert.Throws<ArgumentNullException>("middleware", () => appBuilder.Use(null));
         }
     }
 }

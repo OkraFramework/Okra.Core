@@ -9,6 +9,8 @@ namespace Okra.Builder
     public interface IOkraAppBuilder
     {
         IServiceProvider ApplicationServices { get; }
+
+        ActivationDelegate Build();
         IOkraAppBuilder Use(Func<ActivationDelegate, ActivationDelegate> middleware);
     }
 }

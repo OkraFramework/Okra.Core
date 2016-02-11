@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace Okra.Builder
 {
-    public delegate Task ActivationDelegate(ActivationContext context);
+    public delegate Task ActivationDelegate(AppActivationContext context);
 }

@@ -1,4 +1,5 @@
-﻿using Okra.Builder;
+﻿using Okra.Activation;
+using Okra.Builder;
 using Okra.DependencyInjection;
 using Okra.MEF.DependencyInjection;
 using System;
@@ -11,11 +12,22 @@ namespace Okra.MEF
 {
     public abstract class OkraBootstrapper : IOkraBootstrapper
     {
+        // *** Fields ***
+
+        private ActivationDelegate _activationPipeline;
+
         // *** Methods ***
 
-        public void Activate(object args)
+        public Task Activate(IAppActivationRequest activationRequest)
         {
-            throw new NotImplementedException();
+            if (activationRequest == null)
+                throw new ArgumentNullException(nameof(activationRequest));
+
+            if (_activationPipeline == null)
+                throw new InvalidOperationException(Properties.Errors.Exception_InvalidOperation_BootstrapperNotInitialized);
+
+            AppActivationContext activationContext = new MefAppActivationContext(activationRequest);
+            return _activationPipeline(activationContext);
         }
 
         public void Initialize()
@@ -30,6 +42,7 @@ namespace Okra.MEF
 
             OkraAppBuilder appBuilder = new OkraAppBuilder(serviceProvider);
             Configure(appBuilder);
+            _activationPipeline = appBuilder.Build();
         }
 
         // *** Protected Methods ***
@@ -40,6 +53,21 @@ namespace Okra.MEF
 
         protected virtual void ConfigureServices(IServiceCollection services)
         {
+        }
+
+        // *** Private sub-classes ***
+
+        private class MefAppActivationContext : AppActivationContext
+        {
+            public MefAppActivationContext(IAppActivationRequest activationRequest)
+            {
+                this.ActivationRequest = activationRequest;
+            }
+
+            public override IAppActivationRequest ActivationRequest
+            {
+                get;
+            }
         }
     }
 }
