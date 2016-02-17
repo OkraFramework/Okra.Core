@@ -4,13 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Okra.MEF.Mocks
+namespace Okra.Tests.Mocks
 {
     internal class MockServiceProvider : IServiceProvider
     {
+        Dictionary<Type, object> _serviceDictionary = new Dictionary<Type, object>();
+
+        public MockServiceProvider(params object[] services)
+        {
+            foreach (var service in services)
+                _serviceDictionary.Add(service.GetType(), service);
+        }
+
         public object GetService(Type serviceType)
         {
-            throw new NotImplementedException();
+            return _serviceDictionary[serviceType];
         }
     }
 }

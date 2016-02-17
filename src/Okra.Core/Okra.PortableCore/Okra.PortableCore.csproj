@@ -43,9 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activation\AppActivationContext.cs" />
-    <Compile Include="Activation\IAppActivation.cs" />
+    <Compile Include="Activation\IAppActivationRequest.cs" />
     <Compile Include="Builder\ActivationDelegate.cs" />
+    <Compile Include="Builder\IMiddleware.cs" />
     <Compile Include="Builder\OkraAppBuilder.cs" />
+    <Compile Include="Builder\UseExtensions.cs" />
+    <Compile Include="Builder\UseMiddlewareExtensions.cs" />
     <Compile Include="Core\DelegateCommand.cs" />
     <Compile Include="Core\DelegateCommandT.cs" />
     <Compile Include="Core\NotifyPropertyChangedBase.cs" />

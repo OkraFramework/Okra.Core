@@ -1,6 +1,5 @@
 ﻿using Okra.Activation;
 using Okra.Builder;
-using Okra.MEF.Mocks;
 using Okra.Tests.Mocks;
 using System;
 using System.Collections.Generic;
