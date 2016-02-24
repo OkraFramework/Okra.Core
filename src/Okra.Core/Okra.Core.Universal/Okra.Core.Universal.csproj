@@ -115,6 +115,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activation\UniversalAppActivationRequest.cs" />
+    <Compile Include="Builder\MvvmOkraAppBuilderExtensions.cs" />
+    <Compile Include="Mvvm\DefaultAppShell.xaml.cs">
+      <DependentUpon>DefaultAppShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mvvm\ViewFactory.cs" />
+    <Compile Include="Mvvm\ViewHost.xaml.cs">
+      <DependentUpon>ViewHost.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mvvm\ViewPresenter.cs" />
+    <Compile Include="Mvvm\WindowAppHost.cs" />
     <Compile Include="OkraApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Properties\Okra.Core.rd.xml" />
@@ -132,6 +142,16 @@
       <Project>{7b05b679-6649-430c-9575-a19e2120169b}</Project>
       <Name>Okra.PortableCore</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Mvvm\DefaultAppShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Mvvm\ViewHost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
