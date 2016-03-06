@@ -60,6 +60,45 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyInjection\DependencyInjectionSpecificationTests.cs" />
+    <Compile Include="DependencyInjection\ServiceProviderExtensionsFixture.cs" />
+    <Compile Include="Microsoft.AspNetCore.Testing\CultureReplacer.cs" />
+    <Compile Include="Microsoft.AspNetCore.Testing\ExceptionAssert.cs" />
+    <Compile Include="Microsoft.AspNetCore.Testing\TestPlatformHelper.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\ActivatorUtilitiesTests.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\DependencyInjectionSpecificationTests.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\AnotherClass.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\AnotherClassAcceptingData.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithAmbiguousCtors.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithInternalConstructor.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithNestedReferencesToProvider.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithOptionalArgsCtor.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithPrivateCtor.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithProtectedConstructor.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithStaticCtor.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithThrowingCtor.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ClassWithThrowingEmptyCtor.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\CreationCountFakeService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\FakeOneMultipleService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\FakeOpenGenericService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\FakeOuterService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\FakeService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\FakeTwoMultipleService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFactoryService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeEveryService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeMultipleService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeOpenGenericService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeOuterService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeScopedService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeServiceInstance.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\IFakeSingletonService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\INonexistentService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ScopedFactoryService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\ServiceAcceptingFactoryService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\TransientFactoryService.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\Fakes\TypeWithSupersetConstructors.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Specification.Tests\ServiceCollection.cs" />
     <Compile Include="OkraBootstrapperFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,6 +118,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

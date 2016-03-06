@@ -1,6 +1,6 @@
-﻿using Okra.Activation;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Okra.Activation;
 using Okra.Builder;
-using Okra.DependencyInjection;
 using Okra.MEF.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -99,7 +99,6 @@ namespace Okra.MEF.Tests
             IOkraAppBuilder appBuilder = args[0] as IOkraAppBuilder;
 
             Assert.NotNull(appBuilder.ApplicationServices);
-            Assert.IsType<MefServiceProvider>(appBuilder.ApplicationServices);
         }
 
         // *** Test Classes ***

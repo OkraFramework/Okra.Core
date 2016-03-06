@@ -41,8 +41,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyInjection\DelegateExportDescriptorProvider.cs" />
+    <Compile Include="DependencyInjection\InstanceExportDescriptorProvider.cs" />
     <Compile Include="DependencyInjection\MefServiceProvider.cs" />
     <Compile Include="DependencyInjection\ServiceCollection.cs" />
+    <Compile Include="DependencyInjection\ServiceCollectionExtensions.cs" />
+    <Compile Include="DependencyInjection\SinglePartExportDescriptorProvider.cs" />
     <Compile Include="Properties\Errors.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

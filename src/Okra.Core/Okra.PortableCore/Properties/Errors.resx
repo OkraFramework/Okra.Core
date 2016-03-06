@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AmbiguousConstructorMatch" xml:space="preserve">
+    <value>Multiple constructors accepting all given argument types have been found in type '{0}'. There should only be one applicable constructor.</value>
+    <comment>{0} = service type</comment>
+  </data>
+  <data name="CannotLocateImplementation" xml:space="preserve">
+    <value>Unable to locate implementation '{0}' for service '{1}'.</value>
+    <comment>{0} = implementation type, {1} = service type</comment>
+  </data>
+  <data name="CannotResolveService" xml:space="preserve">
+    <value>Unable to resolve service for type '{0}' while attempting to activate '{1}'.</value>
+    <comment>{0} = service which cannot be resolved, {1} = service being activated</comment>
+  </data>
   <data name="Exception_ArgumentException_EnumerableContainsNullPage" xml:space="preserve">
     <value>The list of pages cannot contain a 'null' page.</value>
   </data>
@@ -170,5 +182,17 @@
   </data>
   <data name="Exception_InvalidOperation_SpecifiedPageDoesNotExistInNavigationStack" xml:space="preserve">
     <value>The specified page '{0}' does not exist in the navigation stack.</value>
+  </data>
+  <data name="NoConstructorMatch" xml:space="preserve">
+    <value>A suitable constructor for type '{0}' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.</value>
+    <comment>{0} = service type</comment>
+  </data>
+  <data name="NoServiceRegistered" xml:space="preserve">
+    <value>No service for type '{0}' has been registered.</value>
+    <comment>{0} = service type</comment>
+  </data>
+  <data name="TryAddIndistinguishableTypeToEnumerable" xml:space="preserve">
+    <value>Implementation type cannot be '{0}' because it is indistinguishable from other services registered for '{1}'.</value>
+    <comment>{0} = implementation type, {1} = service type</comment>
   </data>
 </root>

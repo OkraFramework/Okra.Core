@@ -1,5 +1,4 @@
 ﻿using Okra.Activation;
-using Okra.DependencyInjection;
 using Okra.Mvvm;
 using System;
 using System.Collections.Generic;

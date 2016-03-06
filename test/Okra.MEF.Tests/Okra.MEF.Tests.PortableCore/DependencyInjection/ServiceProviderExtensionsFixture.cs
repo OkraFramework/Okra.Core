@@ -1,0 +1,229 @@
+﻿using Microsoft.AspNetCore.Testing;
+using Microsoft.Extensions.DependencyInjection;
+using Okra.MEF.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Xunit;
+
+namespace Okra.MEF.Tests.DependencyInjection
+{
+    // Based on https://github.com/aspnet/DependencyInjection/blob/dev/test/Microsoft.Extensions.DependencyInjection.Tests/ServiceProviderExtensionsTest.cs
+
+    public partial class ServiceProviderExtensionsFixture
+    {
+        [Fact]
+        public void GetService_Returns_CorrectService()
+        {
+            // Arrange
+            var serviceProvider = CreateTestServiceProvider(1);
+
+            // Act
+            var service = serviceProvider.GetService<IFoo>();
+
+            // Assert
+            Assert.IsType<Foo1>(service);
+        }
+
+        [Fact]
+        public void GetRequiredService_Throws_WhenNoServiceRegistered()
+        {
+            // Arrange
+            var serviceProvider = CreateTestServiceProvider(0);
+
+            // Act + Assert
+            ExceptionAssert.Throws<InvalidOperationException>(() => serviceProvider.GetRequiredService<IFoo>(),
+                $"No service for type '{typeof(IFoo)}' has been registered.");
+        }
+
+        [Fact]
+        public void NonGeneric_GetRequiredService_Throws_WhenNoServiceRegistered()
+        {
+            // Arrange
+            var serviceProvider = CreateTestServiceProvider(0);
+
+            // Act + Assert
+            ExceptionAssert.Throws<InvalidOperationException>(() => serviceProvider.GetRequiredService(typeof(IFoo)),
+                $"No service for type '{typeof(IFoo)}' has been registered.");
+        }
+
+        [Fact]
+        public void GetServices_Returns_AllServices()
+        {
+            // Arrange
+            var serviceProvider = CreateTestServiceProvider(2);
+
+            // Act
+            var services = serviceProvider.GetServices<IFoo>();
+
+            // Assert
+            Assert.Contains(services, item => item is Foo1);
+            Assert.Contains(services, item => item is Foo2);
+            Assert.Equal(2, services.Count());
+        }
+
+        [Fact]
+        public void NonGeneric_GetServices_Returns_AllServices()
+        {
+            // Arrange
+            var serviceProvider = CreateTestServiceProvider(2);
+
+            // Act
+            var services = serviceProvider.GetServices(typeof(IFoo));
+
+            // Assert
+            Assert.Contains(services, item => item is Foo1);
+            Assert.Contains(services, item => item is Foo2);
+            Assert.Equal(2, services.Count());
+        }
+
+        [Fact]
+        public void GetServices_Returns_SingleService()
+        {
+            // Arrange
+            var serviceProvider = CreateTestServiceProvider(1);
+
+            // Act
+            var services = serviceProvider.GetServices<IFoo>();
+
+            // Assert
+            var item = Assert.Single(services);
+            Assert.IsType<Foo1>(item);
+        }
+
+        [Fact]
+        public void NonGeneric_GetServices_Returns_SingleService()
+        {
+            // Arrange
+            var serviceProvider = CreateTestServiceProvider(1);
+
+            // Act
+            var services = serviceProvider.GetServices(typeof(IFoo));
+
+            // Assert
+            var item = Assert.Single(services);
+            Assert.IsType<Foo1>(item);
+        }
+
+        [Fact]
+        public void GetServices_Returns_CorrectTypes()
+        {
+            // Arrange
+            var serviceProvider = CreateTestServiceProvider(4);
+
+            // Act
+            var services = serviceProvider.GetServices(typeof(IBar));
+
+            // Assert
+            foreach (var service in services)
+            {
+                Assert.IsAssignableFrom<IBar>(service);
+            }
+            Assert.Equal(2, services.Count());
+        }
+
+        [Fact]
+        public void GetServices_Returns_EmptyArray_WhenNoServicesAvailable()
+        {
+            // Arrange
+            var serviceProvider = CreateTestServiceProvider(0);
+
+            // Act
+            var services = serviceProvider.GetServices<IFoo>();
+
+            // Assert
+            Assert.Empty(services);
+            Assert.IsType<IFoo[]>(services);
+        }
+
+        [Fact]
+        public void NonGeneric_GetServices_Returns_EmptyArray_WhenNoServicesAvailable()
+        {
+            // Arrange
+            var serviceProvider = CreateTestServiceProvider(0);
+
+            // Act
+            var services = serviceProvider.GetServices(typeof(IFoo));
+
+            // Assert
+            Assert.Empty(services);
+            Assert.IsType<IFoo[]>(services);
+        }
+
+        [Fact]
+        public void GetServices_WithBuildServiceProvider_Returns_EmptyList_WhenNoServicesAvailable()
+        {
+            // Arrange
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<IEnumerable<IFoo>>(new List<IFoo>());
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            // Act
+            var services = serviceProvider.GetServices<IFoo>();
+
+            // Assert
+            Assert.Empty(services);
+            Assert.IsType<List<IFoo>>(services);
+        }
+
+        [Fact]
+        public void NonGeneric_GetServices_WithBuildServiceProvider_Returns_EmptyList_WhenNoServicesAvailable()
+        {
+            // Arrange
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<IEnumerable<IFoo>>(new List<IFoo>());
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            // Act
+            var services = serviceProvider.GetServices(typeof(IFoo));
+
+            // Assert
+            Assert.Empty(services);
+            Assert.IsType<List<IFoo>>(services);
+        }
+
+        // *** Private Helper Methods / Classes
+
+        private static IServiceProvider CreateTestServiceProvider(int count)
+        {
+            var serviceCollection = new ServiceCollection();
+
+            if (count > 0)
+            {
+                serviceCollection.AddTransient<IFoo, Foo1>();
+            }
+
+            if (count > 1)
+            {
+                serviceCollection.AddTransient<IFoo, Foo2>();
+            }
+
+            if (count > 2)
+            {
+                serviceCollection.AddTransient<IBar, Bar1>();
+            }
+
+            if (count > 3)
+            {
+                serviceCollection.AddTransient<IBar, Bar2>();
+            }
+
+            return serviceCollection.BuildServiceProvider();
+        }
+
+        public interface IFoo { }
+
+        public class Foo1 : IFoo { }
+
+        public class Foo2 : IFoo { }
+
+        public interface IBar { }
+
+        public class Bar1 : IBar { }
+
+        public class Bar2 : IBar { }
+
+    }
+}

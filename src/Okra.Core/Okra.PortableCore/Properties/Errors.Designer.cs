@@ -62,6 +62,33 @@ namespace Okra.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Multiple constructors accepting all given argument types have been found in type &apos;{0}&apos;. There should only be one applicable constructor..
+        /// </summary>
+        internal static string AmbiguousConstructorMatch {
+            get {
+                return ResourceManager.GetString("AmbiguousConstructorMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to locate implementation &apos;{0}&apos; for service &apos;{1}&apos;..
+        /// </summary>
+        internal static string CannotLocateImplementation {
+            get {
+                return ResourceManager.GetString("CannotLocateImplementation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to resolve service for type &apos;{0}&apos; while attempting to activate &apos;{1}&apos;..
+        /// </summary>
+        internal static string CannotResolveService {
+            get {
+                return ResourceManager.GetString("CannotResolveService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The list of pages cannot contain a &apos;null&apos; page..
         /// </summary>
         internal static string Exception_ArgumentException_EnumerableContainsNullPage {
@@ -220,6 +247,33 @@ namespace Okra.Strings {
         internal static string Exception_InvalidOperation_SpecifiedPageDoesNotExistInNavigationStack {
             get {
                 return ResourceManager.GetString("Exception_InvalidOperation_SpecifiedPageDoesNotExistInNavigationStack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A suitable constructor for type &apos;{0}&apos; could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor..
+        /// </summary>
+        internal static string NoConstructorMatch {
+            get {
+                return ResourceManager.GetString("NoConstructorMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No service for type &apos;{0}&apos; has been registered..
+        /// </summary>
+        internal static string NoServiceRegistered {
+            get {
+                return ResourceManager.GetString("NoServiceRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Implementation type cannot be &apos;{0}&apos; because it is indistinguishable from other services registered for &apos;{1}&apos;..
+        /// </summary>
+        internal static string TryAddIndistinguishableTypeToEnumerable {
+            get {
+                return ResourceManager.GetString("TryAddIndistinguishableTypeToEnumerable", resourceCulture);
             }
         }
     }

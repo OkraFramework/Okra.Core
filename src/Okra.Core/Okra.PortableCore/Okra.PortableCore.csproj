@@ -52,13 +52,21 @@
     <Compile Include="Core\DelegateCommand.cs" />
     <Compile Include="Core\DelegateCommandT.cs" />
     <Compile Include="Core\NotifyPropertyChangedBase.cs" />
-    <Compile Include="DependencyInjection\IServiceCollection.cs" />
-    <Compile Include="DependencyInjection\ServiceDescriptor.cs" />
-    <Compile Include="DependencyInjection\ServiceLifetime.cs" />
-    <Compile Include="DependencyInjection\ServiceProviderExtensions.cs" />
     <Compile Include="Helpers\ResourceHelper.cs" />
     <Compile Include="Builder\IOkraAppBuilder.cs" />
     <Compile Include="IOkraBootstrapper.cs" />
+    <Compile Include="Microsoft.Extensions.ActivatorUtilities.Sources\ActivatorUtilities.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\ActivatorUtilities.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\Extensions\ServiceCollectionExtensions.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\IServiceCollection.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\IServiceScope.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\IServiceScopeFactory.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\ObjectFactory.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\Okra\Resources.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\ServiceCollectionExtensions.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\ServiceDescriptor.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\ServiceLifetime.cs" />
+    <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\ServiceProviderExtensions.cs" />
     <Compile Include="Mvvm\IViewFactory.cs" />
     <Compile Include="Mvvm\PageInfo.cs" />
     <Compile Include="Navigation\NavigationStackOfT.cs" />
@@ -69,6 +77,7 @@
       <DependentUpon>Errors.resx</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,6 +1,6 @@
-﻿using Okra.Activation;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Okra.Activation;
 using Okra.Builder;
-using Okra.DependencyInjection;
 using Okra.MEF.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -36,7 +36,7 @@ namespace Okra.MEF
 
             IServiceCollection serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
-            MefServiceProvider serviceProvider = new MefServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
             // Create the OkraAppBuilder and configure the application
 
