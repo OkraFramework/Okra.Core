@@ -52,6 +52,9 @@
     <Compile Include="Core\DelegateCommand.cs" />
     <Compile Include="Core\DelegateCommandT.cs" />
     <Compile Include="Core\NotifyPropertyChangedBase.cs" />
+    <Compile Include="DependencyInjection\IMvvmCoreBuilder.cs" />
+    <Compile Include="DependencyInjection\MvvmCoreBuilder.cs" />
+    <Compile Include="DependencyInjection\MvvmCoreServiceCollectionExtensions.cs" />
     <Compile Include="Helpers\ResourceHelper.cs" />
     <Compile Include="Builder\IOkraAppBuilder.cs" />
     <Compile Include="IOkraBootstrapper.cs" />
@@ -67,8 +70,10 @@
     <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\ServiceDescriptor.cs" />
     <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\ServiceLifetime.cs" />
     <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\ServiceProviderExtensions.cs" />
-    <Compile Include="Mvvm\IViewFactory.cs" />
-    <Compile Include="Mvvm\PageInfo.cs" />
+    <Compile Include="Mvvm\ViewManager.cs" />
+    <Compile Include="Navigation\NavigationManager.cs" />
+    <Compile Include="Navigation\PageInfo.cs" />
+    <Compile Include="Navigation\INavigationManager.cs" />
     <Compile Include="Navigation\NavigationStackOfT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Errors.Designer.cs">
@@ -76,6 +81,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Errors.resx</DependentUpon>
     </Compile>
+    <Compile Include="Routing\IRouteBuilder.cs" />
+    <Compile Include="Routing\IViewRouter.cs" />
+    <Compile Include="Routing\RouteBuilder.cs" />
+    <Compile Include="Routing\RouteBuilderExtensions.cs" />
+    <Compile Include="Routing\RouteContext.cs" />
+    <Compile Include="Routing\ViewRouterProxy.cs" />
+    <Compile Include="Routing\ViewRouterDelegate.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

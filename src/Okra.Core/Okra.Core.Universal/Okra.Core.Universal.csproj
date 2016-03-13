@@ -116,10 +116,12 @@
   <ItemGroup>
     <Compile Include="Activation\UniversalAppActivationRequest.cs" />
     <Compile Include="Builder\MvvmOkraAppBuilderExtensions.cs" />
+    <Compile Include="DependencyInjection\IMvvmBuilder.cs" />
+    <Compile Include="DependencyInjection\MvvmBuilder.cs" />
     <Compile Include="Mvvm\DefaultAppShell.xaml.cs">
       <DependentUpon>DefaultAppShell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Mvvm\ViewFactory.cs" />
+    <Compile Include="DependencyInjection\MvvmServiceCollectionExtensions.cs" />
     <Compile Include="Mvvm\ViewHost.xaml.cs">
       <DependentUpon>ViewHost.xaml</DependentUpon>
     </Compile>

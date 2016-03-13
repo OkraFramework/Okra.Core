@@ -7,5 +7,5 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <local:ViewPresenter x:Name="viewPresenter"/>
+    <local:ViewPresenter CurrentView="{x:Bind Path=ViewManager.CurrentView, Mode=OneWay}"/>
 </Page>

@@ -87,6 +87,8 @@ namespace Okra.MEF.DependencyInjection
                 }
             }
 
+            containerConfiguration.WithProvider(new InstanceExportDescriptorProvider(this, typeof(IServiceProvider), null, null));
+
             _compositionHost = containerConfiguration.CreateContainer();
         }
 

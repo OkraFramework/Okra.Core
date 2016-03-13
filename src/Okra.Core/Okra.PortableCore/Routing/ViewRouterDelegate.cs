@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Okra.Mvvm
+namespace Okra.Routing
 {
-    public interface IViewFactory
-    {
-        object CreateView(PageInfo page);
-    }
+    public delegate Task<object> ViewRouterDelegate(RouteContext context);
 }

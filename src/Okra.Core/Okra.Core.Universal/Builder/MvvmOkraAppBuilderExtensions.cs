@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Windows.ApplicationModel.Activation;
+using Okra.Navigation;
 
 namespace Okra.Builder
 {
@@ -21,11 +23,13 @@ namespace Okra.Builder
                 {
                     // TODO : Create a new app container
                     // TODO : Also restore navigation stack (or whole root app container?)
-                    // TODO : Create a root window & root shell
-                    var appHost = new WindowAppHost(); // app.ApplicationServices.GetService<WindowAppHost>();
-                    var appShell = new DefaultAppShell(new ViewFactory()); // app.ApplicationServices.GetService<DefaultAppShell>();
+                    var appHost = app.ApplicationServices.GetRequiredService<WindowAppHost>();
+                    var appShell = app.ApplicationServices.GetRequiredService<DefaultAppShell>();
                     appHost.SetShell(appShell);
-                    appShell.NavigateTo(new PageInfo(pageName, arguments));
+
+                    var navigationManager = app.ApplicationServices.GetRequiredService<INavigationManager>();
+                    navigationManager.NavigateTo(new PageInfo(pageName, arguments));
+
                     return Task.FromResult<bool>(true);
                 }
                 else

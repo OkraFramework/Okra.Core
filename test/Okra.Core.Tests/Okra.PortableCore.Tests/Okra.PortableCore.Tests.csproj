@@ -67,9 +67,10 @@
     <Compile Include="Core\NotifyPropertyChangedFixture.cs" />
     <Compile Include="Mocks\MockAppActivationContext.cs" />
     <Compile Include="Mocks\MockServiceProvider.cs" />
-    <Compile Include="Mvvm\PageInfoFixture.cs" />
+    <Compile Include="Navigation\PageInfoFixture.cs" />
     <Compile Include="Navigation\NavigationStackOfTFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routing\RouteBuilderFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -82,6 +83,9 @@
       <Project>{7b05b679-6649-430c-9575-a19e2120169b}</Project>
       <Name>Okra.PortableCore</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mvvm\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

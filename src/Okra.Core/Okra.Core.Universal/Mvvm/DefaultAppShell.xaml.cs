@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Okra.Navigation;
+using Okra.Routing;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,28 +15,26 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace Okra.Mvvm
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class DefaultAppShell : Page
     {
-        private readonly IViewFactory _viewFactory;
-
-        public DefaultAppShell(IViewFactory viewFactory)
+        public DefaultAppShell(INavigationManager navigationManager, IViewRouter viewRouter)
         {
-            this._viewFactory = viewFactory;
+            this.NavigationManager = navigationManager;
+            this.ViewManager = new ViewManager(navigationManager, viewRouter);
 
             this.InitializeComponent();
         }
 
-        public void NavigateTo(PageInfo page)
+        public INavigationManager NavigationManager
         {
-            var view = _viewFactory.CreateView(page);
-            viewPresenter.CurrentView = view;
+            get;
+        }
+
+        public ViewManager ViewManager
+        {
+            get;
         }
     }
 }

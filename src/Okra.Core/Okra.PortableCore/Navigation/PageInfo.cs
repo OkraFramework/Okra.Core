@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Okra.Mvvm
+namespace Okra.Navigation
 {
     public class PageInfo
     {
