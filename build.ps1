@@ -33,6 +33,8 @@ write-host "--- Building release binaries ---"
 write-host "--- Creating NuGet packages ---"
 .\scripts\CreatePackages.ps1
 
+
 write-host "--- Creating Visual Studio extensions ---"
-.\scripts\CreateVsix2013.ps1
-.\scripts\CreateVsix2015.ps1
+write-host "WARNING: Skipped in build.ps1"
+# .\scripts\CreateVsix2013.ps1
+# .\scripts\CreateVsix2015.ps1

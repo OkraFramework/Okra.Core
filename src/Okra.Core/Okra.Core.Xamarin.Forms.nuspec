@@ -19,6 +19,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Okra.Core.Xamarin.Forms\bin\Release\Okra.Core.dll" target="lib\portable-netcore451+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\Okra.Core.dll" />
+    <file src="Okra.PortableCore\bin\Release\Okra.PortableCore.dll" target="lib\uap10.0\Okra.PortableCore.dll"/>
   </files>
 </package>

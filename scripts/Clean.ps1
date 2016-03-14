@@ -27,32 +27,18 @@ Remove-IfExists .\artifacts
 
 # Remove any build artifacts
 
-Remove-IfExists .\src\Okra.Core\Okra.Core.Windows\bin
-Remove-IfExists .\src\Okra.Core\Okra.Core.Windows\obj
-Remove-IfExists .\src\Okra.Core\Okra.Core.WindowsPhone\bin
-Remove-IfExists .\src\Okra.Core\Okra.Core.WindowsPhone\obj
-Remove-IfExists .\src\Okra.Core\Okra.Core.Universal\bin
-Remove-IfExists .\src\Okra.Core\Okra.Core.Universal\obj
-Remove-IfExists .\src\Okra.Core\Okra.Core.Xamarin.Forms\bin
-Remove-IfExists .\src\Okra.Core\Okra.Core.Xamarin.Forms\obj
 Remove-IfExists .\src\Okra.Core\Okra.PortableCore\bin
 Remove-IfExists .\src\Okra.Core\Okra.PortableCore\obj
+Remove-IfExists .\src\Okra.Core\Okra.Core.Universal\bin
+Remove-IfExists .\src\Okra.Core\Okra.Core.Universal\obj
 
-Remove-IfExists .\src\Okra.MEF\Okra.MEF.Windows\bin
-Remove-IfExists .\src\Okra.MEF\Okra.MEF.Windows\obj
-Remove-IfExists .\src\Okra.MEF\Okra.MEF.WindowsPhone\bin
-Remove-IfExists .\src\Okra.MEF\Okra.MEF.WindowsPhone\obj
-Remove-IfExists .\src\Okra.MEF\Okra.MEF.Universal\bin
-Remove-IfExists .\src\Okra.MEF\Okra.MEF.Universal\obj
-Remove-IfExists .\src\Okra.MEF\Okra.Core.Xamarin.Forms\bin
-Remove-IfExists .\src\Okra.MEF\Okra.Core.Xamarin.Forms\obj
+Remove-IfExists .\src\Okra.MEF\Okra.MEF.PortableCore\bin
+Remove-IfExists .\src\Okra.MEF\Okra.MEF.PortableCore\obj
 
-Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Windows\bin
-Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Windows\obj
-Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Tests.Windows\AppPackages
 Remove-IfExists .\test\Okra.Core.Tests\Okra.PortableCore.Tests\bin
 Remove-IfExists .\test\Okra.Core.Tests\Okra.PortableCore.Tests\obj
+Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Universal.Tests\bin
+Remove-IfExists .\test\Okra.Core.Tests\Okra.Core.Universal.Tests\obj
 
-Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\bin
-Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\obj
-Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.Windows\AppPackages
+Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.PortableCore\bin
+Remove-IfExists .\test\Okra.MEF.Tests\Okra.MEF.Tests.PortableCore\obj
