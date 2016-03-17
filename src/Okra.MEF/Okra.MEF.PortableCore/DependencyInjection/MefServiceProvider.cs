@@ -7,20 +7,25 @@ using System.Reflection;
 using System.Composition.Hosting;
 using System.Composition.Convention;
 using Microsoft.Extensions.DependencyInjection;
+using System.Composition;
 
 namespace Okra.MEF.DependencyInjection
 {
+    [Export(typeof(IServiceProvider))]
     internal class MefServiceProvider : IServiceProvider
     {
+        public const string SHARING_BOUNDARY = "Scope";
+
         // *** Fields ***
 
-        private CompositionHost _compositionHost;
+        private CompositionContext _compositionContext;
 
         // *** Constructors ***
 
-        public MefServiceProvider(IEnumerable<ServiceDescriptor> serviceDescriptors)
+        [ImportingConstructor]
+        public MefServiceProvider(CompositionContext compositionContext)
         {
-            CreateContainer(serviceDescriptors);
+            _compositionContext = compositionContext;
         }
 
         // *** Methods ***
@@ -28,12 +33,12 @@ namespace Okra.MEF.DependencyInjection
         public object GetService(Type serviceType)
         {
             // Try to compose the service using the default MEF container
-            
-            object export;
 
-            if (_compositionHost.TryGetExport(serviceType, out export))
+            var exports = _compositionContext.GetExports(serviceType).ToList();
+
+            if (exports.Count > 0)
             {
-                return export;
+                return exports.Last();
             }
             else
             {
@@ -44,7 +49,7 @@ namespace Okra.MEF.DependencyInjection
                 if (serviceTypeInfo.IsGenericType && serviceTypeInfo.GetGenericTypeDefinition() == typeof(IEnumerable<>))
                 {
                     var serviceElementType = serviceTypeInfo.GenericTypeArguments[0];
-                    var exportArray = _compositionHost.GetExports(serviceElementType);
+                    var exportArray = _compositionContext.GetExports(serviceElementType);
                     return exportArray;
                 }
 
@@ -52,65 +57,6 @@ namespace Okra.MEF.DependencyInjection
 
                 return null;
             }
-        }
-
-        // *** Private Methods ***
-
-        private void CreateContainer(IEnumerable<ServiceDescriptor> serviceDescriptors)
-        {
-            var containerConfiguration = new ContainerConfiguration();
-
-            foreach (var descriptor in serviceDescriptors)
-            {
-                switch (descriptor.Lifetime)
-                {
-                    case ServiceLifetime.Singleton:
-                        if (descriptor.ImplementationInstance != null)
-                            containerConfiguration.WithProvider(new InstanceExportDescriptorProvider(descriptor.ImplementationInstance, descriptor.ServiceType, null, null));
-                        else if (descriptor.ImplementationFactory != null)
-                            containerConfiguration.WithProvider(new DelegateExportDescriptorProvider(() => descriptor.ImplementationFactory(this), descriptor.ServiceType, null, null, true));
-                        else if (descriptor.ImplementationType != null)
-                            AddSingletonPart(containerConfiguration, descriptor.ImplementationType, descriptor.ServiceType);
-                        else
-                            throw new NotImplementedException();
-                        break;
-                    case ServiceLifetime.Transient:
-                        if (descriptor.ImplementationFactory != null)
-                            containerConfiguration.WithProvider(new DelegateExportDescriptorProvider(() => descriptor.ImplementationFactory(this), descriptor.ServiceType, null, null, false));
-                        else if (descriptor.ImplementationType != null)
-                            AddTransientPart(containerConfiguration, descriptor.ImplementationType, descriptor.ServiceType);
-                        else
-                            throw new NotImplementedException();
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
-            }
-
-            containerConfiguration.WithProvider(new InstanceExportDescriptorProvider(this, typeof(IServiceProvider), null, null));
-
-            _compositionHost = containerConfiguration.CreateContainer();
-        }
-
-        private void AddSingletonPart(ContainerConfiguration containerConfiguration, Type implementationType, Type serviceType)
-        {
-            ConventionBuilder conventionBuilder = new ConventionBuilder();
-
-            conventionBuilder.ForType(implementationType)
-                             .Export(e => e.AsContractType(serviceType))
-                             .Shared();
-
-            containerConfiguration.WithPart(implementationType, conventionBuilder);
-        }
-
-        private void AddTransientPart(ContainerConfiguration containerConfiguration, Type implementationType, Type serviceType)
-        {
-            ConventionBuilder conventionBuilder = new ConventionBuilder();
-
-            conventionBuilder.ForType(implementationType)
-                             .Export(e => e.AsContractType(serviceType));
-
-            containerConfiguration.WithPart(implementationType, conventionBuilder);
         }
     }
 }

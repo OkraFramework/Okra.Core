@@ -9,18 +9,18 @@ namespace Okra.MEF.DependencyInjection
 {
     // Based upon https://mef.codeplex.com/SourceControl/latest#oob/demo/Microsoft.Composition.Demos.ExtendedPartTypes/Extension/DelegateExportDescriptorProvider.cs
 
-    internal class DelegateExportDescriptorProvider : SinglePartExportDescriptorProvider
+    internal class FactoryExportDescriptorProvider : SinglePartExportDescriptorProvider
     {
         CompositeActivator _activator;
 
-        public DelegateExportDescriptorProvider(Func<object> exportedInstanceFactory, Type contractType, string contractName, IDictionary<string, object> metadata, bool isShared)
+        public FactoryExportDescriptorProvider(Func<IServiceProvider, object> exportedInstanceFactory, Type contractType, string contractName, IDictionary<string, object> metadata, bool isShared)
             : base (contractType, contractName, metadata)
         {
             if (exportedInstanceFactory == null) throw new ArgumentNullException("exportedInstanceFactory");
 
             // Runs the factory method, validates the result and registers it for disposal if necessary.
             CompositeActivator constructor = (c, o) => {
-                var result = exportedInstanceFactory();
+                var result = exportedInstanceFactory(c.GetExport<IServiceProvider>());
                 if (result == null)
                     throw new InvalidOperationException("Delegate factory returned null.");
 

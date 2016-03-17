@@ -41,9 +41,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DependencyInjection\DelegateExportDescriptorProvider.cs" />
+    <Compile Include="DependencyInjection\FactoryExportDescriptorProvider.cs" />
     <Compile Include="DependencyInjection\InstanceExportDescriptorProvider.cs" />
     <Compile Include="DependencyInjection\MefServiceProvider.cs" />
+    <Compile Include="DependencyInjection\MefServiceScope.cs" />
+    <Compile Include="DependencyInjection\MefServiceScopeFactory.cs" />
     <Compile Include="DependencyInjection\ServiceCollection.cs" />
     <Compile Include="DependencyInjection\ServiceCollectionExtensions.cs" />
     <Compile Include="DependencyInjection\SinglePartExportDescriptorProvider.cs" />
