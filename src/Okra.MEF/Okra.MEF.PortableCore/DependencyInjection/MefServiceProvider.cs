@@ -42,19 +42,6 @@ namespace Okra.MEF.DependencyInjection
             }
             else
             {
-                // If this fails and the service type is IEnumerable<T> then use GetExports(...)
-
-                TypeInfo serviceTypeInfo = serviceType.GetTypeInfo();
-
-                if (serviceTypeInfo.IsGenericType && serviceTypeInfo.GetGenericTypeDefinition() == typeof(IEnumerable<>))
-                {
-                    var serviceElementType = serviceTypeInfo.GenericTypeArguments[0];
-                    var exportArray = _compositionContext.GetExports(serviceElementType);
-                    return exportArray;
-                }
-
-                // Return null if the service type could not be found
-
                 return null;
             }
         }

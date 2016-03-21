@@ -66,6 +66,8 @@ namespace Okra.MEF.DependencyInjection
             containerConfiguration.WithPart<MefServiceProvider>();
             containerConfiguration.WithPart<MefServiceScopeFactory>();
 
+            containerConfiguration.WithProvider(new EnumerableExportDescriptorProvider());
+
             return containerConfiguration.CreateContainer();
         }
 

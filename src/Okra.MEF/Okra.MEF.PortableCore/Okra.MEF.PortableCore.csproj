@@ -41,6 +41,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyInjection\EnumerableExportDescriptorProvider.cs" />
     <Compile Include="DependencyInjection\FactoryExportDescriptorProvider.cs" />
     <Compile Include="DependencyInjection\InstanceExportDescriptorProvider.cs" />
     <Compile Include="DependencyInjection\MefServiceProvider.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="DependencyInjection\ServiceCollection.cs" />
     <Compile Include="DependencyInjection\ServiceCollectionExtensions.cs" />
     <Compile Include="DependencyInjection\SinglePartExportDescriptorProvider.cs" />
+    <Compile Include="Util\MethodInfoExtensions.cs" />
     <Compile Include="Properties\Errors.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
