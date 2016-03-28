@@ -30,6 +30,16 @@ namespace Okra.MEF.DependencyInjection
 
             foreach (var descriptor in serviceDescriptors)
             {
+                //if (descriptor.ImplementationInstance != null)
+                //    containerConfiguration.WithProvider(new InstanceExportDescriptorProvider(descriptor.ImplementationInstance, descriptor.ServiceType, null, null));
+                //else if (descriptor.ImplementationFactory != null)
+                //    containerConfiguration.WithProvider(new FactoryExportDescriptorProvider(descriptor.ImplementationFactory, descriptor.ServiceType, null, null, true));
+                //else if (descriptor.ImplementationType != null)
+                //    containerConfiguration.WithProvider(new TypeExportDescriptorProvider(descriptor.ServiceType, descriptor.ImplementationType, descriptor.Lifetime));
+                //else
+                //    throw new NotImplementedException();
+
+
                 switch (descriptor.Lifetime)
                 {
                     case ServiceLifetime.Singleton:
@@ -46,7 +56,7 @@ namespace Okra.MEF.DependencyInjection
                         if (descriptor.ImplementationFactory != null)
                             containerConfiguration.WithProvider(new FactoryExportDescriptorProvider(descriptor.ImplementationFactory, descriptor.ServiceType, null, null, false));
                         else if (descriptor.ImplementationType != null)
-                            AddTransientPart(containerConfiguration, descriptor.ImplementationType, descriptor.ServiceType);
+                            containerConfiguration.WithProvider(new TypeExportDescriptorProvider(descriptor.ServiceType, descriptor.ImplementationType, descriptor.Lifetime));
                         else
                             throw new NotImplementedException();
                         break;
@@ -73,42 +83,28 @@ namespace Okra.MEF.DependencyInjection
 
         private static void AddSingletonPart(ContainerConfiguration containerConfiguration, Type implementationType, Type serviceType)
         {
+            throw new NotImplementedException();
+
             ConventionBuilder conventionBuilder = new ConventionBuilder();
 
             conventionBuilder.ForType(implementationType)
                              .Export(e => e.AsContractType(serviceType))
-                             .SelectConstructor(GetLongestConstructor)
                              .Shared();
-
-            containerConfiguration.WithPart(implementationType, conventionBuilder);
-        }
-
-        private static void AddTransientPart(ContainerConfiguration containerConfiguration, Type implementationType, Type serviceType)
-        {
-            ConventionBuilder conventionBuilder = new ConventionBuilder();
-
-            conventionBuilder.ForType(implementationType)
-                             .Export(e => e.AsContractType(serviceType))
-                             .SelectConstructor(GetLongestConstructor);
 
             containerConfiguration.WithPart(implementationType, conventionBuilder);
         }
 
         private static void AddScopedPart(ContainerConfiguration containerConfiguration, Type implementationType, Type serviceType)
         {
+            throw new NotImplementedException();
+
             ConventionBuilder conventionBuilder = new ConventionBuilder();
 
             conventionBuilder.ForType(implementationType)
                              .Export(e => e.AsContractType(serviceType))
-                             .SelectConstructor(GetLongestConstructor)
                              .Shared(MefServiceProvider.SHARING_BOUNDARY);
 
             containerConfiguration.WithPart(implementationType, conventionBuilder);
-        }
-
-        private static ConstructorInfo GetLongestConstructor(IEnumerable<ConstructorInfo> constructors)
-        {
-            return constructors.OrderByDescending(c => c.GetParameters().Length).First();
         }
     }
 }
