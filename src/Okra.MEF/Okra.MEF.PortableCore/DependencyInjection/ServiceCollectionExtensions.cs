@@ -48,7 +48,7 @@ namespace Okra.MEF.DependencyInjection
                         else if (descriptor.ImplementationFactory != null)
                             containerConfiguration.WithProvider(new FactoryExportDescriptorProvider(descriptor.ImplementationFactory, descriptor.ServiceType, null, null, true));
                         else if (descriptor.ImplementationType != null)
-                            AddSingletonPart(containerConfiguration, descriptor.ImplementationType, descriptor.ServiceType);
+                            containerConfiguration.WithProvider(new TypeExportDescriptorProvider(descriptor.ServiceType, descriptor.ImplementationType, descriptor.Lifetime));
                         else
                             throw new NotImplementedException();
                         break;
@@ -64,7 +64,7 @@ namespace Okra.MEF.DependencyInjection
                         if (descriptor.ImplementationFactory != null)
                             throw new NotImplementedException();
                         else if (descriptor.ImplementationType != null)
-                            AddScopedPart(containerConfiguration, descriptor.ImplementationType, descriptor.ServiceType);
+                            containerConfiguration.WithProvider(new TypeExportDescriptorProvider(descriptor.ServiceType, descriptor.ImplementationType, descriptor.Lifetime));
                         else
                             throw new NotImplementedException();
                         break;
@@ -79,32 +79,6 @@ namespace Okra.MEF.DependencyInjection
             containerConfiguration.WithProvider(new EnumerableExportDescriptorProvider());
 
             return containerConfiguration.CreateContainer();
-        }
-
-        private static void AddSingletonPart(ContainerConfiguration containerConfiguration, Type implementationType, Type serviceType)
-        {
-            throw new NotImplementedException();
-
-            ConventionBuilder conventionBuilder = new ConventionBuilder();
-
-            conventionBuilder.ForType(implementationType)
-                             .Export(e => e.AsContractType(serviceType))
-                             .Shared();
-
-            containerConfiguration.WithPart(implementationType, conventionBuilder);
-        }
-
-        private static void AddScopedPart(ContainerConfiguration containerConfiguration, Type implementationType, Type serviceType)
-        {
-            throw new NotImplementedException();
-
-            ConventionBuilder conventionBuilder = new ConventionBuilder();
-
-            conventionBuilder.ForType(implementationType)
-                             .Export(e => e.AsContractType(serviceType))
-                             .Shared(MefServiceProvider.SHARING_BOUNDARY);
-
-            containerConfiguration.WithPart(implementationType, conventionBuilder);
         }
     }
 }

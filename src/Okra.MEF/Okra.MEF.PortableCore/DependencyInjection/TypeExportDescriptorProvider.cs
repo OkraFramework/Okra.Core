@@ -33,12 +33,12 @@ namespace Okra.MEF.DependencyInjection
             var implementationContract = contract.ChangeType(_implementationType);
 
             var getDescriptorMethod = s_getTypedDescriptorMethod.MakeGenericMethod(_contractType);
-            var getDescriptorDelegate = getDescriptorMethod.CreateStaticDelegate<Func<CompositionContract, CompositionContract, DependencyAccessor, object>>();
+            var getDescriptorDelegate = getDescriptorMethod.CreateStaticDelegate<Func<CompositionContract, CompositionContract, ServiceLifetime, DependencyAccessor, object>>();
 
-            return new[] { (ExportDescriptorPromise)getDescriptorDelegate(contract, implementationContract, descriptorAccessor) };
+            return new[] { (ExportDescriptorPromise)getDescriptorDelegate(contract, implementationContract, _lifetime, descriptorAccessor) };
         }
 
-        private static ExportDescriptorPromise GetTypedDescriptor<TElement>(CompositionContract contract, CompositionContract implementationContract, DependencyAccessor definitionAccessor)
+        private static ExportDescriptorPromise GetTypedDescriptor<TElement>(CompositionContract contract, CompositionContract implementationContract, ServiceLifetime lifetime, DependencyAccessor definitionAccessor)
         {
             var longestConstructor = GetLongestComposableConstructor(implementationContract, definitionAccessor);
             var constructor = longestConstructor.Item1;
@@ -53,11 +53,33 @@ namespace Okra.MEF.DependencyInjection
                  {
                      var parameterActivators = ds.Select(d => d.Target.GetDescriptor().Activator).ToArray();
 
+                     CompositeActivator activator = (c, o) =>
+                         {
+                             var parameters = parameterActivators.Select(pa => CompositionOperation.Run(c, pa)).ToArray();
+                             var export = constructor.Invoke(parameters);
+                             return export;
+                         };
+
+                     if (lifetime == ServiceLifetime.Transient)
+                         return ExportDescriptor.Create(activator, NoMetadata);
+
+                     var sharingId = LifetimeContext.AllocateSharingId();
                      return ExportDescriptor.Create((c, o) =>
                      {
-                         var parameters = parameterActivators.Select(activator => CompositionOperation.Run(c, activator)).ToArray();
-                         var export = constructor.Invoke(parameters);
-                         return export;
+                         // Find the root composition scope.
+                         var sharingBoundary = lifetime == ServiceLifetime.Scoped ? MefServiceProvider.SHARING_BOUNDARY : null;
+                         var scope = c.FindContextWithin(sharingBoundary);
+                         if (scope == c)
+                         {
+                             // We're already in the root scope, create the instance
+                             return scope.GetOrCreate(sharingId, o, activator);
+                         }
+                         else
+                         {
+                             // Composition is moving up the hierarchy of scopes; run
+                             // a new operation in the root scope.
+                             return CompositionOperation.Run(scope, (c1, o1) => c1.GetOrCreate(sharingId, o1, activator));
+                         }
                      }, NoMetadata);
                  });
         }
