@@ -52,8 +52,12 @@ namespace Okra.MEF.DependencyInjection
                      CompositeActivator activator = (c, o) =>
                          {
                              var parameters = parameterActivators.Select(pa => CompositionOperation.Run(c, pa)).ToArray();
-                             var export = constructor.Invoke(parameters);
-                             return export;
+                             var result = constructor.Invoke(parameters);
+
+                             if (result is IDisposable)
+                                 c.AddBoundInstance((IDisposable)result);
+
+                             return result;
                          };
 
                      if (lifetime == ServiceLifetime.Transient)
