@@ -50,6 +50,7 @@
     <Compile Include="DependencyInjection\ServiceCollection.cs" />
     <Compile Include="DependencyInjection\ServiceCollectionExtensions.cs" />
     <Compile Include="DependencyInjection\TypeExportDescriptorProvider.cs" />
+    <Compile Include="Util\CompositeActivatorExtensions.cs" />
     <Compile Include="Util\MethodInfoExtensions.cs" />
     <Compile Include="Properties\Errors.Designer.cs">
       <AutoGen>True</AutoGen>

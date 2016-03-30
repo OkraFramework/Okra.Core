@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Okra.MEF.Util;
 using System;
 using System.Collections.Generic;
 using System.Composition.Hosting.Core;
@@ -32,31 +33,7 @@ namespace Okra.MEF.DependencyInjection
                 return result;
             };
 
-            if (_serviceDescriptor.Lifetime == ServiceLifetime.Transient)
-            {
-                _activator = constructor;
-            }
-            else
-            {
-                var sharingId = LifetimeContext.AllocateSharingId();
-                _activator = (c, o) =>
-                {
-                    // Find the root composition scope.
-                    var sharingBoundary = _serviceDescriptor.Lifetime == ServiceLifetime.Scoped ? MefServiceProvider.SHARING_BOUNDARY : null;
-                    var scope = c.FindContextWithin(sharingBoundary);
-                    if (scope == c)
-                    {
-                        // We're already in the root scope, create the instance
-                        return scope.GetOrCreate(sharingId, o, constructor);
-                    }
-                    else
-                    {
-                        // Composition is moving up the hierarchy of scopes; run
-                        // a new operation in the root scope.
-                        return CompositionOperation.Run(scope, (c1, o1) => c1.GetOrCreate(sharingId, o1, constructor));
-                    }
-                };
-            };
+            _activator = constructor.ApplyServiceLifetime(_serviceDescriptor.Lifetime);
         }
 
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(CompositionContract contract, DependencyAccessor descriptorAccessor)

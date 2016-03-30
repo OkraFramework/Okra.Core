@@ -60,27 +60,7 @@ namespace Okra.MEF.DependencyInjection
                              return result;
                          };
 
-                     if (lifetime == ServiceLifetime.Transient)
-                         return ExportDescriptor.Create(activator, NoMetadata);
-
-                     var sharingId = LifetimeContext.AllocateSharingId();
-                     return ExportDescriptor.Create((c, o) =>
-                     {
-                         // Find the root composition scope.
-                         var sharingBoundary = lifetime == ServiceLifetime.Scoped ? MefServiceProvider.SHARING_BOUNDARY : null;
-                         var scope = c.FindContextWithin(sharingBoundary);
-                         if (scope == c)
-                         {
-                             // We're already in the root scope, create the instance
-                             return scope.GetOrCreate(sharingId, o, activator);
-                         }
-                         else
-                         {
-                             // Composition is moving up the hierarchy of scopes; run
-                             // a new operation in the root scope.
-                             return CompositionOperation.Run(scope, (c1, o1) => c1.GetOrCreate(sharingId, o1, activator));
-                         }
-                     }, NoMetadata);
+                     return ExportDescriptor.Create(activator.ApplyServiceLifetime(lifetime), NoMetadata);
                  });
         }
 
