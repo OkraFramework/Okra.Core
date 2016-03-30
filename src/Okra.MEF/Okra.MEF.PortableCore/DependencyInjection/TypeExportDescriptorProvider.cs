@@ -12,30 +12,26 @@ namespace Okra.MEF.DependencyInjection
 {
     public class TypeExportDescriptorProvider : ExportDescriptorProvider
     {
-        private Type _contractType;
-        private Type _implementationType;
-        private ServiceLifetime _lifetime;
+        private ServiceDescriptor _serviceDescriptor;
 
         private static readonly MethodInfo s_getTypedDescriptorMethod = typeof(TypeExportDescriptorProvider).GetTypeInfo().GetDeclaredMethod(nameof(GetTypedDescriptor));
 
-        public TypeExportDescriptorProvider(Type contractType, Type implementationType, ServiceLifetime lifetime)
+        public TypeExportDescriptorProvider(ServiceDescriptor serviceDescriptor)
         {
-            this._contractType = contractType;
-            this._implementationType = implementationType;
-            this._lifetime = lifetime;
+            this._serviceDescriptor = serviceDescriptor;
         }
 
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(CompositionContract contract, DependencyAccessor descriptorAccessor)
         {
-            if (contract.ContractType != _contractType)
+            if (contract.ContractType != _serviceDescriptor.ServiceType)
                 return NoExportDescriptors;
 
-            var implementationContract = contract.ChangeType(_implementationType);
+            var implementationContract = contract.ChangeType(_serviceDescriptor.ImplementationType);
 
-            var getDescriptorMethod = s_getTypedDescriptorMethod.MakeGenericMethod(_contractType);
+            var getDescriptorMethod = s_getTypedDescriptorMethod.MakeGenericMethod(_serviceDescriptor.ServiceType);
             var getDescriptorDelegate = getDescriptorMethod.CreateStaticDelegate<Func<CompositionContract, CompositionContract, ServiceLifetime, DependencyAccessor, object>>();
 
-            return new[] { (ExportDescriptorPromise)getDescriptorDelegate(contract, implementationContract, _lifetime, descriptorAccessor) };
+            return new[] { (ExportDescriptorPromise)getDescriptorDelegate(contract, implementationContract, _serviceDescriptor.Lifetime, descriptorAccessor) };
         }
 
         private static ExportDescriptorPromise GetTypedDescriptor<TElement>(CompositionContract contract, CompositionContract implementationContract, ServiceLifetime lifetime, DependencyAccessor definitionAccessor)

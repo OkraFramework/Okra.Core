@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Composition.Hosting.Core;
 using System.Linq;
@@ -9,18 +10,19 @@ namespace Okra.MEF.DependencyInjection
 {
     // Based upon https://mef.codeplex.com/SourceControl/latest#oob/demo/Microsoft.Composition.Demos.ExtendedPartTypes/Extension/DelegateExportDescriptorProvider.cs
 
-    internal class FactoryExportDescriptorProvider : SinglePartExportDescriptorProvider
+    internal class FactoryExportDescriptorProvider : ExportDescriptorProvider
     {
+        ServiceDescriptor _serviceDescriptor;
         CompositeActivator _activator;
 
-        public FactoryExportDescriptorProvider(Func<IServiceProvider, object> exportedInstanceFactory, Type contractType, string contractName, IDictionary<string, object> metadata, bool isShared)
-            : base (contractType, contractName, metadata)
+        public FactoryExportDescriptorProvider(ServiceDescriptor serviceDescriptor)
         {
-            if (exportedInstanceFactory == null) throw new ArgumentNullException("exportedInstanceFactory");
+            this._serviceDescriptor = serviceDescriptor;
 
             // Runs the factory method, validates the result and registers it for disposal if necessary.
-            CompositeActivator constructor = (c, o) => {
-                var result = exportedInstanceFactory(c.GetExport<IServiceProvider>());
+            CompositeActivator constructor = (c, o) =>
+            {
+                var result = _serviceDescriptor.ImplementationFactory(c.GetExport<IServiceProvider>());
                 if (result == null)
                     throw new InvalidOperationException("Delegate factory returned null.");
 
@@ -30,12 +32,18 @@ namespace Okra.MEF.DependencyInjection
                 return result;
             };
 
-            if (isShared)
+            if (_serviceDescriptor.Lifetime == ServiceLifetime.Transient)
+            {
+                _activator = constructor;
+            }
+            else
             {
                 var sharingId = LifetimeContext.AllocateSharingId();
-                _activator = (c, o) => {
+                _activator = (c, o) =>
+                {
                     // Find the root composition scope.
-                    var scope = c.FindContextWithin(null);
+                    var sharingBoundary = _serviceDescriptor.Lifetime == ServiceLifetime.Scoped ? MefServiceProvider.SHARING_BOUNDARY : null;
+                    var scope = c.FindContextWithin(sharingBoundary);
                     if (scope == c)
                     {
                         // We're already in the root scope, create the instance
@@ -48,17 +56,15 @@ namespace Okra.MEF.DependencyInjection
                         return CompositionOperation.Run(scope, (c1, o1) => c1.GetOrCreate(sharingId, o1, constructor));
                     }
                 };
-            }
-            else
-            {
-                _activator = constructor;
-            }
+            };
         }
 
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(CompositionContract contract, DependencyAccessor descriptorAccessor)
         {
-            if (IsSupportedContract(contract))
-                yield return new ExportDescriptorPromise(contract, "factory delegate", true, NoDependencies, _ => ExportDescriptor.Create(_activator, Metadata));
+            if (contract.ContractType != _serviceDescriptor.ServiceType)
+                return NoExportDescriptors;
+
+            return new[] { new ExportDescriptorPromise(contract, "factory delegate", true, NoDependencies, _ => ExportDescriptor.Create(_activator, NoMetadata)) };
         }
 
     }

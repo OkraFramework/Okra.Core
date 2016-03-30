@@ -30,47 +30,14 @@ namespace Okra.MEF.DependencyInjection
 
             foreach (var descriptor in serviceDescriptors)
             {
-                //if (descriptor.ImplementationInstance != null)
-                //    containerConfiguration.WithProvider(new InstanceExportDescriptorProvider(descriptor.ImplementationInstance, descriptor.ServiceType, null, null));
-                //else if (descriptor.ImplementationFactory != null)
-                //    containerConfiguration.WithProvider(new FactoryExportDescriptorProvider(descriptor.ImplementationFactory, descriptor.ServiceType, null, null, true));
-                //else if (descriptor.ImplementationType != null)
-                //    containerConfiguration.WithProvider(new TypeExportDescriptorProvider(descriptor.ServiceType, descriptor.ImplementationType, descriptor.Lifetime));
-                //else
-                //    throw new NotImplementedException();
-
-
-                switch (descriptor.Lifetime)
-                {
-                    case ServiceLifetime.Singleton:
-                        if (descriptor.ImplementationInstance != null)
-                            containerConfiguration.WithProvider(new InstanceExportDescriptorProvider(descriptor.ImplementationInstance, descriptor.ServiceType, null, null));
-                        else if (descriptor.ImplementationFactory != null)
-                            containerConfiguration.WithProvider(new FactoryExportDescriptorProvider(descriptor.ImplementationFactory, descriptor.ServiceType, null, null, true));
-                        else if (descriptor.ImplementationType != null)
-                            containerConfiguration.WithProvider(new TypeExportDescriptorProvider(descriptor.ServiceType, descriptor.ImplementationType, descriptor.Lifetime));
-                        else
-                            throw new NotImplementedException();
-                        break;
-                    case ServiceLifetime.Transient:
-                        if (descriptor.ImplementationFactory != null)
-                            containerConfiguration.WithProvider(new FactoryExportDescriptorProvider(descriptor.ImplementationFactory, descriptor.ServiceType, null, null, false));
-                        else if (descriptor.ImplementationType != null)
-                            containerConfiguration.WithProvider(new TypeExportDescriptorProvider(descriptor.ServiceType, descriptor.ImplementationType, descriptor.Lifetime));
-                        else
-                            throw new NotImplementedException();
-                        break;
-                    case ServiceLifetime.Scoped:
-                        if (descriptor.ImplementationFactory != null)
-                            throw new NotImplementedException();
-                        else if (descriptor.ImplementationType != null)
-                            containerConfiguration.WithProvider(new TypeExportDescriptorProvider(descriptor.ServiceType, descriptor.ImplementationType, descriptor.Lifetime));
-                        else
-                            throw new NotImplementedException();
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
+                if (descriptor.ImplementationInstance != null)
+                    containerConfiguration.WithProvider(new InstanceExportDescriptorProvider(descriptor));
+                else if (descriptor.ImplementationFactory != null)
+                    containerConfiguration.WithProvider(new FactoryExportDescriptorProvider(descriptor));
+                else if (descriptor.ImplementationType != null)
+                    containerConfiguration.WithProvider(new TypeExportDescriptorProvider(descriptor));
+                else
+                    throw new NotImplementedException();
             }
 
             containerConfiguration.WithPart<MefServiceProvider>();
