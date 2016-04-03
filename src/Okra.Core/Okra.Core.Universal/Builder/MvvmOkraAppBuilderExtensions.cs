@@ -13,7 +13,7 @@ namespace Okra.Builder
 {
     public static class MvvmOkraAppBuilderExtensions
     {
-        public static IOkraAppBuilder UseStartPage(this IOkraAppBuilder app, string pageName, object arguments)
+        public static IOkraAppBuilder UseStartPage(this IOkraAppBuilder app, string pageName, object arguments, Type shellType)
         {
             return app.Use((context, next) =>
             {
@@ -24,7 +24,7 @@ namespace Okra.Builder
                     // TODO : Create a new app container
                     // TODO : Also restore navigation stack (or whole root app container?)
                     var appHost = app.ApplicationServices.GetRequiredService<WindowAppHost>();
-                    var appShell = app.ApplicationServices.GetRequiredService<DefaultAppShell>();
+                    var appShell = app.ApplicationServices.GetRequiredService(shellType);
                     appHost.SetShell(appShell);
 
                     var navigationManager = app.ApplicationServices.GetRequiredService<INavigationManager>();

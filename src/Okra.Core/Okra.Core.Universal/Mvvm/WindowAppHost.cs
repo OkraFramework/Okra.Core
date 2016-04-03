@@ -17,9 +17,9 @@ namespace Okra.Mvvm
 
         // *** Methods ***
 
-        public void SetShell(DefaultAppShell shell)
+        public void SetShell(object shell)
         {
-            Window.Current.Content = shell;
+            Window.Current.Content = shell as UIElement;
             Window.Current.Activate();
         }
     }
