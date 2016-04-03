@@ -18,9 +18,9 @@ namespace Okra.Routing
             _router = new Lazy<ViewRouterDelegate>(BuildRouter);
         }
 
-        public Task<object> GetViewAsync(PageInfo pageInfo)
+        public Task<object> GetViewAsync(PageInfo pageInfo, IServiceProvider pageServices)
         {
-            RouteContext context = new RouteContext(pageInfo);
+            RouteContext context = new RouteContext(pageInfo, pageServices);
             return _router.Value(context);
         }
 

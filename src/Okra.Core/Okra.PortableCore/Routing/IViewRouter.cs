@@ -9,6 +9,6 @@ namespace Okra.Routing
 {
     public interface IViewRouter
     {
-        Task<object> GetViewAsync(PageInfo pageInfo);
+        Task<object> GetViewAsync(PageInfo pageInfo, IServiceProvider pageServices);
     }
 }

@@ -13,12 +13,18 @@ namespace Okra.Routing
         {
         }
 
-        public RouteContext(PageInfo page)
+        public RouteContext(PageInfo page, IServiceProvider pageServices)
         {
             this.Page = page;
+            this.PageServices = pageServices;
         }
 
         public PageInfo Page
+        {
+            get;
+        }
+
+        public IServiceProvider PageServices
         {
             get;
         }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Okra.Navigation;
 using Okra.Routing;
+using Okra.State;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace Okra.DependencyInjection
             services.AddSingleton<INavigationManager, NavigationManager>();
             services.AddSingleton<IRouteBuilder, RouteBuilder>();
             services.AddSingleton<IViewRouter, ViewRouterProxy>();
+            services.AddScoped<IStateService, StateService>();
 
             return new MvvmCoreBuilder(services);
         }

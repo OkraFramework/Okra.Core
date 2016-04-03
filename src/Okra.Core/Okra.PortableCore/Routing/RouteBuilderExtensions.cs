@@ -19,7 +19,7 @@ namespace Okra.Routing
                     if (view != null)
                         return view;
                     else
-                        return next(context);
+                        return await next(context);
                 };
             });
         }
@@ -29,7 +29,7 @@ namespace Okra.Routing
             return routeBuilder.AddRoute(context =>
             {
                 if (context.Page.PageName == pageName)
-                    return Task.FromResult<object>(routeBuilder.ApplicationServices.GetService(viewType));
+                    return Task.FromResult<object>(context.PageServices.GetService(viewType));
                 else
                     return Task.FromResult<object>(null);
             });

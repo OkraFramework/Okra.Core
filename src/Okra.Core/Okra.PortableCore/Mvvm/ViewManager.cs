@@ -1,5 +1,7 @@
-﻿using Okra.Navigation;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Okra.Navigation;
 using Okra.Routing;
+using Okra.State;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,14 +15,16 @@ namespace Okra.Mvvm
     {
         private readonly INavigationManager _navigationManager;
         private readonly IViewRouter _viewRouter;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
         private object _currentView;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ViewManager(INavigationManager navigationManager, IViewRouter viewRouter)
+        public ViewManager(INavigationManager navigationManager, IViewRouter viewRouter, IServiceScopeFactory serviceScopeFactory)
         {
             this._navigationManager = navigationManager;
             this._viewRouter = viewRouter;
+            this._serviceScopeFactory = serviceScopeFactory;
 
             navigationManager.PropertyChanged += NavigationManager_PropertyChanged;
         }
@@ -43,7 +47,16 @@ namespace Okra.Mvvm
             if (e.PropertyName == nameof(INavigationManager.CurrentPage))
             {
                 var page = _navigationManager.CurrentPage;
-                var view = await _viewRouter.GetViewAsync(page);
+
+                // TODO : Must dispose of page scope!
+                var pageScope = _serviceScopeFactory.CreateScope();
+                var pageServices = pageScope.ServiceProvider;
+
+                var stateService = pageServices.GetRequiredService<IStateService>();
+                stateService.SetState(StateNames.PageName, page.PageName);
+                stateService.SetState(StateNames.PageArguments, page.Arguments);
+                
+                var view = await _viewRouter.GetViewAsync(page, pageServices);
                 this.CurrentView = view;
             }
         }

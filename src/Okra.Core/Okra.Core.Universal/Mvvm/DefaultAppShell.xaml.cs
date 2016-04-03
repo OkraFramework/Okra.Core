@@ -1,4 +1,5 @@
-﻿using Okra.Navigation;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Okra.Navigation;
 using Okra.Routing;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,10 @@ namespace Okra.Mvvm
 {
     public sealed partial class DefaultAppShell : Page
     {
-        public DefaultAppShell(INavigationManager navigationManager, IViewRouter viewRouter)
+        public DefaultAppShell(INavigationManager navigationManager, IViewRouter viewRouter, IServiceScopeFactory serviceScopeFactory)
         {
             this.NavigationManager = navigationManager;
-            this.ViewManager = new ViewManager(navigationManager, viewRouter);
+            this.ViewManager = new ViewManager(navigationManager, viewRouter, serviceScopeFactory);
 
             this.InitializeComponent();
         }

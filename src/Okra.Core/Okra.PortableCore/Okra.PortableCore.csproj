@@ -88,6 +88,9 @@
     <Compile Include="Routing\RouteContext.cs" />
     <Compile Include="Routing\ViewRouterProxy.cs" />
     <Compile Include="Routing\ViewRouterDelegate.cs" />
+    <Compile Include="State\IStateService.cs" />
+    <Compile Include="State\StateNames.cs" />
+    <Compile Include="State\StateService.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
