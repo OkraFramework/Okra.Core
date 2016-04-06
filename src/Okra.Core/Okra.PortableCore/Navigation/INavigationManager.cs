@@ -13,12 +13,15 @@ namespace Okra.Navigation
         // *** Properties ***
 
         bool CanGoBack { get; }
-        PageInfo CurrentPage { get; }
+        bool CanGoForward { get; }
+        PageEntry CurrentPage { get; }
+        IReadOnlyList<PageEntry> NavigationStack { get; }
 
         // *** Methods ***
 
         void Clear();
         void GoBack();
+        void GoForward();
         void NavigateTo(PageInfo page);
     }
 }

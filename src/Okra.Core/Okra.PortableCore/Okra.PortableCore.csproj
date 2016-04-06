@@ -72,6 +72,7 @@
     <Compile Include="Microsoft.Extensions.DependencyInjection.Abstractions\ServiceProviderExtensions.cs" />
     <Compile Include="Mvvm\ViewManager.cs" />
     <Compile Include="Navigation\NavigationManager.cs" />
+    <Compile Include="Navigation\PageEntry.cs" />
     <Compile Include="Navigation\PageInfo.cs" />
     <Compile Include="Navigation\INavigationManager.cs" />
     <Compile Include="Navigation\NavigationStackOfT.cs" />

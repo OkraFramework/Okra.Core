@@ -1,4 +1,5 @@
 ﻿using Okra.Navigation;
+using Okra.Tests.Helpers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -53,7 +54,7 @@ namespace Okra.Tests.Navigation
             stack.NavigateTo(item2);
             stack.GoBack();
 
-            AssertPropertyChangedEvents(stack, () => stack.Clear());
+            AssertEx.PropertyChangedEvents(stack, () => stack.Clear());
 
             Assert.Equal(0, stack.Count);
             Assert.Equal(default(T), stack.CurrentItem);
@@ -152,7 +153,7 @@ namespace Okra.Tests.Navigation
         {
             var stack = new NavigationStack<T>();
 
-            AssertPropertyChangedEvents(stack, () => stack.NavigateTo(item));
+            AssertEx.PropertyChangedEvents(stack, () => stack.NavigateTo(item));
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item, stack[0]);
@@ -170,7 +171,7 @@ namespace Okra.Tests.Navigation
 
             stack.NavigateTo(item1);
 
-            AssertPropertyChangedEvents(stack, () => stack.NavigateTo(item2));
+            AssertEx.PropertyChangedEvents(stack, () => stack.NavigateTo(item2));
 
             Assert.Equal(2, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -189,7 +190,7 @@ namespace Okra.Tests.Navigation
 
             stack.NavigateTo(item);
 
-            AssertPropertyChangedEvents(stack, () => stack.GoBack());
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoBack());
 
             Assert.Equal(0, stack.Count);
             Assert.Equal(default(T), stack.CurrentItem);
@@ -207,7 +208,7 @@ namespace Okra.Tests.Navigation
             stack.NavigateTo(item1);
             stack.NavigateTo(item2);
 
-            AssertPropertyChangedEvents(stack, () => stack.GoBack());
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoBack());
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -226,7 +227,7 @@ namespace Okra.Tests.Navigation
             stack.NavigateTo(item);
             stack.GoBack();
 
-            AssertPropertyChangedEvents(stack, () => stack.GoForward());
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoForward());
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item, stack[0]);
@@ -246,7 +247,7 @@ namespace Okra.Tests.Navigation
             stack.NavigateTo(item2);
             stack.GoBack();
 
-            AssertPropertyChangedEvents(stack, () => stack.GoForward());
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoForward());
 
             Assert.Equal(2, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -268,7 +269,7 @@ namespace Okra.Tests.Navigation
             stack.GoBack();
             stack.GoBack();
 
-            AssertPropertyChangedEvents(stack, () => stack.GoForward());
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoForward());
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -290,7 +291,7 @@ namespace Okra.Tests.Navigation
             stack.GoBack();
             stack.GoForward();
 
-            AssertPropertyChangedEvents(stack, () => stack.GoForward());
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoForward());
 
             Assert.Equal(2, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -310,7 +311,7 @@ namespace Okra.Tests.Navigation
             stack.NavigateTo(item1);
             stack.GoBack();
 
-            AssertPropertyChangedEvents(stack, () => stack.NavigateTo(item2));
+            AssertEx.PropertyChangedEvents(stack, () => stack.NavigateTo(item2));
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item2, stack[0]);
@@ -331,7 +332,7 @@ namespace Okra.Tests.Navigation
             stack.NavigateTo(item2);
             stack.GoBack();
 
-            AssertPropertyChangedEvents(stack, () => stack.GoForward());
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoForward());
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item2, stack[0]);
@@ -351,7 +352,7 @@ namespace Okra.Tests.Navigation
             stack.NavigateTo(item2);
             stack.NavigateTo(item3);
 
-            AssertPropertyChangedEvents(stack, () => stack.GoBackTo(item2));
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoBackTo(item2));
 
             Assert.Equal(2, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -372,7 +373,7 @@ namespace Okra.Tests.Navigation
             stack.NavigateTo(item2);
             stack.NavigateTo(item3);
 
-            AssertPropertyChangedEvents(stack, () => stack.GoBackTo(item1));
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoBackTo(item1));
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -393,7 +394,7 @@ namespace Okra.Tests.Navigation
             stack.NavigateTo(item3);
             stack.GoBackTo(item2);
 
-            AssertPropertyChangedEvents(stack, () => stack.GoBack());
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoBack());
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -414,7 +415,7 @@ namespace Okra.Tests.Navigation
             stack.NavigateTo(item3);
             stack.GoBackTo(item2);
 
-            AssertPropertyChangedEvents(stack, () => stack.GoForward());
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoForward());
 
             Assert.Equal(3, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -437,7 +438,7 @@ namespace Okra.Tests.Navigation
             stack.GoBack();
             stack.GoBack();
 
-            AssertPropertyChangedEvents(stack, () => stack.GoForwardTo(item1));
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoForwardTo(item1));
 
             Assert.Equal(1, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -458,7 +459,7 @@ namespace Okra.Tests.Navigation
             stack.GoBack();
             stack.GoBack();
 
-            AssertPropertyChangedEvents(stack, () => stack.GoForwardTo(item2));
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoForwardTo(item2));
 
             Assert.Equal(2, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -481,7 +482,7 @@ namespace Okra.Tests.Navigation
             stack.GoBack();
             stack.GoForwardTo(item1);
 
-            AssertPropertyChangedEvents(stack, () => stack.GoForward());
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoForward());
 
             Assert.Equal(2, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -506,7 +507,7 @@ namespace Okra.Tests.Navigation
             stack.GoBack();
             stack.GoForwardTo(item2);
 
-            AssertPropertyChangedEvents(stack, () => stack.GoForward());
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoForward());
 
             Assert.Equal(3, stack.Count);
             Assert.Equal(item1, stack[0]);
@@ -528,54 +529,6 @@ namespace Okra.Tests.Navigation
             }
 
             public string Name { get; }
-        }
-
-        // *** Private Methods ***
-
-        private void AssertPropertyChangedEvents<T>(T obj, Action action) where T : INotifyPropertyChanged
-        {
-            TypeInfo typeInfo = typeof(T).GetTypeInfo();
-
-            // Get current values for all properties
-
-            var initialProperties = new Dictionary<PropertyInfo, object>();
-
-            foreach (PropertyInfo property in typeInfo.DeclaredProperties)
-            {
-                if (property.GetIndexParameters().Length == 0)
-                    initialProperties[property] = property.GetValue(obj);
-            }
-
-            // Perform the action, recording property changed events
-
-            var changedPropertyNames = new List<string>();
-
-            PropertyChangedEventHandler eventHandler = (sender, e) =>
-            {
-                Assert.Equal(obj, sender);
-                changedPropertyNames.Add(e.PropertyName);
-            };
-
-            obj.PropertyChanged += eventHandler;
-            action();
-            obj.PropertyChanged -= eventHandler;
-
-            // Check that property changed events were raised for all modified properties
-
-            foreach (KeyValuePair<PropertyInfo, object> initialProperty in initialProperties)
-            {
-                if (!object.Equals(initialProperty.Key.GetValue(obj), initialProperty.Value))
-                {
-                    string propertyName = initialProperty.Key.Name;
-                    Assert.True(changedPropertyNames.Contains(propertyName), $"Property '{propertyName}' did not raise a PropertyChanged event");
-                    changedPropertyNames.Remove(propertyName);
-                }
-            }
-
-            // Check that no unchanged properties raised PropertyChanged events
-
-            if (changedPropertyNames.Count > 0)
-                Assert.True(false, $"Unchanged Property '{changedPropertyNames[0]}' raised PropertyChanged event");
         }
     }
 }

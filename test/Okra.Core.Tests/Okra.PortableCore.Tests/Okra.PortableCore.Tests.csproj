@@ -65,8 +65,12 @@
     <Compile Include="Builder\UseMiddlewareExtensionsFixture.cs" />
     <Compile Include="Core\DelegateCommandFixture.cs" />
     <Compile Include="Core\NotifyPropertyChangedFixture.cs" />
+    <Compile Include="Helpers\AssertEx.cs" />
     <Compile Include="Mocks\MockAppActivationContext.cs" />
     <Compile Include="Mocks\MockServiceProvider.cs" />
+    <Compile Include="Mocks\MockStateService.cs" />
+    <Compile Include="Navigation\NavigationManagerFixture.cs" />
+    <Compile Include="Navigation\PageEntryFixture.cs" />
     <Compile Include="Navigation\PageInfoFixture.cs" />
     <Compile Include="Navigation\NavigationStackOfTFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

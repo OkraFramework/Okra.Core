@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Okra.State;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,24 +10,30 @@ namespace Okra.Navigation
 {
     public class NavigationManager : INavigationManager, INotifyPropertyChanged
     {
-        private readonly NavigationStack<PageInfo> _navigationStack = new NavigationStack<PageInfo>();
+        // *** Fields ***
+
+        private readonly NavigationStack<PageEntry> _navigationStack = new NavigationStack<PageEntry>();
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        // *** Constructors ***
 
         public NavigationManager()
         {
             _navigationStack.PropertyChanged += NavigationStack_PropertyChanged;
         }
 
+        // *** Properties ***
+
         public bool CanGoBack
         {
             get
             {
-                throw new NotImplementedException();
+                return _navigationStack.CanGoBack;
             }
         }
 
-        public PageInfo CurrentPage
+        public PageEntry CurrentPage
         {
             get
             {
@@ -34,19 +41,49 @@ namespace Okra.Navigation
             }
         }
 
+        public bool CanGoForward
+        {
+            get
+            {
+                return _navigationStack.CanGoForward;
+            }
+        }
+
+        public IReadOnlyList<PageEntry> NavigationStack
+        {
+            get
+            {
+                return _navigationStack;
+            }
+        }
+
+        // *** Methods ***
+
         public void Clear()
         {
-            throw new NotImplementedException();
+            _navigationStack.Clear();
         }
 
         public void GoBack()
         {
-            throw new NotImplementedException();
+            _navigationStack.GoBack();
+        }
+
+        public void GoForward()
+        {
+            _navigationStack.GoForward();
         }
 
         public void NavigateTo(PageInfo page)
         {
-            _navigationStack.NavigateTo(page);
+            if (page == null)
+                throw new ArgumentNullException(nameof(page));
+
+            var pageState = new StateService();
+            pageState.SetState(StateNames.PageArguments, page.Arguments);
+            var pageEntry = new PageEntry(page.PageName, pageState);
+
+            _navigationStack.NavigateTo(pageEntry);
         }
 
         // *** Protected Methods ***
@@ -61,6 +98,12 @@ namespace Okra.Navigation
             {
                 case nameof(NavigationStack<PageInfo>.CurrentItem):
                     OnPropertyChanged(nameof(CurrentPage));
+                    break;
+                case nameof(NavigationStack<PageInfo>.CanGoBack):
+                    OnPropertyChanged(nameof(CanGoBack));
+                    break;
+                case nameof(NavigationStack<PageInfo>.CanGoForward):
+                    OnPropertyChanged(nameof(CanGoForward));
                     break;
             }
         }
