@@ -25,7 +25,8 @@ namespace Okra.Tests.Builder
         [Fact]
         public async Task UseMiddleware_AddsMiddleware()
         {
-            IServiceProvider serviceProvider = new MockServiceProvider(new MockMiddleware());
+            IServiceProvider serviceProvider = new MockServiceProvider()
+                                                    .With<MockMiddleware>(new MockMiddleware());
             OkraAppBuilder app = new OkraAppBuilder(serviceProvider);
 
             var middlewareCallList = new List<string>();

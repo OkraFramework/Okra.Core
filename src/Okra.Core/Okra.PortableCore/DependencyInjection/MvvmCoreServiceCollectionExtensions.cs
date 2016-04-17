@@ -23,7 +23,9 @@ namespace Okra.DependencyInjection
             services.AddSingleton<INavigationManager, NavigationManager>();
             services.AddSingleton<IRouteBuilder, RouteBuilder>();
             services.AddSingleton<IViewRouter, ViewRouterProxy>();
-            services.AddScoped<IStateService, StateService>();
+
+            services.AddInjected<IAppContainer>();
+            services.AddInjected<IStateService>();
 
             return new MvvmCoreBuilder(services);
         }

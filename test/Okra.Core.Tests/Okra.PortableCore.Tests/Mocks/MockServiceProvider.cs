@@ -10,10 +10,14 @@ namespace Okra.Tests.Mocks
     {
         Dictionary<Type, object> _serviceDictionary = new Dictionary<Type, object>();
 
-        public MockServiceProvider(params object[] services)
+        public MockServiceProvider()
         {
-            foreach (var service in services)
-                _serviceDictionary.Add(service.GetType(), service);
+        }
+
+        public MockServiceProvider With<T>(T service)
+        {
+            _serviceDictionary[typeof(T)] = service;
+            return this;
         }
 
         public object GetService(Type serviceType)

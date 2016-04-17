@@ -52,9 +52,15 @@
     <Compile Include="Core\DelegateCommand.cs" />
     <Compile Include="Core\DelegateCommandT.cs" />
     <Compile Include="Core\NotifyPropertyChangedBase.cs" />
+    <Compile Include="DependencyInjection\AppContainer.cs" />
+    <Compile Include="DependencyInjection\IAppContainer.cs" />
     <Compile Include="DependencyInjection\IMvvmCoreBuilder.cs" />
+    <Compile Include="DependencyInjection\IServiceInjector.cs" />
     <Compile Include="DependencyInjection\MvvmCoreBuilder.cs" />
     <Compile Include="DependencyInjection\MvvmCoreServiceCollectionExtensions.cs" />
+    <Compile Include="DependencyInjection\ServiceCollectionExtensions.cs" />
+    <Compile Include="DependencyInjection\ServiceInjector.cs" />
+    <Compile Include="DependencyInjection\ServiceProviderExtensions.cs" />
     <Compile Include="Helpers\ResourceHelper.cs" />
     <Compile Include="Builder\IOkraAppBuilder.cs" />
     <Compile Include="IOkraBootstrapper.cs" />

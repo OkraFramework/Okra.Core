@@ -180,6 +180,12 @@
   <data name="Exception_InvalidOperation_PropertyCannotBeSetAfterActivation" xml:space="preserve">
     <value>The '{0}' property cannot be set after the application has been activated.</value>
   </data>
+  <data name="Exception_InvalidOperation_ServiceAlreadyInjected" xml:space="preserve">
+    <value>The '{0}' service has already been injected into the container.</value>
+  </data>
+  <data name="Exception_InvalidOperation_ServiceNotInjected" xml:space="preserve">
+    <value>The service '{0}' has not been injected into the container.</value>
+  </data>
   <data name="Exception_InvalidOperation_SpecifiedPageDoesNotExistInNavigationStack" xml:space="preserve">
     <value>The specified page '{0}' does not exist in the navigation stack.</value>
   </data>

@@ -65,9 +65,17 @@
     <Compile Include="Builder\UseMiddlewareExtensionsFixture.cs" />
     <Compile Include="Core\DelegateCommandFixture.cs" />
     <Compile Include="Core\NotifyPropertyChangedFixture.cs" />
+    <Compile Include="DependencyInjection\AppContainerFixture.cs" />
+    <Compile Include="DependencyInjection\ServiceCollectionExtensionsFixture.cs" />
+    <Compile Include="DependencyInjection\ServiceInjectorFixture.cs" />
+    <Compile Include="DependencyInjection\ServiceProviderExtensionsFixture.cs" />
     <Compile Include="Helpers\AssertEx.cs" />
     <Compile Include="Mocks\MockAppActivationContext.cs" />
+    <Compile Include="Mocks\MockServiceCollection.cs" />
+    <Compile Include="Mocks\MockServiceInjector.cs" />
     <Compile Include="Mocks\MockServiceProvider.cs" />
+    <Compile Include="Mocks\MockServiceScope.cs" />
+    <Compile Include="Mocks\MockServiceScopeFactory.cs" />
     <Compile Include="Mocks\MockStateService.cs" />
     <Compile Include="Navigation\NavigationManagerFixture.cs" />
     <Compile Include="Navigation\PageEntryFixture.cs" />

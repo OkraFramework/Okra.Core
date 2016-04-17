@@ -242,6 +242,24 @@ namespace Okra.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;{0}&apos; service has already been injected into the container..
+        /// </summary>
+        internal static string Exception_InvalidOperation_ServiceAlreadyInjected {
+            get {
+                return ResourceManager.GetString("Exception_InvalidOperation_ServiceAlreadyInjected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The service &apos;{0}&apos; has not been injected into the container..
+        /// </summary>
+        internal static string Exception_InvalidOperation_ServiceNotInjected {
+            get {
+                return ResourceManager.GetString("Exception_InvalidOperation_ServiceNotInjected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified page &apos;{0}&apos; does not exist in the navigation stack..
         /// </summary>
         internal static string Exception_InvalidOperation_SpecifiedPageDoesNotExistInNavigationStack {
