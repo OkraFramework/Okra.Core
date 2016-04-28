@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "Okra.MEF": "1.2.0"
+    "Okra.MEF": "1.2.1-alpha001"
   },
 
   "frameworks": {

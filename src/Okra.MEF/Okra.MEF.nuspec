@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Okra.MEF</id>
-    <version>1.2.0</version>
+    <version>1.2.1-alpha001</version>
     <title>Okra App Framework</title>
     <authors>Andrew Wilkinson</authors>
     <owners>Andrew Wilkinson</owners>
@@ -14,7 +14,7 @@
     <copyright>Copyright 2015</copyright>
     <tags>Okra MVVM WinRT WindowsStore Windows8 Win8 MEF</tags>
     <dependencies>
-      <dependency id="Okra.Core" version="[1.2.0]"/>
+      <dependency id="Okra.Core" version="[1.2.1-alpha001]"/>
       <dependency id="Microsoft.Composition" version="[1.0.30]"/>
     </dependencies>
   </metadata>
