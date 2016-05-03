@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Okra.DependencyInjection;
 using Okra.Navigation;
 using Okra.Routing;
 using Okra.State;
@@ -44,21 +45,19 @@ namespace Okra.Mvvm
 
         private async void NavigationManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            //if (e.PropertyName == nameof(INavigationManager.CurrentPage))
-            //{
-            //    var page = _navigationManager.CurrentPage;
+            if (e.PropertyName == nameof(INavigationManager.CurrentPage))
+            {
+                var page = _navigationManager.CurrentPage;
 
-            //    // TODO : Must dispose of page scope!
-            //    var pageScope = _serviceScopeFactory.CreateScope();
-            //    var pageServices = pageScope.ServiceProvider;
+                // TODO : Must dispose of page scope!
+                var pageScope = _serviceScopeFactory.CreateScope();
+                var pageServices = pageScope.ServiceProvider;
 
-            //    var stateService = pageServices.GetRequiredService<IStateService>();
-            //    stateService.SetState(StateNames.PageName, page.PageName);
-            //    stateService.SetState(StateNames.PageArguments, page.Arguments);
-                
-            //    var view = await _viewRouter.GetViewAsync(page, pageServices);
-            //    this.CurrentView = view;
-            //}
+                pageServices.InjectService<IStateService>(page.PageState);
+
+                var view = await _viewRouter.GetViewAsync(page.PageName, pageServices);
+                this.CurrentView = view;
+            }
         }
 
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e) => PropertyChanged?.Invoke(this, e);

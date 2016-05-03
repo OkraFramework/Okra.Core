@@ -28,7 +28,7 @@ namespace Okra.Routing
         {
             return routeBuilder.AddRoute(context =>
             {
-                if (context.Page.PageName == pageName)
+                if (context.PageName == pageName)
                     return Task.FromResult<object>(context.PageServices.GetService(viewType));
                 else
                     return Task.FromResult<object>(null);

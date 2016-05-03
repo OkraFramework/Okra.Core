@@ -52,8 +52,6 @@
     <Compile Include="Core\DelegateCommand.cs" />
     <Compile Include="Core\DelegateCommandT.cs" />
     <Compile Include="Core\NotifyPropertyChangedBase.cs" />
-    <Compile Include="DependencyInjection\AppContainer.cs" />
-    <Compile Include="DependencyInjection\IAppContainer.cs" />
     <Compile Include="DependencyInjection\IMvvmCoreBuilder.cs" />
     <Compile Include="DependencyInjection\IServiceInjector.cs" />
     <Compile Include="DependencyInjection\MvvmCoreBuilder.cs" />

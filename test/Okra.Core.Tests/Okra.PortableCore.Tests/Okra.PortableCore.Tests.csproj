@@ -65,7 +65,6 @@
     <Compile Include="Builder\UseMiddlewareExtensionsFixture.cs" />
     <Compile Include="Core\DelegateCommandFixture.cs" />
     <Compile Include="Core\NotifyPropertyChangedFixture.cs" />
-    <Compile Include="DependencyInjection\AppContainerFixture.cs" />
     <Compile Include="DependencyInjection\ServiceCollectionExtensionsFixture.cs" />
     <Compile Include="DependencyInjection\ServiceInjectorFixture.cs" />
     <Compile Include="DependencyInjection\ServiceProviderExtensionsFixture.cs" />
