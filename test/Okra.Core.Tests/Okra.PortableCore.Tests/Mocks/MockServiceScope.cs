@@ -32,6 +32,11 @@ namespace Okra.Tests.Mocks
 
         public void Dispose()
         {
+            if (_childServiceProvider is IDisposable)
+            {
+                ((IDisposable)_childServiceProvider).Dispose();
+            }
+
             this.IsDisposed = true;
         }
     }

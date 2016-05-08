@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Okra.Services
+namespace Okra.Lifetime
 {
     public interface ILifetimeAware
     {
-        // *** Methods ***
-
-        Task OnResuming();
-        Task OnSuspending();
+        Task Activate();
+        Task Deactivate();
     }
 }

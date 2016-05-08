@@ -161,6 +161,15 @@ namespace Okra.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot dispose the root AppContainer..
+        /// </summary>
+        internal static string Exception_InvalidOperation_CannotDisposeRootAppContainer {
+            get {
+                return ResourceManager.GetString("Exception_InvalidOperation_CannotDisposeRootAppContainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You cannot navigate backwards as the back stack is empty..
         /// </summary>
         internal static string Exception_InvalidOperation_CannotGoBackWithEmptyBackStack {
@@ -206,7 +215,7 @@ namespace Okra.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot register the service as it is already registered..
+        ///   Looks up a localized string similar to You cannot register a service multiple times..
         /// </summary>
         internal static string Exception_InvalidOperation_CannotRegisterServiceMultipleTimes {
             get {

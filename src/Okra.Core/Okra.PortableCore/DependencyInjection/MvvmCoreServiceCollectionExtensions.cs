@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Okra.Lifetime;
 using Okra.Navigation;
 using Okra.Routing;
 using Okra.State;
@@ -23,8 +24,10 @@ namespace Okra.DependencyInjection
             services.AddSingleton<INavigationManager, NavigationManager>();
             services.AddSingleton<IRouteBuilder, RouteBuilder>();
             services.AddSingleton<IViewRouter, ViewRouterProxy>();
-            
+
+            services.AddInjected<IAppContainer>();
             services.AddInjected<IStateService>();
+            services.AddInjected<ILifetimeManager>();
 
             return new MvvmCoreBuilder(services);
         }

@@ -153,6 +153,9 @@
   <data name="Exception_InvalidOperation_ActivationKindNotSupported" xml:space="preserve">
     <value>The specified ActivationKind is not supported.</value>
   </data>
+  <data name="Exception_InvalidOperation_CannotDisposeRootAppContainer" xml:space="preserve">
+    <value>You cannot dispose the root AppContainer.</value>
+  </data>
   <data name="Exception_InvalidOperation_CannotGoBackWithEmptyBackStack" xml:space="preserve">
     <value>You cannot navigate backwards as the back stack is empty.</value>
   </data>
@@ -169,7 +172,7 @@
     <value>Cannot navigate as a page named '{0}' does not exist.</value>
   </data>
   <data name="Exception_InvalidOperation_CannotRegisterServiceMultipleTimes" xml:space="preserve">
-    <value>Cannot register the service as it is already registered.</value>
+    <value>You cannot register a service multiple times.</value>
   </data>
   <data name="Exception_InvalidOperation_CannotUnregisterUnregisteredService" xml:space="preserve">
     <value>Cannot unregister the service as it is not currently registered.</value>
