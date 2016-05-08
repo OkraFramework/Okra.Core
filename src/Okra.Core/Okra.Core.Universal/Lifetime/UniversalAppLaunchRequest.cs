@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 
-namespace Okra.Activation
+namespace Okra.Lifetime
 {
-    public class UniversalAppActivationRequest : IAppActivationRequest
+    public class UniversalAppLaunchRequest : IAppLaunchRequest
     {
         // *** Constructors ***
 
-        public UniversalAppActivationRequest(IActivatedEventArgs args)
+        public UniversalAppLaunchRequest(IActivatedEventArgs args)
         {
             this.EventArgs = args;
         }

@@ -1,4 +1,4 @@
-﻿using Okra.Activation;
+﻿using Okra.Lifetime;
 using Okra.Builder;
 using Okra.Tests.Mocks;
 using System;
@@ -19,7 +19,7 @@ namespace Okra.Tests.Builder
             OkraAppBuilder app = new OkraAppBuilder(serviceProvider);
 
             var middlewareCallList = new List<string>();
-            var middlewareCallContextList = new List<AppActivationContext>();
+            var middlewareCallContextList = new List<AppLaunchContext>();
 
             app.Use((context, next) =>
                 {
@@ -38,12 +38,12 @@ namespace Okra.Tests.Builder
                 };
             });
 
-            var appContext = new MockAppActivationContext();
+            var appContext = new MockAppLaunchContext();
             var pipeline = app.Build();
             await pipeline(appContext);
 
             Assert.Equal(new string[] { "Inline", "Next" }, middlewareCallList);
-            Assert.Equal(new AppActivationContext[] { appContext, appContext }, middlewareCallContextList);
+            Assert.Equal(new AppLaunchContext[] { appContext, appContext }, middlewareCallContextList);
         }
     }
 }

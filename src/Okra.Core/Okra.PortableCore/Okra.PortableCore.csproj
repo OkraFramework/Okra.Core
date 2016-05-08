@@ -42,9 +42,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activation\AppActivationContext.cs" />
-    <Compile Include="Activation\IAppActivationRequest.cs" />
-    <Compile Include="Builder\ActivationDelegate.cs" />
+    <Compile Include="Lifetime\AppLaunchContext.cs" />
+    <Compile Include="Lifetime\IAppLaunchRequest.cs" />
+    <Compile Include="Builder\AppLaunchDelegate.cs" />
     <Compile Include="Builder\IMiddleware.cs" />
     <Compile Include="Builder\OkraAppBuilder.cs" />
     <Compile Include="Builder\UseExtensions.cs" />

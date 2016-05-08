@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Okra.Activation;
+using Okra.Lifetime;
 using Okra.Tests.Mocks;
 
 namespace Okra.Tests.Builder
@@ -30,7 +30,7 @@ namespace Okra.Tests.Builder
             OkraAppBuilder app = new OkraAppBuilder(serviceProvider);
 
             var middlewareCallList = new List<string>();
-            var middlewareCallContextList = new List<AppActivationContext>();
+            var middlewareCallContextList = new List<AppLaunchContext>();
             var options = new MockMiddlewareOptions(middlewareCallList, middlewareCallContextList);
 
             app.UseMiddleware<MockMiddleware, MockMiddlewareOptions>(options);
@@ -45,28 +45,28 @@ namespace Okra.Tests.Builder
                 };
             });
 
-            var appContext = new MockAppActivationContext();
+            var appContext = new MockAppLaunchContext();
             var pipeline = app.Build();
             await pipeline(appContext);
 
             Assert.Equal(new string[] { "Middleware", "Next" }, middlewareCallList);
-            Assert.Equal(new AppActivationContext[] { appContext, appContext }, middlewareCallContextList);
+            Assert.Equal(new AppLaunchContext[] { appContext, appContext }, middlewareCallContextList);
         }
 
         // *** Private sub-classes ***
 
         private class MockMiddleware : IMiddleware<MockMiddlewareOptions>
         {
-            ActivationDelegate _next;
+            AppLaunchDelegate _next;
             MockMiddlewareOptions _options;
 
-            public void Configure(ActivationDelegate next, MockMiddlewareOptions options)
+            public void Configure(AppLaunchDelegate next, MockMiddlewareOptions options)
             {
                 _next = next;
                 _options = options;
             }
 
-            public Task Invoke(AppActivationContext context)
+            public Task Invoke(AppLaunchContext context)
             {
                 _options.MiddlewareCallList.Add("Middleware");
                 _options.MiddlewareCallContextList.Add(context);
@@ -80,13 +80,13 @@ namespace Okra.Tests.Builder
             {
             }
 
-            public MockMiddlewareOptions(List<string> middlewareCallList, List<AppActivationContext> middlewareCallContextList)
+            public MockMiddlewareOptions(List<string> middlewareCallList, List<AppLaunchContext> middlewareCallContextList)
             {
                 this.MiddlewareCallList = middlewareCallList;
                 this.MiddlewareCallContextList = middlewareCallContextList;
             }
 
-            public List<AppActivationContext> MiddlewareCallContextList { get; }
+            public List<AppLaunchContext> MiddlewareCallContextList { get; }
             public List<string> MiddlewareCallList { get; }
         }
     }

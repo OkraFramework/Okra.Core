@@ -114,7 +114,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activation\UniversalAppActivationRequest.cs" />
+    <Compile Include="Lifetime\UniversalAppLaunchRequest.cs" />
     <Compile Include="Builder\MvvmOkraAppBuilderExtensions.cs" />
     <Compile Include="DependencyInjection\IMvvmBuilder.cs" />
     <Compile Include="DependencyInjection\MvvmBuilder.cs" />

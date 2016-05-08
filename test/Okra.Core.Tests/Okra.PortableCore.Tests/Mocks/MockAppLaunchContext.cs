@@ -1,4 +1,4 @@
-﻿using Okra.Activation;
+﻿using Okra.Lifetime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Okra.Tests.Mocks
 {
-    public class MockAppActivationContext : AppActivationContext
+    public class MockAppLaunchContext : AppLaunchContext
     {
-        public override IAppActivationRequest ActivationRequest
+        public override IAppLaunchRequest LaunchRequest
         {
             get;
         }

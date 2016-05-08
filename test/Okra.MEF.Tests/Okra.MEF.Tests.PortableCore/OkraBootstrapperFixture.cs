@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Okra.Activation;
+using Okra.Lifetime;
 using Okra.Builder;
 using Okra.MEF.DependencyInjection;
 using System;
@@ -16,38 +16,38 @@ namespace Okra.MEF.Tests
         // *** Tests ***
 
         [Fact]
-        public void Activate_CallsActivationPipelineWithSpecifiedArguments()
+        public void Launch_CallsLaunchPipelineWithSpecifiedArguments()
         {
             TestableBootstrapper bootstrapper = new TestableBootstrapper();
             bootstrapper.Initialize();
 
-            var activationArgs1 = new MockAppActivationRequest();
-            var activationArgs2 = new MockAppActivationRequest();
-            bootstrapper.Activate(activationArgs1);
-            bootstrapper.Activate(activationArgs2);
+            var appLaunchArgs1 = new MockAppLaunchRequest();
+            var appLaunchArgs2 = new MockAppLaunchRequest();
+            bootstrapper.Launch(appLaunchArgs1);
+            bootstrapper.Launch(appLaunchArgs2);
 
-            Assert.Equal(2, bootstrapper.ActivationCalls.Count);
-            Assert.Equal(activationArgs1, bootstrapper.ActivationCalls[0].ActivationRequest);
-            Assert.Equal(activationArgs2, bootstrapper.ActivationCalls[1].ActivationRequest);
+            Assert.Equal(2, bootstrapper.AppLaunchCalls.Count);
+            Assert.Equal(appLaunchArgs1, bootstrapper.AppLaunchCalls[0].LaunchRequest);
+            Assert.Equal(appLaunchArgs2, bootstrapper.AppLaunchCalls[1].LaunchRequest);
         }
 
         [Fact]
-        public void Activate_ThrowsException_IfNotInitialized()
+        public void Launch_ThrowsException_IfNotInitialized()
         {
             TestableBootstrapper bootstrapper = new TestableBootstrapper();
 
-            var e = Assert.Throws<InvalidOperationException>(() => { bootstrapper.Activate(new MockAppActivationRequest()); });
+            var e = Assert.Throws<InvalidOperationException>(() => { bootstrapper.Launch(new MockAppLaunchRequest()); });
             Assert.Equal("The bootstrapper must be initialized before performing this operation.", e.Message);
         }
 
         [Fact]
-        public void Activate_ThrowsException_IfActivationArgumentsAreNull()
+        public void Launch_ThrowsException_IfLaunchArgumentsAreNull()
         {
             TestableBootstrapper bootstrapper = new TestableBootstrapper();
             bootstrapper.Initialize();
 
-            var e = Assert.Throws<ArgumentNullException>(() => { bootstrapper.Activate(null); });
-            Assert.Equal("activationRequest", e.ParamName);
+            var e = Assert.Throws<ArgumentNullException>(() => { bootstrapper.Launch(null); });
+            Assert.Equal("appLaunchRequest", e.ParamName);
         }
 
         [Fact]
@@ -105,7 +105,7 @@ namespace Okra.MEF.Tests
 
         private class TestableBootstrapper : OkraBootstrapper
         {
-            public List<AppActivationContext> ActivationCalls = new List<AppActivationContext>();
+            public List<AppLaunchContext> AppLaunchCalls = new List<AppLaunchContext>();
             public List<Tuple<string, object[]>> MethodCalls = new List<Tuple<string, object[]>>();
 
             protected override void Configure(IOkraAppBuilder app)
@@ -116,7 +116,7 @@ namespace Okra.MEF.Tests
                 {
                     return context =>
                     {
-                        ActivationCalls.Add(context);
+                        AppLaunchCalls.Add(context);
                         return next(context);
                     };
                 });
@@ -128,7 +128,7 @@ namespace Okra.MEF.Tests
             }
         }
 
-        private class MockAppActivationRequest : IAppActivationRequest
+        private class MockAppLaunchRequest : IAppLaunchRequest
         {
         }
     }

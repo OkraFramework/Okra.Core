@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Okra.Activation
+namespace Okra.Lifetime
 {
-    public interface IAppActivationRequest
+    public interface IAppLaunchRequest
     {
     }
 }

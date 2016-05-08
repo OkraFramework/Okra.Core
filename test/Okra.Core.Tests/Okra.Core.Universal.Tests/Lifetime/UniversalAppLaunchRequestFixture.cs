@@ -1,4 +1,4 @@
-﻿using Okra.Activation;
+﻿using Okra.Lifetime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Xunit;
 
-namespace Okra.Core.Universal.Tests.Activation
+namespace Okra.Core.Universal.Tests.Lifetime
 {
-    public class UniversalAppActivationRequestFixture
+    public class UniversalAppLaunchRequestFixture
     {
         [Fact]
         public void Constructor_SetsEventArgsProperty()
         {
             IActivatedEventArgs args = new MockActivationEventArgs();
-            var request = new UniversalAppActivationRequest(args);
+            var request = new UniversalAppLaunchRequest(args);
 
             Assert.Equal(args, request.EventArgs);
         }

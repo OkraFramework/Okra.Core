@@ -71,7 +71,7 @@
     <Compile Include="DependencyInjection\ServiceProviderExtensionsFixture.cs" />
     <Compile Include="Helpers\AssertEx.cs" />
     <Compile Include="Lifetime\LifetimeManagerSourceFixture.cs" />
-    <Compile Include="Mocks\MockAppActivationContext.cs" />
+    <Compile Include="Mocks\MockAppLaunchContext.cs" />
     <Compile Include="Mocks\MockServiceCollection.cs" />
     <Compile Include="Mocks\MockServiceInjector.cs" />
     <Compile Include="Mocks\MockServiceProvider.cs" />

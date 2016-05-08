@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Okra.Activation;
+using Okra.Lifetime;
 using Okra.Builder;
 using Okra.MEF.DependencyInjection;
 using System;
@@ -14,20 +14,20 @@ namespace Okra.MEF
     {
         // *** Fields ***
 
-        private ActivationDelegate _activationPipeline;
+        private AppLaunchDelegate _appLaunchPipeline;
 
         // *** Methods ***
 
-        public Task Activate(IAppActivationRequest activationRequest)
+        public Task Launch(IAppLaunchRequest appLaunchRequest)
         {
-            if (activationRequest == null)
-                throw new ArgumentNullException(nameof(activationRequest));
+            if (appLaunchRequest == null)
+                throw new ArgumentNullException(nameof(appLaunchRequest));
 
-            if (_activationPipeline == null)
+            if (_appLaunchPipeline == null)
                 throw new InvalidOperationException(Properties.Errors.Exception_InvalidOperation_BootstrapperNotInitialized);
 
-            AppActivationContext activationContext = new MefAppActivationContext(activationRequest);
-            return _activationPipeline(activationContext);
+            AppLaunchContext appLaunchContext = new MefAppLaunchContext(appLaunchRequest);
+            return _appLaunchPipeline(appLaunchContext);
         }
 
         public void Initialize()
@@ -42,7 +42,7 @@ namespace Okra.MEF
 
             OkraAppBuilder appBuilder = new OkraAppBuilder(serviceProvider);
             Configure(appBuilder);
-            _activationPipeline = appBuilder.Build();
+            _appLaunchPipeline = appBuilder.Build();
         }
 
         // *** Protected Methods ***
@@ -57,14 +57,14 @@ namespace Okra.MEF
 
         // *** Private sub-classes ***
 
-        private class MefAppActivationContext : AppActivationContext
+        private class MefAppLaunchContext : AppLaunchContext
         {
-            public MefAppActivationContext(IAppActivationRequest activationRequest)
+            public MefAppLaunchContext(IAppLaunchRequest launchRequest)
             {
-                this.ActivationRequest = activationRequest;
+                this.LaunchRequest = launchRequest;
             }
 
-            public override IAppActivationRequest ActivationRequest
+            public override IAppLaunchRequest LaunchRequest
             {
                 get;
             }

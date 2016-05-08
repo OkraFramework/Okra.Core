@@ -1,4 +1,4 @@
-﻿using Okra.Activation;
+﻿using Okra.Lifetime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace Okra.Builder
 {
     public interface IMiddleware<TOptions>
     {
-        void Configure(ActivationDelegate next, TOptions options);
-        Task Invoke(AppActivationContext context);
+        void Configure(AppLaunchDelegate next, TOptions options);
+        Task Invoke(AppLaunchContext context);
     }
 }

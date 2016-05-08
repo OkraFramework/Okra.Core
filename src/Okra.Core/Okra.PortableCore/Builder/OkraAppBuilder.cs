@@ -11,7 +11,7 @@ namespace Okra.Builder
         // *** Fields ***
 
         private readonly IServiceProvider _serviceProvider;
-        private readonly List<Func<ActivationDelegate, ActivationDelegate>> _middlewareList = new List<Func<ActivationDelegate, ActivationDelegate>>();
+        private readonly List<Func<AppLaunchDelegate, AppLaunchDelegate>> _middlewareList = new List<Func<AppLaunchDelegate, AppLaunchDelegate>>();
 
         // *** Constructors ***
 
@@ -35,17 +35,17 @@ namespace Okra.Builder
 
         // *** Methods ***
 
-        public ActivationDelegate Build()
+        public AppLaunchDelegate Build()
         {
-            ActivationDelegate activationDelegate = context => Task.FromResult(false);
+            AppLaunchDelegate appLaunchDelegate = context => Task.FromResult(false);
 
-            foreach (var middleware in _middlewareList.Reverse<Func<ActivationDelegate, ActivationDelegate>>())
-                activationDelegate = middleware(activationDelegate);
+            foreach (var middleware in _middlewareList.Reverse<Func<AppLaunchDelegate, AppLaunchDelegate>>())
+                appLaunchDelegate = middleware(appLaunchDelegate);
 
-            return activationDelegate;
+            return appLaunchDelegate;
         }
 
-        public IOkraAppBuilder Use(Func<ActivationDelegate, ActivationDelegate> middleware)
+        public IOkraAppBuilder Use(Func<AppLaunchDelegate, AppLaunchDelegate> middleware)
         {
             if (middleware == null)
                 throw new ArgumentNullException(nameof(middleware));

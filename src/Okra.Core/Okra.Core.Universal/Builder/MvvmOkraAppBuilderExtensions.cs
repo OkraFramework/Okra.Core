@@ -1,4 +1,4 @@
-﻿using Okra.Activation;
+﻿using Okra.Lifetime;
 using Okra.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace Okra.Builder
         {
             return app.Use((context, next) =>
             {
-                var request = context.ActivationRequest as UniversalAppActivationRequest;
+                var request = context.LaunchRequest as UniversalAppLaunchRequest;
 
                 if (request != null && request.EventArgs.Kind == ActivationKind.Launch)
                 {

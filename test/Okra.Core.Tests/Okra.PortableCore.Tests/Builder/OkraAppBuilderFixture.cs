@@ -1,4 +1,4 @@
-﻿using Okra.Activation;
+﻿using Okra.Lifetime;
 using Okra.Builder;
 using Okra.Tests.Mocks;
 using System;
@@ -34,7 +34,7 @@ namespace Okra.Tests.Builder
             var appBuilder = new OkraAppBuilder(serviceProvider);
 
             var middlewareCallList = new List<string>();
-            var middlewareCallContextList = new List<AppActivationContext>();
+            var middlewareCallContextList = new List<AppLaunchContext>();
 
             appBuilder.Use(next =>
                             {
@@ -66,12 +66,12 @@ namespace Okra.Tests.Builder
                                 };
                             });
 
-            var appContext = new MockAppActivationContext();
+            var appContext = new MockAppLaunchContext();
             var pipeline = appBuilder.Build();
             await pipeline(appContext);
 
             Assert.Equal(new string[] { "First", "Second" }, middlewareCallList);
-            Assert.Equal(new AppActivationContext[] { appContext, appContext }, middlewareCallContextList);
+            Assert.Equal(new AppLaunchContext[] { appContext, appContext }, middlewareCallContextList);
         }
 
         [Fact]
@@ -81,7 +81,7 @@ namespace Okra.Tests.Builder
             var appBuilder = new OkraAppBuilder(serviceProvider);
 
             var middlewareCallList = new List<string>();
-            var middlewareCallContextList = new List<AppActivationContext>();
+            var middlewareCallContextList = new List<AppLaunchContext>();
 
             appBuilder.Use(next =>
             {
@@ -103,12 +103,12 @@ namespace Okra.Tests.Builder
                 };
             });
 
-            var appContext = new MockAppActivationContext();
+            var appContext = new MockAppLaunchContext();
             var pipeline = appBuilder.Build();
             await pipeline(appContext);
 
             Assert.Equal(new string[] { "First", "Second" }, middlewareCallList);
-            Assert.Equal(new AppActivationContext[] { appContext, appContext }, middlewareCallContextList);
+            Assert.Equal(new AppLaunchContext[] { appContext, appContext }, middlewareCallContextList);
         }
 
         [Fact]

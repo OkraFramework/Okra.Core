@@ -1,4 +1,4 @@
-﻿using Okra.Activation;
+﻿using Okra.Lifetime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace Okra.Builder
 
     public static class UseExtensions
     {
-        public static IOkraAppBuilder Use(this IOkraAppBuilder app, Func<AppActivationContext, Func<Task>, Task> middleware)
+        public static IOkraAppBuilder Use(this IOkraAppBuilder app, Func<AppLaunchContext, Func<Task>, Task> middleware)
         {
             return app.Use(next =>
              {

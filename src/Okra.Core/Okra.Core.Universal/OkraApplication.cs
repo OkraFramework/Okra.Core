@@ -1,7 +1,8 @@
-﻿using Okra.Activation;
+﻿using Okra.Lifetime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 
@@ -78,8 +79,8 @@ namespace Okra
 
         private async void Activate(IActivatedEventArgs args)
         {
-            var appActivation = new UniversalAppActivationRequest(args);
-            await _bootstrapper.Activate(appActivation);
+            var appLaunchRequest = new UniversalAppLaunchRequest(args);
+            await _bootstrapper.Launch(appLaunchRequest);
         }
     }
 }
