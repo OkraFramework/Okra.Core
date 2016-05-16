@@ -63,10 +63,6 @@ namespace Okra.DependencyInjection
 
         public IAppContainer CreateChildContainer()
         {
-            // TODO : Enable removal of child containers
-            // TODO : Make sure child services are disposed! 
-            // TODO : Remove all legacy files related to lifetime management
-
             var serviceScopeFactory = Services.GetRequiredService<IServiceScopeFactory>();
             var serviceScope = serviceScopeFactory.CreateScope();
 

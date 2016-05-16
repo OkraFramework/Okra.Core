@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Okra.DependencyInjection;
 
 namespace Okra.MEF
 {
@@ -14,16 +15,33 @@ namespace Okra.MEF
     {
         // *** Fields ***
 
+        private IAppContainer _appContainer;
         private AppLaunchDelegate _appLaunchPipeline;
 
         // *** Methods ***
+
+        public Task Activate()
+        {
+            if (!IsInitialized)
+                throw new InvalidOperationException(Properties.Errors.Exception_InvalidOperation_BootstrapperNotInitialized);
+
+            return _appContainer.Activate();
+        }
+
+        public Task Deactivate()
+        {
+            if (!IsInitialized)
+                throw new InvalidOperationException(Properties.Errors.Exception_InvalidOperation_BootstrapperNotInitialized);
+
+            return _appContainer.Deactivate();
+        }
 
         public Task Launch(IAppLaunchRequest appLaunchRequest)
         {
             if (appLaunchRequest == null)
                 throw new ArgumentNullException(nameof(appLaunchRequest));
 
-            if (_appLaunchPipeline == null)
+            if (!IsInitialized)
                 throw new InvalidOperationException(Properties.Errors.Exception_InvalidOperation_BootstrapperNotInitialized);
 
             AppLaunchContext appLaunchContext = new MefAppLaunchContext(appLaunchRequest);
@@ -34,15 +52,26 @@ namespace Okra.MEF
         {
             // Initialize MEF and compose the bootstrapper
 
-            IServiceCollection serviceCollection = new ServiceCollection();
+            var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            var appContainerFactory = serviceProvider.GetRequiredService<IAppContainerFactory>();
+            _appContainer = appContainerFactory.CreateAppContainer();
 
             // Create the OkraAppBuilder and configure the application
 
-            OkraAppBuilder appBuilder = new OkraAppBuilder(serviceProvider);
+            OkraAppBuilder appBuilder = new OkraAppBuilder(_appContainer.Services);
             Configure(appBuilder);
             _appLaunchPipeline = appBuilder.Build();
+        }
+
+        private bool IsInitialized
+        {
+            get
+            {
+                return _appLaunchPipeline != null;
+            }
         }
 
         // *** Protected Methods ***

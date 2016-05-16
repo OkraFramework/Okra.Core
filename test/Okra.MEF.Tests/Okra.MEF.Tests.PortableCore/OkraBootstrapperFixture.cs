@@ -8,12 +8,61 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Okra.DependencyInjection;
 
 namespace Okra.MEF.Tests
 {
     public class OkraBootstrapperFixture
     {
         // *** Tests ***
+
+        [Fact]
+        public async void Activate_ActivatesRootAppContainer()
+        {
+            TestableBootstrapper bootstrapper = new TestableBootstrapper();
+            bootstrapper.Initialize();
+
+            Assert.Equal(0, bootstrapper.RootAppContainer.ActivateCount);
+            Assert.Equal(0, bootstrapper.RootAppContainer.DeactivateCount);
+
+            await bootstrapper.Activate();
+
+            Assert.Equal(1, bootstrapper.RootAppContainer.ActivateCount);
+            Assert.Equal(0, bootstrapper.RootAppContainer.DeactivateCount);
+        }
+
+        [Fact]
+        public void Activate_ThrowsException_IfNotInitialized()
+        {
+            TestableBootstrapper bootstrapper = new TestableBootstrapper();
+
+            var e = Assert.Throws<InvalidOperationException>(() => { bootstrapper.Activate(); });
+            Assert.Equal("The bootstrapper must be initialized before performing this operation.", e.Message);
+        }
+
+        [Fact]
+        public async void Deactivate_DeactivatesRootAppContainer()
+        {
+            TestableBootstrapper bootstrapper = new TestableBootstrapper();
+            bootstrapper.Initialize();
+
+            Assert.Equal(0, bootstrapper.RootAppContainer.ActivateCount);
+            Assert.Equal(0, bootstrapper.RootAppContainer.DeactivateCount);
+
+            await bootstrapper.Deactivate();
+
+            Assert.Equal(0, bootstrapper.RootAppContainer.ActivateCount);
+            Assert.Equal(1, bootstrapper.RootAppContainer.DeactivateCount);
+        }
+
+        [Fact]
+        public void Deactivate_ThrowsException_IfNotInitialized()
+        {
+            TestableBootstrapper bootstrapper = new TestableBootstrapper();
+
+            var e = Assert.Throws<InvalidOperationException>(() => { bootstrapper.Deactivate(); });
+            Assert.Equal("The bootstrapper must be initialized before performing this operation.", e.Message);
+        }
 
         [Fact]
         public void Launch_CallsLaunchPipelineWithSpecifiedArguments()
@@ -107,6 +156,7 @@ namespace Okra.MEF.Tests
         {
             public List<AppLaunchContext> AppLaunchCalls = new List<AppLaunchContext>();
             public List<Tuple<string, object[]>> MethodCalls = new List<Tuple<string, object[]>>();
+            public MockAppContainer RootAppContainer = new MockAppContainer();
 
             protected override void Configure(IOkraAppBuilder app)
             {
@@ -124,12 +174,81 @@ namespace Okra.MEF.Tests
 
             protected override void ConfigureServices(IServiceCollection services)
             {
+                services.AddSingleton<IAppContainerFactory>(new MockAppContainerFactory(RootAppContainer));
+
                 MethodCalls.Add(Tuple.Create("ConfigureServices", new object[] { services }));
             }
         }
 
         private class MockAppLaunchRequest : IAppLaunchRequest
         {
+        }
+
+        private class MockAppContainerFactory : IAppContainerFactory
+        {
+            private readonly IAppContainer _rootContainer;
+
+            public MockAppContainerFactory(IAppContainer rootContainer)
+            {
+                _rootContainer = rootContainer;
+            }
+
+            public IAppContainer CreateAppContainer()
+            {
+                return _rootContainer;
+            }
+        }
+
+        private class MockAppContainer : IAppContainer
+        {
+            public int ActivateCount;
+            public int DeactivateCount;
+
+            public ILifetimeManager LifetimeManager
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            public IAppContainer Parent
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            public IServiceProvider Services
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            public async Task Activate()
+            {
+                await Task.Yield();
+                ActivateCount++;
+            }
+
+            public IAppContainer CreateChildContainer()
+            {
+                throw new NotImplementedException();
+            }
+
+            public async Task Deactivate()
+            {
+                await Task.Yield();
+                DeactivateCount++;
+            }
+
+            public void Dispose()
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

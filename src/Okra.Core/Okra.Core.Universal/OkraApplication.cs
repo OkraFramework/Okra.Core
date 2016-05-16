@@ -21,6 +21,9 @@ namespace Okra
             if (bootstrapper == null)
                 throw new ArgumentNullException(nameof(bootstrapper));
 
+            this.Resuming += OnResuming;
+            this.Suspending += OnSuspending;
+
             _bootstrapper = bootstrapper;
             _bootstrapper.Initialize();
         }
@@ -73,6 +76,18 @@ namespace Okra
         {
             base.OnLaunched(args);
             Activate(args);
+        }
+
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
+        {
+            var deferal = e.SuspendingOperation.GetDeferral();
+            await _bootstrapper.Deactivate();
+            deferal.Complete();
+        }
+
+        private async void OnResuming(object sender, object e)
+        {
+            await _bootstrapper.Activate();
         }
 
         // *** Private Methods ***

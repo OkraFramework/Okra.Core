@@ -42,6 +42,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyInjection\AppContainerFactory.cs" />
+    <Compile Include="DependencyInjection\IAppContainerFactory.cs" />
     <Compile Include="Lifetime\AppLaunchContext.cs" />
     <Compile Include="Lifetime\IAppLaunchRequest.cs" />
     <Compile Include="Builder\AppLaunchDelegate.cs" />

@@ -16,16 +16,16 @@ namespace Okra.Mvvm
     {
         private readonly INavigationManager _navigationManager;
         private readonly IViewRouter _viewRouter;
-        private readonly IServiceScopeFactory _serviceScopeFactory;
+        private readonly IAppContainerFactory _appContainerFactory;
         private object _currentView;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ViewManager(INavigationManager navigationManager, IViewRouter viewRouter, IServiceScopeFactory serviceScopeFactory)
+        public ViewManager(INavigationManager navigationManager, IViewRouter viewRouter, IAppContainerFactory appContainerFactory)
         {
             this._navigationManager = navigationManager;
             this._viewRouter = viewRouter;
-            this._serviceScopeFactory = serviceScopeFactory;
+            this._appContainerFactory = appContainerFactory;
 
             navigationManager.PropertyChanged += NavigationManager_PropertyChanged;
         }
@@ -50,8 +50,8 @@ namespace Okra.Mvvm
                 var page = _navigationManager.CurrentPage;
 
                 // TODO : Must dispose of page scope!
-                var pageScope = _serviceScopeFactory.CreateScope();
-                var pageServices = pageScope.ServiceProvider;
+                var pageAppContainer = _appContainerFactory.CreateAppContainer();
+                var pageServices = pageAppContainer.Services;
 
                 pageServices.InjectService<IStateService>(page.PageState);
 

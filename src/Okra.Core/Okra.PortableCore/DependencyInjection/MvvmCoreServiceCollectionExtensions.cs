@@ -25,6 +25,8 @@ namespace Okra.DependencyInjection
             services.AddSingleton<IRouteBuilder, RouteBuilder>();
             services.AddSingleton<IViewRouter, ViewRouterProxy>();
 
+            services.AddScoped<IAppContainerFactory, AppContainerFactory>();
+
             services.AddInjected<IAppContainer>();
             services.AddInjected<IStateService>();
             services.AddInjected<ILifetimeManager>();
