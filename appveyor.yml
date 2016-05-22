@@ -9,6 +9,7 @@ environment:
 build_script:
 - ps: >-
     $versionSuffix = "alpha{0:000}" -f $env:APPVEYOR_BUILD_VERSION
+
     .\build.ps1 -versionSuffix $versionSuffix
 test: off
 artifacts:
