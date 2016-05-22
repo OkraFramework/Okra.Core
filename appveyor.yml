@@ -1,0 +1,32 @@
+version: {build}
+branches:
+  only:
+  - master
+image: Visual Studio 2015
+environment:
+  myget_apikey:
+    secure: KpFpQ6mHOGMC9uWthYq91MxqWkYy522sUArvlA/27Rt2lKtKUe5Bpal2U8rRWW2V
+build_script:
+- ps: >-
+    $versionSuffix = "alpha{0:000}" -f $env:APPVEYOR_BUILD_VERSION
+    .\build.ps1 -versionSuffix $versionSuffix
+test: off
+artifacts:
+- path: artifacts\*.nupkg
+  name: NuGet package
+- path: artifacts\*.vsix
+  name: Visual Studio Extensions
+deploy:
+- provider: NuGet
+  server: https://www.myget.org/F/okra/
+  api_key:
+    secure: KpFpQ6mHOGMC9uWthYq91MxqWkYy522sUArvlA/27Rt2lKtKUe5Bpal2U8rRWW2V
+  artifact: 
+  symbol_server: http://nuget.gw.symbolsource.org/MyGet/okra/
+after_deploy:
+- ps: >-
+    Write-Host "WARNING: VSIX deployment disabled in appveyor.yml"
+
+    # Invoke-RestMethod -Uri https://www.myget.org/F/okra/vsix/upload -Method POST -InFile .\artifacts\OkraAppFramework-vs2013.vsix -Headers @{'X-NuGet-ApiKey'=$env:myget_apikey} -ContentType 'application/vsix'
+
+    # Invoke-RestMethod -Uri https://www.myget.org/F/okra/vsix/upload -Method POST -InFile .\artifacts\OkraAppFramework-vs2015.vsix -Headers @{'X-NuGet-ApiKey'=$env:myget_apikey} -ContentType 'application/vsix'

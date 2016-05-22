@@ -1,3 +1,10 @@
+[CmdletBinding()] 
+Param 
+(
+    [Parameter(Mandatory=$False, Position=1)]$Target,
+    [Parameter(Mandatory=$False)][string]$VersionSuffix
+)
+
 # Move to the project root folder (current script folder)
  
 function Get-ScriptDirectory 
@@ -25,6 +32,10 @@ Else
     git clone https://github.com/OkraFramework/Okra-Build.git .build
 }
 
+# Set environment variables
+
+$env:OKRA_BUILD_VERSIONSUFFIX = $VersionSuffix
+
 # Run the build script
 
-.\.build\build.ps1 @args
+.\.build\build.ps1 $Target
