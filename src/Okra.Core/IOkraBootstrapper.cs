@@ -9,9 +9,6 @@ namespace Okra
 {
     public interface IOkraBootstrapper
     {
-        Task Activate();
-        Task Deactivate();
-        Task Launch(IAppLaunchRequest appLaunchRequest);
         void Initialize();
     }
 }
