@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Okra.Builder;
 using Okra.Lifetime;
 using Okra.Navigation;
 using Okra.Routing;
@@ -24,6 +25,7 @@ namespace Okra.DependencyInjection
             services.AddSingleton<INavigationManager, NavigationManager>();
             services.AddSingleton<IRouteBuilder, RouteBuilder>();
             services.AddSingleton<IViewRouter, ViewRouterProxy>();
+            services.AddSingleton<IOkraAppBuilder, OkraAppBuilder>();
 
             services.AddScoped<IAppContainerFactory, AppContainerFactory>();
 
