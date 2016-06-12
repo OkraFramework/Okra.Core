@@ -7,10 +7,10 @@ environment:
   myget_apikey:
     secure: KpFpQ6mHOGMC9uWthYq91MxqWkYy522sUArvlA/27Rt2lKtKUe5Bpal2U8rRWW2V
 build_script:
-- ps: >-
+- ps: |
     $versionSuffix = "alpha{0:000}" -f [convert]::ToInt32($env:APPVEYOR_BUILD_VERSION)
-
-    .\build.ps1 -versionSuffix $versionSuffix
+    .\build.ps1 -versionSuffix="$versionSuffix"
+    if($LastExitCode -ne 0) { $host.SetShouldExit($LastExitCode )  }
 test: off
 artifacts:
 - path: artifacts\*.nupkg
