@@ -11,6 +11,14 @@ namespace Okra.DependencyInjection
     {
         private T _service;
 
+        public bool HasValue
+        {
+            get
+            {
+                return _service != null;
+            }
+        }
+
         public T Service
         {
             get

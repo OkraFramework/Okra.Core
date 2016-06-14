@@ -21,9 +21,10 @@ namespace Okra.DependencyInjection
         public IAppContainer CreateAppContainer()
         {
             var serviceScopeFactory = _serviceProvider.GetRequiredService<IServiceScopeFactory>();
-            var parentAppContainer = _serviceProvider.GetService<IAppContainer>() as AppContainer;
-            
-            var appContainer = new AppContainer(serviceScopeFactory, parentAppContainer);
+            var parentAppContainerInjector = _serviceProvider.GetRequiredService<IServiceInjector<IAppContainer>>();
+            var parentAppContainer = parentAppContainerInjector.HasValue ? parentAppContainerInjector.Service : null;
+
+            var appContainer = new AppContainer(serviceScopeFactory, parentAppContainer as AppContainer);
 
             return appContainer;
         }
