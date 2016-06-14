@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Okra.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Okra.Tests.Mocks
 {
     internal class MockServiceProvider : IServiceProvider, IDisposable
     {
-        Dictionary<Type, object> _serviceDictionary = new Dictionary<Type, object>();
+        Dictionary<Type, Func<object>> _serviceDictionary = new Dictionary<Type, Func<object>>();
 
         public MockServiceProvider()
         {
@@ -22,13 +23,20 @@ namespace Okra.Tests.Mocks
 
         public MockServiceProvider With<T>(T service)
         {
-            _serviceDictionary[typeof(T)] = service;
+            _serviceDictionary[typeof(T)] = () => service ;
+            return this;
+        }
+
+        public MockServiceProvider WithInjector<T>(IServiceInjector<T> serviceInjector)
+        {
+            _serviceDictionary[typeof(IServiceInjector<T>)] = () => serviceInjector;
+            _serviceDictionary[typeof(T)] = () => serviceInjector.Service;
             return this;
         }
 
         public object GetService(Type serviceType)
         {
-            return _serviceDictionary[serviceType];
+            return _serviceDictionary[serviceType]();
         }
 
         public void Dispose()

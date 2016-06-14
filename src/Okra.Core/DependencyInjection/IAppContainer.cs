@@ -14,8 +14,6 @@ namespace Okra.DependencyInjection
         ILifetimeManager LifetimeManager { get; }
 
         Task Activate();
-        IAppContainer CreateChildContainer();
         Task Deactivate();
-
     }
 }
