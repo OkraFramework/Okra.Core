@@ -13,5 +13,11 @@ namespace Okra.Tests.Mocks
         {
             get;
         }
+
+        public override IServiceProvider Services
+        {
+            get;
+            set;
+        }
     }
 }
