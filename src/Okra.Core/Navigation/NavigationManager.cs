@@ -12,7 +12,7 @@ namespace Okra.Navigation
     {
         // *** Fields ***
 
-        private readonly NavigationStack<PageEntry> _navigationStack = new NavigationStack<PageEntry>();
+        private readonly NavigationStack<PageEntry> _navigationStack = new NavigationStack<PageEntry>(NavigationStackType.RequireFirstItem);
 
         public event PropertyChangedEventHandler PropertyChanged;
 

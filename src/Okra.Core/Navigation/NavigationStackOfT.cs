@@ -11,8 +11,21 @@ namespace Okra.Navigation
     {
         // *** Fields ***
 
+        private readonly NavigationStackType _navigationStackType;
         private readonly List<T> _internalStack = new List<T>();
         private readonly List<T> _forwardStack = new List<T>();
+
+        // *** Constructors ***
+
+        public NavigationStack()
+            : this(NavigationStackType.AllowEmptyStack)
+        {
+        }
+
+        public NavigationStack(NavigationStackType navigationStackType)
+        {
+            _navigationStackType = navigationStackType;
+        }
 
         // *** Events ***
 
@@ -28,7 +41,7 @@ namespace Okra.Navigation
             }
         }
 
-        public bool CanGoBack => _internalStack.Count > 0;
+        public bool CanGoBack => _internalStack.Count > MinimumCount;
 
         public bool CanGoForward => _forwardStack.Count > 0;
 
@@ -36,18 +49,21 @@ namespace Okra.Navigation
 
         public T CurrentItem => _internalStack.Count == 0 ? default(T) : _internalStack[_internalStack.Count - 1];
 
+        public int MinimumCount => _navigationStackType == NavigationStackType.RequireFirstItem ? 1 : 0;
+
         // *** Methods ***
 
         public void Clear()
         {
+            bool hadItems = _internalStack.Count > 0;
             bool couldGoBack = CanGoBack;
             bool couldGoForward = CanGoForward;
 
             _internalStack.Clear();
             _forwardStack.Clear();
 
-            if (couldGoBack) OnPropertyChanged(nameof(Count));
-            if (couldGoBack) OnPropertyChanged(nameof(CurrentItem));
+            if (hadItems) OnPropertyChanged(nameof(Count));
+            if (hadItems) OnPropertyChanged(nameof(CurrentItem));
             if (couldGoBack) OnPropertyChanged(nameof(CanGoBack));
             if (couldGoForward) OnPropertyChanged(nameof(CanGoForward));
         }
@@ -132,7 +148,7 @@ namespace Okra.Navigation
 
             OnPropertyChanged(nameof(Count));
             OnPropertyChanged(nameof(CurrentItem));
-            if (!couldGoBack) OnPropertyChanged(nameof(CanGoBack));
+            if (!couldGoBack && CanGoBack) OnPropertyChanged(nameof(CanGoBack));
             if (couldGoForward) OnPropertyChanged(nameof(CanGoForward));
         }
 

@@ -20,6 +20,9 @@ namespace Okra.Tests.Navigation
         public static PageInfo[][] DoubleTestValues = { new [] { new PageInfo("First Page", null), new PageInfo("Second Page", null) },
                                                         new [] { new PageInfo("First Page", "First Arguments"), new PageInfo("Second Page", "Second Arguments") } };
 
+        public static PageInfo[][] TripleTestValues = { new [] { new PageInfo("First Page", null), new PageInfo("Second Page", null), new PageInfo("Third Page", null) },
+                                                        new [] { new PageInfo("First Page", "First Arguments"), new PageInfo("Second Page", "Second Arguments"), new PageInfo("Third Page", "Third Arguments") } };
+
         // *** Tests ***
 
         [Fact]
@@ -56,12 +59,13 @@ namespace Okra.Tests.Navigation
         }
 
         [Theory]
-        [MemberData(nameof(SingleTestValues))]
-        public void GoBack_ThrowsException_IfNoPagesInBackStack(PageInfo page1)
+        [MemberData(nameof(DoubleTestValues))]
+        public void GoBack_ThrowsException_IfOnlyOnePageInBackStack(PageInfo page1, PageInfo page2)
         {
             var navigationManager = new NavigationManager();
 
             navigationManager.NavigateTo(page1);
+            navigationManager.NavigateTo(page2);
             navigationManager.GoBack();
 
             var e = Assert.Throws<InvalidOperationException>(() => navigationManager.GoBack());
@@ -104,7 +108,7 @@ namespace Okra.Tests.Navigation
 
             Assert.Equal(navigationManager.NavigationStack[0], navigationManager.CurrentPage);
 
-            Assert.True(navigationManager.CanGoBack);
+            Assert.False(navigationManager.CanGoBack);
             Assert.False(navigationManager.CanGoForward);
         }
 
@@ -129,23 +133,6 @@ namespace Okra.Tests.Navigation
         }
 
         [Theory]
-        [MemberData(nameof(SingleTestValues))]
-        public void Navigate_ToPage_Back_GivesEmptyStack(PageInfo page1)
-        {
-            var navigationManager = new NavigationManager();
-
-            navigationManager.NavigateTo(page1);
-
-            AssertEx.PropertyChangedEvents(navigationManager, () => navigationManager.GoBack());
-
-            Assert.Equal(0, navigationManager.NavigationStack.Count);
-            Assert.Equal(null, navigationManager.CurrentPage);
-
-            Assert.False(navigationManager.CanGoBack);
-            Assert.True(navigationManager.CanGoForward);
-        }
-
-        [Theory]
         [MemberData(nameof(DoubleTestValues))]
         public void Navigate_ToPage_ToPage_Back_LeavesOneItemOnStack(PageInfo page1, PageInfo page2)
         {
@@ -162,29 +149,8 @@ namespace Okra.Tests.Navigation
 
             Assert.Equal(navigationManager.NavigationStack[0], navigationManager.CurrentPage);
 
-            Assert.True(navigationManager.CanGoBack);
+            Assert.False(navigationManager.CanGoBack);
             Assert.True(navigationManager.CanGoForward);
-        }
-
-        [Theory]
-        [MemberData(nameof(SingleTestValues))]
-        public void Navigate_ToPage_Back_Forward_AddsItemBackOntoStack(PageInfo page1)
-        {
-            var navigationManager = new NavigationManager();
-
-            navigationManager.NavigateTo(page1);
-            navigationManager.GoBack();
-
-            AssertEx.PropertyChangedEvents(navigationManager, () => navigationManager.GoForward());
-
-            Assert.Equal(1, navigationManager.NavigationStack.Count);
-            Assert.Equal(page1.PageName, navigationManager.NavigationStack[0].PageName);
-            Assert.Equal(page1.Arguments, navigationManager.NavigationStack[0].PageState.GetState<string>(StateNames.PageArguments));
-
-            Assert.Equal(navigationManager.NavigationStack[0], navigationManager.CurrentPage);
-
-            Assert.True(navigationManager.CanGoBack);
-            Assert.False(navigationManager.CanGoForward);
         }
 
         [Theory]
@@ -212,39 +178,16 @@ namespace Okra.Tests.Navigation
         }
 
         [Theory]
-        [MemberData(nameof(DoubleTestValues))]
-        public void Navigate_ToPage_ToPage_Back_Back_Forward_AddsItemBackOntoStack(PageInfo page1, PageInfo page2)
+        [MemberData(nameof(TripleTestValues))]
+        public void Navigate_ToPage_ToPage_ToPage_Back_Back_Forward_AddsItemBackOntoStack(PageInfo page1, PageInfo page2, PageInfo page3)
         {
             var navigationManager = new NavigationManager();
 
             navigationManager.NavigateTo(page1);
             navigationManager.NavigateTo(page2);
+            navigationManager.NavigateTo(page3);
             navigationManager.GoBack();
             navigationManager.GoBack();
-
-            AssertEx.PropertyChangedEvents(navigationManager, () => navigationManager.GoForward());
-
-            Assert.Equal(1, navigationManager.NavigationStack.Count);
-            Assert.Equal(page1.PageName, navigationManager.NavigationStack[0].PageName);
-            Assert.Equal(page1.Arguments, navigationManager.NavigationStack[0].PageState.GetState<string>(StateNames.PageArguments));
-
-            Assert.Equal(navigationManager.NavigationStack[0], navigationManager.CurrentPage);
-
-            Assert.True(navigationManager.CanGoBack);
-            Assert.True(navigationManager.CanGoForward);
-        }
-
-        [Theory]
-        [MemberData(nameof(DoubleTestValues))]
-        public void Navigate_ToPage_ToPage_Back_Back_Forward_Forward_AddsItemsBackOntoStack(PageInfo page1, PageInfo page2)
-        {
-            var navigationManager = new NavigationManager();
-
-            navigationManager.NavigateTo(page1);
-            navigationManager.NavigateTo(page2);
-            navigationManager.GoBack();
-            navigationManager.GoBack();
-            navigationManager.GoForward();
 
             AssertEx.PropertyChangedEvents(navigationManager, () => navigationManager.GoForward());
 
@@ -257,48 +200,83 @@ namespace Okra.Tests.Navigation
             Assert.Equal(navigationManager.NavigationStack[1], navigationManager.CurrentPage);
 
             Assert.True(navigationManager.CanGoBack);
-            Assert.False(navigationManager.CanGoForward);
+            Assert.True(navigationManager.CanGoForward);
         }
 
         [Theory]
-        [MemberData(nameof(DoubleTestValues))]
-        public void Navigate_ToPage_Back_ToPage_LeavesOneItemOnStack(PageInfo page1, PageInfo page2)
+        [MemberData(nameof(TripleTestValues))]
+        public void Navigate_ToPage_ToPage_ToPage_Back_Back_Forward_Forward_AddsItemsBackOntoStack(PageInfo page1, PageInfo page2, PageInfo page3)
         {
             var navigationManager = new NavigationManager();
 
             navigationManager.NavigateTo(page1);
+            navigationManager.NavigateTo(page2);
+            navigationManager.NavigateTo(page3);
             navigationManager.GoBack();
+            navigationManager.GoBack();
+            navigationManager.GoForward();
 
-            AssertEx.PropertyChangedEvents(navigationManager, () => navigationManager.NavigateTo(page2));
+            AssertEx.PropertyChangedEvents(navigationManager, () => navigationManager.GoForward());
 
-            Assert.Equal(1, navigationManager.NavigationStack.Count);
-            Assert.Equal(page2.PageName, navigationManager.NavigationStack[0].PageName);
-            Assert.Equal(page2.Arguments, navigationManager.NavigationStack[0].PageState.GetState<string>(StateNames.PageArguments));
+            Assert.Equal(3, navigationManager.NavigationStack.Count);
+            Assert.Equal(page1.PageName, navigationManager.NavigationStack[0].PageName);
+            Assert.Equal(page1.Arguments, navigationManager.NavigationStack[0].PageState.GetState<string>(StateNames.PageArguments));
+            Assert.Equal(page2.PageName, navigationManager.NavigationStack[1].PageName);
+            Assert.Equal(page2.Arguments, navigationManager.NavigationStack[1].PageState.GetState<string>(StateNames.PageArguments));
+            Assert.Equal(page3.PageName, navigationManager.NavigationStack[2].PageName);
+            Assert.Equal(page3.Arguments, navigationManager.NavigationStack[2].PageState.GetState<string>(StateNames.PageArguments));
 
-            Assert.Equal(navigationManager.NavigationStack[0], navigationManager.CurrentPage);
+            Assert.Equal(navigationManager.NavigationStack[2], navigationManager.CurrentPage);
 
             Assert.True(navigationManager.CanGoBack);
             Assert.False(navigationManager.CanGoForward);
         }
 
         [Theory]
-        [MemberData(nameof(DoubleTestValues))]
-        public void Navigate_ToPage_Back_ToPage_Back_Forward_AddsCorrectItemOntoStack(PageInfo page1, PageInfo page2)
+        [MemberData(nameof(TripleTestValues))]
+        public void Navigate_ToPage_ToPage_Back_ToPage_LeavesTwoItemOnStack(PageInfo page1, PageInfo page2, PageInfo page3)
         {
             var navigationManager = new NavigationManager();
 
             navigationManager.NavigateTo(page1);
-            navigationManager.GoBack();
             navigationManager.NavigateTo(page2);
+            navigationManager.GoBack();
+
+            AssertEx.PropertyChangedEvents(navigationManager, () => navigationManager.NavigateTo(page3));
+
+            Assert.Equal(2, navigationManager.NavigationStack.Count);
+            Assert.Equal(page1.PageName, navigationManager.NavigationStack[0].PageName);
+            Assert.Equal(page1.Arguments, navigationManager.NavigationStack[0].PageState.GetState<string>(StateNames.PageArguments));
+            Assert.Equal(page3.PageName, navigationManager.NavigationStack[1].PageName);
+            Assert.Equal(page3.Arguments, navigationManager.NavigationStack[1].PageState.GetState<string>(StateNames.PageArguments));
+
+            Assert.Equal(navigationManager.NavigationStack[1], navigationManager.CurrentPage);
+
+            Assert.True(navigationManager.CanGoBack);
+            Assert.False(navigationManager.CanGoForward);
+        }
+
+        [Theory]
+        [MemberData(nameof(TripleTestValues))]
+        public void Navigate_ToPage_ToPage_ToPage_Back_ToPage_Back_Forward_AddsCorrectItemOntoStack(PageInfo page1, PageInfo page2, PageInfo page3)
+        {
+            var navigationManager = new NavigationManager();
+
+            navigationManager.NavigateTo(page1);
+            navigationManager.NavigateTo(page2);
+            navigationManager.GoBack();
+            navigationManager.NavigateTo(page3);
             navigationManager.GoBack();
 
             AssertEx.PropertyChangedEvents(navigationManager, () => navigationManager.GoForward());
 
-            Assert.Equal(1, navigationManager.NavigationStack.Count);
-            Assert.Equal(page2.PageName, navigationManager.NavigationStack[0].PageName);
-            Assert.Equal(page2.Arguments, navigationManager.NavigationStack[0].PageState.GetState<string>(StateNames.PageArguments));
+            Assert.Equal(2, navigationManager.NavigationStack.Count);
+            Assert.Equal(page1.PageName, navigationManager.NavigationStack[0].PageName);
+            Assert.Equal(page1.Arguments, navigationManager.NavigationStack[0].PageState.GetState<string>(StateNames.PageArguments));
+            Assert.Equal(page3.PageName, navigationManager.NavigationStack[1].PageName);
+            Assert.Equal(page3.Arguments, navigationManager.NavigationStack[1].PageState.GetState<string>(StateNames.PageArguments));
 
-            Assert.Equal(navigationManager.NavigationStack[0], navigationManager.CurrentPage);
+            Assert.Equal(navigationManager.NavigationStack[1], navigationManager.CurrentPage);
 
             Assert.True(navigationManager.CanGoBack);
             Assert.False(navigationManager.CanGoForward);

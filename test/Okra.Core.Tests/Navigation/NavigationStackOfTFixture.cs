@@ -31,13 +31,46 @@ namespace Okra.Tests.Navigation
 
         [Theory]
         [MemberData(nameof(SingleTestValues))]
-        public void InitialStack_IsEmpty<T>(T defaultItem)
+        public void InitialStack_IsEmpty_DefaultConstructor<T>(T defaultItem)
         {
             var stack = new NavigationStack<T>();
 
             Assert.NotNull(stack);
 
             Assert.Equal(0, stack.Count);
+            Assert.Equal(0, stack.MinimumCount);
+            Assert.Equal(default(T), stack.CurrentItem);
+
+            Assert.False(stack.CanGoBack);
+            Assert.False(stack.CanGoForward);
+        }
+
+        [Theory]
+        [MemberData(nameof(SingleTestValues))]
+        public void InitialStack_IsEmpty_AllowsEmptyStack<T>(T defaultItem)
+        {
+            var stack = new NavigationStack<T>(NavigationStackType.AllowEmptyStack);
+
+            Assert.NotNull(stack);
+
+            Assert.Equal(0, stack.Count);
+            Assert.Equal(0, stack.MinimumCount);
+            Assert.Equal(default(T), stack.CurrentItem);
+
+            Assert.False(stack.CanGoBack);
+            Assert.False(stack.CanGoForward);
+        }
+
+        [Theory]
+        [MemberData(nameof(SingleTestValues))]
+        public void InitialStack_IsEmpty_RequiresFirstItem<T>(T defaultItem)
+        {
+            var stack = new NavigationStack<T>(NavigationStackType.RequireFirstItem);
+
+            Assert.NotNull(stack);
+
+            Assert.Equal(0, stack.Count);
+            Assert.Equal(1, stack.MinimumCount);
             Assert.Equal(default(T), stack.CurrentItem);
 
             Assert.False(stack.CanGoBack);
@@ -96,11 +129,25 @@ namespace Okra.Tests.Navigation
 
         [Theory]
         [MemberData(nameof(SingleTestValues))]
-        public void GoBack_ThrowsException_IfNoPagesInBackStack<T>(T item)
+        public void GoBack_ThrowsException_IfNoPagesInBackStack_AllowsEmptyStack<T>(T item)
         {
             var stack = new NavigationStack<T>();
 
             stack.NavigateTo(item);
+            stack.GoBack();
+
+            var e = Assert.Throws<InvalidOperationException>(() => stack.GoBack());
+            Assert.Equal("You cannot navigate backwards as the back stack is empty.", e.Message);
+        }
+
+        [Theory]
+        [MemberData(nameof(DoubleTestValues))]
+        public void GoBack_ThrowsException_IfNoPagesInBackStack_RequiresFirstItem<T>(T item1, T item2)
+        {
+            var stack = new NavigationStack<T>(NavigationStackType.RequireFirstItem);
+
+            stack.NavigateTo(item1);
+            stack.NavigateTo(item2);
             stack.GoBack();
 
             var e = Assert.Throws<InvalidOperationException>(() => stack.GoBack());
@@ -149,7 +196,7 @@ namespace Okra.Tests.Navigation
 
         [Theory]
         [MemberData(nameof(SingleTestValues))]
-        public void Navigate_ToPage_AddsOneItemToStack<T>(T item)
+        public void Navigate_ToPage_AddsOneItemToStack_AllowsEmptyStack<T>(T item)
         {
             var stack = new NavigationStack<T>();
 
@@ -164,10 +211,45 @@ namespace Okra.Tests.Navigation
         }
 
         [Theory]
+        [MemberData(nameof(SingleTestValues))]
+        public void Navigate_ToPage_AddsOneItemToStack_RequiresFirstItem<T>(T item)
+        {
+            var stack = new NavigationStack<T>(NavigationStackType.RequireFirstItem);
+
+            AssertEx.PropertyChangedEvents(stack, () => stack.NavigateTo(item));
+
+            Assert.Equal(1, stack.Count);
+            Assert.Equal(item, stack[0]);
+            Assert.Equal(item, stack.CurrentItem);
+
+            Assert.False(stack.CanGoBack);
+            Assert.False(stack.CanGoForward);
+        }
+
+        [Theory]
         [MemberData(nameof(DoubleTestValues))]
-        public void Navigate_ToPage_ToPage_AddsTwoItemsToStack<T>(T item1, T item2)
+        public void Navigate_ToPage_ToPage_AddsTwoItemsToStack_AllowsEmptyStack<T>(T item1, T item2)
         {
             var stack = new NavigationStack<T>();
+
+            stack.NavigateTo(item1);
+
+            AssertEx.PropertyChangedEvents(stack, () => stack.NavigateTo(item2));
+
+            Assert.Equal(2, stack.Count);
+            Assert.Equal(item1, stack[0]);
+            Assert.Equal(item2, stack[1]);
+            Assert.Equal(item2, stack.CurrentItem);
+
+            Assert.True(stack.CanGoBack);
+            Assert.False(stack.CanGoForward);
+        }
+
+        [Theory]
+        [MemberData(nameof(DoubleTestValues))]
+        public void Navigate_ToPage_ToPage_AddsTwoItemsToStack_RequiresFirstItem<T>(T item1, T item2)
+        {
+            var stack = new NavigationStack<T>(NavigationStackType.RequireFirstItem);
 
             stack.NavigateTo(item1);
 
@@ -201,7 +283,7 @@ namespace Okra.Tests.Navigation
 
         [Theory]
         [MemberData(nameof(DoubleTestValues))]
-        public void Navigate_ToPage_ToPage_Back_LeavesOneItemOnStack<T>(T item1, T item2)
+        public void Navigate_ToPage_ToPage_Back_LeavesOneItemOnStack_AllowsEmptyStack<T>(T item1, T item2)
         {
             var stack = new NavigationStack<T>();
 
@@ -215,6 +297,25 @@ namespace Okra.Tests.Navigation
             Assert.Equal(item1, stack.CurrentItem);
 
             Assert.True(stack.CanGoBack);
+            Assert.True(stack.CanGoForward);
+        }
+
+        [Theory]
+        [MemberData(nameof(DoubleTestValues))]
+        public void Navigate_ToPage_ToPage_Back_LeavesOneItemOnStack_RequiresFirstItem<T>(T item1, T item2)
+        {
+            var stack = new NavigationStack<T>(NavigationStackType.RequireFirstItem);
+
+            stack.NavigateTo(item1);
+            stack.NavigateTo(item2);
+
+            AssertEx.PropertyChangedEvents(stack, () => stack.GoBack());
+
+            Assert.Equal(1, stack.Count);
+            Assert.Equal(item1, stack[0]);
+            Assert.Equal(item1, stack.CurrentItem);
+
+            Assert.False(stack.CanGoBack);
             Assert.True(stack.CanGoForward);
         }
 
