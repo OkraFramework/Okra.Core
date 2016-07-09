@@ -24,6 +24,10 @@ deploy:
     secure: KpFpQ6mHOGMC9uWthYq91MxqWkYy522sUArvlA/27Rt2lKtKUe5Bpal2U8rRWW2V
   artifact: 
   symbol_server: http://nuget.gw.symbolsource.org/MyGet/okra/
+pull_requests:  
+  do_not_increment_build_number: true
+nuget:  
+  disable_publish_on_pr: true
 after_deploy:
 - ps: >-
     Write-Host "WARNING: VSIX deployment disabled in appveyor.yml"
