@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Okra.Routing
 {
-    public delegate Task<object> ViewRouterDelegate(RouteContext context);
+    public delegate Task<ViewInfo> ViewRouterDelegate(RouteContext context);
 }

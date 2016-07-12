@@ -33,7 +33,7 @@ namespace Okra.Routing
 
         public ViewRouterDelegate Build()
         {
-            ViewRouterDelegate activationDelegate = context => Task.FromResult<object>(null);
+            ViewRouterDelegate activationDelegate = context => Task.FromResult<ViewInfo>(null);
 
             foreach (var middleware in _routerList.Reverse<Func<ViewRouterDelegate, ViewRouterDelegate>>())
                 activationDelegate = middleware(activationDelegate);

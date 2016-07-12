@@ -41,7 +41,9 @@ namespace Okra.Tests.Routing
                 {
                     routerCallList.Add("First");
                     routerCallContextList.Add(context);
-                    return string.Concat("Alpha ", await next(context));
+                    var nextViewInfo = await next(context);
+                    var viewInfo = new ViewInfo(string.Concat("Alpha ", nextViewInfo.View));
+                    return viewInfo;
                 };
             });
 
@@ -51,7 +53,8 @@ namespace Okra.Tests.Routing
                 {
                     routerCallList.Add("Second");
                     routerCallContextList.Add(context);
-                    return Task.FromResult<object>("Beta");
+                    var viewInfo = new ViewInfo("Beta");
+                    return Task.FromResult(viewInfo);
                 };
             });
 
@@ -71,7 +74,7 @@ namespace Okra.Tests.Routing
 
             Assert.Equal(new string[] { "First", "Second" }, routerCallList);
             Assert.Equal(new RouteContext[] { routeContext, routeContext }, routerCallContextList);
-            Assert.Equal("Alpha Beta", result);
+            Assert.Equal("Alpha Beta", result.View);
         }
 
         [Fact]

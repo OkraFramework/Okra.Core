@@ -17,7 +17,7 @@ namespace Okra.Mvvm
         private readonly INavigationManager _navigationManager;
         private readonly IViewRouter _viewRouter;
         private readonly IAppContainerFactory _appContainerFactory;
-        private object _currentView;
+        private ViewInfo _currentView;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -30,7 +30,7 @@ namespace Okra.Mvvm
             navigationManager.PropertyChanged += NavigationManager_PropertyChanged;
         }
 
-        public object CurrentView
+        public ViewInfo CurrentView
         {
             get
             {
