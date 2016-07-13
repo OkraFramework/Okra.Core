@@ -26,12 +26,18 @@ namespace Okra.Routing
 
         public static IRouteBuilder MapRoute(this IRouteBuilder routeBuilder, string pageName, Type viewType)
         {
+            return routeBuilder.MapRoute(pageName, viewType, null);
+        }
+
+        public static IRouteBuilder MapRoute(this IRouteBuilder routeBuilder, string pageName, Type viewType, Type viewModelType)
+        {
             return routeBuilder.AddRoute(context =>
             {
                 if (context.PageName == pageName)
                 {
                     var view = context.PageServices.GetService(viewType);
-                    var viewInfo = new ViewInfo(view);
+                    var viewModel = viewModelType != null ? context.PageServices.GetService(viewModelType) : null;
+                    var viewInfo = new ViewInfo(view, viewModel);
                     return Task.FromResult(viewInfo);
                 }
                 else
