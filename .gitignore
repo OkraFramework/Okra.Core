@@ -161,6 +161,7 @@ $RECYCLE.BIN/
 .build/
 .nuget/
 .vs/
+.vscode/
 artifacts/
 *.userprefs
 project.lock.json
