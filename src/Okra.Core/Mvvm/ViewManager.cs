@@ -1,14 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Okra.DependencyInjection;
+﻿using Okra.DependencyInjection;
 using Okra.Navigation;
 using Okra.Routing;
 using Okra.State;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Okra.Mvvm
 {

@@ -1,13 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Okra.Lifetime;
 using Okra.Builder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
-using Okra.DependencyInjection;
 using Okra.Tests.Mocks;
 
 namespace Okra.Tests
