@@ -192,6 +192,9 @@
   <data name="Exception_InvalidOperation_SpecifiedPageDoesNotExistInNavigationStack" xml:space="preserve">
     <value>The specified page '{0}' does not exist in the navigation stack.</value>
   </data>
+  <data name="Exception_InvalidOperation_BootstrapperNotInitialized" xml:space="preserve">
+    <value>The bootstrapper must be initialized before performing this operation.</value>
+  </data>
   <data name="NoConstructorMatch" xml:space="preserve">
     <value>A suitable constructor for type '{0}' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.</value>
     <comment>{0} = service type</comment>

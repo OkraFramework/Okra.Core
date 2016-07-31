@@ -301,5 +301,14 @@ namespace Okra.Core {
                 return ResourceManager.GetString("TryAddIndistinguishableTypeToEnumerable", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The bootstrapper must be initialized before performing this operation..
+        /// </summary>
+        internal static string Exception_InvalidOperation_BootstrapperNotInitialized {
+            get {
+                return ResourceManager.GetString("Exception_InvalidOperation_BootstrapperNotInitialized", resourceCulture);
+            }
+        }
     }
 }
