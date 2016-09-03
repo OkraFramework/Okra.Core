@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Okra.Routing
 {
@@ -32,7 +33,7 @@ namespace Okra.Routing
             {
                 if (context.PageName == pageName)
                 {
-                    var view = context.PageServices.GetService(viewType);
+                    var view = context.PageServices.GetRequiredService(viewType);
                     var viewModel = viewModelType != null ? context.PageServices.GetService(viewModelType) : null;
                     var viewInfo = new ViewInfo(view, viewModel);
                     return Task.FromResult(viewInfo);
