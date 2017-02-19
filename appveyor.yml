@@ -6,6 +6,9 @@ image: Visual Studio 2015
 environment:
   myget_apikey:
     secure: KpFpQ6mHOGMC9uWthYq91MxqWkYy522sUArvlA/27Rt2lKtKUe5Bpal2U8rRWW2V
+install:
+- ps: appveyor DownloadFile https://go.microsoft.com/fwlink/?linkid=841686 -FileName "c:\dotnet.exe"
+- cmd: call c:\dotnet.exe /quiet
 build_script:
 - ps: |
     $versionSuffix = "alpha{0:000}" -f [convert]::ToInt32($env:APPVEYOR_BUILD_VERSION)
